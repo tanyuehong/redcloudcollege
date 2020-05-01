@@ -19,8 +19,6 @@
     <name>redcloudcollege</name>
     <description>a preject about study</description>
 
-
-
     <properties>
         <java.version>1.8</java.version>
         <guli.version>0.0.1-SNAPSHOT</guli.version>
@@ -51,6 +49,11 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.redskt</groupId>
+                <artifactId>common_utils</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
             <!--Spring Cloud-->
 <!--            <dependency>-->
 <!--                <groupId>org.springframework.cloud</groupId>-->
