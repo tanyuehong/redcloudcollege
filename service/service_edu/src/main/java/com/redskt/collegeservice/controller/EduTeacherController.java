@@ -41,6 +41,17 @@ public class EduTeacherController {
         return R.ok().data("items",list);
     }
 
+    //添加讲师接口的方法
+    @PostMapping("addTeacher")
+    public R addTeacher(@RequestBody EduTeacher eduTeacher) {
+        boolean save = teacherService.save(eduTeacher);
+        if(save) {
+            return R.ok();
+        } else {
+            return R.error();
+        }
+    }
+
     //4 条件查询带分页的方法
     @PostMapping("pageTeacherCondition")
     public R pageTeacherCondition(@RequestBody  TeacherQuery teacherQuery) {
