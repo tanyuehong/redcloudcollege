@@ -1,6 +1,7 @@
 package com.redskt.collegeservice.controller;
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StringUtils;
@@ -14,6 +15,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -50,6 +52,56 @@ public class EduTeacherController {
         } else {
             return R.error();
         }
+    }
+
+    //讲师修改功能
+    @PostMapping("updateTeacher")
+    public R updateTeacher(@RequestBody EduTeacher eduTeacher) {
+        String myTeacherId =  eduTeacher.getId();
+        if (myTeacherId==null || myTeacherId.length()<=0) {
+            return R.error().message("teacherId为空");
+        }
+        boolean flag = teacherService.updateById(eduTeacher);
+        if(flag) {
+            return R.ok();
+        } else {
+            return R.error();
+        }
+    }
+
+    //2 逻辑删除讲师的方法
+    @ApiOperation(value = "逻辑删除讲师")
+    @PostMapping("deleteTeacher")
+    public R removeTeacher(@RequestBody String teacherId) {
+        JSONObject jsonObject = JSONObject.parseObject(teacherId);
+        String myTeacherId =  (String)jsonObject.get("teacherId");
+        if (myTeacherId==null || myTeacherId.length()<=0) {
+            return R.error().message("teacherId为空");
+        }
+        if (jsonObject.size()>1) {
+            return R.error().message("参数过多");
+        }
+        boolean flag = teacherService.removeById(myTeacherId);
+        if(flag) {
+            return R.ok();
+        } else {
+            return R.error();
+        }
+    }
+
+    //根据讲师id进行查询
+    @PostMapping("getTeacher")
+    public R getTeacher(@RequestBody String teacherId) {
+        JSONObject jsonObject = JSONObject.parseObject(teacherId);
+        String myTeacherId =  (String)jsonObject.get("teacherId");
+        if (myTeacherId.isEmpty()) {
+            return R.error().message("teacherId为空");
+        }
+        if (jsonObject.size()>1) {
+            return R.error().message("参数过多");
+        }
+        EduTeacher myTeacher = teacherService.getById(myTeacherId);
+        return R.ok().data("teacher", myTeacher);
     }
 
     //4 条件查询带分页的方法
