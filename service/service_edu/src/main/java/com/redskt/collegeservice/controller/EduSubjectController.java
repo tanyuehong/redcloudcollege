@@ -1,6 +1,7 @@
 package com.redskt.collegeservice.controller;
 
 
+import com.redskt.collegeservice.entity.subject.SubjectOne;
 import com.redskt.collegeservice.service.EduSubjectService;
 import com.redskt.commonutils.R;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 /**
  * <p>
@@ -35,5 +38,12 @@ public class EduSubjectController {
         return R.ok();
     }
 
+    //课程分类列表（树形）
+    @PostMapping("getAllSubject")
+    public R getAllSubject() {
+        //list集合泛型是一级分类
+        List<SubjectOne> list = subjectService.getAllOneTwoSubject();
+        return R.ok().data("list",list);
+    }
 }
 
