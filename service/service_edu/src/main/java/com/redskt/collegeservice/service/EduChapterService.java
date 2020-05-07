@@ -2,6 +2,9 @@ package com.redskt.collegeservice.service;
 
 import com.redskt.collegeservice.entity.EduChapter;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.redskt.collegeservice.entity.subject.ChapterVo;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface EduChapterService extends IService<EduChapter> {
 
+    List<ChapterVo> getChapterVideoByCourseId(String courseId);
+
+    boolean deleteChapter(String chapterId);
 }

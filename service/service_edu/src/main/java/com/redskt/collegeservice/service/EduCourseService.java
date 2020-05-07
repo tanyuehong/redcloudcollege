@@ -3,6 +3,7 @@ package com.redskt.collegeservice.service;
 import com.redskt.collegeservice.entity.EduCourse;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.redskt.collegeservice.entity.query.CourseInfoVo;
+import com.redskt.collegeservice.entity.query.CoursePublishVo;
 
 /**
  * <p>
@@ -15,4 +16,10 @@ import com.redskt.collegeservice.entity.query.CourseInfoVo;
 public interface EduCourseService extends IService<EduCourse> {
 
     String saveCourseInfo(CourseInfoVo courseInfoVo);
+
+    CourseInfoVo getCourseInfo(String courseId);
+
+    void updateCourseInfo(CourseInfoVo courseInfoVo);
+
+    CoursePublishVo publishCourseInfo(String id);
 }
