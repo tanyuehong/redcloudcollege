@@ -1,12 +1,15 @@
 package com.redskt.collegeservice.controller;
 
 
+import com.redskt.collegeservice.entity.EduCourse;
 import com.redskt.collegeservice.entity.query.CourseInfoVo;
 import com.redskt.collegeservice.entity.query.CoursePublishVo;
 import com.redskt.collegeservice.service.EduCourseService;
 import com.redskt.commonutils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * <p>
@@ -24,6 +27,14 @@ public class EduCourseController {
 
     @Autowired
     private EduCourseService courseService;
+
+    //课程列表 基本实现
+    //TODO  完善条件查询带分页
+    @GetMapping("getList")
+    public R getCourseList() {
+        List<EduCourse> list = courseService.list(null);
+        return R.ok().data("list",list);
+    }
 
     //添加课程基本信息的方法
     @PostMapping("addCourseInfo")
@@ -52,6 +63,24 @@ public class EduCourseController {
     public R getPublishCourseInfo(@PathVariable String id) {
         CoursePublishVo coursePublishVo = courseService.publishCourseInfo(id);
         return R.ok().data("publishCourse",coursePublishVo);
+    }
+
+    //课程最终发布
+    //修改课程状态
+    @PostMapping("publishCourse/{id}")
+    public R publishCourse(@PathVariable String id) {
+        EduCourse eduCourse = new EduCourse();
+        eduCourse.setId(id);
+        eduCourse.setStatus("Normal");//设置课程发布状态
+        courseService.updateById(eduCourse);
+        return R.ok();
+    }
+
+    //删除课程
+    @PostMapping("{courseId}")
+    public R deleteCourse(@PathVariable String courseId) {
+        courseService.removeCourse(courseId);
+        return R.ok();
     }
 }
 

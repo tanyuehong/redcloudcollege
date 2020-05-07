@@ -5,9 +5,11 @@ import com.redskt.collegeservice.entity.EduCourseDescription;
 import com.redskt.collegeservice.entity.query.CourseInfoVo;
 import com.redskt.collegeservice.entity.query.CoursePublishVo;
 import com.redskt.collegeservice.mapper.EduCourseMapper;
+import com.redskt.collegeservice.service.EduChapterService;
 import com.redskt.collegeservice.service.EduCourseDescriptionService;
 import com.redskt.collegeservice.service.EduCourseService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.redskt.collegeservice.service.EduVideoService;
 import com.redskt.servicebase.excepionhandler.RedCloudCollegeExceptionHandler;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,13 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
     //课程描述注入
     @Autowired
     private EduCourseDescriptionService courseDescriptionService;
+
+    //注入小节和章节service
+    @Autowired
+    private EduVideoService eduVideoService;
+
+    @Autowired
+    private EduChapterService chapterService;
 
     //添加课程基本信息的方法
     @Override
@@ -91,5 +100,24 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         //调用mapper
         CoursePublishVo publishCourseInfo = baseMapper.getPublishCourseInfo(id);
         return publishCourseInfo;
+    }
+
+    @Override
+    public void removeCourse(String courseId) {
+        //1 根据课程id删除小节
+        eduVideoService.removeVideoByCourseId(courseId);
+
+        //2 根据课程id删除章节
+        chapterService.removeChapterByCourseId(courseId);
+
+        //3 根据课程id删除描述
+        courseDescriptionService.removeById(courseId);
+
+        //4 根据课程id删除课程本身
+        int result = baseMapper.deleteById(courseId);
+        if(result == 0) { //失败返回
+            throw new RedCloudCollegeExceptionHandler(20001,"删除失败");
+        }
+
     }
 }
