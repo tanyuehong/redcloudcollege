@@ -1,14 +1,16 @@
-package com.redskt.redoss;
+package com.redskt.ucenter;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 
-@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
+@SpringBootApplication
 @ComponentScan(basePackages = {"com.redskt"})
-public class RedOssApplication {
+@MapperScan("com.redskt.ucenter.mapper")
+public class UcenterApplication {
+
     public static void main(String[] args) {
-        SpringApplication.run(RedOssApplication.class, args);
+        SpringApplication.run(UcenterApplication.class, args);
     }
 }

@@ -1,4 +1,4 @@
-package com.redskt.redoss;
+package com.redskt.vod;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,8 +7,8 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 @ComponentScan(basePackages = {"com.redskt"})
-public class RedOssApplication {
+public class VodApplication {
     public static void main(String[] args) {
-        SpringApplication.run(RedOssApplication.class, args);
+        SpringApplication.run(VodApplication.class, args);
     }
 }
