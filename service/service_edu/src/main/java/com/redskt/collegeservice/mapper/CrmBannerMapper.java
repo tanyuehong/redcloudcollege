@@ -1,6 +1,6 @@
 package com.redskt.collegeservice.mapper;
 
-import com.redskt.collegeservice.entity.CrmBanner;
+import com.redskt.collegeservice.entity.EduBanner;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author tanyuehong
  * @since 2020-05-14
  */
-public interface CrmBannerMapper extends BaseMapper<CrmBanner> {
+public interface CrmBannerMapper extends BaseMapper<EduBanner> {
 
 }

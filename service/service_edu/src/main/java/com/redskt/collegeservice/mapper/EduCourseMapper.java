@@ -2,6 +2,7 @@ package com.redskt.collegeservice.mapper;
 
 import com.redskt.collegeservice.entity.EduCourse;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.redskt.collegeservice.entity.frontvo.CourseWebVo;
 import com.redskt.collegeservice.entity.query.CoursePublishVo;
 
 /**
@@ -15,4 +16,6 @@ import com.redskt.collegeservice.entity.query.CoursePublishVo;
 public interface EduCourseMapper extends BaseMapper<EduCourse> {
 
     CoursePublishVo getPublishCourseInfo(String id);
+
+    CourseWebVo getBaseCourseInfo(String courseId);
 }

@@ -1,6 +1,6 @@
 package com.redskt.collegeservice.service;
 
-import com.redskt.collegeservice.entity.CrmBanner;
+import com.redskt.collegeservice.entity.EduBanner;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.List;
  * @author tanyuehong
  * @since 2020-05-14
  */
-public interface CrmBannerService extends IService<CrmBanner> {
+public interface CrmBannerService extends IService<EduBanner> {
 
-    List<CrmBanner> selectAllBanner();
+    List<EduBanner> selectAllBanner();
 }
