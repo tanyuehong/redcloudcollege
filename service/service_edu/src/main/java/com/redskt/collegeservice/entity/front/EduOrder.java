@@ -1,4 +1,4 @@
-package com.redskt.collegeservice.entity;
+package com.redskt.collegeservice.entity.front;
 
 import java.math.BigDecimal;
 

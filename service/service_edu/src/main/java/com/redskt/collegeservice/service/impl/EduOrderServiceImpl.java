@@ -1,9 +1,8 @@
 package com.redskt.collegeservice.service.impl;
 
-import com.redskt.collegeservice.entity.EduOrder;
-import com.redskt.collegeservice.entity.EduUser;
-import com.redskt.collegeservice.entity.frontvo.CourseWebVo;
-import com.redskt.collegeservice.entity.query.CourseInfoVo;
+import com.redskt.collegeservice.entity.front.EduOrder;
+import com.redskt.collegeservice.entity.front.EduUser;
+import com.redskt.collegeservice.entity.front.vo.CourseWebVo;
 import com.redskt.collegeservice.mapper.EduOrderMapper;
 import com.redskt.collegeservice.service.EduCourseService;
 import com.redskt.collegeservice.service.EduOrderService;

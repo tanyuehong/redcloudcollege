@@ -2,7 +2,7 @@ package com.redskt.collegeservice.controller.front;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.redskt.collegeservice.entity.EduOrder;
+import com.redskt.collegeservice.entity.front.EduOrder;
 import com.redskt.collegeservice.service.EduOrderService;
 import com.redskt.commonutils.JwtUtils;
 import com.redskt.commonutils.R;

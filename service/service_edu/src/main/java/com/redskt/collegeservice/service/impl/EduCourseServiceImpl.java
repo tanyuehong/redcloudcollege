@@ -2,10 +2,10 @@ package com.redskt.collegeservice.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.redskt.collegeservice.entity.EduCourse;
+import com.redskt.collegeservice.entity.admin.EduCourse;
 import com.redskt.collegeservice.entity.EduCourseDescription;
-import com.redskt.collegeservice.entity.frontvo.CourseFrontVo;
-import com.redskt.collegeservice.entity.frontvo.CourseWebVo;
+import com.redskt.collegeservice.entity.front.vo.CourseFrontVo;
+import com.redskt.collegeservice.entity.front.vo.CourseWebVo;
 import com.redskt.collegeservice.entity.query.CourseInfoVo;
 import com.redskt.collegeservice.entity.query.CoursePublishVo;
 import com.redskt.collegeservice.mapper.EduCourseMapper;

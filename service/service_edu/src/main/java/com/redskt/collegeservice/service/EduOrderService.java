@@ -1,6 +1,6 @@
 package com.redskt.collegeservice.service;
 
-import com.redskt.collegeservice.entity.EduOrder;
+import com.redskt.collegeservice.entity.front.EduOrder;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

@@ -2,8 +2,8 @@ package com.redskt.collegeservice.controller.front;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.redskt.collegeservice.entity.EduBanner;
-import com.redskt.collegeservice.service.CrmBannerService;
+import com.redskt.collegeservice.entity.front.EduBanner;
+import com.redskt.collegeservice.service.EduBannerService;
 import com.redskt.commonutils.R;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ import java.util.List;
 @CrossOrigin(allowCredentials="true",maxAge = 3600)
 public class EduBannerController {
     @Autowired
-    private CrmBannerService bannerService;
+    private EduBannerService bannerService;
 
     //查询所有banner
     @GetMapping("getAllBanner")

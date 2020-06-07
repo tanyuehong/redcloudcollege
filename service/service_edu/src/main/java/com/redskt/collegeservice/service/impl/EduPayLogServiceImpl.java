@@ -2,7 +2,7 @@ package com.redskt.collegeservice.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.redskt.collegeservice.entity.EduOrder;
+import com.redskt.collegeservice.entity.front.EduOrder;
 import com.redskt.collegeservice.entity.EduPayLog;
 import com.redskt.collegeservice.mapper.EduPayLogMapper;
 import com.redskt.collegeservice.service.EduOrderService;

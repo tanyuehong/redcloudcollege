@@ -1,7 +1,7 @@
 package com.redskt.collegeservice.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.redskt.collegeservice.entity.EduUser;
+import com.redskt.collegeservice.entity.front.EduUser;
 
 /**
  * <p>
@@ -13,4 +13,5 @@ import com.redskt.collegeservice.entity.EduUser;
  */
 public interface EduUserMapper extends BaseMapper<EduUser> {
 
+    Integer countRegisterDay(String day);
 }

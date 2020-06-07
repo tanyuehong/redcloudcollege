@@ -1,8 +1,8 @@
 package com.redskt.collegeservice.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.redskt.collegeservice.entity.EduUser;
-import com.redskt.collegeservice.entity.frontvo.RegisterVo;
+import com.redskt.collegeservice.entity.front.EduUser;
+import com.redskt.collegeservice.entity.front.vo.RegisterVo;
 
 /**
  * <p>
@@ -17,4 +17,7 @@ public interface EduUserService extends IService<EduUser> {
     String login(EduUser eduUser);
 
     void register(RegisterVo registerVo);
+
+    //查询某一天注册人数
+    Integer countRegisterDay(String day);
 }

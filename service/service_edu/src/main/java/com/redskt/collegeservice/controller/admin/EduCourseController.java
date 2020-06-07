@@ -1,7 +1,7 @@
 package com.redskt.collegeservice.controller.admin;
 
 
-import com.redskt.collegeservice.entity.EduCourse;
+import com.redskt.collegeservice.entity.admin.EduCourse;
 import com.redskt.collegeservice.entity.query.CourseInfoVo;
 import com.redskt.collegeservice.entity.query.CoursePublishVo;
 import com.redskt.collegeservice.service.EduCourseService;

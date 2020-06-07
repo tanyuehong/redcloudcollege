@@ -1,6 +1,6 @@
 package com.redskt.collegeservice.mapper;
 
-import com.redskt.collegeservice.entity.EduOrder;
+import com.redskt.collegeservice.entity.front.EduOrder;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

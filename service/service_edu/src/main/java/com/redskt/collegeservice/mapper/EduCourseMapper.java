@@ -1,8 +1,8 @@
 package com.redskt.collegeservice.mapper;
 
-import com.redskt.collegeservice.entity.EduCourse;
+import com.redskt.collegeservice.entity.admin.EduCourse;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.redskt.collegeservice.entity.frontvo.CourseWebVo;
+import com.redskt.collegeservice.entity.front.vo.CourseWebVo;
 import com.redskt.collegeservice.entity.query.CoursePublishVo;
 
 /**

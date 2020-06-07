@@ -1,7 +1,7 @@
 package com.redskt.collegeservice.controller.front;
 
-import com.redskt.collegeservice.entity.EduUser;
-import com.redskt.collegeservice.entity.frontvo.RegisterVo;
+import com.redskt.collegeservice.entity.front.EduUser;
+import com.redskt.collegeservice.entity.front.vo.RegisterVo;
 import com.redskt.collegeservice.service.EduUserService;
 import com.redskt.commonutils.JwtUtils;
 import com.redskt.commonutils.R;

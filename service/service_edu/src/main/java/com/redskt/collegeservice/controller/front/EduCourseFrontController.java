@@ -1,9 +1,9 @@
 package com.redskt.collegeservice.controller.front;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.redskt.collegeservice.entity.EduCourse;
-import com.redskt.collegeservice.entity.frontvo.CourseFrontVo;
-import com.redskt.collegeservice.entity.frontvo.CourseWebVo;
+import com.redskt.collegeservice.entity.admin.EduCourse;
+import com.redskt.collegeservice.entity.front.vo.CourseFrontVo;
+import com.redskt.collegeservice.entity.front.vo.CourseWebVo;
 import com.redskt.collegeservice.entity.subject.ChapterVo;
 import com.redskt.collegeservice.service.EduChapterService;
 import com.redskt.collegeservice.service.EduCourseService;

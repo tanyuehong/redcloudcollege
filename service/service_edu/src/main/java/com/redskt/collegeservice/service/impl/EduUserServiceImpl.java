@@ -2,8 +2,8 @@ package com.redskt.collegeservice.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.redskt.collegeservice.entity.EduUser;
-import com.redskt.collegeservice.entity.frontvo.RegisterVo;
+import com.redskt.collegeservice.entity.front.EduUser;
+import com.redskt.collegeservice.entity.front.vo.RegisterVo;
 import com.redskt.collegeservice.mapper.EduUserMapper;
 import com.redskt.collegeservice.service.EduUserService;
 import com.redskt.commonutils.JwtUtils;
@@ -99,5 +99,11 @@ public class EduUserServiceImpl extends ServiceImpl<EduUserMapper, EduUser> impl
         member.setIsDisabled(false);//用户不禁用
         member.setAvatar("http://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eoj0hHXhgJNOTSOFsS4uZs8x1ConecaVOB8eIl115xmJZcT4oCicvia7wMEufibKtTLqiaJeanU2Lpg3w/132");
         baseMapper.insert(member);
+    }
+
+    //查询某一天注册人数
+    @Override
+    public Integer countRegisterDay(String day) {
+        return baseMapper.countRegisterDay(day);
     }
 }

@@ -15,7 +15,7 @@
     </select>
 
     <!--sql语句：根据课程id查询课程基本信息-->
-    <select id="getBaseCourseInfo" resultType="com.redskt.collegeservice.entity.frontvo.CourseWebVo">
+    <select id="getBaseCourseInfo" resultType="com.redskt.collegeservice.entity.front.vo.CourseWebVo">
         SELECT ec.id,ec.title,ec.price,ec.lesson_num AS lessonNum,ec.cover,
                ec.buy_count AS buyCount,ec.view_count AS viewCount,
                ecd.description,

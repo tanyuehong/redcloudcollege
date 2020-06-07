@@ -3,7 +3,7 @@ package com.redskt.collegeservice.service.impl;
 import com.alibaba.excel.EasyExcel;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.redskt.collegeservice.entity.EduSubject;
-import com.redskt.collegeservice.entity.excel.SubjectData;
+import com.redskt.collegeservice.entity.admin.excel.SubjectData;
 import com.redskt.collegeservice.entity.subject.SubjectOne;
 import com.redskt.collegeservice.entity.subject.SubjectTwo;
 import com.redskt.collegeservice.listener.SubjectExcelListener;

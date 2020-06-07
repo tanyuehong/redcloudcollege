@@ -1,4 +1,4 @@
-package com.redskt.collegeservice.entity.excel;
+package com.redskt.collegeservice.entity.admin.excel;
 
 import com.alibaba.excel.annotation.ExcelProperty;
 import lombok.Data;

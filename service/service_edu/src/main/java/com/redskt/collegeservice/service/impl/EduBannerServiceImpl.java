@@ -1,9 +1,9 @@
 package com.redskt.collegeservice.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.redskt.collegeservice.entity.EduBanner;
+import com.redskt.collegeservice.entity.front.EduBanner;
 import com.redskt.collegeservice.mapper.CrmBannerMapper;
-import com.redskt.collegeservice.service.CrmBannerService;
+import com.redskt.collegeservice.service.EduBannerService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ import java.util.List;
  * @since 2020-05-14
  */
 @Service
-public class CrmBannerServiceImpl extends ServiceImpl<CrmBannerMapper, EduBanner> implements CrmBannerService {
+public class EduBannerServiceImpl extends ServiceImpl<CrmBannerMapper, EduBanner> implements EduBannerService {
 
     @Override
     public List<EduBanner> selectAllBanner() {

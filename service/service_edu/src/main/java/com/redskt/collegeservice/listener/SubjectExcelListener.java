@@ -4,7 +4,7 @@ import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.redskt.collegeservice.entity.EduSubject;
-import com.redskt.collegeservice.entity.excel.SubjectData;
+import com.redskt.collegeservice.entity.admin.excel.SubjectData;
 import com.redskt.collegeservice.service.EduSubjectService;
 import com.redskt.servicebase.excepionhandler.RedCloudCollegeExceptionHandler;
 

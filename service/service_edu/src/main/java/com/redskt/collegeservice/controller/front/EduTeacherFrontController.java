@@ -3,7 +3,7 @@ package com.redskt.collegeservice.controller.front;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.redskt.collegeservice.entity.EduCourse;
+import com.redskt.collegeservice.entity.admin.EduCourse;
 import com.redskt.collegeservice.entity.EduTeacher;
 import com.redskt.collegeservice.service.EduCourseService;
 import com.redskt.collegeservice.service.EduTeacherService;

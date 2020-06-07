@@ -1,4 +1,4 @@
-package com.redskt.collegeservice.entity.frontvo;
+package com.redskt.collegeservice.entity.front.vo;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
