@@ -13,10 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>service_edu</module>
-        <module>service_redoss</module>
-        <module>service_ucenter</module>
     </modules>
-
 
     <dependencies>
         <dependency>
@@ -117,4 +114,12 @@
     </dependencies>
 
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>

@@ -43,7 +43,6 @@
         <canal.client.version>1.1.0</canal.client.version>
         <docker.image.prefix>zx</docker.image.prefix>
         <cloud-alibaba.version>0.2.2.RELEASE</cloud-alibaba.version>
-        <aliyun-sdk-oss.version>3.1.0</aliyun-sdk-oss.version>
     </properties>
 
 
@@ -87,12 +86,6 @@
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger-ui</artifactId>
                 <version>${swagger.version}</version>
-            </dependency>
-            <!--aliyunOSS-->
-            <dependency>
-                <groupId>com.aliyun.oss</groupId>
-                <artifactId>aliyun-sdk-oss</artifactId>
-                <version>${aliyun.oss.version}</version>
             </dependency>
             <!--日期时间工具-->
             <dependency>
@@ -148,11 +141,6 @@
                 <version>${aliyun-java-sdk-core.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.aliyun.oss</groupId>
-                <artifactId>aliyun-sdk-oss</artifactId>
-                <version>${aliyun-sdk-oss.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>com.aliyun</groupId>
                 <artifactId>aliyun-java-sdk-vod</artifactId>
                 <version>${aliyun-java-sdk-vod.version}</version>
@@ -189,16 +177,5 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>
