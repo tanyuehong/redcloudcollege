@@ -43,6 +43,14 @@ public class R {
         return r;
     }
 
+    public static R error(String message) {
+        R r = new R();
+        r.setSuccess(false);
+        r.setCode(ResultCode.ERROR);
+        r.setMessage(message);
+        return r;
+    }
+
     public R success(Boolean success){
         this.setSuccess(success);
         return this;
