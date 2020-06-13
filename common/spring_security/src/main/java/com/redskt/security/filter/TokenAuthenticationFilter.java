@@ -43,29 +43,36 @@ public class TokenAuthenticationFilter extends BasicAuthenticationFilter {
     protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain chain)
             throws IOException, ServletException {
         logger.info("================="+req.getRequestURI());
-        if(req.getRequestURI().indexOf("admin") == -1) {
-            chain.doFilter(req, res);
-            return;
-        }
+//        if(req.getRequestURI().indexOf("admin") == -1) {
+//            chain.doFilter(req, res);
+//            return;
+//        }
 
         UsernamePasswordAuthenticationToken authentication = null;
         try {
+            logger.info("=================11");
             authentication = getAuthentication(req);
         } catch (Exception e) {
             ResponseUtil.out(res, R.error());
+            logger.info("=================5");
         }
 
         if (authentication != null) {
             SecurityContextHolder.getContext().setAuthentication(authentication);
+            logger.info("=================6");
         } else {
+            logger.info("=================7");
             ResponseUtil.out(res, R.error());
+            return;
         }
+        logger.info("=================8");
         chain.doFilter(req, res);
     }
 
     private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
         // token置于header里
         String token = request.getHeader("token");
+        logger.info("=================12"+token);
         if (token != null && !"".equals(token.trim())) {
             String userName = tokenManager.getUserFromToken(token);
 
@@ -78,10 +85,13 @@ public class TokenAuthenticationFilter extends BasicAuthenticationFilter {
             }
 
             if (!StringUtils.isEmpty(userName)) {
+                logger.info("=================3");
                 return new UsernamePasswordAuthenticationToken(userName, token, authorities);
             }
+            logger.info("=================2");
             return null;
         }
+        logger.info("=================1");
         return null;
     }
 }

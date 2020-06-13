@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/usercenter/index")
+@RequestMapping("/usercenter")
 @CrossOrigin(allowCredentials="true",maxAge = 3600)
 public class EduAdminController {
 

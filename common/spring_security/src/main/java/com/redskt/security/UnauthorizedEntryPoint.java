@@ -23,7 +23,6 @@ public class UnauthorizedEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response,
                          AuthenticationException authException) throws IOException, ServletException {
-
-        ResponseUtil.out(response, R.error());
+        ResponseUtil.out(response, R.error("登录验证失败"));
     }
 }
