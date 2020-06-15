@@ -26,7 +26,7 @@ import java.util.Map;
  * @since 2020-01-12
  */
 @RestController
-@RequestMapping("/admin/acl/user")
+@RequestMapping("/usermanger/user")
 //@CrossOrigin
 public class EduAdminUserController {
 

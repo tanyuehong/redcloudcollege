@@ -19,7 +19,7 @@ import java.util.List;
  * @since 2020-01-12
  */
 @RestController
-@RequestMapping("/admin/acl/permission")
+@RequestMapping("/menumanger/permission")
 //@CrossOrigin
 public class EduPermissionController {
 

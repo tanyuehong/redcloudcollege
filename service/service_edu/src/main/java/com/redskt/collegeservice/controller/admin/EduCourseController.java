@@ -20,7 +20,7 @@ import java.util.List;
  * @since 2020-05-05
  */
 @RestController
-@RequestMapping("/collegeservice/course")
+@RequestMapping("/course")
 @CrossOrigin(allowCredentials="true",maxAge = 3600)
 public class EduCourseController {
 

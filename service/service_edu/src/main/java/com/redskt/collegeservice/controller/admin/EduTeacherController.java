@@ -29,7 +29,7 @@ import java.util.List;
 @Slf4j
 @Api(description="讲师管理")
 @RestController
-@RequestMapping("/collegeservice/edu-teacher")
+@RequestMapping("/teacher")
 @CrossOrigin(allowCredentials="true",maxAge = 3600)
 public class EduTeacherController {
     // 把service注入
