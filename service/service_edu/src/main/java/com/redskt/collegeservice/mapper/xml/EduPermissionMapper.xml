@@ -24,9 +24,9 @@
     <select id="selectPermissionByUserId" resultMap="permissionMap">
         select
         <include refid="columns" />
-        from acl_user_role ur
-        inner join acl_role_permission rp on rp.role_id = ur.role_id
-        inner join acl_permission p on p.id = rp.permission_id
+        from edu_user_role ur
+        inner join edu_role_permission rp on rp.role_id = ur.role_id
+        inner join edu_permission p on p.id = rp.permission_id
         where ur.user_id = #{userId}
         and ur.is_deleted = 0
         and rp.is_deleted = 0
@@ -36,9 +36,9 @@
     <select id="selectPermissionValueByUserId" resultType="String">
     	select
         p.permission_value
-        from acl_user_role ur
-        inner join acl_role_permission rp on rp.role_id = ur.role_id
-        inner join acl_permission p on p.id = rp.permission_id
+        from edu_user_role ur
+        inner join edu_role_permission rp on rp.role_id = ur.role_id
+        inner join edu_permission p on p.id = rp.permission_id
         where ur.user_id = #{userId}
         and p.type = 2
         and ur.is_deleted = 0
@@ -49,7 +49,7 @@
     <select id="selectAllPermissionValue" resultType="String">
         select
         permission_value
-        from acl_permission
+        from edu_permission
         where type = 2
         and is_deleted = 0
     </select>

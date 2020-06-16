@@ -25,7 +25,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("acl_permission")
+@TableName("edu_permission")
 @ApiModel(value="Permission对象", description="权限")
 public class EduPermission implements Serializable {
 

@@ -22,7 +22,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("acl_user_role")
+@TableName("edu_user_role")
 @ApiModel(value="UserRole对象", description="")
 public class EduAdminUserRole implements Serializable {
 
