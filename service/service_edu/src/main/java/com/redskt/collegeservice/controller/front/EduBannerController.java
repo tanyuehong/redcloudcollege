@@ -20,7 +20,7 @@ import java.util.List;
  * @since 2020-05-14
  */
 @RestController
-@RequestMapping("/collegeservice/banner")
+@RequestMapping("/home/banner")
 @CrossOrigin(allowCredentials="true",maxAge = 3600)
 public class EduBannerController {
     @Autowired

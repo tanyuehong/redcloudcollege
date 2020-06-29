@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/eduservice/indexfront")
+@RequestMapping("/home")
 @CrossOrigin(allowCredentials="true",maxAge = 3600)
 public class EduIndexController {
     @Autowired

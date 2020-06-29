@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/eduservice/coursefront")
+@RequestMapping("/home/course")
 @CrossOrigin(allowCredentials="true",maxAge = 3600)
 public class EduCourseFrontController {
 
@@ -26,7 +26,7 @@ public class EduCourseFrontController {
     private EduChapterService chapterService;
 
     //1 条件查询带分页查询课程
-    @PostMapping("getFrontCourseList/{page}/{limit}")
+    @PostMapping("getCourseList/{page}/{limit}")
     public R getFrontCourseList(@PathVariable long page, @PathVariable long limit,
                                 @RequestBody(required = false) CourseFrontVo courseFrontVo) {
         Page<EduCourse> pageCourse = new Page<>(page,limit);

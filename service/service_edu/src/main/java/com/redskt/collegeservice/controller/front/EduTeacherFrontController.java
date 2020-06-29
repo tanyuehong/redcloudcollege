@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/eduservice/teacherfront")
+@RequestMapping("/home/teacher")
 @CrossOrigin(allowCredentials="true",maxAge = 3600)
 public class EduTeacherFrontController {
 
@@ -26,7 +26,7 @@ public class EduTeacherFrontController {
     private EduCourseService courseService;
 
     //1 分页查询讲师的方法
-    @PostMapping("getTeacherFrontList/{page}/{limit}")
+    @PostMapping("getTeacherList/{page}/{limit}")
     public R getTeacherFrontList(@PathVariable long page, @PathVariable long limit) {
         Page<EduTeacher> pageTeacher = new Page<>(page,limit);
         Map<String,Object> map = teacherService.getTeacherFrontList(pageTeacher);
@@ -35,7 +35,7 @@ public class EduTeacherFrontController {
     }
 
     //2 讲师详情的功能
-    @GetMapping("getTeacherFrontInfo/{teacherId}")
+    @GetMapping("getTeacherInfo/{teacherId}")
     public R getTeacherFrontInfo(@PathVariable String teacherId) {
         //1 根据讲师id查询讲师基本信息
         EduTeacher eduTeacher = teacherService.getById(teacherId);
