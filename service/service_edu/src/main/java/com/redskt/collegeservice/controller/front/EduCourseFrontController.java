@@ -5,8 +5,10 @@ import com.redskt.collegeservice.entity.admin.EduCourse;
 import com.redskt.collegeservice.entity.front.vo.CourseFrontVo;
 import com.redskt.collegeservice.entity.front.vo.CourseWebVo;
 import com.redskt.collegeservice.entity.subject.ChapterVo;
+import com.redskt.collegeservice.entity.subject.SubjectOne;
 import com.redskt.collegeservice.service.EduChapterService;
 import com.redskt.collegeservice.service.EduCourseService;
+import com.redskt.collegeservice.service.EduSubjectService;
 import com.redskt.commonutils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +26,9 @@ public class EduCourseFrontController {
 
     @Autowired
     private EduChapterService chapterService;
+
+    @Autowired
+    private EduSubjectService subjectService;
 
     //1 条件查询带分页查询课程
     @PostMapping("getCourseList/{page}/{limit}")
@@ -45,5 +50,13 @@ public class EduCourseFrontController {
         List<ChapterVo> chapterVideoList = chapterService.getChapterVideoByCourseId(courseId);
 
         return R.ok().data("courseWebVo",courseWebVo).data("chapterVideoList",chapterVideoList);
+    }
+
+    //课程分类列表（树形）
+    @PostMapping("getAllSubject")
+    public R getAllSubject() {
+        //list集合泛型是一级分类
+        List<SubjectOne> list = subjectService.getAllOneTwoSubject();
+        return R.ok().data("list",list);
     }
 }

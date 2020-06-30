@@ -37,13 +37,5 @@ public class EduSubjectController {
         subjectService.saveSubject(file,subjectService);
         return R.ok();
     }
-
-    //课程分类列表（树形）
-    @PostMapping("getAllSubject")
-    public R getAllSubject() {
-        //list集合泛型是一级分类
-        List<SubjectOne> list = subjectService.getAllOneTwoSubject();
-        return R.ok().data("list",list);
-    }
 }
 
