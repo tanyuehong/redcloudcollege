@@ -20,7 +20,7 @@ public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@ApiModelProperty(value = "微信openid")
+	@ApiModelProperty(value = "用户登录名")
 	private String username;
 
 	@ApiModelProperty(value = "密码")

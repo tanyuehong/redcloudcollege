@@ -1,4 +1,4 @@
-package com.redskt.collegeservice.config;
+package com.redskt.classroom.config;
 
 import com.baomidou.mybatisplus.core.injector.ISqlInjector;
 import com.baomidou.mybatisplus.extension.injector.LogicSqlInjector;
@@ -10,8 +10,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 @Configuration
-@MapperScan("com.redskt.collegeservice.mapper")
-public class CollegeConfig {
+@MapperScan("com.redskt.classroom.mapper")
+public class RedClassConfig {
 
     /**
      * 逻辑删除插件
@@ -41,4 +41,5 @@ public class CollegeConfig {
         performanceInterceptor.setFormat(true);
         return performanceInterceptor;
     }
+
 }

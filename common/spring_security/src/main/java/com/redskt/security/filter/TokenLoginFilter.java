@@ -41,7 +41,7 @@ public class TokenLoginFilter extends UsernamePasswordAuthenticationFilter {
         this.tokenManager = tokenManager;
         this.redisTemplate = redisTemplate;
         this.setPostOnly(false);
-        this.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/usercenter/login","POST"));
+        this.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/ucenter/login","POST"));
     }
 
     @Override
@@ -50,6 +50,7 @@ public class TokenLoginFilter extends UsernamePasswordAuthenticationFilter {
         try {
             User user = new ObjectMapper().readValue(req.getInputStream(), User.class);
 
+            logger.info("=================登录");
             return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword(), new ArrayList<>()));
         } catch (IOException e) {
             throw new RuntimeException(e);

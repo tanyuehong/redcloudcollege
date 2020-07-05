@@ -22,7 +22,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/home/banner")
 @CrossOrigin(allowCredentials="true",maxAge = 3600)
-public class EduBannerController {
+public class  EduBannerController {
     @Autowired
     private EduBannerService bannerService;
 
