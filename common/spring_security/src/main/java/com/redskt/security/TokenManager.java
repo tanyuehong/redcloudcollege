@@ -1,10 +1,10 @@
 package com.redskt.security;
 
-import io.jsonwebtoken.CompressionCodecs;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 /**
@@ -19,7 +19,7 @@ import java.util.Date;
 public class TokenManager {
 
     private long tokenExpiration = 24*60*60*1000;
-    private String tokenSignKey = "123456";
+    private static final String  tokenSignKey = "ukc8BDbRizUDaY6pZFfWus2jZWLPHO";
 
     public String createToken(String username) {
         String token = Jwts.builder().setSubject(username)
@@ -31,6 +31,17 @@ public class TokenManager {
     public String getUserFromToken(String token) {
         String user = Jwts.parser().setSigningKey(tokenSignKey).parseClaimsJws(token).getBody().getSubject();
         return user;
+    }
+
+    /**
+     * 根据token字符串获取会员id
+     * @param request
+     * @return
+     */
+    public static String getMemberIdByJwtToken(HttpServletRequest request) {
+        String jwtToken = request.getHeader("token");
+        if(StringUtils.isEmpty(jwtToken)) return "";
+        return  Jwts.parser().setSigningKey(tokenSignKey).parseClaimsJws(jwtToken).getBody().getSubject();
     }
 
     public void removeToken(String token) {

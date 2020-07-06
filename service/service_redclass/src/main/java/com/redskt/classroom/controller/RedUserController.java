@@ -1,9 +1,10 @@
 package com.redskt.classroom.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.redskt.classroom.entity.RedClassUser;
 import com.redskt.classroom.entity.vo.RedClassRegisterVo;
 import com.redskt.classroom.service.RedUserService;
-import com.redskt.commonutils.JwtUtils;
+import com.redskt.security.TokenManager;
 import com.redskt.commonutils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,24 +20,14 @@ import javax.servlet.http.HttpServletRequest;
  * @since 2020-05-16
  */
 @RestController
-@RequestMapping("/home/ucenter")
+@RequestMapping("/ucenter")
 @CrossOrigin(allowCredentials="true",maxAge = 3600)
 public class RedUserController<UcenterMemberService> {
     @Autowired
     private RedUserService userService;
 
-    //登录
-    @PostMapping("login")
-    public R loginUser(@RequestBody RedClassUser eduUser) {
-        //member对象封装手机号和密码
-        //调用service方法实现登录
-        //返回token值，使用jwt生成
-        String token = userService.login(eduUser);
-        return R.ok().data("token",token);
-    }
-
     //注册
-    @PostMapping("register")
+    @PostMapping("home/register")
     public R registerUser(@RequestBody RedClassRegisterVo registerVo) {
         userService.register(registerVo);
         return R.ok();
@@ -46,9 +37,12 @@ public class RedUserController<UcenterMemberService> {
     @GetMapping("getUserInfo")
     public R getMemberInfo(HttpServletRequest request) {
         //调用jwt工具类的方法。根据request对象获取头信息，返回用户id
-        String memberId = JwtUtils.getMemberIdByJwtToken(request);
-        //查询数据库根据用户id获取用户信息
-        RedClassUser eduUser = userService.getById(memberId);
+        String username = TokenManager.getMemberIdByJwtToken(request);
+
+        //1 根据订单号查询订单信息
+        QueryWrapper<RedClassUser> wrapper = new QueryWrapper<>();
+        wrapper.eq("username",username);
+        RedClassUser eduUser = userService.getOne(wrapper);
         return R.ok().data("userInfo",eduUser);
     }
 }

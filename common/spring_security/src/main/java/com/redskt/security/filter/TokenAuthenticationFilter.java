@@ -71,7 +71,7 @@ public class TokenAuthenticationFilter extends BasicAuthenticationFilter {
 
     private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
         // token置于header里
-            String token = request.getHeader("token");
+        String token = request.getHeader("token");
         logger.info("=================12"+token);
         if (token != null && !"".equals(token.trim())) {
             String userName = tokenManager.getUserFromToken(token);
