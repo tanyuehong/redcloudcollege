@@ -1,7 +1,10 @@
 package com.redskt.classroom.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.redskt.classroom.entity.RedClassCourse;
+import com.redskt.classroom.entity.vo.RedClassCourseWebVo;
+import com.redskt.classroom.entity.vo.RedClassCourseFrontVo;
 
 import java.util.Map;
 
@@ -14,5 +17,9 @@ import java.util.Map;
  * @since 2020-05-05
  */
 public interface RedCourseService extends IService<RedClassCourse> {
+
+    RedClassCourseWebVo getBaseCourseInfo(String courseId);
+
+    Map<String, Object> getCourseFrontList(Page<RedClassCourse> pageCourse, RedClassCourseFrontVo courseFrontVo);
 
 }

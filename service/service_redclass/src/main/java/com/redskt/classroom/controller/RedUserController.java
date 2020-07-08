@@ -2,7 +2,6 @@ package com.redskt.classroom.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.redskt.classroom.entity.RedClassUser;
-import com.redskt.classroom.entity.vo.RedClassRegisterVo;
 import com.redskt.classroom.service.RedUserService;
 import com.redskt.security.TokenManager;
 import com.redskt.commonutils.R;
@@ -22,16 +21,9 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("/ucenter")
 @CrossOrigin(allowCredentials="true",maxAge = 3600)
-public class RedUserController<UcenterMemberService> {
+public class RedUserController {
     @Autowired
     private RedUserService userService;
-
-    //注册
-    @PostMapping("home/register")
-    public R registerUser(@RequestBody RedClassRegisterVo registerVo) {
-        userService.register(registerVo);
-        return R.ok();
-    }
 
     //根据token获取用户信息
     @GetMapping("getUserInfo")
