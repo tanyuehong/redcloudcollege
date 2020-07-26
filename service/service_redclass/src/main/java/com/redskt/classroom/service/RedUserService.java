@@ -14,8 +14,6 @@ import com.redskt.classroom.entity.vo.RedClassRegisterVo;
  */
 public interface RedUserService extends IService<RedClassUser> {
 
-    String login(RedClassUser eduUser);
-
     void register(RedClassRegisterVo registerVo);
 
     // 从数据库中取出用户信息
