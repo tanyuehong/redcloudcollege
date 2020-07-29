@@ -2,4 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.redskt.classroom.mapper.EduUserAskMapper">
 
+
+        <resultMap id="askquestionMap" type="com.redskt.classroom.entity.vo.RedClassAskQuestionVo">
+            <result property="title" column="title"/>
+        </resultMap>
+    <select id="getHomeQustionLists" resultMap="askquestionMap">
+        SELECT ask.title as title
+        FROM edu_user_ask ask
+        order by ask.read desc limit 10;
+    </select>
+
+
 </mapper>

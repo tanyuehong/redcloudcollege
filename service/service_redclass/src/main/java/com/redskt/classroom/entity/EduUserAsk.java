@@ -47,6 +47,8 @@ public class EduUserAsk implements Serializable {
 
     private Integer coment;
 
+    private Integer read;
+
     private Integer hot;
 
     @ApiModelProperty(value = "创建时间")

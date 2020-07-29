@@ -2,6 +2,9 @@ package com.redskt.classroom.service;
 
 import com.redskt.classroom.entity.EduUserAsk;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.redskt.classroom.entity.vo.RedClassAskQuestionVo;
+
+import java.util.List;
 
 /**
  * <p>
@@ -15,4 +18,5 @@ public interface EduUserAskService extends IService<EduUserAsk> {
 
     Boolean saveUserAsk(EduUserAsk userAsk);
 
+    List<RedClassAskQuestionVo> getHomeAskQustionList();
 }

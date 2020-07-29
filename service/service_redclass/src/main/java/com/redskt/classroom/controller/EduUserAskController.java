@@ -2,14 +2,13 @@ package com.redskt.classroom.controller;
 
 
 import com.redskt.classroom.entity.EduUserAsk;
+import com.redskt.classroom.entity.vo.RedClassAskQuestionVo;
 import com.redskt.classroom.service.EduUserAskService;
 import com.redskt.commonutils.R;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
 
 /**
  * <p>
@@ -34,8 +33,5 @@ public class EduUserAskController {
             return R.error("报错问题信息失败");
         }
     }
-
-
-
 }
 

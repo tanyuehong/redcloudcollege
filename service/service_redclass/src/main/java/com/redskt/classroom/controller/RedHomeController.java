@@ -4,7 +4,9 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.redskt.classroom.entity.RedClassCourse;
 import com.redskt.classroom.entity.RedClassTeacher;
+import com.redskt.classroom.entity.vo.RedClassAskQuestionVo;
 import com.redskt.classroom.entity.vo.RedClassRegisterVo;
+import com.redskt.classroom.service.EduUserAskService;
 import com.redskt.classroom.service.RedCourseService;
 import com.redskt.classroom.service.RedTeacherService;
 import com.redskt.classroom.service.RedUserService;
@@ -35,6 +37,15 @@ public class RedHomeController<UcenterMemberService> {
 
     @Autowired
     private RedCourseService courseService;
+
+    @Autowired
+    private EduUserAskService userAskService;
+
+    @GetMapping("eduask/questionlist")
+    public  R getHomeQuestionList() {
+        List<RedClassAskQuestionVo> list = userAskService.getHomeAskQustionList();
+        return R.ok().data("list",list);
+    }
 
     //注册
     @PostMapping("ucenter/register")

@@ -1,10 +1,13 @@
 package com.redskt.classroom.service.impl;
 
 import com.redskt.classroom.entity.EduUserAsk;
+import com.redskt.classroom.entity.vo.RedClassAskQuestionVo;
 import com.redskt.classroom.mapper.EduUserAskMapper;
 import com.redskt.classroom.service.EduUserAskService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -21,5 +24,10 @@ public class EduUserAskServiceImpl extends ServiceImpl<EduUserAskMapper, EduUser
     public Boolean saveUserAsk(EduUserAsk userAsk) {
         baseMapper.insert(userAsk);
         return true;
+    }
+
+    @Override
+    public List<RedClassAskQuestionVo> getHomeAskQustionList() {
+        return baseMapper.getHomeQustionLists();
     }
 }
