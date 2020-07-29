@@ -15,7 +15,7 @@ public class RedClassAskQuestionVo {
 
     private String content;
 
-    private Integer relay;
+    private Integer reply;
 
     private Integer read;
 
