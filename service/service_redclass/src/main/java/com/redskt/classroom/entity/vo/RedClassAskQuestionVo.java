@@ -5,6 +5,8 @@ import lombok.Data;
 @Data
 public class RedClassAskQuestionVo {
 
+    private String qId;
+
     private String nickname;
 
     private String title;
@@ -20,4 +22,10 @@ public class RedClassAskQuestionVo {
     private Integer read;
 
     private Integer hot;
+
+    private Integer top;
+
+    private Integer price;
+
+    private Integer hotnum;
 }

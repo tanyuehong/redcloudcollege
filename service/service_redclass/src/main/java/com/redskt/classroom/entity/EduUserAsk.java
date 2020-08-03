@@ -51,6 +51,12 @@ public class EduUserAsk implements Serializable {
 
     private Integer hot;
 
+    private Integer top;
+
+    private Integer price;
+
+    private Integer hotnum;
+
     @ApiModelProperty(value = "创建时间")
     @TableField(fill = FieldFill.INSERT)
     private Date gmtCreate;
