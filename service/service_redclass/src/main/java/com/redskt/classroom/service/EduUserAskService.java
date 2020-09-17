@@ -18,5 +18,7 @@ public interface EduUserAskService extends IService<EduUserAsk> {
 
     Boolean saveUserAsk(EduUserAsk userAsk);
 
+    RedClassAskQuestionVo getQustionDetail(String tId);
+
     List<RedClassAskQuestionVo> getHomeAskQustionList();
 }

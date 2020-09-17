@@ -33,5 +33,11 @@ public class EduUserAskController {
             return R.error("报错问题信息失败");
         }
     }
+
+    @GetMapping("getquestiondetail/{qId}")
+    public R getQustionDetil(@PathVariable String qId) {
+        RedClassAskQuestionVo qDetail =  userAskService.getQustionDetail(qId);
+        return R.ok().data("qdetail",qDetail);
+    }
 }
 

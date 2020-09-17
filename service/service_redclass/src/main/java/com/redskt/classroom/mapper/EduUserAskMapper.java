@@ -18,4 +18,6 @@ import java.util.List;
  */
 public interface EduUserAskMapper extends BaseMapper<EduUserAsk> {
     List<RedClassAskQuestionVo> getHomeQustionLists();
+
+    RedClassAskQuestionVo getQustionDetail(String tId);
 }

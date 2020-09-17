@@ -27,6 +27,11 @@ public class EduUserAskServiceImpl extends ServiceImpl<EduUserAskMapper, EduUser
     }
 
     @Override
+    public RedClassAskQuestionVo getQustionDetail(String qId) {
+        return baseMapper.getQustionDetail(qId);
+    }
+
+    @Override
     public List<RedClassAskQuestionVo> getHomeAskQustionList() {
         return baseMapper.getHomeQustionLists();
     }
