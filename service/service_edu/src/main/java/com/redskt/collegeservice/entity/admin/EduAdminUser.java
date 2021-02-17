@@ -22,7 +22,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("edu_admin_user")
+@TableName("edu_user")
 @ApiModel(value="User对象", description="用户表")
 public class EduAdminUser implements Serializable {
 
@@ -39,13 +39,10 @@ public class EduAdminUser implements Serializable {
     private String password;
 
     @ApiModelProperty(value = "昵称")
-    private String nickName;
+    private String nickname;
 
     @ApiModelProperty(value = "用户头像")
-    private String salt;
-
-    @ApiModelProperty(value = "用户签名")
-    private String token;
+    private String avatar;
 
     @ApiModelProperty(value = "逻辑删除 1（true）已删除， 0（false）未删除")
     private Boolean isDeleted;
@@ -55,6 +52,4 @@ public class EduAdminUser implements Serializable {
 
     @ApiModelProperty(value = "更新时间")
     private Date gmtModified;
-
-
 }
