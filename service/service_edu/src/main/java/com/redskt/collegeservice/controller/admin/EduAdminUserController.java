@@ -8,6 +8,7 @@ import com.redskt.collegeservice.service.EduAdminRoleService;
 import com.redskt.collegeservice.service.EduAdminUserService;
 import com.redskt.commonutils.R;
 import com.redskt.commonutils.MD5;
+import com.redskt.security.entity.User;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +56,14 @@ public class EduAdminUserController {
 
         IPage<EduAdminUser> pageModel = userService.page(pageParam, wrapper);
         return R.ok().data("items", pageModel.getRecords()).data("total", pageModel.getTotal());
+    }
+
+    @ApiOperation(value = "根据id获取用户数据")
+    @GetMapping("get/{id}")
+    public R getUserWithId(@PathVariable String id) {
+        EduAdminUser user = userService.getById(id);
+        user.setPassword("");
+        return  R.ok().data("user", user);
     }
 
     @ApiOperation(value = "新增管理用户")
