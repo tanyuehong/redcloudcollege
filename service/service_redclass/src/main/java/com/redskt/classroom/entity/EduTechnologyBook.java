@@ -1,8 +1,12 @@
 package com.redskt.classroom.entity;
 
 import java.math.BigDecimal;
+
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import java.util.Date;
+
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
@@ -33,6 +37,8 @@ public class EduTechnologyBook implements Serializable {
 
     private String title;
 
+    private String bookImg;
+
     private String describ;
 
     private String author;
@@ -47,9 +53,10 @@ public class EduTechnologyBook implements Serializable {
 
     private BigDecimal oldPrice;
 
+    @TableField(fill = FieldFill.INSERT)
     private Date gmtCreate;
 
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date gmtModified;
-
 
 }
