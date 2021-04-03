@@ -14,7 +14,7 @@ public class GlobalExceptionHandler {
     public R error(Exception e) {
         e.printStackTrace();
         log.error(e.getMessage());
-        return R.error().message("执行了全局异常处理");
+        return R.error().message("哦，服务端遇到了未知问题，请联系我们把");
     }
 
     //特定异常

@@ -3,16 +3,13 @@ package com.redskt.classroom.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 
+import com.redskt.classroom.entity.EduBookContents;
 import com.redskt.classroom.entity.EduTechnologyBook;
-import com.redskt.classroom.entity.RedClassCourse;
+import com.redskt.classroom.service.EduBookContentsService;
 import com.redskt.classroom.service.EduTechnologyBookService;
 import com.redskt.commonutils.R;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,11 +23,13 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/home/book/")
-@CrossOrigin(allowCredentials="true",maxAge = 3600)
 public class EduTechnologyBookController {
 
     @Autowired
     private EduTechnologyBookService bookService;
+
+    @Autowired
+    private EduBookContentsService contentsService;
 
     //查询前8条热门课程，查询前4条名师
     @GetMapping("getBooks")
@@ -44,5 +43,14 @@ public class EduTechnologyBookController {
         return R.ok().data("bookList",bookList);
     }
 
+    @GetMapping("getBookDetail/{bookId}")
+    public R getBookDetail(@PathVariable String bookId) {
+        if(bookId.length()>0) {
+            EduTechnologyBook book = bookService.getById(bookId);
+            return  R.ok().data("book",book);
+        } else {
+            return R.error("哦哦,参数错误哈");
+        }
+    }
 }
 
