@@ -1,8 +1,8 @@
 package com.redskt.classroom.service.impl;
 
-import com.redskt.classroom.entity.EduTechnologyBookArticle;
+import com.redskt.classroom.entity.RedTechBookArticle;
 import com.redskt.classroom.mapper.EduTechnologyBookArticleMapper;
-import com.redskt.classroom.service.EduTechnologyBookArticleService;
+import com.redskt.classroom.service.RedTechBookArticleService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +15,6 @@ import org.springframework.stereotype.Service;
  * @since 2021-02-28
  */
 @Service
-public class EduTechnologyBookArticleServiceImpl extends ServiceImpl<EduTechnologyBookArticleMapper, EduTechnologyBookArticle> implements EduTechnologyBookArticleService {
+public class EduTechnologyBookArticleServiceImpl extends ServiceImpl<EduTechnologyBookArticleMapper, RedTechBookArticle> implements RedTechBookArticleService {
 
 }

@@ -28,9 +28,6 @@ public class EduTechnologyBookController {
     @Autowired
     private EduTechnologyBookService bookService;
 
-    @Autowired
-    private EduBookContentsService contentsService;
-
     //查询前8条热门课程，查询前4条名师
     @GetMapping("getBooks")
     public R index() {

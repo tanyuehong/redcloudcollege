@@ -1,6 +1,6 @@
 package com.redskt.classroom.service;
 
-import com.redskt.classroom.entity.EduTechnologyBookArticle;
+import com.redskt.classroom.entity.RedTechBookArticle;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author tanyuehong
  * @since 2021-02-28
  */
-public interface EduTechnologyBookArticleService extends IService<EduTechnologyBookArticle> {
+public interface RedTechBookArticleService extends IService<RedTechBookArticle> {
 
 }
