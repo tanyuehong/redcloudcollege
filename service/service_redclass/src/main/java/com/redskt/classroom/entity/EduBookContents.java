@@ -38,6 +38,8 @@ public class EduBookContents implements Serializable {
 
     private String chapterId;
 
+    private String articleId;
+
     private String title;
 
     private Integer sortcontent;
