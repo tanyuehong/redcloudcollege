@@ -23,6 +23,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/home/book/")
+@CrossOrigin(allowCredentials="true",maxAge = 3600)
 public class EduTechnologyBookController {
 
     @Autowired

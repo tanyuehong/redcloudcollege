@@ -9,11 +9,7 @@ import com.redskt.classroom.service.EduTechnologyBookService;
 import com.redskt.classroom.service.RedTechBookArticleService;
 import com.redskt.commonutils.R;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -25,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/home/book")
+@CrossOrigin(allowCredentials="true",maxAge = 3600)
 public class RedTechBookArticleController {
 
     @Autowired

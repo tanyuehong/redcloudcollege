@@ -20,6 +20,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/eduask")
+@CrossOrigin(allowCredentials="true",maxAge = 3600)
 public class EduUserAskController {
 
     @Autowired

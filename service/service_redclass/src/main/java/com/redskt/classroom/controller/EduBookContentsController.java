@@ -25,6 +25,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/home/book/contents")
+@CrossOrigin(allowCredentials="true",maxAge = 3600)
 public class EduBookContentsController {
     @Autowired
     private EduBookContentsService contentsService;

@@ -21,6 +21,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/home/book/comments")
+@CrossOrigin(allowCredentials="true",maxAge = 3600)
 public class EduBookCommentController {
     @Autowired
     private EduBookCommentService commentService;
