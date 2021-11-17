@@ -33,7 +33,7 @@ public class RedIndexController {
         wrapper.last("limit 8");
         List<RedClassCourse> eduList = courseService.list(wrapper);
 
-        //查询前4条名师
+        // 猜你喜欢的内容
         QueryWrapper<RedClassTeacher> wrapperTeacher = new QueryWrapper<>();
         wrapperTeacher.orderByDesc("id");
         wrapperTeacher.last("limit 4");
