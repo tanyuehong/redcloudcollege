@@ -39,7 +39,7 @@ public class OpBlogController {
     @GetMapping("index")
     public R index() {
         QueryWrapper<OpBlogType> wrapper = new QueryWrapper<>();
-        wrapper.orderByDesc("id");
+        wrapper.orderByAsc("bsort");
         wrapper.last("limit 8");
         List<OpBlogType> typeList = typeService.list(wrapper);
 

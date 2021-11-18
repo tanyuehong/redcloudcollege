@@ -37,6 +37,8 @@ public class OpBlogType implements Serializable {
     @TableField("parentId")
     private String parentId;
 
+    private Integer bsort;
+
     private Integer level;
 
     private Integer hot;
