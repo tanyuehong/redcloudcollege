@@ -1,5 +1,6 @@
 package com.redskt.classroom.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -28,7 +29,7 @@ public class OpBlogType implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "类型ID")
-    @TableId(value = "id", type = IdType.ID_WORKER)
+    @TableId(value = "id", type = IdType.ID_WORKER_STR)
     private String id;
 
     private String name;
@@ -40,8 +41,10 @@ public class OpBlogType implements Serializable {
 
     private Integer hot;
 
+    @TableField(fill = FieldFill.INSERT)
     private Date gmtCreate;
 
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date gmtModified;
 
 
