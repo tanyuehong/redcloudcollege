@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,16 +40,24 @@ public class OpBlogController {
     @GetMapping("index")
     public R index() {
         QueryWrapper<OpBlogType> wrapper = new QueryWrapper<>();
+        wrapper.eq('par')
         wrapper.orderByAsc("bsort");
         wrapper.last("limit 8");
         List<OpBlogType> typeList = typeService.list(wrapper);
+
+        List<OpBlogType> subTypeList = new ArrayList<>();
+        if (typeList.size()>0) {
+            QueryWrapper<OpBlogType> subWrapper = new QueryWrapper<>();
+            subWrapper.eq("id",typeList.get(0).getId());
+            subTypeList = typeService.list(subWrapper);
+        }
 
         QueryWrapper<OpBlogDetail> blogDetailQueryWrapper = new QueryWrapper<>();
         blogDetailQueryWrapper.orderByDesc("id");
         blogDetailQueryWrapper.last("limit 4");
         List<OpBlogDetail> blogList = blogService.list(blogDetailQueryWrapper);
 
-        return R.ok().data("typeList",typeList).data("blogList",blogList);
+        return R.ok().data("typeList",typeList).data("subTypeList",subTypeList).data("blogList",blogList);
     }
 }
 
