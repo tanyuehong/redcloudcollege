@@ -41,6 +41,8 @@ public class OpBlogDetail implements Serializable {
 
     private String content;
 
+    private String descrb;
+
     private Integer good;
 
     private Integer faver;

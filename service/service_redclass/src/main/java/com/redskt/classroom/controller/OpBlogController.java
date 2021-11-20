@@ -40,7 +40,7 @@ public class OpBlogController {
     @GetMapping("index")
     public R index() {
         QueryWrapper<OpBlogType> wrapper = new QueryWrapper<>();
-        wrapper.eq('par')
+        wrapper.isNull("parentId");
         wrapper.orderByAsc("bsort");
         wrapper.last("limit 8");
         List<OpBlogType> typeList = typeService.list(wrapper);
@@ -48,15 +48,24 @@ public class OpBlogController {
         List<OpBlogType> subTypeList = new ArrayList<>();
         if (typeList.size()>0) {
             QueryWrapper<OpBlogType> subWrapper = new QueryWrapper<>();
-            subWrapper.eq("id",typeList.get(0).getId());
+            subWrapper.eq("parentId",typeList.get(0).getId());
             subTypeList = typeService.list(subWrapper);
         }
 
         QueryWrapper<OpBlogDetail> blogDetailQueryWrapper = new QueryWrapper<>();
+        blogDetailQueryWrapper.select("id","title","type","good","faver","readcount","price","descrb");
         blogDetailQueryWrapper.orderByDesc("id");
         blogDetailQueryWrapper.last("limit 4");
+
         List<OpBlogDetail> blogList = blogService.list(blogDetailQueryWrapper);
 
+        for (int i=0;i<blogList.size();i++) {
+            OpBlogDetail detail = blogList.get(i);
+            if (detail.getDescrb().length()>150) {
+                detail.setDescrb(detail.getDescrb().substring(0,150)+"...");
+            }
+        }
+        
         return R.ok().data("typeList",typeList).data("subTypeList",subTypeList).data("blogList",blogList);
     }
 }
