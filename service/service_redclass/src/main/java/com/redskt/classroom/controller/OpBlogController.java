@@ -67,14 +67,10 @@ public class OpBlogController {
         return R.ok().data("typeList",typeList).data("subTypeList",subTypeList).data("blogList",blogList);
     }
 
-    @PostMapping("getDetail")
-    public R index(@RequestBody String params) {
-        JSONObject jsonObject = JSONObject.parseObject(params);
-        String practiceId = (String)jsonObject.get("practiceId");
-        if (practiceId.length()>0) {
-            QueryWrapper<OpBlogDetail> blogDetailQueryWrapper = new QueryWrapper<>();
-            blogDetailQueryWrapper.eq("id",practiceId);
-            OpBlogDetail detail = blogService.getById(practiceId);
+    @GetMapping("getDetail/{praticeId}")
+    public R index(@PathVariable String praticeId) {
+        if (praticeId.length()>0) {
+            OpBlogDetail detail = blogService.getById(praticeId);
             return R.ok().data("pitem",detail);
         } else {
             return R.error("参数不合法，请验证");
