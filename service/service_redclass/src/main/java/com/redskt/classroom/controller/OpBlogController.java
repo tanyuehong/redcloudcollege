@@ -1,6 +1,7 @@
 package com.redskt.classroom.controller;
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.redskt.classroom.entity.OpBlogDetail;
 import com.redskt.classroom.entity.OpBlogType;
@@ -11,10 +12,7 @@ import com.redskt.classroom.service.OpBlogTypeService;
 import com.redskt.classroom.service.RedCourseService;
 import com.redskt.commonutils.R;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,6 +65,20 @@ public class OpBlogController {
         }
         
         return R.ok().data("typeList",typeList).data("subTypeList",subTypeList).data("blogList",blogList);
+    }
+
+    @PostMapping("getDetail")
+    public R index(@RequestBody String params) {
+        JSONObject jsonObject = JSONObject.parseObject(params);
+        String practiceId = (String)jsonObject.get("practiceId");
+        if (practiceId.length()>0) {
+            QueryWrapper<OpBlogDetail> blogDetailQueryWrapper = new QueryWrapper<>();
+            blogDetailQueryWrapper.eq("id",practiceId);
+            OpBlogDetail detail = blogService.getById(practiceId);
+            return R.ok().data("pitem",detail);
+        } else {
+            return R.error("参数不合法，请验证");
+        }
     }
 }
 
