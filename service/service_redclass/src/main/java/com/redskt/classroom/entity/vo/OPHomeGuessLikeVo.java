@@ -1,5 +1,8 @@
 package com.redskt.classroom.entity.vo;
 
+import lombok.Data;
+
+@Data
 public class OPHomeGuessLikeVo {
     private Integer type;
 

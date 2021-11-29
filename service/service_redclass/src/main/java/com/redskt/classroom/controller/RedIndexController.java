@@ -5,6 +5,7 @@ import com.redskt.classroom.entity.*;
 import com.redskt.classroom.entity.vo.OPHomeGuessLikeVo;
 import com.redskt.classroom.service.*;
 import com.redskt.commonutils.R;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,7 +51,7 @@ public class RedIndexController {
             courseC = 1;
         }
         QueryWrapper<RedClassCourse> videowrapper = new QueryWrapper<>();
-        videowrapper.orderByDesc("readcount");
+        videowrapper.orderByDesc("view_count");
         videowrapper.last(String.format("limit %d",courseC));
         List<RedClassCourse> guessvideo = courseService.list(videowrapper);
 
@@ -71,33 +72,41 @@ public class RedIndexController {
             bookCount = 1;
         }
         QueryWrapper<EduTechnologyBook> bookwrapper = new QueryWrapper<>();
-        bookwrapper.orderByDesc("viewCount");
+        bookwrapper.orderByDesc("view_count");
         bookwrapper.last(String.format("limit %d",bookCount));
         List<EduTechnologyBook> bookList = bookService.list(bookwrapper);
 
-
-        List<OPHomeGuessLikeVo> gussLike = new ArrayList<>();
-
+        List<OPHomeGuessLikeVo> gussLikes = new ArrayList<>();
+        int type = random.nextInt(3);
         while (guessvideo.size()>0 || blogList.size()>0 || bookList.size()>0) {
-            int type = random.nextInt(3);
             OPHomeGuessLikeVo vo = new OPHomeGuessLikeVo();
-            if (type == 0 && guessvideo.size()>0) {
-
-
-            } else if()
-
-        }
-
-        for (int i=0;i<blogList.size();i++) {
-
-
-
-            OpBlogDetail detail = blogList.get(i);
-            if (detail.getDescrb().length()>150) {
-                detail.setDescrb(detail.getDescrb().substring(0,150)+"...");
+            if (type>2) {
+                type = type%3;
             }
+            if (type == 0&& guessvideo.size()>0 ) {
+                RedClassCourse couseItem = guessvideo.get(0);
+                guessvideo.remove(0);
+                BeanUtils.copyProperties(couseItem, vo);
+                vo.setType(type);
+                type = random.nextInt(3);
+            } else if(type == 1 && blogList.size()>0) {
+                OpBlogDetail blog = blogList.get(0);
+                blogList.remove(0);
+                BeanUtils.copyProperties(blog, vo);
+                vo.setType(type);
+                type = random.nextInt(3);
+            } else if(type == 2 && bookList.size()>0) {
+                EduTechnologyBook book = bookList.get(0);
+                bookList.remove(0);
+                BeanUtils.copyProperties(book, vo);
+                vo.setType(type);
+                type = random.nextInt(3);
+            } else {
+                type++;
+            }
+            gussLikes.add(vo);
         }
         List<RedClassBanner> banerList = bannerService.selectAllBanner();
-        return R.ok().data("banerList",banerList).data("eduList",eduList).data("teacherList",teacherList);
+        return R.ok().data("banerList",banerList).data("eduList",eduList).data("gusslikeList",gussLikes);
     }
 }
