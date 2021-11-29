@@ -43,6 +43,8 @@ public class OpBlogDetail implements Serializable {
 
     private String descrb;
 
+    private Integer hot;
+
     private Integer good;
 
     private Integer faver;

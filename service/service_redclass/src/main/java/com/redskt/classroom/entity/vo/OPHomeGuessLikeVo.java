@@ -3,6 +3,8 @@ package com.redskt.classroom.entity.vo;
 public class OPHomeGuessLikeVo {
     private Integer type;
 
+    private String id;
+
     private String title;
 
     private String imageUrl;
