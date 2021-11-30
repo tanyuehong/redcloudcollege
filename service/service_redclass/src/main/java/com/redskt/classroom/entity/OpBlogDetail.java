@@ -49,7 +49,7 @@ public class OpBlogDetail implements Serializable {
 
     private Integer faver;
 
-    private Integer readcount;
+    private Integer viewCount;
 
     private Integer price;
 

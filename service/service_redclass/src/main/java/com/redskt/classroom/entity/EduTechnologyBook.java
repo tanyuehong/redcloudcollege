@@ -37,7 +37,7 @@ public class EduTechnologyBook implements Serializable {
 
     private String title;
 
-    private String bookImg;
+    private String imgUrl;
 
     private String describ;
 

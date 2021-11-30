@@ -61,7 +61,7 @@ public class RedIndexController {
             blogCunt = 1;
         }
         QueryWrapper<OpBlogDetail> blogDetailQueryWrapper = new QueryWrapper<>();
-        blogDetailQueryWrapper.select("id","title","type","good","faver","readcount","price","descrb","hot");
+        blogDetailQueryWrapper.select("id","title","type","good","faver","view_count","price","descrb","hot");
         blogDetailQueryWrapper.orderByDesc("hot");
         blogDetailQueryWrapper.last(String.format("limit %d",blogCunt));
         List<OpBlogDetail> blogList = blogService.list(blogDetailQueryWrapper);
@@ -94,12 +94,14 @@ public class RedIndexController {
                 blogList.remove(0);
                 BeanUtils.copyProperties(blog, vo);
                 vo.setType(type);
+                vo.setContent(blog.getDescrb());
                 type = random.nextInt(3);
             } else if(type == 2 && bookList.size()>0) {
                 EduTechnologyBook book = bookList.get(0);
                 bookList.remove(0);
                 BeanUtils.copyProperties(book, vo);
                 vo.setType(type);
+
                 type = random.nextInt(3);
             } else {
                 type++;

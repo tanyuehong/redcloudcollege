@@ -51,7 +51,7 @@ public class OpBlogController {
         }
 
         QueryWrapper<OpBlogDetail> blogDetailQueryWrapper = new QueryWrapper<>();
-        blogDetailQueryWrapper.select("id","title","type","good","faver","readcount","price","descrb");
+        blogDetailQueryWrapper.select("id","title","type","good","faver","view_count","price","descrb");
         blogDetailQueryWrapper.orderByDesc("id");
         blogDetailQueryWrapper.last("limit 4");
 
