@@ -101,10 +101,11 @@ public class RedIndexController {
                 bookList.remove(0);
                 BeanUtils.copyProperties(book, vo);
                 vo.setType(type);
-
+                vo.setContent(book.getDescrib());
                 type = random.nextInt(3);
             } else {
                 type++;
+                continue;
             }
             gussLikes.add(vo);
         }
