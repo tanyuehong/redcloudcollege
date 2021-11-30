@@ -26,13 +26,15 @@ public class OPHomeGuessLikeVo {
 
     private Integer viewCount;  // 浏览量
 
+    private Integer buyCount;
+
     private Integer good; // 点赞的数量
 
     private Integer hot;
 
     private Integer top;
 
-    private Integer price;
+    private BigDecimal price;
 
     private BigDecimal oldPrice;
 

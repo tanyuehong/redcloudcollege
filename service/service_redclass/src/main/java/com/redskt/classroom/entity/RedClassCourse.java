@@ -51,13 +51,13 @@ public class RedClassCourse implements Serializable {
     private Integer lessonNum;
 
     @ApiModelProperty(value = "课程封面图片路径")
-    private String cover;
+    private String imgUrl;
 
     @ApiModelProperty(value = "销售数量")
-    private Long buyCount;
+    private Integer buyCount;
 
     @ApiModelProperty(value = "浏览数量")
-    private Long viewCount;
+    private Integer viewCount;
 
     @ApiModelProperty(value = "乐观锁")
     private Long version;
