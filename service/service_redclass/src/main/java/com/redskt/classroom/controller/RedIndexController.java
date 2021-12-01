@@ -32,6 +32,9 @@ public class RedIndexController {
     @Autowired
     private EduTechnologyBookService bookService;
 
+    @Autowired
+    private EduBookChaptersService chaperService;
+
     //查询前8条热门课程，查询前4条名师
     @GetMapping("index")
     public R index() {
@@ -87,7 +90,9 @@ public class RedIndexController {
                 RedClassCourse couseItem = guessvideo.get(0);
                 guessvideo.remove(0);
                 BeanUtils.copyProperties(couseItem, vo);
+                vo.setContentCount(couseItem.getLessonNum());
                 vo.setType(type);
+                vo.setContent(couseItem.getCdescribe());
                 type = random.nextInt(3);
             } else if(type == 1 && blogList.size()>0) {
                 OpBlogDetail blog = blogList.get(0);
@@ -100,8 +105,12 @@ public class RedIndexController {
                 EduTechnologyBook book = bookList.get(0);
                 bookList.remove(0);
                 BeanUtils.copyProperties(book, vo);
+                QueryWrapper<EduBookChapters> chperWarper = new QueryWrapper<>();
+                chperWarper.eq("book_id",book.getId());
+                List<EduBookChapters> chapters = chaperService.list(chperWarper);
                 vo.setType(type);
                 vo.setContent(book.getDescrib());
+                vo.setContentCount(chapters.size());
                 type = random.nextInt(3);
             } else {
                 type++;

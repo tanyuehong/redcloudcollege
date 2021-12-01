@@ -26,6 +26,8 @@ public class OPHomeGuessLikeVo {
 
     private Integer viewCount;  // 浏览量
 
+    private Integer contentCount;
+
     private Integer buyCount;
 
     private Integer good; // 点赞的数量
