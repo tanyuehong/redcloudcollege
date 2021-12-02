@@ -35,6 +35,9 @@ public class RedIndexController {
     @Autowired
     private EduBookChaptersService chaperService;
 
+    @Autowired
+    private RedTeacherService teacherService;
+
     //查询前8条热门课程，查询前4条名师
     @GetMapping("index")
     public R index() {
@@ -90,8 +93,11 @@ public class RedIndexController {
                 RedClassCourse couseItem = guessvideo.get(0);
                 guessvideo.remove(0);
                 BeanUtils.copyProperties(couseItem, vo);
+                RedClassTeacher teacher = teacherService.getById(couseItem.getTeacherId());
                 vo.setContentCount(couseItem.getLessonNum());
                 vo.setType(type);
+                vo.setAuthor(teacher.getName());
+                vo.setAuthorPositon("资深工程师");
                 vo.setContent(couseItem.getCdescribe());
                 type = random.nextInt(3);
             } else if(type == 1 && blogList.size()>0) {
