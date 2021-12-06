@@ -19,7 +19,7 @@ public class RedClassCourseWebVo {
     private Integer lessonNum;
 
     @ApiModelProperty(value = "课程封面图片路径")
-    private String cover;
+    private String imgUrl;
 
     @ApiModelProperty(value = "销售数量")
     private Long buyCount;
