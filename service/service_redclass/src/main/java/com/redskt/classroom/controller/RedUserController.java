@@ -35,6 +35,9 @@ public class RedUserController {
         QueryWrapper<RedClassUser> wrapper = new QueryWrapper<>();
         wrapper.eq("username",username);
         RedClassUser eduUser = userService.getOne(wrapper);
+        if (eduUser != null && eduUser.getSign()==null) {
+            eduUser.setSign("这位同学很懒，木有签名的说～");
+        }
         return R.ok().data("userInfo",eduUser);
     }
 }
