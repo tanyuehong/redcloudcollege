@@ -7,8 +7,11 @@ import com.redskt.security.TokenManager;
 import com.redskt.commonutils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * <p>
@@ -39,5 +42,22 @@ public class RedUserController {
             eduUser.setSign("这位同学很懒，木有签名的说～");
         }
         return R.ok().data("userInfo",eduUser);
+    }
+
+    @PostMapping("uploadUserImage")
+    public  R uploadUerImage(@RequestParam(value = "file") MultipartFile file) {
+        if (file.isEmpty()) {
+            return R.error("上传失败，请选择文件");
+        }
+
+        String fileName = file.getOriginalFilename();
+        String filePath = "C:/Users/tanyuehong/Postman/files";
+        File dest = new File(filePath + fileName);
+        try {
+            file.transferTo(dest);
+            return R.ok().data("path",filePath);
+        } catch (IOException e) {
+            return R.error(e.getLocalizedMessage());
+        }
     }
 }
