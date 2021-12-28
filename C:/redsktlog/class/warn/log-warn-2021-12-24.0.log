@@ -1,2 +1,0 @@
-2021-12-24 12:45:17.149 [main] WARN  com.zaxxer.hikari.HikariConfig - HikariPool-1 - idleTimeout is close to or more than maxLifetime, disabling it.
-2021-12-24 13:37:48.129 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=10m59s826ms).
