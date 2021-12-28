@@ -1,5 +1,7 @@
 package com.redskt.commonutils;
 
+import org.springframework.util.DigestUtils;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -27,5 +29,9 @@ public final class MD5 {
             e.printStackTrace();
             throw new RuntimeException("MD5加密出错！！+" + e);
         }
+    }
+
+    public static String getMD5(String str) {
+        return DigestUtils.md5DigestAsHex(str.getBytes());
     }
 }

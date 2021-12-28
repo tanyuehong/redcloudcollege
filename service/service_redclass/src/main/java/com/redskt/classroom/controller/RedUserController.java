@@ -3,6 +3,7 @@ package com.redskt.classroom.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.redskt.classroom.entity.RedClassUser;
 import com.redskt.classroom.service.RedUserService;
+import com.redskt.commonutils.MD5;
 import com.redskt.security.TokenManager;
 import com.redskt.commonutils.R;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * <p>
@@ -27,6 +30,8 @@ import java.io.IOException;
 public class RedUserController {
     @Autowired
     private RedUserService userService;
+
+    private static final List<String> CONTENT_TYPES = Arrays.asList("image/jpeg", "image/png");
 
     //根据token获取用户信息
     @GetMapping("getUserInfo")
@@ -45,17 +50,26 @@ public class RedUserController {
     }
 
     @PostMapping("uploadUserImage")
-    public  R uploadUerImage(@RequestParam(value = "file") MultipartFile file) {
+    public  R uploadUerImage(@RequestParam(value = "file") MultipartFile file,HttpServletRequest request) {
         if (file.isEmpty()) {
             return R.error("上传失败，请选择文件");
         }
-
+        String contentType = file.getContentType();
+        if (!CONTENT_TYPES.contains(contentType)){
+            // 文件类型不合法，直接返回null
+            return R.error("图片格式不正确!");
+        }
         String fileName = file.getOriginalFilename();
-        String filePath = "C:/Users/tanyuehong/Postman/files";
-        File dest = new File(filePath + fileName);
+        String userName = TokenManager.getMemberIdByJwtToken(request);
+        if (userName == null||userName.length()==0) {
+            return R.error("用户验证失败，请登录后重试");
+        }
+        String userPath = MD5.getMD5(userName);
+        File dest = new File("/Users/zyb/Documents/upload/"+ userPath +"/"+fileName);
         try {
+            if (!dest.exists()) dest.mkdirs(); // 要是目录不存在,创建一个
             file.transferTo(dest);
-            return R.ok().data("path",filePath);
+            return R.ok().data("imageUrl","https://static.redskt.com/user/"+userPath+"/"+fileName);
         } catch (IOException e) {
             return R.error(e.getLocalizedMessage());
         }

@@ -1,0 +1,141 @@
+2021-12-24 12:45:15.286 [main] INFO  com.redskt.classroom.RedClassApplication - Starting RedClassApplication on tanyuehongs-MacBook-Pro.local with PID 56941 (/Users/zyb/Documents/redcloudcollege/service/service_redclass/target/classes started by zyb in /Users/zyb/Documents/redcloudcollege)
+2021-12-24 12:45:15.289 [main] INFO  com.redskt.classroom.RedClassApplication - The following profiles are active: dev
+2021-12-24 12:45:16.230 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-12-24 12:45:16.234 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data repositories in DEFAULT mode.
+2021-12-24 12:45:16.264 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 15ms. Found 0 repository interfaces.
+2021-12-24 12:45:16.561 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'redisConfig' of type [com.redskt.servicebase.RedisConfig$$EnhancerBySpringCGLIB$$fe03283a] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-12-24 12:45:16.567 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-12-24 12:45:16.855 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8001 (http)
+2021-12-24 12:45:16.866 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8001"]
+2021-12-24 12:45:16.866 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2021-12-24 12:45:16.867 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.27]
+2021-12-24 12:45:16.955 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2021-12-24 12:45:16.955 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 1631 ms
+2021-12-24 12:45:17.150 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2021-12-24 12:45:18.012 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2021-12-24 12:45:19.354 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2021-12-24 12:45:19.472 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2021-12-24 12:45:19.847 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/home/**'], []
+2021-12-24 12:45:19.848 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/swagger-resources/**'], []
+2021-12-24 12:45:19.848 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/webjars/**'], []
+2021-12-24 12:45:19.848 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/v2/**'], []
+2021-12-24 12:45:19.848 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/swagger-ui.html/**'], []
+2021-12-24 12:45:19.848 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/home/**'], []
+2021-12-24 12:45:19.848 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/swagger-resources/**'], []
+2021-12-24 12:45:19.848 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/webjars/**'], []
+2021-12-24 12:45:19.848 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/v2/**'], []
+2021-12-24 12:45:19.849 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/swagger-ui.html/**'], []
+2021-12-24 12:45:19.877 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/admin/**'], [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1a88d194, org.springframework.security.web.context.SecurityContextPersistenceFilter@52035328, org.springframework.security.web.header.HeaderWriterFilter@12d35bc9, org.springframework.security.web.authentication.logout.LogoutFilter@64ef2719, com.redskt.security.filter.TokenLoginFilter@6949cead, com.redskt.security.filter.TokenAuthenticationFilter@fe13916, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@22ee7fdc, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@54970127, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@77f529a6, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5ea0a7a9, org.springframework.security.web.session.SessionManagementFilter@1aa31454, org.springframework.security.web.access.ExceptionTranslationFilter@3b77940f, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@48f4264e]
+2021-12-24 12:45:19.879 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1b5f960a, org.springframework.security.web.context.SecurityContextPersistenceFilter@4203529f, org.springframework.security.web.header.HeaderWriterFilter@6b278b17, org.springframework.security.web.authentication.logout.LogoutFilter@217fd3c, com.redskt.security.filter.TokenLoginFilter@53ddabc6, com.redskt.security.filter.TokenAuthenticationFilter@39ac8c0c, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@3df6494f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7d82ca56, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2aaa89c2, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@361f1647, org.springframework.security.web.session.SessionManagementFilter@2ae5580, org.springframework.security.web.access.ExceptionTranslationFilter@470f0637, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@36eb8e07]
+2021-12-24 12:45:19.925 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2021-12-24 12:45:19.940 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2021-12-24 12:45:19.967 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2021-12-24 12:45:20.085 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: indexUsingGET_1
+2021-12-24 12:45:20.087 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: indexUsingGET_2
+2021-12-24 12:45:20.105 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: registerUserUsingPOST_1
+2021-12-24 12:45:20.107 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: indexUsingGET_3
+2021-12-24 12:45:20.108 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getBookDetailUsingGET_1
+2021-12-24 12:45:20.129 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8001"]
+2021-12-24 12:45:20.156 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8001 (http) with context path ''
+2021-12-24 12:45:20.160 [main] INFO  com.redskt.classroom.RedClassApplication - Started RedClassApplication in 5.232 seconds (JVM running for 10.777)
+2021-12-24 12:45:41.733 [http-nio-8001-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-12-24 12:45:41.734 [http-nio-8001-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2021-12-24 12:45:41.743 [http-nio-8001-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 8 ms
+2021-12-24 12:45:45.589 [http-nio-8001-exec-2] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================/ucenter/getUserInfo
+2021-12-24 12:45:45.589 [http-nio-8001-exec-2] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================11
+2021-12-24 12:45:45.590 [http-nio-8001-exec-2] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================12eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSMjQzMzI2NDcwtDBX0lFKrShQsjI0MzEwNDUwNjCtBQB3p5qAJgAAAA.sufqLHnq_qpB1h2WyjFQTbrCFa7fGFgVkvGKMf24InNQcjo5TfCapXYujSBp8dycTTUNkwBMjGGLzUprZlTLSA
+2021-12-24 12:45:45.636 [http-nio-8001-exec-2] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================5
+2021-12-24 12:45:45.636 [http-nio-8001-exec-2] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================7
+2021-12-24 12:46:05.432 [http-nio-8001-exec-4] INFO  io.lettuce.core.EpollProvider - Starting without optional epoll library
+2021-12-24 12:46:05.433 [http-nio-8001-exec-4] INFO  io.lettuce.core.KqueueProvider - Starting without optional kqueue library
+2021-12-24 12:46:10.721 [http-nio-8001-exec-5] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================/ucenter/getUserInfo
+2021-12-24 12:46:10.722 [http-nio-8001-exec-5] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================11
+2021-12-24 12:46:10.722 [http-nio-8001-exec-5] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================12eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSMjQzMzI2NDcwtDBX0lFKrShQsjI0MzEwMTA3NTOtBQAd5qkRJgAAAA.A2dO_Dur3K9G9O4PnlpOvbWQy0xeRJ-ZQ-2wxr5SWXmOFGsZtcNj1WDJZcjZjZ-v0Jp_0YvwmrttSn757RqD2Q
+2021-12-24 12:46:10.771 [http-nio-8001-exec-5] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================3
+2021-12-24 12:46:10.772 [http-nio-8001-exec-5] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================6
+2021-12-24 12:46:10.772 [http-nio-8001-exec-5] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================8
+2021-12-24 12:46:30.386 [http-nio-8001-exec-8] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================/ucenter/getUserInfo
+2021-12-24 12:46:30.386 [http-nio-8001-exec-8] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================11
+2021-12-24 12:46:30.387 [http-nio-8001-exec-8] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================12eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSMjQzMzI2NDcwtDBX0lFKrShQsjI0MzEwMTA3NTOtBQAd5qkRJgAAAA.A2dO_Dur3K9G9O4PnlpOvbWQy0xeRJ-ZQ-2wxr5SWXmOFGsZtcNj1WDJZcjZjZ-v0Jp_0YvwmrttSn757RqD2Q
+2021-12-24 12:46:30.433 [http-nio-8001-exec-8] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================3
+2021-12-24 12:46:30.434 [http-nio-8001-exec-8] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================6
+2021-12-24 12:46:30.434 [http-nio-8001-exec-8] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================8
+2021-12-24 12:46:33.850 [http-nio-8001-exec-9] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================/ucenter/getUserInfo
+2021-12-24 12:46:33.851 [http-nio-8001-exec-9] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================11
+2021-12-24 12:46:33.851 [http-nio-8001-exec-9] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================12eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSMjQzMzI2NDcwtDBX0lFKrShQsjI0MzEwMTA3NTOtBQAd5qkRJgAAAA.A2dO_Dur3K9G9O4PnlpOvbWQy0xeRJ-ZQ-2wxr5SWXmOFGsZtcNj1WDJZcjZjZ-v0Jp_0YvwmrttSn757RqD2Q
+2021-12-24 12:46:33.898 [http-nio-8001-exec-9] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================3
+2021-12-24 12:46:33.898 [http-nio-8001-exec-9] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================6
+2021-12-24 12:46:33.898 [http-nio-8001-exec-9] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================8
+2021-12-24 13:02:54.234 [http-nio-8001-exec-2] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================/ucenter/getUserInfo
+2021-12-24 13:02:54.235 [http-nio-8001-exec-2] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================11
+2021-12-24 13:02:54.235 [http-nio-8001-exec-2] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================12eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSMjQzMzI2NDcwtDBX0lFKrShQsjI0MzEwMTA3NTOtBQAd5qkRJgAAAA.A2dO_Dur3K9G9O4PnlpOvbWQy0xeRJ-ZQ-2wxr5SWXmOFGsZtcNj1WDJZcjZjZ-v0Jp_0YvwmrttSn757RqD2Q
+2021-12-24 13:02:54.283 [http-nio-8001-exec-2] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================3
+2021-12-24 13:02:54.283 [http-nio-8001-exec-2] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================6
+2021-12-24 13:02:54.283 [http-nio-8001-exec-2] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================8
+2021-12-24 13:04:22.954 [http-nio-8001-exec-5] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================/ucenter/getUserInfo
+2021-12-24 13:04:22.955 [http-nio-8001-exec-5] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================11
+2021-12-24 13:04:22.955 [http-nio-8001-exec-5] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================12eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSMjQzMzI2NDcwtDBX0lFKrShQsjI0MzEwMTA3NTOtBQAd5qkRJgAAAA.A2dO_Dur3K9G9O4PnlpOvbWQy0xeRJ-ZQ-2wxr5SWXmOFGsZtcNj1WDJZcjZjZ-v0Jp_0YvwmrttSn757RqD2Q
+2021-12-24 13:04:23.000 [http-nio-8001-exec-5] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================3
+2021-12-24 13:04:23.000 [http-nio-8001-exec-5] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================6
+2021-12-24 13:04:23.000 [http-nio-8001-exec-5] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================8
+2021-12-24 13:06:24.231 [http-nio-8001-exec-6] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================/ucenter/getUserInfo
+2021-12-24 13:06:24.232 [http-nio-8001-exec-6] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================11
+2021-12-24 13:06:24.232 [http-nio-8001-exec-6] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================12eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSMjQzMzI2NDcwtDBX0lFKrShQsjI0MzEwMTA3NTOtBQAd5qkRJgAAAA.A2dO_Dur3K9G9O4PnlpOvbWQy0xeRJ-ZQ-2wxr5SWXmOFGsZtcNj1WDJZcjZjZ-v0Jp_0YvwmrttSn757RqD2Q
+2021-12-24 13:06:24.281 [http-nio-8001-exec-6] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================3
+2021-12-24 13:06:24.282 [http-nio-8001-exec-6] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================6
+2021-12-24 13:06:24.282 [http-nio-8001-exec-6] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================8
+2021-12-24 13:13:40.175 [http-nio-8001-exec-8] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================/ucenter/getUserInfo
+2021-12-24 13:13:40.176 [http-nio-8001-exec-8] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================11
+2021-12-24 13:13:40.176 [http-nio-8001-exec-8] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================12eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSMjQzMzI2NDcwtDBX0lFKrShQsjI0MzEwMTA3NTOtBQAd5qkRJgAAAA.A2dO_Dur3K9G9O4PnlpOvbWQy0xeRJ-ZQ-2wxr5SWXmOFGsZtcNj1WDJZcjZjZ-v0Jp_0YvwmrttSn757RqD2Q
+2021-12-24 13:13:40.226 [http-nio-8001-exec-8] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================3
+2021-12-24 13:13:40.227 [http-nio-8001-exec-8] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================6
+2021-12-24 13:13:40.227 [http-nio-8001-exec-8] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================8
+2021-12-24 13:17:22.517 [http-nio-8001-exec-9] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================/ucenter/getUserInfo
+2021-12-24 13:17:22.517 [http-nio-8001-exec-9] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================11
+2021-12-24 13:17:22.517 [http-nio-8001-exec-9] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================12eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSMjQzMzI2NDcwtDBX0lFKrShQsjI0MzEwMTA3NTOtBQAd5qkRJgAAAA.A2dO_Dur3K9G9O4PnlpOvbWQy0xeRJ-ZQ-2wxr5SWXmOFGsZtcNj1WDJZcjZjZ-v0Jp_0YvwmrttSn757RqD2Q
+2021-12-24 13:17:22.563 [http-nio-8001-exec-9] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================3
+2021-12-24 13:17:22.563 [http-nio-8001-exec-9] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================6
+2021-12-24 13:17:22.563 [http-nio-8001-exec-9] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================8
+2021-12-24 13:18:52.102 [http-nio-8001-exec-1] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================/ucenter/getUserInfo
+2021-12-24 13:18:52.102 [http-nio-8001-exec-1] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================11
+2021-12-24 13:18:52.102 [http-nio-8001-exec-1] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================12eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSMjQzMzI2NDcwtDBX0lFKrShQsjI0MzEwMTA3NTOtBQAd5qkRJgAAAA.A2dO_Dur3K9G9O4PnlpOvbWQy0xeRJ-ZQ-2wxr5SWXmOFGsZtcNj1WDJZcjZjZ-v0Jp_0YvwmrttSn757RqD2Q
+2021-12-24 13:18:52.149 [http-nio-8001-exec-1] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================3
+2021-12-24 13:18:52.150 [http-nio-8001-exec-1] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================6
+2021-12-24 13:18:52.150 [http-nio-8001-exec-1] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================8
+2021-12-24 13:39:37.906 [http-nio-8001-exec-10] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================/ucenter/getUserInfo
+2021-12-24 13:39:37.907 [http-nio-8001-exec-10] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================11
+2021-12-24 13:39:37.907 [http-nio-8001-exec-10] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================12eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSMjQzMzI2NDcwtDBX0lFKrShQsjI0MzEwMTA3NTOtBQAd5qkRJgAAAA.A2dO_Dur3K9G9O4PnlpOvbWQy0xeRJ-ZQ-2wxr5SWXmOFGsZtcNj1WDJZcjZjZ-v0Jp_0YvwmrttSn757RqD2Q
+2021-12-24 13:39:40.923 [http-nio-8001-exec-10] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================5
+2021-12-24 13:39:40.923 [http-nio-8001-exec-10] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================7
+2021-12-24 13:39:40.927 [http-nio-8001-exec-2] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================/ucenter/getUserInfo
+2021-12-24 13:39:40.927 [http-nio-8001-exec-2] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================11
+2021-12-24 13:39:40.928 [http-nio-8001-exec-2] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================12eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSMjQzMzI2NDcwtDBX0lFKrShQsjI0MzEwMTA3NTOtBQAd5qkRJgAAAA.A2dO_Dur3K9G9O4PnlpOvbWQy0xeRJ-ZQ-2wxr5SWXmOFGsZtcNj1WDJZcjZjZ-v0Jp_0YvwmrttSn757RqD2Q
+2021-12-24 13:39:43.935 [http-nio-8001-exec-2] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================5
+2021-12-24 13:39:43.936 [http-nio-8001-exec-2] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================7
+2021-12-24 13:39:44.887 [http-nio-8001-exec-4] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================/ucenter/getUserInfo
+2021-12-24 13:39:44.887 [http-nio-8001-exec-4] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================11
+2021-12-24 13:39:44.888 [http-nio-8001-exec-4] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================12eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSMjQzMzI2NDcwtDBX0lFKrShQsjI0MzEwMTA3NTOtBQAd5qkRJgAAAA.A2dO_Dur3K9G9O4PnlpOvbWQy0xeRJ-ZQ-2wxr5SWXmOFGsZtcNj1WDJZcjZjZ-v0Jp_0YvwmrttSn757RqD2Q
+2021-12-24 13:39:47.897 [http-nio-8001-exec-4] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================5
+2021-12-24 13:39:47.897 [http-nio-8001-exec-4] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================7
+2021-12-24 13:39:47.958 [http-nio-8001-exec-3] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================/ucenter/getUserInfo
+2021-12-24 13:39:47.958 [http-nio-8001-exec-3] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================11
+2021-12-24 13:39:47.958 [http-nio-8001-exec-3] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================12eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSMjQzMzI2NDcwtDBX0lFKrShQsjI0MzEwMTA3NTOtBQAd5qkRJgAAAA.A2dO_Dur3K9G9O4PnlpOvbWQy0xeRJ-ZQ-2wxr5SWXmOFGsZtcNj1WDJZcjZjZ-v0Jp_0YvwmrttSn757RqD2Q
+2021-12-24 13:39:50.964 [http-nio-8001-exec-3] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================5
+2021-12-24 13:39:50.964 [http-nio-8001-exec-3] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================7
+2021-12-24 13:39:57.133 [lettuce-eventExecutorLoop-1-8] INFO  io.lettuce.core.protocol.ConnectionWatchdog - Reconnecting, last destination was /121.43.146.70:6379
+2021-12-24 13:39:57.201 [lettuce-nioEventLoop-4-2] INFO  io.lettuce.core.protocol.ReconnectionHandler - Reconnected to 121.43.146.70:6379
+2021-12-24 13:40:01.144 [http-nio-8001-exec-5] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================/ucenter/getUserInfo
+2021-12-24 13:40:01.144 [http-nio-8001-exec-5] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================11
+2021-12-24 13:40:01.144 [http-nio-8001-exec-5] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================12eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSMjQzMzI2NDcwtDBX0lFKrShQsjI0MzEwMTA3NTOtBQAd5qkRJgAAAA.A2dO_Dur3K9G9O4PnlpOvbWQy0xeRJ-ZQ-2wxr5SWXmOFGsZtcNj1WDJZcjZjZ-v0Jp_0YvwmrttSn757RqD2Q
+2021-12-24 13:40:01.195 [http-nio-8001-exec-5] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================3
+2021-12-24 13:40:01.195 [http-nio-8001-exec-5] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================6
+2021-12-24 13:40:01.195 [http-nio-8001-exec-5] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================8
+2021-12-24 13:42:54.305 [http-nio-8001-exec-6] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================/ucenter/getUserInfo
+2021-12-24 13:42:54.305 [http-nio-8001-exec-6] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================11
+2021-12-24 13:42:54.306 [http-nio-8001-exec-6] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================12eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSMjQzMzI2NDcwtDBX0lFKrShQsjI0MzEwMTA3NTOtBQAd5qkRJgAAAA.A2dO_Dur3K9G9O4PnlpOvbWQy0xeRJ-ZQ-2wxr5SWXmOFGsZtcNj1WDJZcjZjZ-v0Jp_0YvwmrttSn757RqD2Q
+2021-12-24 13:42:54.354 [http-nio-8001-exec-6] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================3
+2021-12-24 13:42:54.355 [http-nio-8001-exec-6] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================6
+2021-12-24 13:42:54.355 [http-nio-8001-exec-6] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================8
+2021-12-24 14:24:14.309 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2021-12-24 14:24:14.431 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2021-12-24 14:24:14.437 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

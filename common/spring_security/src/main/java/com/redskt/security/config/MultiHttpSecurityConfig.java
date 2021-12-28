@@ -124,8 +124,7 @@ public class MultiHttpSecurityConfig {
          */
         @Override
         public void configure(WebSecurity web) throws Exception {
-            web.ignoring().antMatchers("/home/**","/ucenter/**",
-                    "/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**"
+            web.ignoring().antMatchers("/home/**","/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**"
             );
         }
     }
