@@ -65,7 +65,7 @@ public class RedUserController {
             return R.error("用户验证失败，请登录后重试");
         }
         String userPath = MD5.getMD5(userName);
-        File dest = new File("/Users/zyb/Documents/upload/"+ userPath +"/"+fileName);
+        File dest = new File("/home/redsktsource/user/"+ userPath +"/"+fileName);
         try {
             if (!dest.exists()) dest.mkdirs(); // 要是目录不存在,创建一个
             file.transferTo(dest);
