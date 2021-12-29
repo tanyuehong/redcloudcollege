@@ -10,7 +10,7 @@ import com.redskt.commonutils.JwtUtils;
 import com.redskt.servicebase.excepionhandler.RedCloudCollegeExceptionHandler;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-import com.redskt.collegeservice.utils.MD5;
+import com.redskt.commonutils.MD5;
 
 /**
  * <p>
