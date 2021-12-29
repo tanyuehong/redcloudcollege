@@ -52,6 +52,18 @@ public class RedClassUser implements Serializable {
     @ApiModelProperty(value = "用户头像")
     private String avatar;
 
+    @ApiModelProperty(value = "公司")
+    private String company;
+
+    @ApiModelProperty(value = "职位")
+    private String position;
+
+    @ApiModelProperty(value = "个人主页")
+    private String perpage;
+
+    @ApiModelProperty(value = "个人介绍")
+    private String perintroduction;
+
     @ApiModelProperty(value = "用户签名")
     private String sign;
 
