@@ -4,12 +4,12 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.redskt.classroom.entity.RedClassUser;
 import com.redskt.classroom.service.RedUserService;
 import com.redskt.commonutils.MD5;
+import com.redskt.commonutils.RequestParmUtil;
 import com.redskt.security.TokenManager;
 import com.redskt.commonutils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.apache.commons.beanutils.BeanUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
@@ -81,9 +81,12 @@ public class RedUserController {
 
     @PostMapping("updateUserInfo")
     public R updateUserInfo(HttpServletRequest request) {
-        Map<String, String[]> name = request.getParameterMap();
-        BeanUtils.populate( Object bean, Map properties )
-        return R.ok().data("result","sucess");
+        Map<String, String[]> parameterMap = request.getParameterMap();
+        int count = userService.updateUserInfo(RequestParmUtil.transToMAP(parameterMap));
+        if (count>0) {
+            return R.ok().data("result", "sucess");
+        } else {
+            return  R.error("更新失败，请重试");
+        }
     }
-
 }
