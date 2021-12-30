@@ -9,12 +9,14 @@ import com.redskt.commonutils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.apache.commons.beanutils.BeanUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -76,4 +78,12 @@ public class RedUserController {
             return R.error(e.getLocalizedMessage());
         }
     }
+
+    @PostMapping("updateUserInfo")
+    public R updateUserInfo(HttpServletRequest request) {
+        Map<String, String[]> name = request.getParameterMap();
+        BeanUtils.populate( Object bean, Map properties )
+        return R.ok().data("result","sucess");
+    }
+
 }
