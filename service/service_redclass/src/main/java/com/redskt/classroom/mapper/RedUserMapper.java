@@ -2,6 +2,9 @@ package com.redskt.classroom.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.redskt.classroom.entity.RedClassUser;
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
+import java.util.Map;
 
 /**
  * <p>
@@ -14,4 +17,7 @@ import com.redskt.classroom.entity.RedClassUser;
 public interface RedUserMapper extends BaseMapper<RedClassUser> {
 
     Integer countRegisterDay(String day);
+
+    int updateUserInfo(Map<String, Object> map);
+
 }

@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.redskt.classroom.entity.RedClassUser;
 import com.redskt.classroom.entity.vo.RedClassRegisterVo;
 
+import java.util.Map;
+
 /**
  * <p>
  * 会员表 服务类
@@ -18,5 +20,7 @@ public interface RedUserService extends IService<RedClassUser> {
 
     // 从数据库中取出用户信息
     RedClassUser selectByUsername(String username);
+
+    int updateUserInfo(Map<String, Object> map);
 
 }

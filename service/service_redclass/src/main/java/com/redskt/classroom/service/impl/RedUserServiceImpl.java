@@ -12,6 +12,8 @@ import com.redskt.servicebase.excepionhandler.RedCloudCollegeExceptionHandler;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.Map;
+
 /**
  * <p>
  * 会员表 服务实现类
@@ -65,5 +67,10 @@ public class RedUserServiceImpl extends ServiceImpl<RedUserMapper, RedClassUser>
     @Override
     public RedClassUser selectByUsername(String username) {
         return baseMapper.selectOne(new QueryWrapper<RedClassUser>().eq("username", username));
+    }
+
+    @Override
+    public int updateUserInfo(Map<String, Object> map) {
+        return  baseMapper.updateUserInfo(map);
     }
 }
