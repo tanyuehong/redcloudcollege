@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -80,13 +81,48 @@ public class RedUserController {
     }
 
     @PostMapping("updateUserInfo")
-    public R updateUserInfo(HttpServletRequest request) {
-        Map<String, String[]> parameterMap = request.getParameterMap();
-        int count = userService.updateUserInfo(RequestParmUtil.transToMAP(parameterMap));
+    public R updateUserInfo(@RequestBody Map parameterMap) {
+        parameterMap = RequestParmUtil.transToMAP(parameterMap);
+        String userId =(String)parameterMap.get("id");
+        parameterMap.remove("id");
+        int count = userService.updateUserInfo(parameterMap,userId);
+        Map returnMap = new HashMap();
         if (count>0) {
-            return R.ok().data("result", "sucess");
+            returnMap.put("resultType",1);
+            returnMap.put("tips","更新用户信息成功");
+            return R.ok().data(returnMap);
         } else {
-            return  R.error("更新失败，请重试");
+            returnMap.put("resultType",2);
+            returnMap.put("tips","更新用户信息失败，请重试");
+            return R.ok().data(returnMap);
+        }
+    }
+
+    @PostMapping("changeUserPwd")
+    public R changeUserPwd(@RequestBody Map parameterMap) {
+        parameterMap = RequestParmUtil.transToMAP(parameterMap);
+        String value =(String)parameterMap.get("newPwd");
+        parameterMap.remove("newPwd");
+        parameterMap.put("password",MD5.encrypt(value));
+
+        // e10adc3949ba59abbe56e057f20f883e
+
+        String oldPwd =(String)parameterMap.get("oldPwd");
+        oldPwd = MD5.encrypt(oldPwd);
+        parameterMap.remove("oldPwd");
+
+        String userId =(String)parameterMap.get("id");
+        parameterMap.remove("id");
+        int count = userService.changeUserPwd(parameterMap,oldPwd,userId);
+        Map returnMap = new HashMap();
+        if (count>0) {
+            returnMap.put("resultType",1);
+            returnMap.put("tips","密码修改成功");
+            return R.ok().data(returnMap);
+        } else  {
+            returnMap.put("resultType",2);
+            returnMap.put("tips","密码验证失败");
+            return R.ok().data(returnMap);
         }
     }
 }

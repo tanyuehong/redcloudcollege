@@ -21,6 +21,7 @@ public interface RedUserService extends IService<RedClassUser> {
     // 从数据库中取出用户信息
     RedClassUser selectByUsername(String username);
 
-    int updateUserInfo(Map<String, Object> map);
+    int updateUserInfo(Map<String, Object> map,String userId);
 
+    int changeUserPwd(Map<String, Object> map,String oldPwd,String userId);
 }

@@ -4,9 +4,18 @@
     <update id="updateUserInfo" parameterType="map">
         update edu_user
         set
-        <foreach collection="_parameter" item="val" index="key" separator=",">
+        <foreach collection="map" item="val" index="key" separator=",">
             ${key} =  #{val}
         </foreach>
         where id = #{id}
+    </update>
+
+    <update id="changeUserPwd" parameterType="map">
+        update edu_user
+        set
+        <foreach collection="map" item="val" index="key" separator=",">
+            ${key} =  #{val}
+        </foreach>
+        where id = #{id} and password = #{oldPwd}
     </update>
 </mapper>

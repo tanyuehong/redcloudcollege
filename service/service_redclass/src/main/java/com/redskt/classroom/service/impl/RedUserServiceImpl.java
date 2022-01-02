@@ -70,7 +70,12 @@ public class RedUserServiceImpl extends ServiceImpl<RedUserMapper, RedClassUser>
     }
 
     @Override
-    public int updateUserInfo(Map<String, Object> map) {
-        return  baseMapper.updateUserInfo(map);
+    public int updateUserInfo(Map<String, Object> map,String userId) {
+        return  baseMapper.updateUserInfo(map,userId);
+    }
+
+    @Override
+    public int changeUserPwd(Map<String, Object> map,String oldPwd,String userId) {
+        return  baseMapper.changeUserPwd(map,oldPwd,userId);
     }
 }

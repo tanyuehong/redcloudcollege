@@ -19,6 +19,7 @@ public class RequestParmUtil {
             Object valueObj = entry.getValue();
             if(null == valueObj){
                 value = "";
+                continue;
             }else if(valueObj instanceof String[]){
                 String[] values = (String[])valueObj;
                 for(int i=0;i<values.length;i++){
