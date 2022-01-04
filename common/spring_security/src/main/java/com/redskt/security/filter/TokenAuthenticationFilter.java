@@ -2,6 +2,7 @@ package com.redskt.security.filter;
 
 import com.redskt.commonutils.ResponseUtil;
 import com.redskt.commonutils.R;
+import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -52,13 +53,13 @@ public class TokenAuthenticationFilter extends BasicAuthenticationFilter {
         try {
             logger.info("=================11");
             authentication = getAuthentication(req);
+        }catch (ExpiredJwtException expried) {
+            // 这里是token过期了 需要重新登录
+            ResponseUtil.out(res, R.LoginExpired());
         } catch (Exception e) {
             ResponseUtil.out(res, R.error());
             logger.info("=================5");
-
-            // 这里是token过期了 需要重新登录
         }
-
         if (authentication != null) {
             SecurityContextHolder.getContext().setAuthentication(authentication);
             logger.info("=================6");

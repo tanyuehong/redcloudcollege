@@ -43,6 +43,15 @@ public class R {
         return r;
     }
 
+    // 登录过期的方法封装
+    public static R LoginExpired() {
+        R r = new R();
+        r.setSuccess(false);
+        r.setCode(ResultCode.LOGINExpired);
+        r.setMessage("登录已过期，即将跳转登录页面,请重新登录");
+        return r;
+    }
+
     public static R error(String message) {
         R r = new R();
         r.setSuccess(false);
