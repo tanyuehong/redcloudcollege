@@ -29,6 +29,8 @@ public class RedClassCourseWebVo {
     @ApiModelProperty(value = "浏览数量")
     private Long viewCount;
 
+    private String level;
+
     @ApiModelProperty(value = "课程简介")
     private String description;
 

@@ -32,6 +32,11 @@ public class RedCourseServiceImpl extends ServiceImpl<RedCourseMapper, RedClassC
     }
 
     @Override
+    public List<RedClassCourseWebVo> getCourseList() {
+        return baseMapper.getCourseList();
+    }
+
+    @Override
     public Map<String, Object> getCourseFrontList(Page<RedClassCourse> pageCourse, RedClassCourseFrontVo courseFrontVo) {
         //2 根据讲师id查询所讲课程
         QueryWrapper<RedClassCourse> wrapper = new QueryWrapper<>();

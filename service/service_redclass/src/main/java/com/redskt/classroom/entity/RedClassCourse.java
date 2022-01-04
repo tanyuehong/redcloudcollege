@@ -61,9 +61,6 @@ public class RedClassCourse implements Serializable {
     @ApiModelProperty(value = "销售数量")
     private Integer buyCount;
 
-    @ApiModelProperty(value = "浏览数量")
-    private Integer viewCount;
-
     @ApiModelProperty(value = "乐观锁")
     private Long version;
 
@@ -80,6 +77,4 @@ public class RedClassCourse implements Serializable {
     @ApiModelProperty(value = "更新时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date gmtModified;
-
-
 }

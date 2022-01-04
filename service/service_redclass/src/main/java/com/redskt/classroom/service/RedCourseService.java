@@ -6,6 +6,7 @@ import com.redskt.classroom.entity.RedClassCourse;
 import com.redskt.classroom.entity.vo.RedClassCourseWebVo;
 import com.redskt.classroom.entity.vo.RedClassCourseFrontVo;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,6 +20,8 @@ import java.util.Map;
 public interface RedCourseService extends IService<RedClassCourse> {
 
     RedClassCourseWebVo getBaseCourseInfo(String courseId);
+
+    List<RedClassCourseWebVo> getCourseList();
 
     Map<String, Object> getCourseFrontList(Page<RedClassCourse> pageCourse, RedClassCourseFrontVo courseFrontVo);
 

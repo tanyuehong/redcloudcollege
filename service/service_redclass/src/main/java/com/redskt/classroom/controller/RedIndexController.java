@@ -3,6 +3,7 @@ package com.redskt.classroom.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.redskt.classroom.entity.*;
 import com.redskt.classroom.entity.vo.OPHomeGuessLikeVo;
+import com.redskt.classroom.entity.vo.RedClassCourseWebVo;
 import com.redskt.classroom.service.*;
 import com.redskt.commonutils.R;
 import org.springframework.beans.BeanUtils;
@@ -42,13 +43,8 @@ public class RedIndexController {
     @GetMapping("index")
     public R index() {
         //查询前8条热门课程
-        QueryWrapper<RedClassCourse> wrapper = new QueryWrapper<>();
-        wrapper.orderByDesc("id");
-        wrapper.last("limit 8");
-        List<RedClassCourse> eduList = courseService.list(wrapper);
-
+        List<RedClassCourseWebVo> eduList = courseService.getCourseList();
         Random random = new Random();
-
         // 猜你喜欢的内容
 
         // 1.课程的随机个数

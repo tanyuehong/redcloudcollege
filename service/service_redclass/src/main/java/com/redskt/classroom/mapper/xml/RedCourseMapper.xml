@@ -17,4 +17,12 @@
         WHERE ec.id=#{courseId}
     </select>
 
+    <select id="getCourseList" resultType="com.redskt.classroom.entity.vo.RedClassCourseWebVo">
+        SELECT ec.id,ec.title,ec.price,ec.lesson_num AS lessonNum,ec.img_url, ec.adimage,ec.level,
+               ec.buy_count AS buyCount,ec.view_count AS viewCount,
+               et.id AS teacherId,et.name AS teacherName,et.intro,et.avatar
+      FROM edu_course ec  LEFT OUTER JOIN edu_teacher et ON ec.teacher_id=et.id
+      order by ec.id desc limit 8;
+    </select>
+
 </mapper>
