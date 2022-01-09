@@ -47,6 +47,8 @@ public class RedClassCourse implements Serializable {
     @ApiModelProperty(value = "课程描述")
     private String cdescribe;
 
+    private String level;
+
     @ApiModelProperty(value = "课程销售价格，设置为0则可免费观看")
     private BigDecimal price;
 

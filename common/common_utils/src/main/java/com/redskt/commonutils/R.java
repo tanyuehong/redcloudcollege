@@ -48,7 +48,7 @@ public class R {
         R r = new R();
         r.setSuccess(false);
         r.setCode(ResultCode.LOGINExpired);
-        r.setMessage("登录已过期，即将跳转登录页面,请重新登录");
+        r.setMessage("登录已过期，正在跳转登录页面中,请重新登录");
         return r;
     }
 
