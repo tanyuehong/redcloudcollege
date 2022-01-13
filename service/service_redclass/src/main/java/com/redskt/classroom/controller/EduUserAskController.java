@@ -42,14 +42,14 @@ public class EduUserAskController {
         return R.ok().data("qdetail",qDetail);
     }
 
-    @PostMapping("uploadtoken")
+    @PostMapping("uploadqiniutoken")
     public  R getUploadImageToken(){
-        String accessKey = "access key";
-        String secretKey = "secret key";
-        String bucket = "bucket name";
+        String accessKey = "RG58GEA8RMtVLfDyxGpSx-82lMwn3bdgKsJxGtap";
+        String secretKey = "qUgiA7mJJ8cu0V8wi1F0rDtGK2oD5fMj2i6I4QTF";
+        String bucket = "redskt";
         Auth auth = Auth.create(accessKey, secretKey);
         String upToken = auth.uploadToken(bucket);
-
+        return R.ok().data("token",upToken);
     }
 }
 
