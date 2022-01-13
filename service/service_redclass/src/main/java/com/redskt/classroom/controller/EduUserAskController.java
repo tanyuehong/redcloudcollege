@@ -1,6 +1,7 @@
 package com.redskt.classroom.controller;
 
 
+import com.qiniu.util.Auth;
 import com.redskt.classroom.entity.EduUserAsk;
 import com.redskt.classroom.entity.vo.RedClassAskQuestionVo;
 import com.redskt.classroom.service.EduUserAskService;
@@ -39,6 +40,16 @@ public class EduUserAskController {
     public R getQustionDetil(@PathVariable String qId) {
         RedClassAskQuestionVo qDetail =  userAskService.getQustionDetail(qId);
         return R.ok().data("qdetail",qDetail);
+    }
+
+    @PostMapping("uploadtoken")
+    public  R getUploadImageToken(){
+        String accessKey = "access key";
+        String secretKey = "secret key";
+        String bucket = "bucket name";
+        Auth auth = Auth.create(accessKey, secretKey);
+        String upToken = auth.uploadToken(bucket);
+
     }
 }
 
