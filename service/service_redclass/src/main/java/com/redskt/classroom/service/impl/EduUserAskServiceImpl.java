@@ -32,7 +32,19 @@ public class EduUserAskServiceImpl extends ServiceImpl<EduUserAskMapper, EduUser
     }
 
     @Override
-    public List<RedClassAskQuestionVo> getHomeAskQustionList() {
-        return baseMapper.getHomeQustionLists();
+    public List<RedClassAskQuestionVo> getHomeAskQustionList(int type,String typeId) {
+       if(type == 2) {
+            return baseMapper.getReplayQustionLists(typeId);
+        } else if(type == 3) {
+            return baseMapper.getUnReplayQustionLists(typeId);
+        } else if(type == 4) {
+            return baseMapper.getReplayCountQustionLists(typeId);
+        } else if(type == 5) {
+            return baseMapper.getTopQustionLists(typeId);
+        } else if(type == 6) {
+            return baseMapper.getPriceQustionLists(typeId);
+        } else {
+           return baseMapper.getHomeQustionLists(typeId);
+       }
     }
 }

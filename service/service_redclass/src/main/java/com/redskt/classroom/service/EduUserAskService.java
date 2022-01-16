@@ -20,5 +20,5 @@ public interface EduUserAskService extends IService<EduUserAsk> {
 
     RedClassAskQuestionVo getQustionDetail(String tId);
 
-    List<RedClassAskQuestionVo> getHomeAskQustionList();
+    List<RedClassAskQuestionVo> getHomeAskQustionList(int type,String typeId);
 }

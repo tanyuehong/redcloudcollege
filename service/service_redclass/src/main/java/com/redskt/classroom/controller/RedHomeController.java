@@ -2,15 +2,12 @@ package com.redskt.classroom.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.redskt.classroom.entity.RedClassCourse;
-import com.redskt.classroom.entity.RedClassTeacher;
+import com.redskt.classroom.entity.*;
 import com.redskt.classroom.entity.vo.RedClassAskQuestionVo;
 import com.redskt.classroom.entity.vo.RedClassRegisterVo;
-import com.redskt.classroom.service.EduUserAskService;
-import com.redskt.classroom.service.RedCourseService;
-import com.redskt.classroom.service.RedTeacherService;
-import com.redskt.classroom.service.RedUserService;
+import com.redskt.classroom.service.*;
 import com.redskt.commonutils.R;
+import com.redskt.commonutils.RequestParmUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,10 +38,39 @@ public class RedHomeController<UcenterMemberService> {
     @Autowired
     private EduUserAskService userAskService;
 
-    @GetMapping("eduask/questionlist")
-    public  R getHomeQuestionList() {
-        List<RedClassAskQuestionVo> list = userAskService.getHomeAskQustionList();
-        return R.ok().data("list",list);
+    @Autowired
+    private RedAskTypeService askTypeService;
+
+    @Autowired
+    private RedAskQustionTagService tagService;
+
+    @PostMapping("eduask/questionlist")
+    public  R getHomeQuestionList(@RequestBody Map parameterMap) {
+        QueryWrapper<RedAskType > askWarper = new QueryWrapper<>();
+        parameterMap = RequestParmUtil.transToMAP(parameterMap);
+
+        String qustionType = (String) parameterMap.get("qtype");
+        int type = Integer.parseInt((String) parameterMap.get("type"));
+
+        askWarper.orderByAsc("sort");
+        List<RedAskType> askList = askTypeService.list(askWarper);
+
+        if (qustionType==null || qustionType.length()==0) {
+            qustionType = askList.get(0).getId();
+        }
+
+        List<RedClassAskQuestionVo> list = userAskService.getHomeAskQustionList(type,qustionType);
+
+        QueryWrapper<RedAskQustionTag> tagQueryWrapper = new QueryWrapper<>();
+        tagQueryWrapper.eq("asktype",askList.get(0).getId());
+        List<RedAskQustionTag> tagList = tagService.list(tagQueryWrapper);
+        return R.ok().data("list",list).data("qustionType",askList).data("tagList",tagList);
+    }
+
+    @GetMapping("eduask/getquestiondetail/{qId}")
+    public R getQustionDetil(@PathVariable String qId) {
+        RedClassAskQuestionVo qDetail =  userAskService.getQustionDetail(qId);
+        return R.ok().data("qdetail",qDetail);
     }
 
     //注册

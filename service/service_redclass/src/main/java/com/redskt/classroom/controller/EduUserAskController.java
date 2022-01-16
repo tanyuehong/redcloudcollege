@@ -36,12 +36,6 @@ public class EduUserAskController {
         }
     }
 
-    @GetMapping("getquestiondetail/{qId}")
-    public R getQustionDetil(@PathVariable String qId) {
-        RedClassAskQuestionVo qDetail =  userAskService.getQustionDetail(qId);
-        return R.ok().data("qdetail",qDetail);
-    }
-
     @PostMapping("uploadqiniutoken")
     public  R getUploadImageToken(){
         String accessKey = "RG58GEA8RMtVLfDyxGpSx-82lMwn3bdgKsJxGtap";
