@@ -9,6 +9,8 @@ public class RedClassAskQuestionVo {
 
     private String nickname;
 
+    private String avatar;
+
     private String title;
 
     private Integer type;
