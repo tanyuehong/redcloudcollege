@@ -1,5 +1,6 @@
 package com.redskt.classroom.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.redskt.classroom.entity.EduUserAsk;
 import com.redskt.classroom.entity.vo.RedClassAskQuestionVo;
 import com.redskt.classroom.mapper.EduUserAskMapper;
@@ -46,5 +47,9 @@ public class EduUserAskServiceImpl extends ServiceImpl<EduUserAskMapper, EduUser
         } else {
            return baseMapper.getHomeQustionLists(typeId);
        }
+    }
+    @Override
+    public void updateUserAskReadCount(String qId,int readCount) {
+        baseMapper.changReadCount(qId,readCount);
     }
 }

@@ -18,6 +18,8 @@ public interface EduUserAskService extends IService<EduUserAsk> {
 
     Boolean saveUserAsk(EduUserAsk userAsk);
 
+    void updateUserAskReadCount(String qId,int readCount);
+
     RedClassAskQuestionVo getQustionDetail(String tId);
 
     List<RedClassAskQuestionVo> getHomeAskQustionList(int type,String typeId);

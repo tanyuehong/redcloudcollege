@@ -65,7 +65,7 @@ public class TokenAuthenticationFilter extends BasicAuthenticationFilter {
             logger.info("=================6");
         } else {
             logger.info("=================7");
-            ResponseUtil.out(res, R.error());
+            ResponseUtil.out(res, R.LoginNoToken());
             return;
         }
         logger.info("=================8");

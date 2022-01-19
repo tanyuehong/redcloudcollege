@@ -47,7 +47,7 @@ public class EduUserAsk implements Serializable {
 
     private Integer coment;
 
-    private Integer read;
+    private Integer readcount;
 
     private Integer hot;
 

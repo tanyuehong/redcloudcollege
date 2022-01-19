@@ -31,4 +31,6 @@ public interface EduUserAskMapper extends BaseMapper<EduUserAsk> {
     List<RedClassAskQuestionVo> getPriceQustionLists(@Param("qustype")  String qustype);
 
     RedClassAskQuestionVo getQustionDetail(String tId);
+
+    int changReadCount(@Param("id")  String qId,@Param("readCount") int readCount);
 }

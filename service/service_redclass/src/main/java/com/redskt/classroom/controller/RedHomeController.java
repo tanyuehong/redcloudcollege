@@ -1,6 +1,7 @@
 package com.redskt.classroom.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.redskt.classroom.entity.*;
 import com.redskt.classroom.entity.vo.RedClassAskQuestionVo;
@@ -70,6 +71,8 @@ public class RedHomeController<UcenterMemberService> {
     @GetMapping("eduask/getquestiondetail/{qId}")
     public R getQustionDetil(@PathVariable String qId) {
         RedClassAskQuestionVo qDetail =  userAskService.getQustionDetail(qId);
+        int readCount = qDetail.getReadcount()+1;
+        userAskService.updateUserAskReadCount(qDetail.getQId(),readCount);
         return R.ok().data("qdetail",qDetail);
     }
 

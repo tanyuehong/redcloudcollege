@@ -52,6 +52,15 @@ public class R {
         return r;
     }
 
+    // 登录过期的方法封装
+    public static R LoginNoToken() {
+        R r = new R();
+        r.setSuccess(false);
+        r.setCode(ResultCode.LOGINNoToken);
+        r.setMessage("该功能需要登录后使用，正在跳转登录页面中！");
+        return r;
+    }
+
     public static R error(String message) {
         R r = new R();
         r.setSuccess(false);

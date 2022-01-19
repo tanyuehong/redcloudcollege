@@ -2,6 +2,8 @@ package com.redskt.classroom.entity.vo;
 
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 public class RedClassAskQuestionVo {
 
@@ -21,7 +23,7 @@ public class RedClassAskQuestionVo {
 
     private Integer reply;
 
-    private Integer read;
+    private Integer readcount;
 
     private Integer hot;
 
@@ -30,4 +32,6 @@ public class RedClassAskQuestionVo {
     private Integer price;
 
     private Integer hotnum;
+
+    private Date gmtCreate;
 }
