@@ -112,9 +112,11 @@ public class OpBlogController {
                     good.setBid(praticeId);
                     good.setUid(uId);
                     if(goodService.save(good)) {
+                        blogService.updateBlogGoodCount(true,praticeId);
                         return R.ok().data("good", true);
                     }
                 } else {
+                    blogService.updateBlogGoodCount(true,praticeId);
                     return R.ok().data("good", true);
                 }
             }
@@ -131,6 +133,7 @@ public class OpBlogController {
                 goodQueryWrapper.eq("bid", praticeId);
                 goodQueryWrapper.eq("uid", uId);
                 if(goodService.remove(goodQueryWrapper)) {
+                    blogService.updateBlogGoodCount(false,praticeId);
                     return R.ok().data("good",false);
                 }
             }

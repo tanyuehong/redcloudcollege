@@ -4,6 +4,7 @@ import com.redskt.classroom.entity.OpBlogDetail;
 import com.redskt.classroom.mapper.OpBlogDetailMapper;
 import com.redskt.classroom.service.OpBlogDetailService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,5 +17,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class OpBlogDetailServiceImpl extends ServiceImpl<OpBlogDetailMapper, OpBlogDetail> implements OpBlogDetailService {
-
+    @Override
+    public int updateBlogGoodCount(boolean isAdd,String bid) {
+        if(isAdd) {
+            return baseMapper.addBlogGoodCount(bid);
+        } else {
+            return baseMapper.prepBlogGoodCount(bid);
+        }
+    }
 }
