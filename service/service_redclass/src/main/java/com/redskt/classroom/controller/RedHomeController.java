@@ -36,53 +36,12 @@ public class RedHomeController<UcenterMemberService> {
     @Autowired
     private RedCourseService courseService;
 
-    @Autowired
-    private EduUserAskService userAskService;
-
-    @Autowired
-    private RedAskTypeService askTypeService;
-
-    @Autowired
-    private RedAskQustionTagService tagService;
-
-    @PostMapping("eduask/questionlist")
-    public  R getHomeQuestionList(@RequestBody Map parameterMap) {
-        QueryWrapper<RedAskType > askWarper = new QueryWrapper<>();
-        parameterMap = RequestParmUtil.transToMAP(parameterMap);
-
-        String qustionType = (String) parameterMap.get("qtype");
-        int type = Integer.parseInt((String) parameterMap.get("type"));
-
-        askWarper.orderByAsc("sort");
-        List<RedAskType> askList = askTypeService.list(askWarper);
-
-        if (qustionType==null || qustionType.length()==0) {
-            qustionType = askList.get(0).getId();
-        }
-
-        List<RedClassAskQuestionVo> list = userAskService.getHomeAskQustionList(type,qustionType);
-
-        QueryWrapper<RedAskQustionTag> tagQueryWrapper = new QueryWrapper<>();
-        tagQueryWrapper.eq("asktype",askList.get(0).getId());
-        List<RedAskQustionTag> tagList = tagService.list(tagQueryWrapper);
-        return R.ok().data("list",list).data("qustionType",askList).data("tagList",tagList);
-    }
-
-    @GetMapping("eduask/getquestiondetail/{qId}")
-    public R getQustionDetil(@PathVariable String qId) {
-        RedClassAskQuestionVo qDetail =  userAskService.getQustionDetail(qId);
-        int readCount = qDetail.getReadcount()+1;
-        userAskService.updateUserAskReadCount(qDetail.getQId(),readCount);
-        return R.ok().data("qdetail",qDetail);
-    }
-
     //注册
     @PostMapping("ucenter/register")
     public R registerUser(@RequestBody RedClassRegisterVo registerVo) {
         userService.register(registerVo);
         return R.ok();
     }
-
 
     //1 分页查询讲师的方法
     @PostMapping("teacher/getTeacherList/{page}/{limit}")

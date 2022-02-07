@@ -27,7 +27,7 @@ public class RedClassAskQuestionVo {
 
     private Integer hot;
 
-    private Integer top;
+    private Integer good;
 
     private Integer price;
 

@@ -1,0 +1,130 @@
+2022-01-24 06:46:44.497 [main] INFO  com.redskt.classroom.RedClassApplication - Starting RedClassApplication on tanyuehongs-mbp with PID 997 (/Users/zyb/Documents/redcloudcollege/service/service_redclass/target/classes started by zyb in /Users/zyb/Documents/redcloudcollege)
+2022-01-24 06:46:44.503 [main] INFO  com.redskt.classroom.RedClassApplication - The following profiles are active: dev
+2022-01-24 06:46:45.986 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2022-01-24 06:46:45.989 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data repositories in DEFAULT mode.
+2022-01-24 06:46:46.022 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 18ms. Found 0 repository interfaces.
+2022-01-24 06:46:46.343 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'redisConfig' of type [com.redskt.servicebase.RedisConfig$$EnhancerBySpringCGLIB$$49edf761] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-01-24 06:46:46.349 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-01-24 06:46:46.664 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8001 (http)
+2022-01-24 06:46:46.682 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8001"]
+2022-01-24 06:46:46.682 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2022-01-24 06:46:46.683 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.27]
+2022-01-24 06:46:46.780 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-01-24 06:46:46.780 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 2224 ms
+2022-01-24 06:46:47.007 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2022-01-24 06:46:48.366 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2022-01-24 06:46:49.813 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2022-01-24 06:46:49.929 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2022-01-24 06:46:50.345 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/home/**'], []
+2022-01-24 06:46:50.345 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/swagger-resources/**'], []
+2022-01-24 06:46:50.345 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/webjars/**'], []
+2022-01-24 06:46:50.345 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/v2/**'], []
+2022-01-24 06:46:50.345 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/swagger-ui.html/**'], []
+2022-01-24 06:46:50.345 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/home/**'], []
+2022-01-24 06:46:50.346 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/swagger-resources/**'], []
+2022-01-24 06:46:50.346 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/webjars/**'], []
+2022-01-24 06:46:50.346 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/v2/**'], []
+2022-01-24 06:46:50.346 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/swagger-ui.html/**'], []
+2022-01-24 06:46:50.381 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/admin/**'], [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5ca8bd01, org.springframework.security.web.context.SecurityContextPersistenceFilter@7cd25bf5, org.springframework.security.web.header.HeaderWriterFilter@22bfd4b, org.springframework.security.web.authentication.logout.LogoutFilter@3df6494f, com.redskt.security.filter.TokenLoginFilter@7b10472e, com.redskt.security.filter.TokenAuthenticationFilter@70e5737f, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@e4ef4c0, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@18b30951, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@234ce7ff, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@9746157, org.springframework.security.web.session.SessionManagementFilter@5fa9247b, org.springframework.security.web.access.ExceptionTranslationFilter@7aab98b6, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@154b0748]
+2022-01-24 06:46:50.385 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@215c6ec0, org.springframework.security.web.context.SecurityContextPersistenceFilter@5ee0cf64, org.springframework.security.web.header.HeaderWriterFilter@6e90cec8, org.springframework.security.web.authentication.logout.LogoutFilter@46748b04, com.redskt.security.filter.TokenLoginFilter@2b19b346, com.redskt.security.filter.TokenAuthenticationFilter@37c5b8e8, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@2d3d4a54, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@69c227fd, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@14c5283, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@706d2bae, org.springframework.security.web.session.SessionManagementFilter@13f182b9, org.springframework.security.web.access.ExceptionTranslationFilter@10e4ee33, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@1ef04613]
+2022-01-24 06:46:50.442 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2022-01-24 06:46:50.456 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2022-01-24 06:46:50.488 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2022-01-24 06:46:50.631 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: registerUserUsingPOST_1
+2022-01-24 06:46:50.636 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: indexUsingGET_1
+2022-01-24 06:46:50.639 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: indexUsingGET_2
+2022-01-24 06:46:50.674 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: registerUserUsingPOST_2
+2022-01-24 06:46:50.677 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: indexUsingGET_3
+2022-01-24 06:46:50.680 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getBookDetailUsingGET_1
+2022-01-24 06:46:50.715 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8001"]
+2022-01-24 06:46:50.746 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8001 (http) with context path ''
+2022-01-24 06:46:50.749 [main] INFO  com.redskt.classroom.RedClassApplication - Started RedClassApplication in 6.903 seconds (JVM running for 7.724)
+2022-01-24 06:54:10.298 [http-nio-8001-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-01-24 06:54:10.299 [http-nio-8001-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2022-01-24 06:54:10.307 [http-nio-8001-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 7 ms
+2022-01-24 06:54:28.192 [http-nio-8001-exec-3] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================/eduask/uploadqiniutoken
+2022-01-24 06:54:28.192 [http-nio-8001-exec-3] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================11
+2022-01-24 06:54:28.193 [http-nio-8001-exec-3] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================12eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSMjQzMzI2NDcwtDBX0lFKrShQsjI0MzGyNDAyMTSuBQC22RIRJgAAAA.BdKZeVT5gD2TaDWqBikpUNM72z8z2uwPjo3C2j63E4sKQvLKgtvPxnqcugQsAZ3IaIkDBCLKRKcffV9oA-lNxQ
+2022-01-24 06:54:28.232 [http-nio-8001-exec-3] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================7
+2022-01-24 06:54:41.200 [http-nio-8001-exec-5] INFO  io.lettuce.core.EpollProvider - Starting without optional epoll library
+2022-01-24 06:54:41.202 [http-nio-8001-exec-5] INFO  io.lettuce.core.KqueueProvider - Starting without optional kqueue library
+2022-01-24 06:54:41.469 [http-nio-8001-exec-6] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================/ucenter/getUserInfo
+2022-01-24 06:54:41.469 [http-nio-8001-exec-6] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================11
+2022-01-24 06:54:41.469 [http-nio-8001-exec-6] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================12eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSMjQzMzI2NDcwtDBX0lFKrShQsjI0MzE2MDOxsDCsBQDzbAhmJgAAAA.LCwv0rk5JVvzvSnR2aDw60iffs-q9fC0KsAd-EccYMBtgBErxp4AnWwEuuecc8zbGb1FxebYquGV03PQNVNm3Q
+2022-01-24 06:54:41.518 [http-nio-8001-exec-6] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================3
+2022-01-24 06:54:41.518 [http-nio-8001-exec-6] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================6
+2022-01-24 06:54:41.518 [http-nio-8001-exec-6] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================8
+2022-01-24 06:54:41.657 [http-nio-8001-exec-8] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================/eduask/uploadqiniutoken
+2022-01-24 06:54:41.658 [http-nio-8001-exec-8] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================11
+2022-01-24 06:54:41.659 [http-nio-8001-exec-8] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================12eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSMjQzMzI2NDcwtDBX0lFKrShQsjI0MzE2MDOxsDCsBQDzbAhmJgAAAA.LCwv0rk5JVvzvSnR2aDw60iffs-q9fC0KsAd-EccYMBtgBErxp4AnWwEuuecc8zbGb1FxebYquGV03PQNVNm3Q
+2022-01-24 06:54:41.706 [http-nio-8001-exec-8] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================3
+2022-01-24 06:54:41.706 [http-nio-8001-exec-8] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================6
+2022-01-24 06:54:41.706 [http-nio-8001-exec-8] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================8
+2022-01-24 06:54:44.752 [http-nio-8001-exec-9] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================/eduask/uploadqiniutoken
+2022-01-24 06:54:44.752 [http-nio-8001-exec-9] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================11
+2022-01-24 06:54:44.753 [http-nio-8001-exec-9] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================12eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSMjQzMzI2NDcwtDBX0lFKrShQsjI0MzE2MDOxsDCsBQDzbAhmJgAAAA.LCwv0rk5JVvzvSnR2aDw60iffs-q9fC0KsAd-EccYMBtgBErxp4AnWwEuuecc8zbGb1FxebYquGV03PQNVNm3Q
+2022-01-24 06:54:44.802 [http-nio-8001-exec-9] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================3
+2022-01-24 06:54:44.803 [http-nio-8001-exec-9] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================6
+2022-01-24 06:54:44.804 [http-nio-8001-exec-9] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================8
+2022-01-24 06:58:03.908 [http-nio-8001-exec-1] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================/eduask/uploadqiniutoken
+2022-01-24 06:58:03.908 [http-nio-8001-exec-1] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================11
+2022-01-24 06:58:03.908 [http-nio-8001-exec-1] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================12eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSMjQzMzI2NDcwtDBX0lFKrShQsjI0MzE2MDOxsDCsBQDzbAhmJgAAAA.LCwv0rk5JVvzvSnR2aDw60iffs-q9fC0KsAd-EccYMBtgBErxp4AnWwEuuecc8zbGb1FxebYquGV03PQNVNm3Q
+2022-01-24 06:58:03.962 [http-nio-8001-exec-1] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================3
+2022-01-24 06:58:03.962 [http-nio-8001-exec-1] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================6
+2022-01-24 06:58:03.962 [http-nio-8001-exec-1] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================8
+2022-01-24 06:58:09.082 [http-nio-8001-exec-3] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================/eduask/uploadqiniutoken
+2022-01-24 06:58:09.082 [http-nio-8001-exec-3] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================11
+2022-01-24 06:58:09.082 [http-nio-8001-exec-3] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================12eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSMjQzMzI2NDcwtDBX0lFKrShQsjI0MzE2MDOxsDCsBQDzbAhmJgAAAA.LCwv0rk5JVvzvSnR2aDw60iffs-q9fC0KsAd-EccYMBtgBErxp4AnWwEuuecc8zbGb1FxebYquGV03PQNVNm3Q
+2022-01-24 06:58:09.136 [http-nio-8001-exec-3] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================3
+2022-01-24 06:58:09.137 [http-nio-8001-exec-3] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================6
+2022-01-24 06:58:09.137 [http-nio-8001-exec-3] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================8
+2022-01-24 06:58:13.839 [http-nio-8001-exec-4] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================/eduask/uploadqiniutoken
+2022-01-24 06:58:13.840 [http-nio-8001-exec-4] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================11
+2022-01-24 06:58:13.840 [http-nio-8001-exec-4] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================12eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSMjQzMzI2NDcwtDBX0lFKrShQsjI0MzE2MDOxsDCsBQDzbAhmJgAAAA.LCwv0rk5JVvzvSnR2aDw60iffs-q9fC0KsAd-EccYMBtgBErxp4AnWwEuuecc8zbGb1FxebYquGV03PQNVNm3Q
+2022-01-24 06:58:13.883 [http-nio-8001-exec-4] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================3
+2022-01-24 06:58:13.883 [http-nio-8001-exec-4] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================6
+2022-01-24 06:58:13.884 [http-nio-8001-exec-4] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================8
+2022-01-24 06:58:25.838 [http-nio-8001-exec-5] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================/eduask/submitReply
+2022-01-24 06:58:25.839 [http-nio-8001-exec-5] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================11
+2022-01-24 06:58:25.839 [http-nio-8001-exec-5] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================12eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSMjQzMzI2NDcwtDBX0lFKrShQsjI0MzE2MDOxsDCsBQDzbAhmJgAAAA.LCwv0rk5JVvzvSnR2aDw60iffs-q9fC0KsAd-EccYMBtgBErxp4AnWwEuuecc8zbGb1FxebYquGV03PQNVNm3Q
+2022-01-24 06:58:25.889 [http-nio-8001-exec-5] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================3
+2022-01-24 06:58:25.890 [http-nio-8001-exec-5] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================6
+2022-01-24 06:58:25.890 [http-nio-8001-exec-5] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================8
+2022-01-24 07:00:50.311 [http-nio-8001-exec-7] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================/eduask/uploadqiniutoken
+2022-01-24 07:00:50.311 [http-nio-8001-exec-7] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================11
+2022-01-24 07:00:50.312 [http-nio-8001-exec-7] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================12eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSMjQzMzI2NDcwtDBX0lFKrShQsjI0MzE2MDOxsDCsBQDzbAhmJgAAAA.LCwv0rk5JVvzvSnR2aDw60iffs-q9fC0KsAd-EccYMBtgBErxp4AnWwEuuecc8zbGb1FxebYquGV03PQNVNm3Q
+2022-01-24 07:00:50.354 [http-nio-8001-exec-7] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================3
+2022-01-24 07:00:50.355 [http-nio-8001-exec-7] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================6
+2022-01-24 07:00:50.356 [http-nio-8001-exec-7] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================8
+2022-01-24 07:14:29.792 [http-nio-8001-exec-9] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================/eduask/uploadqiniutoken
+2022-01-24 07:14:29.793 [http-nio-8001-exec-9] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================11
+2022-01-24 07:14:29.793 [http-nio-8001-exec-9] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================12eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSMjQzMzI2NDcwtDBX0lFKrShQsjI0MzE2MDOxsDCsBQDzbAhmJgAAAA.LCwv0rk5JVvzvSnR2aDw60iffs-q9fC0KsAd-EccYMBtgBErxp4AnWwEuuecc8zbGb1FxebYquGV03PQNVNm3Q
+2022-01-24 07:14:32.809 [http-nio-8001-exec-9] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================5
+2022-01-24 07:14:32.809 [http-nio-8001-exec-9] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================7
+2022-01-24 07:14:48.867 [lettuce-eventExecutorLoop-1-4] INFO  io.lettuce.core.protocol.ConnectionWatchdog - Reconnecting, last destination was /121.43.146.70:6379
+2022-01-24 07:14:48.930 [lettuce-nioEventLoop-4-2] INFO  io.lettuce.core.protocol.ReconnectionHandler - Reconnected to 121.43.146.70:6379
+2022-01-24 07:14:54.508 [http-nio-8001-exec-10] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================/eduask/uploadqiniutoken
+2022-01-24 07:14:54.508 [http-nio-8001-exec-10] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================11
+2022-01-24 07:14:54.508 [http-nio-8001-exec-10] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================12eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSMjQzMzI2NDcwtDBX0lFKrShQsjI0MzE2MDOxsDCsBQDzbAhmJgAAAA.LCwv0rk5JVvzvSnR2aDw60iffs-q9fC0KsAd-EccYMBtgBErxp4AnWwEuuecc8zbGb1FxebYquGV03PQNVNm3Q
+2022-01-24 07:14:54.555 [http-nio-8001-exec-10] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================3
+2022-01-24 07:14:54.555 [http-nio-8001-exec-10] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================6
+2022-01-24 07:14:54.555 [http-nio-8001-exec-10] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================8
+2022-01-24 07:26:48.933 [http-nio-8001-exec-2] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================/eduask/uploadqiniutoken
+2022-01-24 07:26:48.934 [http-nio-8001-exec-2] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================11
+2022-01-24 07:26:48.934 [http-nio-8001-exec-2] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================12eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSMjQzMzI2NDcwtDBX0lFKrShQsjI0MzE2MDOxsDCsBQDzbAhmJgAAAA.LCwv0rk5JVvzvSnR2aDw60iffs-q9fC0KsAd-EccYMBtgBErxp4AnWwEuuecc8zbGb1FxebYquGV03PQNVNm3Q
+2022-01-24 07:26:51.942 [http-nio-8001-exec-2] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================5
+2022-01-24 07:26:51.942 [http-nio-8001-exec-2] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================7
+2022-01-24 07:27:07.814 [lettuce-eventExecutorLoop-1-8] INFO  io.lettuce.core.protocol.ConnectionWatchdog - Reconnecting, last destination was /121.43.146.70:6379
+2022-01-24 07:27:07.881 [lettuce-nioEventLoop-4-3] INFO  io.lettuce.core.protocol.ReconnectionHandler - Reconnected to 121.43.146.70:6379
+2022-01-24 07:27:10.212 [http-nio-8001-exec-6] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================/eduask/uploadqiniutoken
+2022-01-24 07:27:10.212 [http-nio-8001-exec-6] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================11
+2022-01-24 07:27:10.213 [http-nio-8001-exec-6] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================12eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSMjQzMzI2NDcwtDBX0lFKrShQsjI0MzE2MDOxsDCsBQDzbAhmJgAAAA.LCwv0rk5JVvzvSnR2aDw60iffs-q9fC0KsAd-EccYMBtgBErxp4AnWwEuuecc8zbGb1FxebYquGV03PQNVNm3Q
+2022-01-24 07:27:10.261 [http-nio-8001-exec-6] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================3
+2022-01-24 07:27:10.262 [http-nio-8001-exec-6] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================6
+2022-01-24 07:27:10.262 [http-nio-8001-exec-6] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================8
+2022-01-24 07:29:40.385 [http-nio-8001-exec-7] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================/eduask/uploadqiniutoken
+2022-01-24 07:29:40.387 [http-nio-8001-exec-7] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================11
+2022-01-24 07:29:40.387 [http-nio-8001-exec-7] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================12eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSMjQzMzI2NDcwtDBX0lFKrShQsjI0MzE2MDOxsDCsBQDzbAhmJgAAAA.LCwv0rk5JVvzvSnR2aDw60iffs-q9fC0KsAd-EccYMBtgBErxp4AnWwEuuecc8zbGb1FxebYquGV03PQNVNm3Q
+2022-01-24 07:29:40.440 [http-nio-8001-exec-7] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================3
+2022-01-24 07:29:40.440 [http-nio-8001-exec-7] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================6
+2022-01-24 07:29:40.440 [http-nio-8001-exec-7] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================8

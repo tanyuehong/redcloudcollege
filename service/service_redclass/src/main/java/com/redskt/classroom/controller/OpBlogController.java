@@ -3,17 +3,19 @@ package com.redskt.classroom.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.redskt.classroom.entity.OpBlogDetail;
-import com.redskt.classroom.entity.OpBlogType;
-import com.redskt.classroom.entity.RedClassCourse;
-import com.redskt.classroom.entity.RedClassTeacher;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.redskt.classroom.entity.*;
 import com.redskt.classroom.service.OpBlogDetailService;
 import com.redskt.classroom.service.OpBlogTypeService;
+import com.redskt.classroom.service.RedBlogGoodService;
 import com.redskt.classroom.service.RedCourseService;
 import com.redskt.commonutils.R;
+import com.redskt.security.TokenManager;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +36,11 @@ public class OpBlogController {
 
     @Autowired
     private OpBlogDetailService blogService;
+
+    @Autowired
+    private RedBlogGoodService goodService;
+
+
 
     @GetMapping("index")
     public R index() {
@@ -75,6 +82,60 @@ public class OpBlogController {
         } else {
             return R.error("参数不合法，请验证");
         }
+    }
+
+    @GetMapping("good/{praticeId}")
+    public R getGoodState(@PathVariable String praticeId, HttpServletRequest request) {
+        if (praticeId.length()>0) {
+            String uId = TokenManager.getMemberIdByJwtToken(request);
+            if (uId.length()>0) {
+                QueryWrapper<RedBlogGood> goodQueryWrapper = new QueryWrapper<>();
+                goodQueryWrapper.eq("bid", praticeId);
+                goodQueryWrapper.eq("uid", uId);
+                List<RedBlogGood> goodList = goodService.list(goodQueryWrapper);
+                if (goodList.size() > 0) {
+                    return R.ok().data("good", true);
+                }
+            }
+        }
+        return R.ok().data("good",false);
+    }
+
+    @GetMapping("addGood/{praticeId}")
+    public R addGood(@PathVariable String praticeId, HttpServletRequest request) {
+        if (praticeId.length()>0) {
+            String uId = TokenManager.getMemberIdByJwtToken(request);
+            if (uId.length()>0) {
+                int count = goodService.updateGoodState(uId,praticeId);
+                if (count<=0) {
+                    RedBlogGood good = new RedBlogGood();
+                    good.setBid(praticeId);
+                    good.setUid(uId);
+                    if(goodService.save(good)) {
+                        return R.ok().data("good", true);
+                    }
+                } else {
+                    return R.ok().data("good", true);
+                }
+            }
+        }
+        return R.error("数据出现了异常哦哦哦");
+    }
+
+    @GetMapping("cancleGood/{praticeId}")
+    public R cancleGood(@PathVariable String praticeId, HttpServletRequest request) {
+        if (praticeId.length()>0) {
+            String uId = TokenManager.getMemberIdByJwtToken(request);
+            if (uId.length()>0) {
+                QueryWrapper<RedBlogGood> goodQueryWrapper = new QueryWrapper<>();
+                goodQueryWrapper.eq("bid", praticeId);
+                goodQueryWrapper.eq("uid", uId);
+                if(goodService.remove(goodQueryWrapper)) {
+                    return R.ok().data("good",false);
+                }
+            }
+        }
+        return R.error("数据出现了异常哦哦哦");
     }
 }
 

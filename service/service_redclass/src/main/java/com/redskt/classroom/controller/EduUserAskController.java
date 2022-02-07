@@ -3,8 +3,10 @@ package com.redskt.classroom.controller;
 
 import com.qiniu.util.Auth;
 import com.redskt.classroom.entity.EduUserAsk;
+import com.redskt.classroom.entity.RedAskReply;
 import com.redskt.classroom.entity.vo.RedClassAskQuestionVo;
 import com.redskt.classroom.service.EduUserAskService;
+import com.redskt.classroom.service.RedAskReplyService;
 import com.redskt.commonutils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,9 +29,22 @@ public class EduUserAskController {
     @Autowired
     private EduUserAskService userAskService;
 
+    @Autowired
+    private RedAskReplyService replyService;
+
     @PostMapping("submit")
     public R registerUser(@RequestBody EduUserAsk userAsk) {
         if (userAskService.saveUserAsk(userAsk)) {
+            return R.ok();
+        } else  {
+            return R.error("报错问题信息失败");
+        }
+    }
+
+
+    @PostMapping("submitReply")
+    public R registerUser(@RequestBody RedAskReply reply) {
+        if (replyService.save(reply)) {
             return R.ok();
         } else  {
             return R.error("报错问题信息失败");

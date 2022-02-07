@@ -19,13 +19,13 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author tanyuehong
- * @since 2020-07-26
+ * @since 2022-01-21
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="EduUserAsk对象", description="")
-public class EduUserAsk implements Serializable {
+@ApiModel(value="RedAskReplyComment对象", description="")
+public class RedAskReplyComment implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -35,27 +35,11 @@ public class EduUserAsk implements Serializable {
 
     private String uid;
 
-    private String title;
-
-    private Integer type;
-
-    private String tag;
-
     private String content;
-
-    private Integer email;
-
-    private Integer coment;
-
-    private Integer readcount;
-
-    private Integer hot;
 
     private Integer good;
 
-    private Integer price;
-
-    private Integer hotnum;
+    private Integer bad;
 
     @ApiModelProperty(value = "创建时间")
     @TableField(fill = FieldFill.INSERT)
@@ -64,4 +48,6 @@ public class EduUserAsk implements Serializable {
     @ApiModelProperty(value = "更新时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date gmtModified;
+
+
 }

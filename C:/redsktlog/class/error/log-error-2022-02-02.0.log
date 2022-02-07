@@ -1,0 +1,24 @@
+2022-02-02 16:03:25.801 [http-nio-8001-exec-1] ERROR c.r.s.excepionhandler.GlobalExceptionHandler - 
+### Error querying database.  Cause: java.sql.SQLSyntaxErrorException: Unknown column 'ask.top' in 'field list'
+### The error may exist in file [/Users/zyb/Documents/redcloudcollege/service/service_redclass/target/classes/com/redskt/classroom/mapper/xml/EduUserAskMapper.xml]
+### The error may involve defaultParameterMap
+### The error occurred while setting parameters
+### SQL: SELECT ask.id as qId, ask.title,ask.type,ask.tag,ask.content,ask.hot,ask.readcount,ask.hotnum,ask.price,ask.top,ask.gmt_create, user.nickname,         user.avatar,(select count(reply.id) from edu_ask_reply reply where reply.qid=ask.id) as  reply         FROM edu_user_ask ask         LEFT OUTER JOIN edu_user user ON ask.uid=user.id         WHERE ask.id=?
+### Cause: java.sql.SQLSyntaxErrorException: Unknown column 'ask.top' in 'field list'
+; bad SQL grammar []; nested exception is java.sql.SQLSyntaxErrorException: Unknown column 'ask.top' in 'field list'
+2022-02-02 16:03:27.645 [http-nio-8001-exec-3] ERROR c.r.s.excepionhandler.GlobalExceptionHandler - 
+### Error querying database.  Cause: java.sql.SQLSyntaxErrorException: Unknown column 'ask.top' in 'field list'
+### The error may exist in file [/Users/zyb/Documents/redcloudcollege/service/service_redclass/target/classes/com/redskt/classroom/mapper/xml/EduUserAskMapper.xml]
+### The error may involve defaultParameterMap
+### The error occurred while setting parameters
+### SQL: SELECT ask.id as qId, ask.title,ask.type,ask.tag,ask.content,ask.hot,ask.readcount,ask.hotnum,ask.price,ask.top,ask.gmt_create, user.nickname,         user.avatar,(select count(reply.id) from edu_ask_reply reply where reply.qid=ask.id) as  reply         FROM edu_user_ask ask         LEFT OUTER JOIN edu_user user ON ask.uid=user.id         WHERE ask.id=?
+### Cause: java.sql.SQLSyntaxErrorException: Unknown column 'ask.top' in 'field list'
+; bad SQL grammar []; nested exception is java.sql.SQLSyntaxErrorException: Unknown column 'ask.top' in 'field list'
+2022-02-02 16:03:34.254 [http-nio-8001-exec-5] ERROR c.r.s.excepionhandler.GlobalExceptionHandler - 
+### Error querying database.  Cause: java.sql.SQLSyntaxErrorException: Unknown column 'ask.top' in 'field list'
+### The error may exist in file [/Users/zyb/Documents/redcloudcollege/service/service_redclass/target/classes/com/redskt/classroom/mapper/xml/EduUserAskMapper.xml]
+### The error may involve defaultParameterMap
+### The error occurred while setting parameters
+### SQL: SELECT ask.id as qId, ask.title,ask.type,ask.tag,ask.content,ask.hot,ask.readcount,ask.hotnum,ask.price,ask.top,ask.gmt_create, user.nickname,         user.avatar,(select count(reply.id) from edu_ask_reply reply where reply.qid=ask.id) as  reply         FROM edu_user_ask ask         LEFT OUTER JOIN edu_user user ON ask.uid=user.id         WHERE ask.id=?
+### Cause: java.sql.SQLSyntaxErrorException: Unknown column 'ask.top' in 'field list'
+; bad SQL grammar []; nested exception is java.sql.SQLSyntaxErrorException: Unknown column 'ask.top' in 'field list'
