@@ -119,9 +119,11 @@ public class OpBlogController {
                     blogService.updateBlogGoodCount(true,praticeId);
                     return R.ok().data("good", true);
                 }
+            } else {
+               return R.error("登录信息异常，请重新登录后尝试！");
             }
         }
-        return R.error("数据出现了异常哦哦哦");
+        return R.error("点赞失败，请稍后重试哈！");
     }
 
     @GetMapping("cancleGood/{praticeId}")
@@ -136,9 +138,11 @@ public class OpBlogController {
                     blogService.updateBlogGoodCount(false,praticeId);
                     return R.ok().data("good",false);
                 }
+            } else {
+                return R.error("登录信息异常，请重新登录后尝试！");
             }
         }
-        return R.error("数据出现了异常哦哦哦");
+        return R.error("取消点赞失败，请稍后重试哈！");
     }
 }
 

@@ -53,7 +53,7 @@ public class TokenAuthenticationFilter extends BasicAuthenticationFilter {
         try {
             logger.info("=================11");
             authentication = getAuthentication(req);
-        }catch (ExpiredJwtException expried) {
+        } catch (ExpiredJwtException expried) {
             // 这里是token过期了 需要重新登录
             ResponseUtil.out(res, R.LoginExpired());
         } catch (Exception e) {

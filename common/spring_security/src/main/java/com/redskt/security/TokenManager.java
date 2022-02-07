@@ -1,10 +1,15 @@
 package com.redskt.security;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.redskt.security.entity.User;
 import io.jsonwebtoken.*;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -41,7 +46,11 @@ public class TokenManager {
     public static String getMemberIdByJwtToken(HttpServletRequest request) {
         String jwtToken = request.getHeader("token");
         if(StringUtils.isEmpty(jwtToken)) return "";
-        return  Jwts.parser().setSigningKey(tokenSignKey).parseClaimsJws(jwtToken).getBody().getSubject();
+        try {
+            return  Jwts.parser().setSigningKey(tokenSignKey).parseClaimsJws(jwtToken).getBody().getSubject();
+        } catch (Exception e) {
+            return "";
+        }
     }
 
     public void removeToken(String token) {
