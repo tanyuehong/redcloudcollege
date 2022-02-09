@@ -80,7 +80,7 @@
         where id = #{qid}
     </update>
 
-    <update id="prepBlogGoodCount">
+    <update id="prepQustionGoodCount">
         update edu_user_ask
         set good=good-1
         where id = #{qid}

@@ -90,7 +90,7 @@ public class RedHomeAskController {
                 }
             }
         }
-        return R.ok().data("good",false);
+        return R.ok().data("goodqustion",false);
     }
 
     @GetMapping("addqGood/{qId}")
