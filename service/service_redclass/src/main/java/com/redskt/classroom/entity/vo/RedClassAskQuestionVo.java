@@ -25,7 +25,7 @@ public class RedClassAskQuestionVo {
 
     private Integer readcount;
 
-    private Integer hot;
+    private Integer collect;
 
     private Integer good;
 

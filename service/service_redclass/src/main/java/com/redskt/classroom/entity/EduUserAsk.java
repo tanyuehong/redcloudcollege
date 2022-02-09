@@ -49,7 +49,7 @@ public class EduUserAsk implements Serializable {
 
     private Integer readcount;
 
-    private Integer hot;
+    private Integer collect;
 
     private Integer good;
 

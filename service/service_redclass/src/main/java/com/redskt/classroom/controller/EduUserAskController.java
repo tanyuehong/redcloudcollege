@@ -4,14 +4,11 @@ package com.redskt.classroom.controller;
 import com.qiniu.util.Auth;
 import com.redskt.classroom.entity.EduUserAsk;
 import com.redskt.classroom.entity.RedAskReply;
-import com.redskt.classroom.entity.vo.RedClassAskQuestionVo;
 import com.redskt.classroom.service.EduUserAskService;
 import com.redskt.classroom.service.RedAskReplyService;
 import com.redskt.commonutils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * <p>
