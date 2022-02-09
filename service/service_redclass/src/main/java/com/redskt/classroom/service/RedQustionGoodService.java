@@ -12,5 +12,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2022-02-07
  */
 public interface RedQustionGoodService extends IService<RedQustionGood> {
-    int updateGoodState(String uid,String bid);
+    int updateQustionGoodState(String uid,String qId);
 }

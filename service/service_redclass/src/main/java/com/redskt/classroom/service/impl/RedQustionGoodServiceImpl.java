@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class RedQustionGoodServiceImpl extends ServiceImpl<RedQustionGoodMapper, RedQustionGood> implements RedQustionGoodService {
     @Override
-    public int updateGoodState(String uid,String bid) {
-        return baseMapper.updateGoodState(uid,bid);
+    public int updateQustionGoodState(String uid,String qId) {
+        return baseMapper.updateGoodState(uid,qId);
     }
 }

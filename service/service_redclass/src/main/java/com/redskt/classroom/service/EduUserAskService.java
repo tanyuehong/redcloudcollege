@@ -20,7 +20,9 @@ public interface EduUserAskService extends IService<EduUserAsk> {
 
     void updateUserAskReadCount(String qId,int readCount);
 
-    RedClassAskQuestionVo getQustionDetail(String tId);
+    RedClassAskQuestionVo getQustionDetail(String qId);
 
     List<RedClassAskQuestionVo> getHomeAskQustionList(int type,String typeId);
+
+    int updateQustionGoodCount(boolean isAdd,String qId);
 }

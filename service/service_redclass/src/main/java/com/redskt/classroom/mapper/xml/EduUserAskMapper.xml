@@ -74,4 +74,16 @@
         where id = #{id}
     </update>
 
+    <update id="addQustionGoodCount">
+        update edu_user_ask
+        set good=good+1
+        where id = #{qid}
+    </update>
+
+    <update id="prepBlogGoodCount">
+        update edu_user_ask
+        set good=good-1
+        where id = #{qid}
+    </update>
+
 </mapper>

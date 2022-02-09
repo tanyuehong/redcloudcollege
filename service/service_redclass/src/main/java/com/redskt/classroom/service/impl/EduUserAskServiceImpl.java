@@ -48,6 +48,16 @@ public class EduUserAskServiceImpl extends ServiceImpl<EduUserAskMapper, EduUser
            return baseMapper.getHomeQustionLists(typeId);
        }
     }
+
+    @Override
+    public int updateQustionGoodCount(boolean isAdd, String qId) {
+        if(isAdd) {
+            return baseMapper.addQustionGoodCount(qId);
+        } else {
+            return baseMapper.prepQustionGoodCount(qId);
+        }
+    }
+
     @Override
     public void updateUserAskReadCount(String qId,int readCount) {
         baseMapper.changReadCount(qId,readCount);

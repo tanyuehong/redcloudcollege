@@ -13,5 +13,5 @@ import org.apache.ibatis.annotations.Param;
  * @since 2022-02-07
  */
 public interface RedQustionGoodMapper extends BaseMapper<RedQustionGood> {
-    int updateGoodState(@Param("uid")  String uid, @Param("bid")  String bid);
+    int updateGoodState(@Param("uid")  String uid, @Param("qid")  String qId);
 }

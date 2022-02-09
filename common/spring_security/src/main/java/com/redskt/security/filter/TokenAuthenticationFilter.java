@@ -58,7 +58,7 @@ public class TokenAuthenticationFilter extends BasicAuthenticationFilter {
             ResponseUtil.out(res, R.LoginExpired());
         } catch (Exception e) {
             ResponseUtil.out(res, R.error());
-            logger.info("=================5");
+            logger.info("=================5"+e.getLocalizedMessage());
         }
         if (authentication != null) {
             SecurityContextHolder.getContext().setAuthentication(authentication);
