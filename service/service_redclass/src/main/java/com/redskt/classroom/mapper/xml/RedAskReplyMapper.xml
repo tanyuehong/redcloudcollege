@@ -8,7 +8,7 @@
         FROM red_ask_reply ask
         LEFT OUTER JOIN edu_user user ON ask.uid=user.id
         WHERE ask.qid=#{qId}
-        ORDER BY ask.gmt_create DESC limit 10
+        ORDER BY ask.good DESC limit 10
     </select>
 
 </mapper>

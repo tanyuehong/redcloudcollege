@@ -28,7 +28,7 @@ import java.util.List;
  * @since 2022-02-09
  */
 @RestController
-@RequestMapping("/collect")
+@RequestMapping("/home/eduask")
 public class RedQustionCollectController {
 
     @Autowired
@@ -66,12 +66,12 @@ public class RedQustionCollectController {
                     good.setQid(qId);
                     good.setUid(uId);
                     if(collectService.save(good)) {
-                        userAskService.updateQustionGoodCount(true,qId);
-                        return R.ok().data("goodqustion", true);
+                        userAskService.updateQustionCollectCount(true,qId);
+                        return R.ok().data("collectState", true);
                     }
                 } else {
-                    userAskService.updateQustionGoodCount(true,qId);
-                    return R.ok().data("goodqustion", true);
+                    userAskService.updateQustionCollectCount(true,qId);
+                    return R.ok().data("collectState", true);
                 }
             } else {
                 return R.error("登录信息异常，请重新登录后尝试！");
@@ -89,8 +89,8 @@ public class RedQustionCollectController {
                 goodQueryWrapper.eq("qid", qId);
                 goodQueryWrapper.eq("uid", uId);
                 if(collectService.remove(goodQueryWrapper)) {
-                    userAskService.updateQustionGoodCount(false,qId);
-                    return R.ok().data("goodqustion",false);
+                    userAskService.updateQustionCollectCount(false,qId);
+                    return R.ok().data("collectState",false);
                 }
             } else {
                 return R.error("登录信息异常，请重新登录后尝试！");

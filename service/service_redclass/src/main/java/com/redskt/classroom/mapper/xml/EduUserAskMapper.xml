@@ -86,4 +86,16 @@
         where id = #{qid}
     </update>
 
+    <update id="addQustionCollectCount">
+        update edu_user_ask
+        set collect=collect+1
+        where id = #{qid}
+    </update>
+
+    <update id="prepQustionCollectCount">
+        update edu_user_ask
+        set collect=collect-1
+        where id = #{qid}
+    </update>
+
 </mapper>

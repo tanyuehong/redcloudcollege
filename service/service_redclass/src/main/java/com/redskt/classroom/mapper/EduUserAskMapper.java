@@ -37,4 +37,8 @@ public interface EduUserAskMapper extends BaseMapper<EduUserAsk> {
     int addQustionGoodCount(@Param("qid")  String qId);
 
     int prepQustionGoodCount(@Param("qid")  String qId);
+
+    int addQustionCollectCount(@Param("qid")  String qId);
+
+    int prepQustionCollectCount(@Param("qid")  String qId);
 }

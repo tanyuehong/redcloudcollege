@@ -25,4 +25,6 @@ public interface EduUserAskService extends IService<EduUserAsk> {
     List<RedClassAskQuestionVo> getHomeAskQustionList(int type,String typeId);
 
     int updateQustionGoodCount(boolean isAdd,String qId);
+
+    int updateQustionCollectCount(boolean isAdd,String qId);
 }
