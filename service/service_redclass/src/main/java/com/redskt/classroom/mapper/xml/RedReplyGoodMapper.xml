@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.redskt.classroom.mapper.RedReplyGoodMapper">
+
+    <update id="updateGoodState">
+        update red_reply_good
+        set is_deleted = 0
+        where uid = #{uid} and rid = #{rid}
+    </update>
+
+    <select id="getUserReplyState" resultType="com.redskt.classroom.entity.EduAskReply">
+        SELECT *
+        FROM red_reply_good
+        <where>
+            <foreach item="item" index="index" collection="map"
+                     open="uid = #{uid} and rid in (" separator="," close=")">
+                #{item}
+            </foreach>
+        </where>
+    </select>
+
+</mapper>

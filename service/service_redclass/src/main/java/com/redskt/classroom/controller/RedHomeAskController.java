@@ -43,6 +43,9 @@ public class RedHomeAskController {
     @Autowired
     private RedQustionGoodService qustionGoodService;
 
+    @Autowired
+    private RedReplyGoodService replyGoodService;
+
 
     @PostMapping("questionlist")
     public R getHomeQuestionList(@RequestBody Map parameterMap) {
@@ -67,12 +70,17 @@ public class RedHomeAskController {
     }
 
     @GetMapping("getquestiondetail/{qId}")
-    public R getQustionDetil(@PathVariable String qId) {
+    public R getQustionDetil(@PathVariable String qId,HttpServletRequest request) {
         RedClassAskQuestionVo qDetail =  userAskService.getQustionDetail(qId);
         int readCount = qDetail.getReadcount()+1;
         userAskService.updateUserAskReadCount(qDetail.getQId(),readCount);
 
         List<RedAskReplyVo> replyList = replyService.getHomeAskReplyList(qDetail.getQId());
+
+        String uId = TokenManager.getMemberIdByJwtToken(request);
+        if (uId.length()>0) {
+
+        }
         return R.ok().data("qdetail",qDetail).data("replyList",replyList);
     }
 
@@ -128,6 +136,50 @@ public class RedHomeAskController {
                 goodQueryWrapper.eq("uid", uId);
                 if(qustionGoodService.remove(goodQueryWrapper)) {
                     userAskService.updateQustionGoodCount(false,qId);
+                    return R.ok().data("goodqustion",false);
+                }
+            } else {
+                return R.error("登录信息异常，请重新登录后尝试！");
+            }
+        }
+        return R.error("取消点赞失败，请稍后重试哈！");
+    }
+
+    @GetMapping("addRelpyGood/{rId}")
+    public R addRelpyGood(@PathVariable String rId, HttpServletRequest request) {
+        if (rId.length()>0) {
+            String uId = TokenManager.getMemberIdByJwtToken(request);
+            if (uId.length()>0) {
+                int count = replyGoodService.updateReplyGoodState(uId,rId);
+                if (count<=0) {
+                    RedReplyGood good = new RedReplyGood();
+                    good.setRid(rId);
+                    good.setUid(uId);
+                    if(replyGoodService.save(good)) {
+                        replyService.updateReplyGoodCount(true,rId);
+                        return R.ok().data("goodqustion", true);
+                    }
+                } else {
+                    replyService.updateReplyGoodCount(true,rId);
+                    return R.ok().data("goodqustion", true);
+                }
+            } else {
+                return R.error("登录信息异常，请重新登录后尝试！");
+            }
+        }
+        return R.error("点赞失败，请稍后重试哈！");
+    }
+
+    @GetMapping("cancleRelpyGood/{rId}")
+    public R cancleRelpyGood(@PathVariable String rId, HttpServletRequest request) {
+        if (rId.length()>0) {
+            String uId = TokenManager.getMemberIdByJwtToken(request);
+            if (uId.length()>0) {
+                QueryWrapper<RedReplyGood> goodQueryWrapper = new QueryWrapper<>();
+                goodQueryWrapper.eq("rid", rId);
+                goodQueryWrapper.eq("uid", uId);
+                if(replyGoodService.remove(goodQueryWrapper)) {
+                    replyService.updateReplyGoodCount(false,rId);
                     return R.ok().data("goodqustion",false);
                 }
             } else {

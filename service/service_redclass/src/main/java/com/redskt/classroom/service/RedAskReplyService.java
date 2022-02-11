@@ -18,4 +18,6 @@ public interface RedAskReplyService extends IService<RedAskReply> {
 
     List<RedAskReplyVo> getHomeAskReplyList(String qId);
 
+    int updateReplyGoodCount(boolean isAdd,String rId);
+
 }

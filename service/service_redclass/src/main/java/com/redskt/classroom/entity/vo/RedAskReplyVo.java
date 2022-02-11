@@ -19,6 +19,8 @@ public class RedAskReplyVo {
 
     private Integer bad;
 
+    private Integer myreply;
+
     private boolean showeditor;
 
     private String username;

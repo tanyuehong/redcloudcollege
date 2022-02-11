@@ -2,4 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.redskt.classroom.mapper.EduAskReplyMapper">
 
+    <update id="addReplyGoodCount">
+        update red_ask_reply
+        set good=good+1
+        where id = #{rid}
+    </update>
+
+    <update id="prepReplyGoodCount">
+        update red_ask_reply
+        set good=good-1
+        where id = #{rid}
+    </update>
+
 </mapper>

@@ -24,4 +24,13 @@ public class RedAskReplyServiceImpl extends ServiceImpl<RedAskReplyMapper, RedAs
     public List<RedAskReplyVo> getHomeAskReplyList(String qId) {
         return baseMapper.getQustionReplyList(qId);
     }
+
+    @Override
+    public int updateReplyGoodCount(boolean isAdd,String rId) {
+        if(isAdd) {
+            return baseMapper.addReplyGoodCount(rId);
+        } else {
+            return baseMapper.prepReplyGoodCount(rId);
+        }
+    }
 }
