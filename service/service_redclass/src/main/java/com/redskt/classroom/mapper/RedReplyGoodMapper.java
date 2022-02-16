@@ -4,6 +4,7 @@ import com.redskt.classroom.entity.RedReplyGood;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -17,5 +18,5 @@ import java.util.Map;
 public interface RedReplyGoodMapper extends BaseMapper<RedReplyGood> {
     int updateGoodState(@Param("uid")  String uid, @Param("rid")  String rId);
 
-    int getUserReplyGoodState(Map<String, Object> map, @Param("uid")  String uId);
+    List<RedReplyGood> getUserReplyGoodState(@Param("map") List<String> rIds, @Param("uid")  String uId);
 }

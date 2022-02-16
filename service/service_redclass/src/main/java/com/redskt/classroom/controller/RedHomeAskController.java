@@ -171,7 +171,7 @@ public class RedHomeAskController {
                 return R.error("登录信息异常，请重新登录后尝试！");
             }
         }
-        return R.error("点赞失败，请稍后重试哈！");
+        return R.error("添加解决标签失败，请稍后重试哈！");
     }
 
     @GetMapping("cancleRelpyGood/{rId}")
@@ -190,7 +190,7 @@ public class RedHomeAskController {
                 return R.error("登录信息异常，请重新登录后尝试！");
             }
         }
-        return R.error("取消点赞失败，请稍后重试哈！");
+        return R.error("取消解决标签失败，请稍后重试哈！");
     }
 
     @GetMapping("addRelpyBad/{rId}")
@@ -215,7 +215,7 @@ public class RedHomeAskController {
                 return R.error("登录信息异常，请重新登录后尝试！");
             }
         }
-        return R.error("点赞失败，请稍后重试哈！");
+        return R.error("添加无用标签失败，请稍后重试哈！");
     }
 
     @GetMapping("cancleRelpyBad/{rId}")
@@ -234,7 +234,22 @@ public class RedHomeAskController {
                 return R.error("登录信息异常，请重新登录后尝试！");
             }
         }
-        return R.error("取消点赞失败，请稍后重试哈！");
+        return R.error("取消无用标签失败，请稍后重试哈！");
+    }
+
+    @PostMapping("getUserGoodState")
+    public R getUserGoodState(@RequestBody List<String> rIds,HttpServletRequest request) {
+        if(rIds.size()>0) {
+            String uId = TokenManager.getMemberIdByJwtToken(request);
+            if(uId.length()>0) {
+
+              List<RedReplyGood> goodList = replyGoodService.getUserReplyGoodState(rIds,uId);
+
+              return R.ok().data("goodList",goodList);
+
+            }
+        }
+        return R.ok();
     }
 }
 

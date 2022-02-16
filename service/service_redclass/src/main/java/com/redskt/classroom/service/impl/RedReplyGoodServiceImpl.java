@@ -6,6 +6,8 @@ import com.redskt.classroom.service.RedReplyGoodService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务实现类
@@ -19,5 +21,10 @@ public class RedReplyGoodServiceImpl extends ServiceImpl<RedReplyGoodMapper, Red
     @Override
     public int updateReplyGoodState(String uid,String qId) {
         return baseMapper.updateGoodState(uid,qId);
+    }
+
+    @Override
+    public List<RedReplyGood> getUserReplyGoodState(List<String> rIds, String uId) {
+        return baseMapper.getUserReplyGoodState(rIds,uId);
     }
 }
