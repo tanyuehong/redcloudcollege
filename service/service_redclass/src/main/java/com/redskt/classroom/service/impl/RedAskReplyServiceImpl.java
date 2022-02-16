@@ -33,4 +33,13 @@ public class RedAskReplyServiceImpl extends ServiceImpl<RedAskReplyMapper, RedAs
             return baseMapper.prepReplyGoodCount(rId);
         }
     }
+
+    @Override
+    public int updateReplyBadCount(boolean isAdd,String rId) {
+        if(isAdd) {
+            return baseMapper.addReplyBadCount(rId);
+        } else {
+            return baseMapper.prepReplyBadCount(rId);
+        }
+    }
 }

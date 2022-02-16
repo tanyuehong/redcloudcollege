@@ -11,4 +11,29 @@
         ORDER BY ask.good DESC limit 10
     </select>
 
+    <update id="addReplyGoodCount">
+        update red_ask_reply
+        set good=good+1
+        where id = #{rid}
+    </update>
+
+    <update id="prepReplyGoodCount">
+        update red_ask_reply
+        set good=good-1
+        where id = #{rid}
+    </update>
+
+    <update id="addReplyBadCount">
+        update red_ask_reply
+        set bad=bad+1
+        where id = #{rid}
+    </update>
+
+    <update id="prepReplyBadCount">
+        update red_ask_reply
+        set bad=bad-1
+        where id = #{rid}
+    </update>
+
+
 </mapper>

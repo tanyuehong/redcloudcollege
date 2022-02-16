@@ -22,4 +22,8 @@ public interface RedAskReplyMapper extends BaseMapper<RedAskReply> {
     int addReplyGoodCount(@Param("rid")  String qId);
 
     int prepReplyGoodCount(@Param("rid")  String qId);
+
+    int addReplyBadCount(@Param("rid")  String qId);
+
+    int prepReplyBadCount(@Param("rid")  String qId);
 }

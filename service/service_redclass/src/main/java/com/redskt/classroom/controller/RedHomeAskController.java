@@ -46,6 +46,10 @@ public class RedHomeAskController {
     @Autowired
     private RedReplyGoodService replyGoodService;
 
+    @Autowired
+    private RedReplyBadService replyBadService;
+
+
 
     @PostMapping("questionlist")
     public R getHomeQuestionList(@RequestBody Map parameterMap) {
@@ -180,6 +184,50 @@ public class RedHomeAskController {
                 goodQueryWrapper.eq("uid", uId);
                 if(replyGoodService.remove(goodQueryWrapper)) {
                     replyService.updateReplyGoodCount(false,rId);
+                    return R.ok().data("goodqustion",false);
+                }
+            } else {
+                return R.error("登录信息异常，请重新登录后尝试！");
+            }
+        }
+        return R.error("取消点赞失败，请稍后重试哈！");
+    }
+
+    @GetMapping("addRelpyBad/{rId}")
+    public R addRelpyBad(@PathVariable String rId, HttpServletRequest request) {
+        if (rId.length()>0) {
+            String uId = TokenManager.getMemberIdByJwtToken(request);
+            if (uId.length()>0) {
+                int count = replyBadService.updateReplyBadState(uId,rId);
+                if (count<=0) {
+                    RedReplyBad good = new RedReplyBad();
+                    good.setRid(rId);
+                    good.setUid(uId);
+                    if(replyBadService.save(good)) {
+                        replyService.updateReplyGoodCount(true,rId);
+                        return R.ok().data("goodqustion", true);
+                    }
+                } else {
+                    replyService.updateReplyBadCount(true,rId);
+                    return R.ok().data("goodqustion", true);
+                }
+            } else {
+                return R.error("登录信息异常，请重新登录后尝试！");
+            }
+        }
+        return R.error("点赞失败，请稍后重试哈！");
+    }
+
+    @GetMapping("cancleRelpyBad/{rId}")
+    public R cancleRelpyBad(@PathVariable String rId, HttpServletRequest request) {
+        if (rId.length()>0) {
+            String uId = TokenManager.getMemberIdByJwtToken(request);
+            if (uId.length()>0) {
+                QueryWrapper<RedReplyBad> goodQueryWrapper = new QueryWrapper<>();
+                goodQueryWrapper.eq("rid", rId);
+                goodQueryWrapper.eq("uid", uId);
+                if(replyBadService.remove(goodQueryWrapper)) {
+                    replyService.updateReplyBadCount(false,rId);
                     return R.ok().data("goodqustion",false);
                 }
             } else {

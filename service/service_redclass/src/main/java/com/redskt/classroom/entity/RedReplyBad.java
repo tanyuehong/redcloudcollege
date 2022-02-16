@@ -19,13 +19,13 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author tanyuehong
- * @since 2022-02-11
+ * @since 2022-02-15
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="RedReplyGood对象", description="")
-public class RedReplyGood implements Serializable {
+@ApiModel(value="RedReplyBad对象", description="")
+public class RedReplyBad implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -49,6 +49,7 @@ public class RedReplyGood implements Serializable {
     @ApiModelProperty(value = "修改时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date gmtModified;
+
 
 
 }
