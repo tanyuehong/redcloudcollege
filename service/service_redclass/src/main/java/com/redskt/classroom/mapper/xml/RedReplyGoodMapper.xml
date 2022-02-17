@@ -13,7 +13,7 @@
         FROM red_reply_good
         <where>
             <foreach item="item" index="index" collection="map"
-                     open="uid = #{uid} and rid in (" separator="," close=")">
+                     open="is_deleted = 0 and uid = #{uid} and rid in (" separator="," close=")">
                 #{item}
             </foreach>
         </where>
