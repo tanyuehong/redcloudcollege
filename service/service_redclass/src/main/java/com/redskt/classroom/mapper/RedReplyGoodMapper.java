@@ -16,7 +16,7 @@ import java.util.Map;
  * @since 2022-02-11
  */
 public interface RedReplyGoodMapper extends BaseMapper<RedReplyGood> {
-    int updateGoodState(@Param("uid")  String uid, @Param("rid")  String rId);
+    int updateGoodState(@Param("uid")  String uid, @Param("rid")  String rId,@Param("type") int type);
 
     List<RedReplyGood> getUserReplyGoodState(@Param("map") List<String> rIds, @Param("uid")  String uId);
 }

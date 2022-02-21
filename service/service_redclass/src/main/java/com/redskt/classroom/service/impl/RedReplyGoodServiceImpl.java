@@ -19,8 +19,8 @@ import java.util.List;
 @Service
 public class RedReplyGoodServiceImpl extends ServiceImpl<RedReplyGoodMapper, RedReplyGood> implements RedReplyGoodService {
     @Override
-    public int updateReplyGoodState(String uid,String qId) {
-        return baseMapper.updateGoodState(uid,qId);
+    public int updateReplyGoodState(String uid,String qId,int type) {
+        return baseMapper.updateGoodState(uid,qId,type);
     }
 
     @Override

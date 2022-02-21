@@ -14,7 +14,7 @@ import java.util.List;
  * @since 2022-02-11
  */
 public interface RedReplyGoodService extends IService<RedReplyGood> {
-    int updateReplyGoodState(String uid,String qId);
+    int updateReplyGoodState(String uid,String qId,int type);
 
     List<RedReplyGood> getUserReplyGoodState(List<String> rIds,String uId);
 

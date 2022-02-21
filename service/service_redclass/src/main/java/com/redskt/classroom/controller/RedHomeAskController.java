@@ -149,12 +149,12 @@ public class RedHomeAskController {
         return R.error("取消点赞失败，请稍后重试哈！");
     }
 
-    @GetMapping("addRelpyGood/{rId}")
+    @GetMapping("updateRelpyGood/{rId}")
     public R addRelpyGood(@PathVariable String rId, HttpServletRequest request) {
         if (rId.length()>0) {
             String uId = TokenManager.getMemberIdByJwtToken(request);
             if (uId.length()>0) {
-                int count = replyGoodService.updateReplyGoodState(uId,rId);
+                int count = replyGoodService.updateReplyGoodState(uId,rId,1);
                 if (count<=0) {
                     RedReplyGood good = new RedReplyGood();
                     good.setRid(rId);
@@ -174,23 +174,65 @@ public class RedHomeAskController {
         return R.error("添加解决标签失败，请稍后重试哈！");
     }
 
-    @GetMapping("cancleRelpyGood/{rId}")
-    public R cancleRelpyGood(@PathVariable String rId, HttpServletRequest request) {
+    @GetMapping("updateRelpyState/{rId}/{type}")
+    public R cancleRelpyGood(@PathVariable String rId, @PathVariable int type,HttpServletRequest request) {
         if (rId.length()>0) {
             String uId = TokenManager.getMemberIdByJwtToken(request);
             if (uId.length()>0) {
-                QueryWrapper<RedReplyGood> goodQueryWrapper = new QueryWrapper<>();
-                goodQueryWrapper.eq("rid", rId);
-                goodQueryWrapper.eq("uid", uId);
-                if(replyGoodService.remove(goodQueryWrapper)) {
-                    replyService.updateReplyGoodCount(false,rId);
-                    return R.ok().data("goodqustion",false);
+                if(type == 1 || type ==2) {
+                    int count = replyGoodService.updateReplyGoodState(uId,rId,type);
+                    if (count<=0) {
+                        RedReplyGood good = new RedReplyGood();
+                        good.setRid(rId);
+                        good.setUid(uId);
+                        good.setType(type);
+                        if(replyGoodService.save(good)) {
+                            if(type == 1) {
+                                replyService.updateReplyGoodCount(true,rId);
+                            } else {
+                                replyService.updateReplyBadCount(true,rId);
+                            }
+                            return R.ok().data("goodqustion", true);
+                        }
+                    } else {
+                        if(type == 1) {
+                            replyService.updateReplyGoodCount(true,rId);
+                        } else {
+                            replyService.updateReplyBadCount(true,rId);
+                        }
+                        return R.ok().data("goodqustion", true);
+                    }
+                } else if(type == 3 || type == 4) {
+                    QueryWrapper<RedReplyGood> goodQueryWrapper = new QueryWrapper<>();
+                    goodQueryWrapper.eq("rid", rId);
+                    goodQueryWrapper.eq("uid", uId);
+                    if(replyGoodService.remove(goodQueryWrapper)) {
+                        if(type == 3) {
+                            replyService.updateReplyGoodCount(false, rId);
+                        } else {
+                            replyService.updateReplyBadCount(false, rId);
+                        }
+
+                        return R.ok().data("goodqustion", false);
+                    }
+                } else if(type == 5) {
+                    int count = replyGoodService.updateReplyGoodState(uId,rId,2);
+                    if (count>0) {
+                        replyService.updateReplyBadCount(true,rId);
+                    }
+                    return R.ok().data("goodqustion", true);
+                } else if(type == 6) {
+                    int count = replyGoodService.updateReplyGoodState(uId,rId,1);
+                    if (count>0) {
+                        replyService.updateReplyGoodCount(true,rId);
+                    }
+                    return R.ok().data("goodqustion", true);
                 }
             } else {
                 return R.error("登录信息异常，请重新登录后尝试！");
             }
         }
-        return R.error("取消解决标签失败，请稍后重试哈！");
+        return R.ok().data("goodqustion", true);
     }
 
     @GetMapping("addRelpyBad/{rId}")
@@ -200,10 +242,11 @@ public class RedHomeAskController {
             if (uId.length()>0) {
                 int count = replyBadService.updateReplyBadState(uId,rId);
                 if (count<=0) {
-                    RedReplyBad good = new RedReplyBad();
+                    RedReplyGood good = new RedReplyGood();
                     good.setRid(rId);
                     good.setUid(uId);
-                    if(replyBadService.save(good)) {
+                    good.setType(2);
+                    if(replyGoodService.save(good)) {
                         replyService.updateReplyGoodCount(true,rId);
                         return R.ok().data("goodqustion", true);
                     }
@@ -242,11 +285,8 @@ public class RedHomeAskController {
         if(rIds.size()>0) {
             String uId = TokenManager.getMemberIdByJwtToken(request);
             if(uId.length()>0) {
-
               List<RedReplyGood> goodList = replyGoodService.getUserReplyGoodState(rIds,uId);
-
               return R.ok().data("goodList",goodList);
-
             }
         }
         return R.ok();

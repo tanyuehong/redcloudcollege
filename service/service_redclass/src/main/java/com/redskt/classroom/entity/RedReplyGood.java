@@ -37,6 +37,9 @@ public class RedReplyGood implements Serializable {
     @ApiModelProperty(value = "问题id")
     private String rid;
 
+    @ApiModelProperty(value = "好问题还是坏问题 1是good 2 bad")
+    private Integer type;
+
     @ApiModelProperty(value = "逻辑删除 1（true）已删除， 0（false）未删除")
     @TableLogic
     private Integer isDeleted;
