@@ -21,8 +21,12 @@ import java.util.List;
 public class RedAskReplyServiceImpl extends ServiceImpl<RedAskReplyMapper, RedAskReply> implements RedAskReplyService {
 
     @Override
-    public List<RedAskReplyVo> getHomeAskReplyList(String qId) {
-        return baseMapper.getQustionReplyList(qId);
+    public List<RedAskReplyVo> getHomeAskReplyList(String qId,int sortType) {
+        if(sortType == 1) {
+            return baseMapper.getQustionReplyList(qId);
+        } else {
+            return baseMapper.getTimeQustionReplyList(qId);
+        }
     }
 
     @Override

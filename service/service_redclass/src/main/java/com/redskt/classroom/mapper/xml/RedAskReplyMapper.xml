@@ -11,6 +11,15 @@
         ORDER BY ask.good DESC limit 10
     </select>
 
+    <select id="getTimeQustionReplyList" resultType="com.redskt.classroom.entity.vo.RedAskReplyVo">
+        SELECT ask.id, ask.qid,ask.content,ask.good,ask.bad,ask.uid,ask.gmt_create, user.nickname as username,
+        user.avatar
+        FROM red_ask_reply ask
+        LEFT OUTER JOIN edu_user user ON ask.uid=user.id
+        WHERE ask.qid=#{qId}
+        ORDER BY ask.gmt_create DESC limit 10
+    </select>
+
     <update id="addReplyGoodCount">
         update red_ask_reply
         set good=good+1
