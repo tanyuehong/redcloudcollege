@@ -4,7 +4,7 @@
 
     <update id="updateGoodState">
         update red_reply_good
-        set is_deleted = 0,type = {#type}
+        set is_deleted = 0,type = #{type}
         where uid = #{uid} and rid = #{rid}
     </update>
 

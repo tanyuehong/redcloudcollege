@@ -46,11 +46,6 @@ public class RedHomeAskController {
     @Autowired
     private RedReplyGoodService replyGoodService;
 
-    @Autowired
-    private RedReplyBadService replyBadService;
-
-
-
     @PostMapping("questionlist")
     public R getHomeQuestionList(@RequestBody Map parameterMap) {
         QueryWrapper<RedAskType> askWarper = new QueryWrapper<>();
@@ -103,75 +98,6 @@ public class RedHomeAskController {
             }
         }
         return R.ok().data("goodqustion",false);
-    }
-
-    @GetMapping("addqGood/{qId}")
-    public R addGood(@PathVariable String qId, HttpServletRequest request) {
-        if (qId.length()>0) {
-            String uId = TokenManager.getMemberIdByJwtToken(request);
-            if (uId.length()>0) {
-                int count = qustionGoodService.updateQustionGoodState(uId,qId);
-                if (count<=0) {
-                    RedQustionGood good = new RedQustionGood();
-                    good.setQid(qId);
-                    good.setUid(uId);
-                    if(qustionGoodService.save(good)) {
-                        userAskService.updateQustionGoodCount(true,qId);
-                        return R.ok().data("goodqustion", true);
-                    }
-                } else {
-                    userAskService.updateQustionGoodCount(true,qId);
-                    return R.ok().data("goodqustion", true);
-                }
-            } else {
-                return R.error("登录信息异常，请重新登录后尝试！");
-            }
-        }
-        return R.error("点赞失败，请稍后重试哈！");
-    }
-
-    @GetMapping("cancleqGood/{qId}")
-    public R cancleGood(@PathVariable String qId, HttpServletRequest request) {
-        if (qId.length()>0) {
-            String uId = TokenManager.getMemberIdByJwtToken(request);
-            if (uId.length()>0) {
-                QueryWrapper<RedQustionGood> goodQueryWrapper = new QueryWrapper<>();
-                goodQueryWrapper.eq("qid", qId);
-                goodQueryWrapper.eq("uid", uId);
-                if(qustionGoodService.remove(goodQueryWrapper)) {
-                    userAskService.updateQustionGoodCount(false,qId);
-                    return R.ok().data("goodqustion",false);
-                }
-            } else {
-                return R.error("登录信息异常，请重新登录后尝试！");
-            }
-        }
-        return R.error("取消点赞失败，请稍后重试哈！");
-    }
-
-    @GetMapping("updateRelpyGood/{rId}")
-    public R addRelpyGood(@PathVariable String rId, HttpServletRequest request) {
-        if (rId.length()>0) {
-            String uId = TokenManager.getMemberIdByJwtToken(request);
-            if (uId.length()>0) {
-                int count = replyGoodService.updateReplyGoodState(uId,rId,1);
-                if (count<=0) {
-                    RedReplyGood good = new RedReplyGood();
-                    good.setRid(rId);
-                    good.setUid(uId);
-                    if(replyGoodService.save(good)) {
-                        replyService.updateReplyGoodCount(true,rId);
-                        return R.ok().data("goodqustion", true);
-                    }
-                } else {
-                    replyService.updateReplyGoodCount(true,rId);
-                    return R.ok().data("goodqustion", true);
-                }
-            } else {
-                return R.error("登录信息异常，请重新登录后尝试！");
-            }
-        }
-        return R.error("添加解决标签失败，请稍后重试哈！");
     }
 
     @GetMapping("updateRelpyState/{rId}/{type}")
@@ -233,51 +159,6 @@ public class RedHomeAskController {
             }
         }
         return R.ok().data("goodqustion", true);
-    }
-
-    @GetMapping("addRelpyBad/{rId}")
-    public R addRelpyBad(@PathVariable String rId, HttpServletRequest request) {
-        if (rId.length()>0) {
-            String uId = TokenManager.getMemberIdByJwtToken(request);
-            if (uId.length()>0) {
-                int count = replyBadService.updateReplyBadState(uId,rId);
-                if (count<=0) {
-                    RedReplyGood good = new RedReplyGood();
-                    good.setRid(rId);
-                    good.setUid(uId);
-                    good.setType(2);
-                    if(replyGoodService.save(good)) {
-                        replyService.updateReplyGoodCount(true,rId);
-                        return R.ok().data("goodqustion", true);
-                    }
-                } else {
-                    replyService.updateReplyBadCount(true,rId);
-                    return R.ok().data("goodqustion", true);
-                }
-            } else {
-                return R.error("登录信息异常，请重新登录后尝试！");
-            }
-        }
-        return R.error("添加无用标签失败，请稍后重试哈！");
-    }
-
-    @GetMapping("cancleRelpyBad/{rId}")
-    public R cancleRelpyBad(@PathVariable String rId, HttpServletRequest request) {
-        if (rId.length()>0) {
-            String uId = TokenManager.getMemberIdByJwtToken(request);
-            if (uId.length()>0) {
-                QueryWrapper<RedReplyBad> goodQueryWrapper = new QueryWrapper<>();
-                goodQueryWrapper.eq("rid", rId);
-                goodQueryWrapper.eq("uid", uId);
-                if(replyBadService.remove(goodQueryWrapper)) {
-                    replyService.updateReplyBadCount(false,rId);
-                    return R.ok().data("goodqustion",false);
-                }
-            } else {
-                return R.error("登录信息异常，请重新登录后尝试！");
-            }
-        }
-        return R.error("取消无用标签失败，请稍后重试哈！");
     }
 
     @PostMapping("getUserGoodState")
