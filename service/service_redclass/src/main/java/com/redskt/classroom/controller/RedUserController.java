@@ -42,7 +42,7 @@ public class RedUserController {
 
         //1 根据订单号查询订单信息
         QueryWrapper<RedClassUser> wrapper = new QueryWrapper<>();
-        wrapper.select("id","username", "nickname","sex","age","avatar","position","perpage","company","perintroduction");
+        wrapper.select("id","username", "nickname","sex","age","avatar","sign","position","perpage","company","perintroduction");
         wrapper.eq("username",username);
 
         RedClassUser eduUser = userService.getOne(wrapper);
