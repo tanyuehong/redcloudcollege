@@ -4,7 +4,9 @@ package com.redskt.classroom.controller;
 import com.qiniu.util.Auth;
 import com.redskt.classroom.entity.EduUserAsk;
 import com.redskt.classroom.entity.RedAskReply;
+import com.redskt.classroom.entity.RedAskReplyComment;
 import com.redskt.classroom.service.EduUserAskService;
+import com.redskt.classroom.service.RedAskReplyCommentService;
 import com.redskt.classroom.service.RedAskReplyService;
 import com.redskt.commonutils.R;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,22 +31,34 @@ public class EduUserAskController {
     @Autowired
     private RedAskReplyService replyService;
 
+    @Autowired
+    private RedAskReplyCommentService commentService;
+
     @PostMapping("submit")
     public R registerUser(@RequestBody EduUserAsk userAsk) {
         if (userAskService.saveUserAsk(userAsk)) {
             return R.ok();
         } else  {
-            return R.error("报错问题信息失败");
+            return R.error("问题提交失败，请重新尝试！");
         }
     }
-
 
     @PostMapping("submitReply")
     public R registerUser(@RequestBody RedAskReply reply) {
         if (replyService.save(reply)) {
             return R.ok();
         } else  {
-            return R.error("报错问题信息失败");
+            return R.error("回答提交失败，请重新尝试！");
+        }
+    }
+
+    @PostMapping("submitReplyComment")
+    public R registerUser(@RequestBody RedAskReplyComment replyComment) {
+        replyComment.setGood(0);
+        if (commentService.save(replyComment)) {
+            return R.ok();
+        } else  {
+            return R.error("评论回答失败，请重新尝试！");
         }
     }
 

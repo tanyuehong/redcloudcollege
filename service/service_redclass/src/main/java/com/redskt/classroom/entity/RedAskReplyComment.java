@@ -35,11 +35,11 @@ public class RedAskReplyComment implements Serializable {
 
     private String uid;
 
+    private String rid;
+
     private String content;
 
     private Integer good;
-
-    private Integer bad;
 
     @ApiModelProperty(value = "创建时间")
     @TableField(fill = FieldFill.INSERT)
