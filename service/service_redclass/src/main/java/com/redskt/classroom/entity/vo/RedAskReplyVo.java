@@ -1,8 +1,10 @@
 package com.redskt.classroom.entity.vo;
 
+import com.redskt.classroom.entity.RedAskReplyComment;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class RedAskReplyVo {
@@ -14,6 +16,8 @@ public class RedAskReplyVo {
     private String qid;
 
     private String content;
+
+    private List<RedAskReplyComment> comments;
 
     private Integer good;
 

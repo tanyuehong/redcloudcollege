@@ -2,29 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.redskt.classroom.mapper.RedAskReplyMapper">
 
-    <resultMap id="commentMap" type="com.rhaegal.Vo.CommentVo">
-        <id column="commentId" property="id"/>
-        <result column="commentContent" property="content"/>
-        <result column="commentDate" property="date"/>
-        <result column="replyCount" property="replyCount"/>
-        <result column="commentUserId" property="userId"/>
-        <result column="commentUserNickname" property="nickname"/>
-        <result column="commentUserAvatar" property="avatar"/>
-        <collection column="reply" property="replies" resultMap="replyMap">
-            <id column="replyId" property="id"/>
+    <resultMap id="replyMap" type="com.redskt.classroom.entity.vo.RedAskReplyVo">
+        <collection column="reply" property="replies" resultMap="commentMap">
         </collection>
     </resultMap>
 
-    <resultMap id="replyMap" type="com.rhaegal.Vo.ReplyVo">
-        <id column="replyId" property="id"/>
-        <result column="replyContent" property="content"/>
-        <result column="replyDate" property="date"/>
-        <result column="fromUserId" property="fromUserId"/>
-        <result column="fromUserNickname" property="fromUserNickname"/>
-        <result column="fromUserAvatar" property="fromUserAvatar"/>
-        <result column="toUserId" property="toUserId"/>
-        <result column="toUserNickname" property="toUserNickname"/>
-        <result column="toUserAvatar" property="toUserAvatar"/>
+    <resultMap id="commentMap" type="com.rhaegal.Vo.ReplyVo">
     </resultMap>
 
     <select id="getQustionReplyList" resultType="com.redskt.classroom.entity.vo.RedAskReplyVo">
@@ -32,8 +15,17 @@
         user.avatar
         FROM red_ask_reply ask
         LEFT OUTER JOIN edu_user user ON ask.uid=user.id
-        WHERE ask.qid=#{qId}
-        ORDER BY ask.good DESC limit 10
+        left join red_ask_reply_comment on ask.id = red_ask_reply_comment.comment_id
+        WHERE ask.id in (select id
+                             from (select id
+                                   from red_ask_reply subask
+                                   /* 评论的状态判断要在这里做 */
+                                   where subask.qid=#{qId}
+                                   order by date asc limit #{param2}, #{param3}) as ask_id_list)
+                                   and #{param4} > (select count(*)
+                                   from red_ask_reply_comment comment
+                   where comment.id = red_ask_reply_comment.id and comment.id > red_ask_reply_comment.id)
+                   ORDER BY ask.good DESC 
     </select>
 
     <select id="getTimeQustionReplyList" resultType="com.redskt.classroom.entity.vo.RedAskReplyVo">
