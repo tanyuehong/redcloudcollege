@@ -23,7 +23,7 @@ public class RedAskReplyServiceImpl extends ServiceImpl<RedAskReplyMapper, RedAs
     @Override
     public List<RedAskReplyVo> getHomeAskReplyList(String qId,int sortType) {
         if(sortType == 1) {
-            return baseMapper.getQustionReplyList(qId);
+            return baseMapper.getQustionReplyList(qId,6);
         } else {
             return baseMapper.getTimeQustionReplyList(qId);
         }

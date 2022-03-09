@@ -3,29 +3,33 @@
 <mapper namespace="com.redskt.classroom.mapper.RedAskReplyMapper">
 
     <resultMap id="replyMap" type="com.redskt.classroom.entity.vo.RedAskReplyVo">
-        <collection column="reply" property="replies" resultMap="commentMap">
+        <id column="id" property="id"/>
+        <id column="qid" property="qid"/>
+        <id column="good" property="good"/>
+        <id column="bad" property="bad"/>
+        <id column="uid" property="uid"/>
+        <id column="username" property="username"/>
+        <id column="avatar" property="avatar"/>
+        <id column="content" property="content"/>
+        <id column="gmt_create" property="gmtCreate"/>
+        <collection property="comments" resultMap="commentMap">
         </collection>
     </resultMap>
 
-    <resultMap id="commentMap" type="com.rhaegal.Vo.ReplyVo">
+    <resultMap id="commentMap" type="com.redskt.classroom.entity.vo.ReplyCommentVo">
+        <id column="replyId" property="id"/>
+        <id column="ccontent" property="content"/>
+        <result column="replyContent" property="content"/>
     </resultMap>
 
-    <select id="getQustionReplyList" resultType="com.redskt.classroom.entity.vo.RedAskReplyVo">
-        SELECT ask.id, ask.qid,ask.content,ask.good,ask.bad,ask.uid,ask.gmt_create, user.nickname as username,
-        user.avatar
-        FROM red_ask_reply ask
-        LEFT OUTER JOIN edu_user user ON ask.uid=user.id
-        left join red_ask_reply_comment on ask.id = red_ask_reply_comment.comment_id
-        WHERE ask.id in (select id
-                             from (select id
-                                   from red_ask_reply subask
-                                   /* 评论的状态判断要在这里做 */
-                                   where subask.qid=#{qId}
-                                   order by date asc limit #{param2}, #{param3}) as ask_id_list)
-                                   and #{param4} > (select count(*)
-                                   from red_ask_reply_comment comment
-                   where comment.id = red_ask_reply_comment.id and comment.id > red_ask_reply_comment.id)
-                   ORDER BY ask.good DESC 
+    <select id="getQustionReplyList" resultMap="replyMap">
+        SELECT reply.id, reply.qid,reply.content,reply.good,reply.bad,reply.uid,reply.gmt_create, ruser.nickname as username,
+        ruser.avatar, rcomment.id as replyId,rcomment.content as replyContent, rcomment.id as replyId, rcomment.content as ccontent
+        FROM red_ask_reply reply
+        LEFT JOIN edu_user ruser on reply.uid = ruser.id
+        LEFT JOIN ( SELECT * FROM red_ask_reply_comment ORDER BY gmt_create ASC LIMIT 2) as rcomment on  rcomment.rid = reply.id
+        WHERE  reply.id in (SELECT id FROM  (SELECT id FROM red_ask_reply WHERE qid = #{qId} LIMIT #{size} ) as subreply )
+        ORDER BY reply.good DESC
     </select>
 
     <select id="getTimeQustionReplyList" resultType="com.redskt.classroom.entity.vo.RedAskReplyVo">
@@ -60,6 +64,5 @@
         set bad=bad-1
         where id = #{rid}
     </update>
-
 
 </mapper>

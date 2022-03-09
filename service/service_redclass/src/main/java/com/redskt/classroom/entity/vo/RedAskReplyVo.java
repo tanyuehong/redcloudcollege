@@ -17,7 +17,7 @@ public class RedAskReplyVo {
 
     private String content;
 
-    private List<RedAskReplyComment> comments;
+    private List<ReplyCommentVo> comments;
 
     private Integer good;
 
