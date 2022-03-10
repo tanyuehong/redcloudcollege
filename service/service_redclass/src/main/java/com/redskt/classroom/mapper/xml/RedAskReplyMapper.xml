@@ -43,10 +43,10 @@
                           FROM red_ask_reply
                           WHERE qid = #{qId}
                           <if test="type == 1">
-                             ORDER BY reply.good DESC
+                             ORDER BY red_ask_reply.good DESC
                           </if>
                           <if test="type == 2">
-                             ORDER BY reply.gmt_create DESC
+                             ORDER BY red_ask_reply.gmt_create DESC
                           </if>
                           LIMIT #{size} ) as subreply )
     </select>
@@ -66,10 +66,10 @@
         FROM red_ask_reply
         WHERE qid = #{qId}
         <if test="type == 1">
-            ORDER BY reply.good DESC
+            ORDER BY red_ask_reply.good DESC
         </if>
         <if test="type == 2">
-            ORDER BY reply.gmt_create DESC
+            ORDER BY red_ask_reply.gmt_create DESC
         </if>
         LIMIT #{size} ) as subreply )
     </select>
