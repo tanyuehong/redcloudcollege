@@ -19,15 +19,24 @@
     <resultMap id="commentMap" type="com.redskt.classroom.entity.vo.ReplyCommentVo">
         <id column="replyId" property="id"/>
         <id column="ccontent" property="content"/>
-        <result column="replyContent" property="content"/>
+        <id column="crid" property="rid"/>
+        <id column="cuid" property="uid"/>
+        <id column="touid" property="touid"/>
+        <id column="cname" property="name"/>
+        <id column="tname" property="toname"/>
+        <id column="cavatar" property="avatar"/>
+        <id column="cgmt_create" property="gmtCreate"/>
     </resultMap>
 
     <select id="getQustionReplyList" resultMap="replyMap">
         SELECT reply.id, reply.qid,reply.content,reply.good,reply.bad,reply.uid,reply.gmt_create, ruser.nickname as username,
-        ruser.avatar, rcomment.id as replyId,rcomment.content as replyContent, rcomment.id as replyId, rcomment.content as ccontent
+        ruser.avatar, rcomment.id as replyId,rcomment.content as replyContent, rcomment.id as replyId, rcomment.content as ccontent,
+        rcomment.rid as crid,rcomment.uid as cuid,rcomment.touid,rcomment.gmt_create as cgmt_create,cuser.nickname as cname,cuser.avatar as cavatar,tuser.nickname as tname
         FROM red_ask_reply reply
         LEFT JOIN edu_user ruser on reply.uid = ruser.id
         LEFT JOIN ( SELECT * FROM red_ask_reply_comment ORDER BY gmt_create ASC LIMIT 2) as rcomment on  rcomment.rid = reply.id
+        LEFT JOIN edu_user cuser on rcomment.uid = cuser.id
+        LEFT JOIN edu_user tuser on rcomment.touid = tuser.id
         WHERE  reply.id in (SELECT id FROM  (SELECT id FROM red_ask_reply WHERE qid = #{qId} LIMIT #{size} ) as subreply )
         ORDER BY reply.good DESC
     </select>

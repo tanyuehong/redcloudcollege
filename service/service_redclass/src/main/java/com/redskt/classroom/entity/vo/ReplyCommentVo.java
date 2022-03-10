@@ -12,24 +12,20 @@ public class ReplyCommentVo {
 
     private String id;
 
+    private String rid;
+
     private String content;
 
-    /*
     private String uid;
+
+    private String name;
 
     private String touid;
 
     private String toname;
 
-    private String toaverta;
+    private String avatar;
 
-    private String rid;
+    private Date gmtCreate;
 
-
-
-    private Integer good;
-
-    private Date date;
-
-     */
 }
