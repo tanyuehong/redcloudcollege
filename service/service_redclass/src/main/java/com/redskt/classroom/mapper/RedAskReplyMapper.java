@@ -17,9 +17,7 @@ import java.util.List;
  */
 public interface RedAskReplyMapper extends BaseMapper<RedAskReply> {
 
-    List<RedAskReplyVo> getQustionReplyList(@Param("qId")  String qId,@Param("size") Integer size);
-
-    List<RedAskReplyVo> getTimeQustionReplyList(@Param("qId")  String qId);
+    List<RedAskReplyVo> getQustionReplyList(@Param("qId")  String qId,@Param("size") Integer size,@Param("csize") Integer csize,@Param("type") Integer type);
 
     int addReplyGoodCount(@Param("rid")  String qId);
 
