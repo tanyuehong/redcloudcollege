@@ -24,6 +24,8 @@ public class ReplyCommentVo {
 
     private String toname;
 
+    private boolean showeditor;
+
     private String avatar;
 
     private Date gmtCreate;
