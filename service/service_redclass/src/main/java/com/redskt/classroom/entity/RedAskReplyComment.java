@@ -35,6 +35,8 @@ public class RedAskReplyComment implements Serializable {
 
     private String uid;
 
+    private String touid;
+
     private String rid;
 
     private String content;
