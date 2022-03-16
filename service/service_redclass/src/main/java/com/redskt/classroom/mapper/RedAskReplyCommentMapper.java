@@ -2,6 +2,8 @@ package com.redskt.classroom.mapper;
 
 import com.redskt.classroom.entity.RedAskReplyComment;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.redskt.classroom.entity.vo.ReplyCommentVo;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -12,5 +14,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2022-01-21
  */
 public interface RedAskReplyCommentMapper extends BaseMapper<RedAskReplyComment> {
-
+    ReplyCommentVo getUerCommentOne(@Param("uid")  String uId);
 }

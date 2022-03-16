@@ -2,6 +2,8 @@ package com.redskt.classroom.service;
 
 import com.redskt.classroom.entity.RedAskReplyComment;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.redskt.classroom.entity.vo.ReplyCommentVo;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -12,5 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2022-01-21
  */
 public interface RedAskReplyCommentService extends IService<RedAskReplyComment> {
-
+    ReplyCommentVo getUerCommentOne(String uId);
 }

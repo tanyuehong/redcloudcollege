@@ -5,6 +5,7 @@ import com.qiniu.util.Auth;
 import com.redskt.classroom.entity.EduUserAsk;
 import com.redskt.classroom.entity.RedAskReply;
 import com.redskt.classroom.entity.RedAskReplyComment;
+import com.redskt.classroom.entity.vo.ReplyCommentVo;
 import com.redskt.classroom.service.EduUserAskService;
 import com.redskt.classroom.service.RedAskReplyCommentService;
 import com.redskt.classroom.service.RedAskReplyService;
@@ -56,7 +57,8 @@ public class EduUserAskController {
     public R registerUser(@RequestBody RedAskReplyComment replyComment) {
         replyComment.setGood(0);
         if (commentService.save(replyComment)) {
-            return R.ok();
+            ReplyCommentVo myComment = commentService.getUerCommentOne(replyComment.getUid());
+            return R.ok().data("comment",myComment);
         } else  {
             return R.error("评论回答失败，请重新尝试！");
         }
