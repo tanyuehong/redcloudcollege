@@ -26,4 +26,16 @@
         LIMIT 1
     </select>
 
+    <update id="addReplyCommentGoodCount">
+        update red_ask_reply_comment
+        set good=good+1
+        where id = #{cid}
+    </update>
+
+    <update id="prepReplyCommentGoodCount">
+        update red_ask_reply_comment
+        set good=good-1
+        where id = #{cid}
+    </update>
+
 </mapper>

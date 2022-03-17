@@ -15,4 +15,8 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface RedAskReplyCommentMapper extends BaseMapper<RedAskReplyComment> {
     ReplyCommentVo getUerCommentOne(@Param("uid")  String uId);
+
+    int addReplyCommentGoodCount(@Param("cid")  String cId);
+
+    int prepReplyCommentGoodCount(@Param("cid")  String cId);
 }

@@ -21,4 +21,13 @@ public class RedAskReplyCommentServiceImpl extends ServiceImpl<RedAskReplyCommen
     public ReplyCommentVo getUerCommentOne(String uId) {
         return  baseMapper.getUerCommentOne(uId);
     }
+
+    @Override
+    public int updateReplyCommentGoodCount(boolean isAdd,String cId) {
+        if(isAdd) {
+            return baseMapper.addReplyCommentGoodCount(cId);
+        } else {
+            return baseMapper.prepReplyCommentGoodCount(cId);
+        }
+    }
 }

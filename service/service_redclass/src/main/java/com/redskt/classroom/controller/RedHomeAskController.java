@@ -46,6 +46,12 @@ public class RedHomeAskController {
     @Autowired
     private RedReplyGoodService replyGoodService;
 
+    @Autowired
+    private RedReplyCommentGoodService replyCGoodService;
+
+    @Autowired
+    private RedAskReplyCommentService commentService;
+
     @PostMapping("questionlist")
     public R getHomeQuestionList(@RequestBody Map parameterMap) {
         QueryWrapper<RedAskType> askWarper = new QueryWrapper<>();
@@ -121,6 +127,31 @@ public class RedHomeAskController {
                     }
                 } else {
                     userAskService.updateQustionGoodCount(true, qId);
+                    return R.ok().data("goodqustion", true);
+                }
+            } else {
+                return R.error("登录信息异常，请重新登录后尝试！");
+            }
+        }
+        return R.error("点赞失败，请稍后重试哈！");
+    }
+
+    @GetMapping("addCGood/{qId}")
+    public R addCGood(@PathVariable String cId, HttpServletRequest request) {
+        if (cId.length() > 0) {
+            String uId = TokenManager.getMemberIdByJwtToken(request);
+            if (uId.length() > 0) {
+                int count = replyCGoodService.updateReplyCommentGoodState(uId, cId);
+                if (count <= 0) {
+                    RedReplyCommentGood good = new RedReplyCommentGood();
+                    good.setCid(cId);
+                    good.setUid(uId);
+                    if (replyCGoodService.save(good)) {
+                        commentService.updateReplyCommentGoodCount(true, cId);
+                        return R.ok().data("goodqustion", true);
+                    }
+                } else {
+                    commentService.updateReplyCommentGoodCount(true, cId);
                     return R.ok().data("goodqustion", true);
                 }
             } else {
