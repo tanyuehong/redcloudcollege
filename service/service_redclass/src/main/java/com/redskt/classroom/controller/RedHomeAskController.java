@@ -136,7 +136,26 @@ public class RedHomeAskController {
         return R.error("点赞失败，请稍后重试哈！");
     }
 
-    @GetMapping("addCGood/{qId}")
+    @GetMapping("cancleqGood/{qId}")
+    public R cancleGood(@PathVariable String qId, HttpServletRequest request) {
+        if (qId.length() > 0) {
+            String uId = TokenManager.getMemberIdByJwtToken(request);
+            if (uId.length() > 0) {
+                QueryWrapper<RedQustionGood> goodQueryWrapper = new QueryWrapper<>();
+                goodQueryWrapper.eq("qid", qId);
+                goodQueryWrapper.eq("uid", uId);
+                if (qustionGoodService.remove(goodQueryWrapper)) {
+                    userAskService.updateQustionGoodCount(false, qId);
+                    return R.ok().data("goodqustion", false);
+                }
+            } else {
+                return R.error("登录信息异常，请重新登录后尝试！");
+            }
+        }
+        return R.error("取消点赞失败，请稍后重试哈！");
+    }
+
+    @GetMapping("addCGood/{cId}")
     public R addCGood(@PathVariable String cId, HttpServletRequest request) {
         if (cId.length() > 0) {
             String uId = TokenManager.getMemberIdByJwtToken(request);
@@ -161,16 +180,16 @@ public class RedHomeAskController {
         return R.error("点赞失败，请稍后重试哈！");
     }
 
-    @GetMapping("cancleqGood/{qId}")
-    public R cancleGood(@PathVariable String qId, HttpServletRequest request) {
-        if (qId.length() > 0) {
+    @GetMapping("canclecGood/{cId}")
+    public R canclecGood(@PathVariable String cId, HttpServletRequest request) {
+        if (cId.length() > 0) {
             String uId = TokenManager.getMemberIdByJwtToken(request);
             if (uId.length() > 0) {
-                QueryWrapper<RedQustionGood> goodQueryWrapper = new QueryWrapper<>();
-                goodQueryWrapper.eq("qid", qId);
+                QueryWrapper<RedReplyCommentGood> goodQueryWrapper = new QueryWrapper<>();
+                goodQueryWrapper.eq("cid", cId);
                 goodQueryWrapper.eq("uid", uId);
-                if (qustionGoodService.remove(goodQueryWrapper)) {
-                    userAskService.updateQustionGoodCount(false, qId);
+                if (replyCGoodService.remove(goodQueryWrapper)) {
+                    commentService.updateReplyCommentGoodCount(false, cId);
                     return R.ok().data("goodqustion", false);
                 }
             } else {

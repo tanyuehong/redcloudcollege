@@ -7,6 +7,7 @@
         <id column="ccontent" property="content"/>
         <id column="crid" property="rid"/>
         <id column="cuid" property="uid"/>
+        <id column="good" property="good"/>
         <id column="touid" property="touid"/>
         <id column="cname" property="name"/>
         <id column="tname" property="toname"/>
@@ -16,7 +17,7 @@
 
 
     <select id="getUerCommentOne" resultMap="commentMapOne">
-        SELECT  rcomment.id as replyId,rcomment.content as replyContent, rcomment.id as replyId, rcomment.content as ccontent,
+        SELECT  rcomment.id as replyId,rcomment.content as replyContent, rcomment.id as replyId, rcomment.content as ccontent,rcomment.good,
         rcomment.rid as crid,rcomment.uid as cuid,rcomment.touid,rcomment.gmt_create as cgmt_create,cuser.nickname as cname,cuser.avatar as cavatar,tuser.nickname as tname
         FROM red_ask_reply_comment rcomment
         LEFT JOIN edu_user cuser on rcomment.uid = cuser.id

@@ -5,7 +5,7 @@
     <update id="updateCommentGoodState">
         update red_reply_comment_good
         set is_deleted = 0
-        where uid = #{uid} and rid = #{cid}
+        where uid = #{uid} and cid = #{cid}
     </update>
 
 </mapper>
