@@ -12,6 +12,7 @@
         <id column="cname" property="name"/>
         <id column="tname" property="toname"/>
         <id column="cavatar" property="avatar"/>
+
         <id column="cgmt_create" property="gmtCreate"/>
     </resultMap>
 
