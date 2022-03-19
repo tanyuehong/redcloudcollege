@@ -39,7 +39,7 @@
         LEFT JOIN (
         SELECT myc.id,myc.content,myc.good,myc.rid,myc.uid,myc.touid,myc.gmt_create,!isnull(ccgood.id) as goodc
         FROM red_ask_reply_comment myc
-        LEFT JOIN red_reply_comment_good ccgood on myc.uid = ccgood.uid and myc.id = ccgood.cid
+        LEFT JOIN red_reply_comment_good ccgood on myc.uid = ccgood.uid and myc.id = ccgood.cid and ccgood.is_deleted = 0
         ORDER BY gmt_create,goodc DESC LIMIT #{csize} ) as rcomment on  rcomment.rid = reply.id
         LEFT JOIN edu_user cuser on rcomment.uid = cuser.id
         LEFT JOIN edu_user tuser on rcomment.touid = tuser.id

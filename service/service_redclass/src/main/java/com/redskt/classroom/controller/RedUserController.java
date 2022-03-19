@@ -38,12 +38,12 @@ public class RedUserController {
     @GetMapping("getUserInfo")
     public R getMemberInfo(HttpServletRequest request) {
         //调用jwt工具类的方法。根据request对象获取头信息，返回用户id
-        String username = TokenManager.getMemberIdByJwtToken(request);
+        String uid = TokenManager.getMemberIdByJwtToken(request);
 
         //1 根据订单号查询订单信息
         QueryWrapper<RedClassUser> wrapper = new QueryWrapper<>();
         wrapper.select("id","username", "nickname","sex","age","avatar","position","perpage","company","perintroduction");
-        wrapper.eq("username",username);
+        wrapper.eq("id",uid);
 
         RedClassUser eduUser = userService.getOne(wrapper);
         if (eduUser != null && eduUser.getSign()==null) {

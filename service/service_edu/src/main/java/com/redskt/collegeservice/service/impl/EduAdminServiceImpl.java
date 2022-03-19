@@ -55,7 +55,7 @@ public class EduAdminServiceImpl implements EduAdminService {
 
         //根据用户id获取操作权限值
         List<String> permissionValueList = permissionService.selectPermissionValueByUserId(user.getId());
-        redisTemplate.opsForValue().set(username, permissionValueList);
+        redisTemplate.opsForValue().set(user.getId(), permissionValueList);
 
         result.put("name", user.getUsername());
         result.put("avatar", "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
