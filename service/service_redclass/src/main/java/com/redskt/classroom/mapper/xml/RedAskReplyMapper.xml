@@ -43,6 +43,7 @@
         ORDER BY gmt_create,goodc DESC LIMIT #{csize} ) as rcomment on  rcomment.rid = reply.id
         LEFT JOIN edu_user cuser on rcomment.uid = cuser.id
         LEFT JOIN edu_user tuser on rcomment.touid = tuser.id
+        LEFT JOIN
 
         WHERE  reply.id in
                ( SELECT id FROM
