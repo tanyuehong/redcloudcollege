@@ -2,13 +2,9 @@ package com.redskt.classroom.controller;
 
 
 import com.qiniu.util.Auth;
-import com.redskt.classroom.entity.EduUserAsk;
-import com.redskt.classroom.entity.RedAskReply;
-import com.redskt.classroom.entity.RedAskReplyComment;
+import com.redskt.classroom.entity.*;
 import com.redskt.classroom.entity.vo.ReplyCommentVo;
-import com.redskt.classroom.service.EduUserAskService;
-import com.redskt.classroom.service.RedAskReplyCommentService;
-import com.redskt.classroom.service.RedAskReplyService;
+import com.redskt.classroom.service.*;
 import com.redskt.commonutils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/eduask")
 @CrossOrigin(allowCredentials="true",maxAge = 3600)
-public class EduUserAskController {
+public class RedUserAskController {
 
     @Autowired
     private EduUserAskService userAskService;
@@ -34,6 +30,12 @@ public class EduUserAskController {
 
     @Autowired
     private RedAskReplyCommentService commentService;
+
+    @Autowired
+    private RedAskAdviseService adviseService;
+
+    @Autowired
+    private RedAskWaringService waringService;
 
     @PostMapping("submit")
     public R registerUser(@RequestBody EduUserAsk userAsk) {
@@ -54,13 +56,35 @@ public class EduUserAskController {
     }
 
     @PostMapping("submitReplyComment")
-    public R registerUser(@RequestBody RedAskReplyComment replyComment) {
+    public R submitReplyComment(@RequestBody RedAskReplyComment replyComment) {
         replyComment.setGood(0);
         if (commentService.save(replyComment)) {
             ReplyCommentVo myComment = commentService.getUerCommentOne(replyComment.getUid());
             return R.ok().data("comment",myComment);
         } else  {
             return R.error("评论回答失败，请重新尝试！");
+        }
+    }
+
+    @PostMapping("submitAdvise")
+    public R submitAdvise(@RequestBody RedAskAdvise advise) {
+        int count = adviseService.updateQustionAdvise(advise.getQid(),advise.getUid(),advise.getType(),advise.getContent());
+        if (count >0) {
+            return R.ok();
+        } else {
+            adviseService.save(advise);
+            return R.ok();
+        }
+    }
+
+    @PostMapping("submitWaring")
+    public R submitAdvise(@RequestBody RedAskWaring uwaring) {
+        int count = waringService.updateContentWarling(uwaring.getWid(),uwaring.getUid(),uwaring.getType(),uwaring.getContent());
+        if (count>0) {
+            return R.ok().data("tips","ok");
+        } else  {
+            waringService.save(uwaring);
+            return R.ok().data("tips","ok");
         }
     }
 

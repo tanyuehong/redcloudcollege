@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.redskt.classroom.mapper.RedAskAdviseMapper">
+
+    <update id="updateQustionAdvise">
+        update red_ask_advise
+        set is_deleted = 0,content = #{content},type = #{type}
+        where uid = #{uid} and qid = #{qid}
+    </update>
+</mapper>
