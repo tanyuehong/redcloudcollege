@@ -16,5 +16,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class RedAskWaringServiceImpl extends ServiceImpl<RedAskWaringMapper, RedAskWaring> implements RedAskWaringService {
-
+    @Override
+    public  int updateContentWarling(String wId, String uId,int type,String content) {
+        return baseMapper.updateContentWarling(wId,uId,type,content);
+    }
 }
