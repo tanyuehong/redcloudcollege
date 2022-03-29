@@ -4,7 +4,7 @@
 
     <update id="updateQustionAdvise">
         update red_ask_advise
-        set is_deleted = 0,content = #{content},type = #{type}
+        set content = #{content},type = #{type}
         where uid = #{uid} and qid = #{qid}
     </update>
 </mapper>

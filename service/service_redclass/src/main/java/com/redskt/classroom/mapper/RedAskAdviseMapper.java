@@ -13,5 +13,5 @@ import org.apache.ibatis.annotations.Param;
  * @since 2022-03-25
  */
 public interface RedAskAdviseMapper extends BaseMapper<RedAskAdvise> {
-    int updateQustionAdvise(@Param("wid")  String wId,@Param("uid")  String uId,@Param("type")  int type,@Param("content")  String content);
+    int updateQustionAdvise(@Param("qid")  String wId,@Param("uid")  String uId,@Param("type")  int type,@Param("content")  String content);
 }
