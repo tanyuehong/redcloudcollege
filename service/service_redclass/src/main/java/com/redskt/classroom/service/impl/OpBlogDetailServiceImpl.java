@@ -25,4 +25,9 @@ public class OpBlogDetailServiceImpl extends ServiceImpl<OpBlogDetailMapper, OpB
             return baseMapper.prepBlogGoodCount(bid);
         }
     }
+
+    @Override
+    public int updateReadCount(String bid) {
+        return baseMapper.updateReadCount(bid);
+    }
 }

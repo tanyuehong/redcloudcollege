@@ -13,4 +13,10 @@
         where id = #{bid}
     </update>
 
+    <update id="updateReadCount">
+        update op_blog_detail
+        set  view_count=view_count+1
+        where id = #{bid}
+    </update>
+
 </mapper>

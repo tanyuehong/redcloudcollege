@@ -13,4 +13,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface OpBlogDetailService extends IService<OpBlogDetail> {
     int updateBlogGoodCount(boolean isAdd,String bid);
+
+    int updateReadCount(String bid);
 }

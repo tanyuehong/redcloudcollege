@@ -87,6 +87,7 @@ public class OpBlogController {
     @GetMapping("good/{praticeId}")
     public R getGoodState(@PathVariable String praticeId, HttpServletRequest request) {
         if (praticeId.length()>0) {
+            blogService.updateReadCount(praticeId);
             String uId = TokenManager.getMemberIdByJwtToken(request);
             if (uId.length()>0) {
                 QueryWrapper<RedBlogGood> goodQueryWrapper = new QueryWrapper<>();

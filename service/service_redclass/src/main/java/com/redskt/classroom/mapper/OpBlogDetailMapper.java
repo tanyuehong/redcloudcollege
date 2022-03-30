@@ -16,4 +16,6 @@ public interface OpBlogDetailMapper extends BaseMapper<OpBlogDetail> {
     int addBlogGoodCount(@Param("bid")  String bid);
 
     int prepBlogGoodCount(@Param("bid")  String bid);
+
+    int updateReadCount(@Param("bid")  String bid);
 }
