@@ -1,12 +1,10 @@
 package com.redskt.classroom.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
-import java.util.Date;
+import com.baomidou.mybatisplus.annotation.*;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
+import java.util.Date;
 import java.io.Serializable;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -19,37 +17,36 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author tanyuehong
- * @since 2022-01-21
+ * @since 2022-03-17
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="RedAskReplyComment对象", description="")
-public class RedAskReplyComment implements Serializable {
+@ApiModel(value="RedReplyCommentGood对象", description="")
+public class RedReplyCommentGood implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "问题id")
+    @ApiModelProperty(value = "id")
     @TableId(value = "id", type = IdType.ID_WORKER_STR)
     private String id;
 
+    @ApiModelProperty(value = "用户id")
     private String uid;
 
-    private String touid;
+    @ApiModelProperty(value = "问题id")
+    private String cid;
 
-    private String rid;
-
-    private String content;
-
-    private Integer good;
+    @ApiModelProperty(value = "逻辑删除 1（true）已删除， 0（false）未删除")
+    @TableLogic
+    private Integer isDeleted;
 
     @ApiModelProperty(value = "创建时间")
     @TableField(fill = FieldFill.INSERT)
     private Date gmtCreate;
 
-    @ApiModelProperty(value = "更新时间")
+    @ApiModelProperty(value = "修改时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date gmtModified;
-
 
 }

@@ -19,29 +19,32 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author tanyuehong
- * @since 2022-01-21
+ * @since 2022-03-25
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="RedAskReplyComment对象", description="")
-public class RedAskReplyComment implements Serializable {
+@ApiModel(value="RedAskWaring对象", description="")
+public class RedAskWaring implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "问题id")
+    @ApiModelProperty(value = "回复id")
     @TableId(value = "id", type = IdType.ID_WORKER_STR)
     private String id;
 
+    @ApiModelProperty(value = "举报得id")
+    private String wid;
+
     private String uid;
-
-    private String touid;
-
-    private String rid;
 
     private String content;
 
-    private Integer good;
+    @ApiModelProperty(value = "举报类型")
+    private String jubaotype;
+
+    @ApiModelProperty(value = "类型")
+    private Integer type;
 
     @ApiModelProperty(value = "创建时间")
     @TableField(fill = FieldFill.INSERT)

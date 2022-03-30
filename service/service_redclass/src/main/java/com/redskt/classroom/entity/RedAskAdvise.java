@@ -1,12 +1,10 @@
 package com.redskt.classroom.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
-import java.util.Date;
+import com.baomidou.mybatisplus.annotation.*;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
+import java.util.Date;
 import java.io.Serializable;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -19,29 +17,32 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author tanyuehong
- * @since 2022-01-21
+ * @since 2022-03-25
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="RedAskReplyComment对象", description="")
-public class RedAskReplyComment implements Serializable {
+@ApiModel(value="RedAskAdvise对象", description="")
+public class RedAskAdvise implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "问题id")
+    @ApiModelProperty(value = "回复id")
     @TableId(value = "id", type = IdType.ID_WORKER_STR)
     private String id;
 
+    @ApiModelProperty(value = "问题id")
+    private String qid;
+
     private String uid;
-
-    private String touid;
-
-    private String rid;
 
     private String content;
 
-    private Integer good;
+    @ApiModelProperty(value = "类型名字")
+    private String typename;
+
+    @ApiModelProperty(value = "类型")
+    private Integer type;
 
     @ApiModelProperty(value = "创建时间")
     @TableField(fill = FieldFill.INSERT)

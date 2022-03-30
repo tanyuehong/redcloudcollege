@@ -46,6 +46,12 @@ public class RedHomeAskController {
     @Autowired
     private RedReplyGoodService replyGoodService;
 
+    @Autowired
+    private RedReplyCommentGoodService replyCGoodService;
+
+    @Autowired
+    private RedAskReplyCommentService commentService;
+
     @PostMapping("questionlist")
     public R getHomeQuestionList(@RequestBody Map parameterMap) {
         QueryWrapper<RedAskType> askWarper = new QueryWrapper<>();
@@ -75,6 +81,7 @@ public class RedHomeAskController {
         userAskService.updateUserAskReadCount(qDetail.getQId(), readCount);
 
         List<RedAskReplyVo> replyList = replyService.getHomeAskReplyList(qDetail.getQId(),1);
+
         return R.ok().data("qdetail", qDetail).data("replyList", replyList);
     }
 
@@ -139,6 +146,50 @@ public class RedHomeAskController {
                 goodQueryWrapper.eq("uid", uId);
                 if (qustionGoodService.remove(goodQueryWrapper)) {
                     userAskService.updateQustionGoodCount(false, qId);
+                    return R.ok().data("goodqustion", false);
+                }
+            } else {
+                return R.error("登录信息异常，请重新登录后尝试！");
+            }
+        }
+        return R.error("取消点赞失败，请稍后重试哈！");
+    }
+
+    @GetMapping("addCGood/{cId}")
+    public R addCGood(@PathVariable String cId, HttpServletRequest request) {
+        if (cId.length() > 0) {
+            String uId = TokenManager.getMemberIdByJwtToken(request);
+            if (uId.length() > 0) {
+                int count = replyCGoodService.updateReplyCommentGoodState(uId, cId);
+                if (count <= 0) {
+                    RedReplyCommentGood good = new RedReplyCommentGood();
+                    good.setCid(cId);
+                    good.setUid(uId);
+                    if (replyCGoodService.save(good)) {
+                        commentService.updateReplyCommentGoodCount(true, cId);
+                        return R.ok().data("goodqustion", true);
+                    }
+                } else {
+                    commentService.updateReplyCommentGoodCount(true, cId);
+                    return R.ok().data("goodqustion", true);
+                }
+            } else {
+                return R.error("登录信息异常，请重新登录后尝试！");
+            }
+        }
+        return R.error("点赞失败，请稍后重试哈！");
+    }
+
+    @GetMapping("canclecGood/{cId}")
+    public R canclecGood(@PathVariable String cId, HttpServletRequest request) {
+        if (cId.length() > 0) {
+            String uId = TokenManager.getMemberIdByJwtToken(request);
+            if (uId.length() > 0) {
+                QueryWrapper<RedReplyCommentGood> goodQueryWrapper = new QueryWrapper<>();
+                goodQueryWrapper.eq("cid", cId);
+                goodQueryWrapper.eq("uid", uId);
+                if (replyCGoodService.remove(goodQueryWrapper)) {
+                    commentService.updateReplyCommentGoodCount(false, cId);
                     return R.ok().data("goodqustion", false);
                 }
             } else {

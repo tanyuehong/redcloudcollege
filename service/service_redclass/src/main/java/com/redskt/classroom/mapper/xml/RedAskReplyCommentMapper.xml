@@ -2,4 +2,42 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.redskt.classroom.mapper.RedAskReplyCommentMapper">
 
+    <resultMap id="commentMapOne" type="com.redskt.classroom.entity.vo.ReplyCommentVo">
+        <id column="replyId" property="id"/>
+        <id column="ccontent" property="content"/>
+        <id column="crid" property="rid"/>
+        <id column="cuid" property="uid"/>
+        <id column="good" property="good"/>
+        <id column="touid" property="touid"/>
+        <id column="cname" property="name"/>
+        <id column="tname" property="toname"/>
+        <id column="cavatar" property="avatar"/>
+
+        <id column="cgmt_create" property="gmtCreate"/>
+    </resultMap>
+
+
+    <select id="getUerCommentOne" resultMap="commentMapOne">
+        SELECT  rcomment.id as replyId,rcomment.content as replyContent, rcomment.id as replyId, rcomment.content as ccontent,rcomment.good,
+        rcomment.rid as crid,rcomment.uid as cuid,rcomment.touid,rcomment.gmt_create as cgmt_create,cuser.nickname as cname,cuser.avatar as cavatar,tuser.nickname as tname
+        FROM red_ask_reply_comment rcomment
+        LEFT JOIN edu_user cuser on rcomment.uid = cuser.id
+        LEFT JOIN edu_user tuser on rcomment.touid = tuser.id
+        WHERE  rcomment.uid = #{uid}
+        ORDER BY  rcomment.gmt_create DESC 
+        LIMIT 1
+    </select>
+
+    <update id="addReplyCommentGoodCount">
+        update red_ask_reply_comment
+        set good=good+1
+        where id = #{cid}
+    </update>
+
+    <update id="prepReplyCommentGoodCount">
+        update red_ask_reply_comment
+        set good=good-1
+        where id = #{cid}
+    </update>
+
 </mapper>

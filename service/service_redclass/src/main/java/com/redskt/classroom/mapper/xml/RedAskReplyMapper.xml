@@ -2,22 +2,83 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.redskt.classroom.mapper.RedAskReplyMapper">
 
-    <select id="getQustionReplyList" resultType="com.redskt.classroom.entity.vo.RedAskReplyVo">
-        SELECT ask.id, ask.qid,ask.content,ask.good,ask.bad,ask.uid,ask.gmt_create, user.nickname as username,
-        user.avatar
-        FROM red_ask_reply ask
-        LEFT OUTER JOIN edu_user user ON ask.uid=user.id
-        WHERE ask.qid=#{qId}
-        ORDER BY ask.good DESC limit 10
+    <resultMap id="replyMap" type="com.redskt.classroom.entity.vo.RedAskReplyVo">
+        <id column="id" property="id"/>
+        <id column="qid" property="qid"/>
+        <id column="good" property="good"/>
+        <id column="bad" property="bad"/>
+        <id column="uid" property="uid"/>
+        <id column="username" property="username"/>
+        <id column="avatar" property="avatar"/>
+        <id column="content" property="content"/>
+        <id column="gmt_create" property="gmtCreate"/>
+        <collection property="comments" resultMap="commentMap">
+        </collection>
+    </resultMap>
+
+    <resultMap id="commentMap" type="com.redskt.classroom.entity.vo.ReplyCommentVo">
+        <id column="replyId" property="id"/>
+        <id column="ccontent" property="content"/>
+        <id column="crid" property="rid"/>
+        <id column="cuid" property="uid"/>
+        <id column="touid" property="touid"/>
+        <id column="cname" property="name"/>
+        <id column="tname" property="toname"/>
+        <id column="cavatar" property="avatar"/>
+        <id column="cgood" property="good"/>
+        <id column="goodcomment" property="goodcomment"/>
+        <id column="cgmt_create" property="gmtCreate"/>
+    </resultMap>
+
+    <select id="getQustionReplyList" resultMap="replyMap">
+        SELECT reply.id, reply.qid,reply.content,reply.good,reply.bad,reply.uid,reply.gmt_create, ruser.nickname as username,
+        ruser.avatar, rcomment.id as replyId, rcomment.content as ccontent,rcomment.good as cgood,rcomment.goodc as goodcomment,
+        rcomment.rid as crid,rcomment.uid as cuid,rcomment.touid,rcomment.gmt_create as cgmt_create,cuser.nickname as cname,cuser.avatar as cavatar,tuser.nickname as tname
+        FROM red_ask_reply reply
+        LEFT JOIN edu_user ruser on reply.uid = ruser.id
+        LEFT JOIN (
+        SELECT myc.id,myc.content,myc.good,myc.rid,myc.uid,myc.touid,myc.gmt_create,!isnull(ccgood.id) as goodc
+        FROM red_ask_reply_comment myc
+        LEFT JOIN red_reply_comment_good ccgood on myc.uid = ccgood.uid and myc.id = ccgood.cid and ccgood.is_deleted = 0
+        ORDER BY gmt_create,goodc DESC LIMIT #{csize} ) as rcomment on  rcomment.rid = reply.id
+        LEFT JOIN edu_user cuser on rcomment.uid = cuser.id
+        LEFT JOIN edu_user tuser on rcomment.touid = tuser.id
+
+        WHERE  reply.id in
+               ( SELECT id FROM
+                        ( SELECT id
+                          FROM red_ask_reply
+                          WHERE qid = #{qId}
+                          <if test="type == 1">
+                             ORDER BY red_ask_reply.good DESC
+                          </if>
+                          <if test="type == 2">
+                             ORDER BY red_ask_reply.gmt_create DESC
+                          </if>
+                          LIMIT #{size} ) as subreply )
     </select>
 
-    <select id="getTimeQustionReplyList" resultType="com.redskt.classroom.entity.vo.RedAskReplyVo">
-        SELECT ask.id, ask.qid,ask.content,ask.good,ask.bad,ask.uid,ask.gmt_create, user.nickname as username,
-        user.avatar
-        FROM red_ask_reply ask
-        LEFT OUTER JOIN edu_user user ON ask.uid=user.id
-        WHERE ask.qid=#{qId}
-        ORDER BY ask.gmt_create DESC limit 10
+    <select id="getMoreQustionReplyList" resultMap="replyMap">
+        SELECT reply.id, reply.qid,reply.content,reply.good,reply.bad,reply.uid,reply.gmt_create, ruser.nickname as username,
+        ruser.avatar, rcomment.id as replyId,rcomment.content as replyContent, rcomment.id as replyId, rcomment.content as ccontent,
+        rcomment.rid as crid,rcomment.uid as cuid,rcomment.touid,rcomment.gmt_create as cgmt_create,cuser.nickname as cname,cuser.avatar as cavatar,tuser.nickname as tname
+        FROM red_ask_reply reply
+        LEFT JOIN edu_user ruser on reply.uid = ruser.id
+        LEFT JOIN ( SELECT * FROM red_ask_reply_comment ORDER BY gmt_create ASC LIMIT #{csize} ) as rcomment on  rcomment.rid = reply.id
+        LEFT JOIN edu_user cuser on rcomment.uid = cuser.id
+        LEFT JOIN edu_user tuser on rcomment.touid = tuser.id
+        WHERE  reply.id in
+        ( SELECT id FROM
+        ( SELECT id
+        FROM red_ask_reply
+        WHERE qid = #{qId}
+        <if test="type == 1">
+            ORDER BY red_ask_reply.good DESC
+        </if>
+        <if test="type == 2">
+            ORDER BY red_ask_reply.gmt_create DESC
+        </if>
+        LIMIT #{size} ) as subreply )
     </select>
 
     <update id="addReplyGoodCount">
@@ -43,6 +104,5 @@
         set bad=bad-1
         where id = #{rid}
     </update>
-
 
 </mapper>

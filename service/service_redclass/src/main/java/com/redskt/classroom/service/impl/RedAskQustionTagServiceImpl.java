@@ -16,5 +16,4 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class RedAskQustionTagServiceImpl extends ServiceImpl<RedAskQustionTagMapper, RedAskQustionTag> implements RedAskQustionTagService {
-
 }

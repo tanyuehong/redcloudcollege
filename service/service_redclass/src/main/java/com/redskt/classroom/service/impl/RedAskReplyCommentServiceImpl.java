@@ -1,6 +1,7 @@
 package com.redskt.classroom.service.impl;
 
 import com.redskt.classroom.entity.RedAskReplyComment;
+import com.redskt.classroom.entity.vo.ReplyCommentVo;
 import com.redskt.classroom.mapper.RedAskReplyCommentMapper;
 import com.redskt.classroom.service.RedAskReplyCommentService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -16,5 +17,17 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class RedAskReplyCommentServiceImpl extends ServiceImpl<RedAskReplyCommentMapper, RedAskReplyComment> implements RedAskReplyCommentService {
+    @Override
+    public ReplyCommentVo getUerCommentOne(String uId) {
+        return  baseMapper.getUerCommentOne(uId);
+    }
 
+    @Override
+    public int updateReplyCommentGoodCount(boolean isAdd,String cId) {
+        if(isAdd) {
+            return baseMapper.addReplyCommentGoodCount(cId);
+        } else {
+            return baseMapper.prepReplyCommentGoodCount(cId);
+        }
+    }
 }
