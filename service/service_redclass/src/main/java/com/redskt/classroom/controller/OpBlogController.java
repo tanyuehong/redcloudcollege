@@ -121,7 +121,7 @@ public class OpBlogController {
                     return R.ok().data("good", true);
                 }
             } else {
-               return R.error("登录信息异常，请重新登录后尝试！");
+               return R.error("请您登录以后在点赞该文章哈！");
             }
         }
         return R.error("点赞失败，请稍后重试哈！");
