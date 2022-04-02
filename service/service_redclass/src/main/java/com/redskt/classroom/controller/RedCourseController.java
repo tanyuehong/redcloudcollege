@@ -1,7 +1,9 @@
 package com.redskt.classroom.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.redskt.classroom.entity.RedClassCourse;
+import com.redskt.classroom.entity.RedClassTeacher;
 import com.redskt.classroom.entity.vo.RedClassCourseFrontVo;
 import com.redskt.classroom.entity.vo.RedClassCourseWebVo;
 import com.redskt.classroom.entity.vo.RedClassChapterVo;
@@ -9,6 +11,7 @@ import com.redskt.classroom.entity.vo.RedClassSubjectOneVo;
 import com.redskt.classroom.service.RedChapterService;
 import com.redskt.classroom.service.RedCourseService;
 import com.redskt.classroom.service.RedSubjectService;
+import com.redskt.classroom.service.RedTeacherService;
 import com.redskt.commonutils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +32,9 @@ public class RedCourseController {
 
     @Autowired
     private RedSubjectService subjectService;
+
+    @Autowired
+    private RedTeacherService teacherService;
 
     //1 条件查询带分页查询课程
     @PostMapping("getCourseList/{page}/{limit}")
@@ -58,5 +64,15 @@ public class RedCourseController {
         //list集合泛型是一级分类
         List<RedClassSubjectOneVo> list = subjectService.getAllOneTwoSubject();
         return R.ok().data("list",list);
+    }
+
+    // 获取老师详情
+    @GetMapping("getTeacherDetail/{teacherId}")
+    public R getTeacherDetail(@PathVariable String teacherId) {
+        RedClassTeacher teacher = teacherService.getById(teacherId);
+        QueryWrapper<RedClassCourse> wrapper = new QueryWrapper<>();
+        wrapper.eq("teacher_id",teacherId);
+        List<RedClassCourse> courseList = courseService.list(wrapper);
+        return R.ok().data("teacher",teacher).data("courseList",courseList);
     }
 }
