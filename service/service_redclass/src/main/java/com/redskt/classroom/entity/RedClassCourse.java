@@ -60,6 +60,8 @@ public class RedClassCourse implements Serializable {
     @ApiModelProperty(value = "课程封面图片路径")
     private String imgUrl;
 
+    private String adimage;
+
     @ApiModelProperty(value = "销售数量")
     private Integer buyCount;
 
