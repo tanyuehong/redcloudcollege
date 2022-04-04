@@ -42,7 +42,7 @@ public class RedUserController {
 
         //1 根据订单号查询订单信息
         QueryWrapper<RedClassUser> wrapper = new QueryWrapper<>();
-        wrapper.select("id","username", "nickname","sex","age","avatar","position","perpage","company","perintroduction");
+        wrapper.select("id","username", "nickname","sex","age","sign","avatar","position","perpage","company","perintroduction");
         wrapper.eq("id",uid);
 
         RedClassUser eduUser = userService.getOne(wrapper);
@@ -132,6 +132,14 @@ public class RedUserController {
     public R updateUserInfo(@RequestBody Map parameterMap) {
         parameterMap = RequestParmUtil.transToMAP(parameterMap);
         String userId =(String)parameterMap.get("id");
+        String touxiang = (String)parameterMap.get("avatar");
+        String sex = (String) parameterMap.get("sex");
+        if(sex.equals("1")  && touxiang.equals("https://static.redskt.com/assets/img/yonghutouxiangnv.png")) {
+            parameterMap.put("avatar","https://static.redskt.com/assets/img/yonghutouxiangnan.png");
+        }
+        if(sex.equals("2") && touxiang.equals("https://static.redskt.com/assets/img/yonghutouxiangnan.png")) {
+            parameterMap.put("avatar","https://static.redskt.com/assets/img/yonghutouxiangnv.png");
+        }
         parameterMap.remove("id");
         int count = userService.updateUserInfo(parameterMap,userId);
         Map returnMap = new HashMap();
