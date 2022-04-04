@@ -58,9 +58,10 @@ public class RedUserServiceImpl extends ServiceImpl<RedUserMapper, RedClassUser>
         RedClassUser member = new RedClassUser();
         member.setUsername(username);
         member.setNickname(nickname);
+        member.setSex(1);
         member.setPassword(MD5.encrypt(password));//密码需要加密的
         member.setIsDisabled(false);//用户不禁用
-        member.setAvatar("http://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eoj0hHXhgJNOTSOFsS4uZs8x1ConecaVOB8eIl115xmJZcT4oCicvia7wMEufibKtTLqiaJeanU2Lpg3w/132");
+        member.setAvatar("https://static.redskt.com/assets/img/yonghutouxiangnan.png");
         baseMapper.insert(member);
     }
 
