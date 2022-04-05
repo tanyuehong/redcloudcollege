@@ -43,6 +43,8 @@ public class RedClassUser implements Serializable {
     @ApiModelProperty(value = "昵称")
     private String nickname;
 
+    private String name;
+
     @ApiModelProperty(value = "性别 1 女，2 男")
     private Integer sex;
 
@@ -58,6 +60,9 @@ public class RedClassUser implements Serializable {
     @ApiModelProperty(value = "职位")
     private String position;
 
+    @ApiModelProperty(value = "讲师简介")
+    private String intro;
+
     @ApiModelProperty(value = "个人主页")
     private String perpage;
 
@@ -67,10 +72,14 @@ public class RedClassUser implements Serializable {
     @ApiModelProperty(value = "用户签名")
     private String sign;
 
+    @ApiModelProperty(value = "讲师资历,一句话说明讲师")
+    private String career;
+
     @ApiModelProperty(value = "是否禁用 1（true）已禁用，  0（false）未禁用")
     private Boolean isDisabled;
 
     @ApiModelProperty(value = "逻辑删除 1（true）已删除， 0（false）未删除")
+    @TableLogic
     private Boolean isDeleted;
 
     @ApiModelProperty(value = "创建时间")

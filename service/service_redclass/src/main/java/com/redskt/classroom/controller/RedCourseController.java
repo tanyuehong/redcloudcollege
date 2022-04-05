@@ -2,20 +2,15 @@ package com.redskt.classroom.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.redskt.classroom.entity.RedClassCourse;
-import com.redskt.classroom.entity.RedClassTeacher;
-import com.redskt.classroom.entity.vo.RedClassCourseFrontVo;
-import com.redskt.classroom.entity.vo.RedClassCourseWebVo;
-import com.redskt.classroom.entity.vo.RedClassChapterVo;
-import com.redskt.classroom.entity.vo.RedClassSubjectOneVo;
-import com.redskt.classroom.service.RedChapterService;
-import com.redskt.classroom.service.RedCourseService;
-import com.redskt.classroom.service.RedSubjectService;
-import com.redskt.classroom.service.RedTeacherService;
+import com.redskt.classroom.entity.*;
+import com.redskt.classroom.entity.vo.*;
+import com.redskt.classroom.service.*;
 import com.redskt.commonutils.R;
+import com.redskt.security.TokenManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -34,7 +29,13 @@ public class RedCourseController {
     private RedSubjectService subjectService;
 
     @Autowired
-    private RedTeacherService teacherService;
+    private RedUserService userService;
+
+    @Autowired
+    private OpBlogDetailService blogDetailService;
+
+    @Autowired
+    private EduTechnologyBookService bookService;
 
     //1 条件查询带分页查询课程
     @PostMapping("getCourseList/{page}/{limit}")
@@ -69,10 +70,24 @@ public class RedCourseController {
     // 获取老师详情
     @GetMapping("getTeacherDetail/{teacherId}")
     public R getTeacherDetail(@PathVariable String teacherId) {
-        RedClassTeacher teacher = teacherService.getById(teacherId);
-        QueryWrapper<RedClassCourse> wrapper = new QueryWrapper<>();
-        wrapper.eq("teacher_id",teacherId);
-        List<RedClassCourse> courseList = courseService.list(wrapper);
-        return R.ok().data("teacher",teacher).data("courseList",courseList);
+        RedClassUserVo teacher = userService.getUserInfoFocusCount(teacherId);
+        if(teacher != null) {
+            QueryWrapper<RedClassCourse> wrapper = new QueryWrapper<>();
+            wrapper.eq("teacher_id", teacherId);
+            wrapper.last("limit 6");
+            List<RedClassCourse> courseList = courseService.list(wrapper);
+
+            QueryWrapper<EduTechnologyBook> bookWarp = new QueryWrapper<>();
+            bookWarp.eq("auid",teacherId);
+            bookWarp.last("limit 6");
+            List<EduTechnologyBook> bookList = bookService.list(bookWarp);
+
+            QueryWrapper<OpBlogDetail> blogWarp = new QueryWrapper<>();
+            blogWarp.eq("auid",teacherId);
+            blogWarp.last("limit 6");
+            List<OpBlogDetail> blogDetailList = blogDetailService.list(blogWarp);
+            return R.ok().data("teacher", teacher).data("courseList", courseList).data("bookList",bookList).data("praticeList",blogDetailList);
+        }
+        return R.error("没有对应的老师信息哈");
     }
 }

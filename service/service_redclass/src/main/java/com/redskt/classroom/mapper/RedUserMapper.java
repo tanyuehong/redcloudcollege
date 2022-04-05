@@ -2,6 +2,7 @@ package com.redskt.classroom.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.redskt.classroom.entity.RedClassUser;
+import com.redskt.classroom.entity.vo.RedClassUserVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Map;
@@ -17,6 +18,8 @@ import java.util.Map;
 public interface RedUserMapper extends BaseMapper<RedClassUser> {
 
     Integer countRegisterDay(String day);
+
+    RedClassUserVo getUserInfoFocusCount(@Param("uid")  String uid);
 
     int updateUserInfo(Map<String, Object> map,@Param("id")  String userId);
 

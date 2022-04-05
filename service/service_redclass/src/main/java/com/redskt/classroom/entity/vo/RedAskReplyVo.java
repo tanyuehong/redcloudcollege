@@ -1,6 +1,5 @@
 package com.redskt.classroom.entity.vo;
 
-import com.redskt.classroom.entity.RedAskReplyComment;
 import lombok.Data;
 
 import java.util.Date;

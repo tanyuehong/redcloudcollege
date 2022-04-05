@@ -3,6 +3,7 @@ package com.redskt.classroom.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.redskt.classroom.entity.RedClassUser;
 import com.redskt.classroom.entity.vo.RedClassRegisterVo;
+import com.redskt.classroom.entity.vo.RedClassUserVo;
 
 import java.util.Map;
 
@@ -18,6 +19,7 @@ public interface RedUserService extends IService<RedClassUser> {
 
     void register(RedClassRegisterVo registerVo);
 
+    RedClassUserVo getUserInfoFocusCount(String uId);
     // 从数据库中取出用户信息
     RedClassUser selectByUsername(String username);
 

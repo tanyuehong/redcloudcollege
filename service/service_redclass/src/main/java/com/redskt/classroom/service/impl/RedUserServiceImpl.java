@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.redskt.classroom.entity.RedClassUser;
 import com.redskt.classroom.entity.vo.RedClassRegisterVo;
+import com.redskt.classroom.entity.vo.RedClassUserVo;
 import com.redskt.classroom.mapper.RedUserMapper;
 import com.redskt.classroom.service.RedUserService;
 import com.redskt.commonutils.MD5;
@@ -25,6 +26,10 @@ import java.util.Map;
 @Service
 public class RedUserServiceImpl extends ServiceImpl<RedUserMapper, RedClassUser> implements RedUserService {
 
+    @Override
+    public RedClassUserVo getUserInfoFocusCount(String uId) {
+        return baseMapper.getUserInfoFocusCount(uId);
+    }
     //注册的方法
     @Override
     public void register(RedClassRegisterVo registerVo) {

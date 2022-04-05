@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.redskt.classroom.mapper.RedUserMapper">
+
+    <select id="getUserInfoFocusCount" resultType="com.redskt.classroom.entity.vo.RedClassUserVo">
+        SELECT eduser.*,count(focus.id) as focus
+        FROM edu_user eduser
+        LEFT OUTER JOIN red_user_focus focus ON eduser.id=focus.fid and focus.is_deleted = 0
+        where eduser.id = #{uid}
+    </select>
+
     <update id="updateUserInfo" parameterType="map">
         update edu_user
         set
