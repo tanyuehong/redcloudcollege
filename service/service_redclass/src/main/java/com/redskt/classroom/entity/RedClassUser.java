@@ -60,6 +60,15 @@ public class RedClassUser implements Serializable {
     @ApiModelProperty(value = "职位")
     private String position;
 
+    @ApiModelProperty(value = "老师职级")
+    private String tposition;
+
+    @ApiModelProperty(value = "老师类型")
+    private String ttype;
+
+    @ApiModelProperty(value = "老师关键字")
+    private String keywords;
+
     @ApiModelProperty(value = "讲师简介")
     private String intro;
 
