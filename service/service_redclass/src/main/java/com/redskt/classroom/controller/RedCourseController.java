@@ -6,11 +6,9 @@ import com.redskt.classroom.entity.*;
 import com.redskt.classroom.entity.vo.*;
 import com.redskt.classroom.service.*;
 import com.redskt.commonutils.R;
-import com.redskt.security.TokenManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -77,10 +75,10 @@ public class RedCourseController {
             wrapper.last("limit 6");
             List<RedClassCourse> courseList = courseService.list(wrapper);
 
-            QueryWrapper<EduTechnologyBook> bookWarp = new QueryWrapper<>();
+            QueryWrapper<RedClassBook> bookWarp = new QueryWrapper<>();
             bookWarp.eq("auid",teacherId);
             bookWarp.last("limit 6");
-            List<EduTechnologyBook> bookList = bookService.list(bookWarp);
+            List<RedClassBook> bookList = bookService.list(bookWarp);
 
             QueryWrapper<OpBlogDetail> blogWarp = new QueryWrapper<>();
             blogWarp.eq("auid",teacherId);

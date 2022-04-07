@@ -2,7 +2,7 @@ package com.redskt.classroom.controller;
 
 
 import com.redskt.classroom.entity.EduBookContents;
-import com.redskt.classroom.entity.EduTechnologyBook;
+import com.redskt.classroom.entity.RedClassBook;
 import com.redskt.classroom.entity.RedTechBookArticle;
 import com.redskt.classroom.service.EduBookContentsService;
 import com.redskt.classroom.service.EduTechnologyBookService;
@@ -34,10 +34,10 @@ public class RedTechBookArticleController {
     private EduBookContentsService contentsService;
 
     @GetMapping("getBookArticleDetail/{articleId}")
-    public R getBookDetail(@PathVariable String articleId) {
+    public R getBookArticleDetail(@PathVariable String articleId) {
         if(articleId.length()>0) {
             RedTechBookArticle article = articleService.getById(articleId);
-            EduTechnologyBook book = bookService.getById(article.getBookId());
+            RedClassBook book = bookService.getById(article.getBookId());
             EduBookContents contents = contentsService.getById(article.getContentId());
             return  R.ok().data("item",article).data("book",book).data("contents",contents);
         } else {

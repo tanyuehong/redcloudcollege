@@ -1,6 +1,6 @@
 package com.redskt.classroom.mapper;
 
-import com.redskt.classroom.entity.EduTechnologyBook;
+import com.redskt.classroom.entity.RedClassBook;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author tanyuehong
  * @since 2021-02-28
  */
-public interface EduTechnologyBookMapper extends BaseMapper<EduTechnologyBook> {
+public interface EduTechnologyBookMapper extends BaseMapper<RedClassBook> {
 
 }

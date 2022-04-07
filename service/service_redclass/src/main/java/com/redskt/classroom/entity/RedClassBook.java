@@ -2,12 +2,10 @@ package com.redskt.classroom.entity;
 
 import java.math.BigDecimal;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.util.Date;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -26,8 +24,8 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="EduTechnologyBook对象", description="")
-public class EduTechnologyBook implements Serializable {
+@TableName("edu_technology_book")
+public class RedClassBook implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -42,6 +40,8 @@ public class EduTechnologyBook implements Serializable {
     private String describ;
 
     private String author;
+
+    private String auid;
 
     private String authorPositon;
 

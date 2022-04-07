@@ -5,7 +5,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.redskt.classroom.entity.EduBookChapters;
 import com.redskt.classroom.entity.EduBookContents;
-import com.redskt.classroom.entity.EduTechnologyBook;
 import com.redskt.classroom.service.EduBookChaptersService;
 import com.redskt.classroom.service.EduBookContentsService;
 import com.redskt.commonutils.R;
@@ -34,7 +33,7 @@ public class EduBookContentsController {
     private EduBookChaptersService chaptersService;
 
     @PostMapping("getBookContents")
-    public R getBookDetail(@RequestBody String bookIdString) {
+    public R getBookContents(@RequestBody String bookIdString) {
         JSONObject jsonObject = JSONObject.parseObject(bookIdString);
         String bookId = (String)jsonObject.get("bookId");
         if(bookId.length()>0) {

@@ -73,10 +73,10 @@ public class RedIndexController {
         if (bookCount == 0) {
             bookCount = 1;
         }
-        QueryWrapper<EduTechnologyBook> bookwrapper = new QueryWrapper<>();
+        QueryWrapper<RedClassBook> bookwrapper = new QueryWrapper<>();
         bookwrapper.orderByDesc("view_count");
         bookwrapper.last(String.format("limit %d",bookCount));
-        List<EduTechnologyBook> bookList = bookService.list(bookwrapper);
+        List<RedClassBook> bookList = bookService.list(bookwrapper);
 
         List<OPHomeGuessLikeVo> gussLikes = new ArrayList<>();
         int type = random.nextInt(3);
@@ -104,7 +104,7 @@ public class RedIndexController {
                 vo.setContent(blog.getDescrb());
                 type = random.nextInt(3);
             } else if(type == 2 && bookList.size()>0) {
-                EduTechnologyBook book = bookList.get(0);
+                RedClassBook book = bookList.get(0);
                 bookList.remove(0);
                 BeanUtils.copyProperties(book, vo);
                 QueryWrapper<EduBookChapters> chperWarper = new QueryWrapper<>();
