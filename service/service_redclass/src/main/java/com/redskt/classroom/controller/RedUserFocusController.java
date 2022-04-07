@@ -68,25 +68,5 @@ public class RedUserFocusController {
         }
         return R.error("取消关注失败，请稍后重试哈！");
     }
-
-    @GetMapping("getUserFocus/{fId}")
-    public R getUserGoodState(@PathVariable String fId, HttpServletRequest request) {
-        if (fId.length() > 0) {
-            String uId = TokenManager.getMemberIdByJwtToken(request);
-            if (uId.length() > 0) {
-                QueryWrapper<RedUserFocus> focusWrapper = new QueryWrapper<>();
-                focusWrapper.eq("uid", uId);
-                focusWrapper.eq("fid", fId);
-                if (focusService.list(focusWrapper).size()>0) {
-                    return R.ok().data("focus", true);
-                } else {
-                    return R.ok().data("focus", false);
-                }
-            } else {
-                return R.error("登录信息异常，请重新登录后尝试！");
-            }
-        }
-        return R.error("获取关注失败，请稍后重试哈！");
-    }
 }
 

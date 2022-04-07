@@ -6,9 +6,11 @@ import com.redskt.classroom.entity.*;
 import com.redskt.classroom.entity.vo.*;
 import com.redskt.classroom.service.*;
 import com.redskt.commonutils.R;
+import com.redskt.security.TokenManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -34,6 +36,9 @@ public class RedCourseController {
 
     @Autowired
     private EduTechnologyBookService bookService;
+
+    @Autowired
+    private RedUserFocusService focusService;
 
     //1 条件查询带分页查询课程
     @PostMapping("getCourseList/{page}/{limit}")
@@ -87,5 +92,23 @@ public class RedCourseController {
             return R.ok().data("teacher", teacher).data("courseList", courseList).data("bookList",bookList).data("praticeList",blogDetailList);
         }
         return R.error("没有对应的老师信息哈");
+    }
+
+    @GetMapping("getUserFocus/{fId}")
+    public R getUserGoodState(@PathVariable String fId, HttpServletRequest request) {
+        if (fId.length() > 0) {
+            String uId = TokenManager.getMemberIdByJwtToken(request);
+            if (uId.length() > 0) {
+                QueryWrapper<RedUserFocus> focusWrapper = new QueryWrapper<>();
+                focusWrapper.eq("uid", uId);
+                focusWrapper.eq("fid", fId);
+                if (focusService.list(focusWrapper).size()>0) {
+                    return R.ok().data("focus", true);
+                } else {
+                    return R.ok().data("focus", false);
+                }
+            }
+        }
+        return R.ok().data("focus", false);
     }
 }
