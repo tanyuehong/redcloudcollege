@@ -1,7 +1,5 @@
 package com.redskt.classroom.entity.vo;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -19,6 +17,14 @@ public class RedClassBookVo {
     private String describ;
 
     private String author;
+
+    private String auid;
+
+    private String authorAvatar;
+
+    private String ftitle; // 第一章节
+
+    private String fcid;
 
     private String authorPositon;
 

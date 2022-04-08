@@ -4,6 +4,7 @@ package com.redskt.classroom.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 
 import com.redskt.classroom.entity.RedClassBook;
+import com.redskt.classroom.entity.vo.RedClassBookVo;
 import com.redskt.classroom.service.EduTechnologyBookService;
 import com.redskt.commonutils.R;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class RedBookController {
         QueryWrapper<RedClassBook> wrapper = new QueryWrapper<>();
         wrapper.orderByDesc("id");
         wrapper.last("limit 8");
-        List<RedClassBook> bookList = bookService.list(wrapper);
+        List<RedClassBookVo> bookList = bookService.getBookIndexInfo();
 
         return R.ok().data("bookList",bookList);
     }

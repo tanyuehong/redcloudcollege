@@ -2,6 +2,9 @@ package com.redskt.classroom.service;
 
 import com.redskt.classroom.entity.RedClassBook;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.redskt.classroom.entity.vo.RedClassBookVo;
+
+import java.util.List;
 
 /**
  * <p>
@@ -12,5 +15,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2021-02-28
  */
 public interface EduTechnologyBookService extends IService<RedClassBook> {
-
+    List<RedClassBookVo> getBookIndexInfo();
 }
