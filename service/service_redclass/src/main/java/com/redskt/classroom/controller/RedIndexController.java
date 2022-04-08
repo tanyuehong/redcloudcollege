@@ -3,6 +3,7 @@ package com.redskt.classroom.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.redskt.classroom.entity.*;
 import com.redskt.classroom.entity.vo.OPHomeGuessLikeVo;
+import com.redskt.classroom.entity.vo.RedClassBookVo;
 import com.redskt.classroom.entity.vo.RedClassCourseWebVo;
 import com.redskt.classroom.service.*;
 import com.redskt.commonutils.R;
@@ -73,10 +74,8 @@ public class RedIndexController {
         if (bookCount == 0) {
             bookCount = 1;
         }
-        QueryWrapper<RedClassBook> bookwrapper = new QueryWrapper<>();
-        bookwrapper.orderByDesc("view_count");
-        bookwrapper.last(String.format("limit %d",bookCount));
-        List<RedClassBook> bookList = bookService.list(bookwrapper);
+
+        List<RedClassBookVo> bookList = bookService.getBookIndexInfo(bookCount);
 
         List<OPHomeGuessLikeVo> gussLikes = new ArrayList<>();
         int type = random.nextInt(3);
@@ -92,6 +91,7 @@ public class RedIndexController {
                 RedClassTeacher teacher = teacherService.getById(couseItem.getTeacherId());
                 vo.setContentCount(couseItem.getLessonNum());
                 vo.setType(type);
+                vo.setAuid(couseItem.getTeacherId());
                 vo.setAuthor(teacher.getName());
                 vo.setAuthorPositon("资深工程师");
                 vo.setContent(couseItem.getCdescribe());
@@ -104,7 +104,7 @@ public class RedIndexController {
                 vo.setContent(blog.getDescrb());
                 type = random.nextInt(3);
             } else if(type == 2 && bookList.size()>0) {
-                RedClassBook book = bookList.get(0);
+                RedClassBookVo book = bookList.get(0);
                 bookList.remove(0);
                 BeanUtils.copyProperties(book, vo);
                 QueryWrapper<EduBookChapters> chperWarper = new QueryWrapper<>();

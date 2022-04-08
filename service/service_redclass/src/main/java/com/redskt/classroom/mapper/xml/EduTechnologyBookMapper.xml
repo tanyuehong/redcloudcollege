@@ -5,9 +5,9 @@
     <select id="getBookIndexInfo" resultType="com.redskt.classroom.entity.vo.RedClassBookVo">
         SELECT book.*,contents.article_id as fcid,contents.title as ftitle,buser.avatar as authorAvatar
         FROM edu_technology_book book
-        LEFT OUTER JOIN (SELECT  * from  edu_book_contents order by sortcontent DESC LIMIT 1) as contents ON book.id=contents.book_id
+        LEFT OUTER JOIN (SELECT  * from  edu_book_contents order by sortcontent ASC LIMIT 1) as contents ON book.id=contents.book_id
         LEFT OUTER JOIN edu_user buser on book.auid = buser.id
-        order by view_count DESC LIMIT 8
+        order by view_count DESC LIMIT #{size}
     </select>
 
 </mapper>

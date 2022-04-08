@@ -32,10 +32,7 @@ public class RedBookController {
     @GetMapping("getBooks")
     public R index() {
         //查询前8条热门课程
-        QueryWrapper<RedClassBook> wrapper = new QueryWrapper<>();
-        wrapper.orderByDesc("id");
-        wrapper.last("limit 8");
-        List<RedClassBookVo> bookList = bookService.getBookIndexInfo();
+        List<RedClassBookVo> bookList = bookService.getBookIndexInfo(8);
 
         return R.ok().data("bookList",bookList);
     }

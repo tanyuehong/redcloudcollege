@@ -15,5 +15,5 @@ import java.util.List;
  * @since 2021-02-28
  */
 public interface EduTechnologyBookService extends IService<RedClassBook> {
-    List<RedClassBookVo> getBookIndexInfo();
+    List<RedClassBookVo> getBookIndexInfo(int size);
 }

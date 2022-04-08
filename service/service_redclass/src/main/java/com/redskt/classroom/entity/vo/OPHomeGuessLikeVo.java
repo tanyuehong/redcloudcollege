@@ -20,6 +20,12 @@ public class OPHomeGuessLikeVo {
 
     private String author;
 
+    private String ftitle; // 第一章节
+
+    private String fcid;
+
+    private String auid;
+
     private String authorPositon;
 
     private Integer reply;

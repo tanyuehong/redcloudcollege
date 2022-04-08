@@ -20,7 +20,7 @@ import java.util.List;
 @Service
 public class EduTechnologyBookServiceImpl extends ServiceImpl<EduTechnologyBookMapper, RedClassBook> implements EduTechnologyBookService {
     @Override
-    public List<RedClassBookVo> getBookIndexInfo() {
-        return baseMapper.getBookIndexInfo();
+    public List<RedClassBookVo> getBookIndexInfo(int size) {
+        return baseMapper.getBookIndexInfo(size);
     }
 }

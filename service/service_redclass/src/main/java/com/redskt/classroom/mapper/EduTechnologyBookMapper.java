@@ -17,6 +17,6 @@ import java.util.List;
  */
 public interface EduTechnologyBookMapper extends BaseMapper<RedClassBook> {
 
-   List<RedClassBookVo> getBookIndexInfo();
+   List<RedClassBookVo> getBookIndexInfo(@Param("size") int size);
 
 }
