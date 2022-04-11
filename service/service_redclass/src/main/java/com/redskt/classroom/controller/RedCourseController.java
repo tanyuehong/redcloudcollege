@@ -40,6 +40,15 @@ public class RedCourseController {
     @Autowired
     private RedUserFocusService focusService;
 
+    @GetMapping("getCourseIndex")
+    public R getCourseIndex() {
+        Page<RedClassCourse> pageCourse = new Page<>(1,8);
+        Map<String,Object> map = courseService.getCourseFrontList(pageCourse,new RedClassCourseFrontVo());
+        //返回分页所有数据
+        List<RedClassSubjectOneVo> list = subjectService.getAllOneTwoSubject();
+        return R.ok().data("coursList",map).data("list",list);
+    }
+
     //1 条件查询带分页查询课程
     @PostMapping("getCourseList/{page}/{limit}")
     public R getFrontCourseList(@PathVariable long page, @PathVariable long limit,
@@ -60,14 +69,6 @@ public class RedCourseController {
         List<RedClassChapterVo> chapterVideoList = chapterService.getChapterVideoByCourseId(courseId);
 
         return R.ok().data("courseWebVo",courseWebVo).data("chapterVideoList",chapterVideoList);
-    }
-
-    //课程分类列表（树形）
-    @PostMapping("getAllSubject")
-    public R getAllSubject() {
-        //list集合泛型是一级分类
-        List<RedClassSubjectOneVo> list = subjectService.getAllOneTwoSubject();
-        return R.ok().data("list",list);
     }
 
     // 获取老师详情
