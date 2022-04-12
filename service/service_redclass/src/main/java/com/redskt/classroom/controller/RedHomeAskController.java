@@ -81,7 +81,6 @@ public class RedHomeAskController {
         userAskService.updateUserAskReadCount(qDetail.getQId(), readCount);
 
         List<RedAskReplyVo> replyList = replyService.getHomeAskReplyList(qDetail.getQId(),1);
-
         return R.ok().data("qdetail", qDetail).data("replyList", replyList);
     }
 
