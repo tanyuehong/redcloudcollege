@@ -30,6 +30,16 @@
         <id column="cgmt_create" property="gmtCreate"/>
     </resultMap>
 
+    <select id="getUserLasterReply" resultMap="replyMap">
+        SELECT  reply.id, reply.qid,reply.content,reply.good,reply.bad,reply.uid,reply.gmt_create, ruser.nickname as username,
+        ruser.avatar
+        FROM red_ask_reply reply
+        LEFT JOIN edu_user ruser on reply.uid = ruser.id
+        WHERE  reply.uid = #{uid}
+        ORDER BY  reply.gmt_create DESC
+        LIMIT 1
+    </select>
+
     <select id="getQustionReplyList" resultMap="replyMap">
         SELECT reply.id, reply.qid,reply.content,reply.good,reply.bad,reply.uid,reply.gmt_create, ruser.nickname as username,
         ruser.avatar, rcomment.id as replyId, rcomment.content as ccontent,rcomment.good as cgood,rcomment.goodc as goodcomment,

@@ -16,6 +16,8 @@ import java.util.List;
  */
 public interface RedAskReplyService extends IService<RedAskReply> {
 
+    RedAskReplyVo getUserLasterReply(String uid);
+
     List<RedAskReplyVo> getHomeAskReplyList(String qId,int sortType);
 
     int updateReplyGoodCount(boolean isAdd,String rId);

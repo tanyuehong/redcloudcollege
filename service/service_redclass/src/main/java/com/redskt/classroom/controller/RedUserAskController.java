@@ -3,11 +3,15 @@ package com.redskt.classroom.controller;
 
 import com.qiniu.util.Auth;
 import com.redskt.classroom.entity.*;
+import com.redskt.classroom.entity.vo.RedAskReplyVo;
 import com.redskt.classroom.entity.vo.ReplyCommentVo;
 import com.redskt.classroom.service.*;
 import com.redskt.commonutils.R;
+import com.redskt.security.TokenManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <p>
@@ -47,12 +51,17 @@ public class RedUserAskController {
     }
 
     @PostMapping("submitReply")
-    public R registerUser(@RequestBody RedAskReply reply) {
-        if (replyService.save(reply)) {
-            return R.ok();
-        } else  {
-            return R.error("回答提交失败，请重新尝试！");
+    public R registerUser(@RequestBody RedAskReply reply, HttpServletRequest request) {
+        String uId = TokenManager.getMemberIdByJwtToken(request);
+        if (uId.length()>0 && uId.equals(reply.getUid())) {
+            if (replyService.save(reply)) {
+                RedAskReplyVo rReply = replyService.getUserLasterReply(uId);
+                return R.ok().data("reply",rReply);
+            } else {
+                return R.error("回答存储失败,请重新尝试！");
+            }
         }
+        return  R.error("登录信息验证失败，请重新尝试！");
     }
 
     @PostMapping("submitReplyComment")
