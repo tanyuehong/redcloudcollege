@@ -1,6 +1,7 @@
 package com.redskt.classroom.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.qiniu.util.Auth;
 import com.redskt.classroom.entity.*;
 import com.redskt.classroom.entity.vo.RedAskReplyVo;
@@ -95,6 +96,38 @@ public class RedUserAskController {
             waringService.save(uwaring);
             return R.ok().data("tips","ok");
         }
+    }
+
+    @GetMapping("deleteQustionReply/{rId}")
+    public R deleteQustionReply(@PathVariable String rId, HttpServletRequest request) {
+        String uId = TokenManager.getMemberIdByJwtToken(request);
+        if (rId.length()>0 && uId.length()>0) {
+            QueryWrapper<RedAskReply> replyWrapper = new QueryWrapper<>();
+            replyWrapper.eq("uid", uId);
+            replyWrapper.eq("id", rId);
+            if(replyService.remove(replyWrapper)) {
+                return R.ok();
+            } else {
+                return R.error("删除回答失败，请重新尝试哈！");
+            }
+        }
+        return R.error("参数异常，请重新尝试哈！");
+    }
+
+    @GetMapping("deleteReplyComment/{cId}")
+    public R deleteReplyComment(@PathVariable String cId, HttpServletRequest request) {
+        String uId = TokenManager.getMemberIdByJwtToken(request);
+        if (cId.length()>0 && uId.length()>0) {
+            QueryWrapper<RedAskReplyComment> commentWrapper = new QueryWrapper<>();
+            commentWrapper.eq("uid", uId);
+            commentWrapper.eq("id", cId);
+            if(commentService.remove(commentWrapper)) {
+                return R.ok();
+            } else {
+                return R.error("删除回答失败，请重新尝试哈！");
+            }
+        }
+        return R.error("参数异常，请重新尝试哈！");
     }
 
     @PostMapping("uploadqiniutoken")
