@@ -64,7 +64,7 @@ public class RedHomeAskController {
         List<RedAskType> askList = askTypeService.list(askWarper);
 
         if (qustionType == null || qustionType.length() == 0) {
-            qustionType = askList.get(0).getId();
+            qustionType = "";
         }
 
         List<RedClassAskQuestionVo> list = userAskService.getHomeAskQustionList(type, qustionType);
