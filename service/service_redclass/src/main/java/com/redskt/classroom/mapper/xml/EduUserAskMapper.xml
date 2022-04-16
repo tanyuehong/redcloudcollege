@@ -31,7 +31,9 @@
         (select count(reply.id) from red_ask_reply reply where reply.qid=ask.id) as  reply
         FROM edu_user_ask ask
         LEFT OUTER JOIN edu_user user ON ask.uid=user.id
-        where qustype = #{qustype}
+        <if test="qustype != 0">
+            where qustype = #{qustype}
+        </if>
         HAVING reply=0
         ORDER BY ask.gmt_create DESC limit 20
     </select>
@@ -41,7 +43,9 @@
         (select count(reply.id)  from red_ask_reply reply where reply.qid=ask.id) as  reply
         FROM edu_user_ask ask
         LEFT OUTER JOIN edu_user user ON ask.uid=user.id
-        where qustype = #{qustype}
+        <if test="qustype != 0">
+            where qustype = #{qustype}
+        </if>
         ORDER BY reply DESC limit 20
     </select>
 
@@ -50,7 +54,9 @@
         (select count(reply.id) from red_ask_reply reply where reply.qid=ask.id) as  reply
         FROM edu_user_ask ask
         LEFT OUTER JOIN edu_user user ON ask.uid=user.id
-        where qustype = #{qustype}
+        <if test="qustype != 0">
+            where qustype = #{qustype}
+        </if>
         ORDER BY ask.readcount DESC limit 20
     </select>
 
@@ -59,7 +65,10 @@
         (select count(reply.id) from red_ask_reply reply where reply.qid=ask.id) as  reply
         FROM edu_user_ask ask
         LEFT OUTER JOIN edu_user user ON ask.uid=user.id
-        where price>0 and qustype = #{qustype}
+        where price>0
+        <if test="qustype != 0">
+         and qustype = #{qustype}
+        </if>
         ORDER BY ask.gmt_create DESC limit 20
     </select>
 
