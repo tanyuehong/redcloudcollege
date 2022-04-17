@@ -19,6 +19,10 @@ public class RedClassAskQuestionVo {
 
     private String tag;
 
+    private String typeString;
+
+    private String subString;
+
     private String content;
 
     private Integer reply;
