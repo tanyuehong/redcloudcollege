@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.redskt.classroom.entity.*;
+import com.redskt.classroom.entity.vo.RedClassBlogDetailVo;
 import com.redskt.classroom.service.OpBlogDetailService;
 import com.redskt.classroom.service.OpBlogTypeService;
 import com.redskt.classroom.service.RedBlogGoodService;
@@ -77,7 +78,7 @@ public class OpBlogController {
     @GetMapping("getDetail/{praticeId}")
     public R index(@PathVariable String praticeId) {
         if (praticeId.length()>0) {
-            OpBlogDetail detail = blogService.getById(praticeId);
+            RedClassBlogDetailVo detail = blogService.getRedClassBlogDetail(praticeId);
             return R.ok().data("pitem",detail);
         } else {
             return R.error("参数不合法，请验证");
