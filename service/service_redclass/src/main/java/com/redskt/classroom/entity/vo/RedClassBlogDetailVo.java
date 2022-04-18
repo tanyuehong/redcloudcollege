@@ -10,11 +10,11 @@ public class RedClassBlogDetailVo {
 
     private String title;
 
-    private String aName;
+    private String authorName;
 
-    private String aUid;
+    private String authorUid;
 
-    private String aAvatar;
+    private String authorAvatar;
 
     private String type;
 

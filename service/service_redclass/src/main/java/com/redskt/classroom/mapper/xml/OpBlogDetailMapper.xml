@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.redskt.classroom.mapper.OpBlogDetailMapper">
     <select id="getRedClassBlogDetail" resultType="com.redskt.classroom.entity.vo.RedClassBlogDetailVo">
-        SELECT blog.*,auser.id as aUid,auser.nickName,auser.avatar as aAvatar
+        SELECT blog.*,auser.id as aUid,auser.nickName as authorName,auser.avatar as authorAvatar,auser.id as authorUid
         FROM op_blog_detail blog
-        LEFT OUTER JOIN edu_user auser ON eduser.id=focus.fid and focus.is_deleted = 0
+        LEFT OUTER JOIN edu_user auser ON auser.id=blog.auid
         where blog.id = #{bid}
     </select>
 
