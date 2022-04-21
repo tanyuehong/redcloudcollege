@@ -26,7 +26,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/home/eduask")
-public class RedHomeAskController {
+public class RedAskController {
 
     @Autowired
     private RedAskTypeService askTypeService;

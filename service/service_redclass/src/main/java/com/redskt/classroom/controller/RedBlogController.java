@@ -30,7 +30,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/home/pratice")
-public class OpBlogController {
+public class RedBlogController {
 
     @Autowired
     private OpBlogTypeService typeService;
@@ -40,8 +40,6 @@ public class OpBlogController {
 
     @Autowired
     private RedBlogGoodService goodService;
-
-
 
     @GetMapping("index")
     public R index() {

@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("/eduask")
 @CrossOrigin(allowCredentials="true",maxAge = 3600)
-public class RedUserAskController {
+public class RedAskUserController {
 
     @Autowired
     private EduUserAskService userAskService;
