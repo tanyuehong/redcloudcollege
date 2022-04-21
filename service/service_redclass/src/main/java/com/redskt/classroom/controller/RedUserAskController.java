@@ -98,6 +98,22 @@ public class RedUserAskController {
         }
     }
 
+    @GetMapping("getUserQustionInfo")
+    public R getUserQustionInfo(HttpServletRequest request) {
+        String uId = TokenManager.getMemberIdByJwtToken(request);
+        if (uId.length()>0) {
+            QueryWrapper<RedAskReply> replyWrapper = new QueryWrapper<>();
+            replyWrapper.eq("uid", uId);
+            replyWrapper.eq("id", rId);
+            if(replyService.remove(replyWrapper)) {
+                return R.ok();
+            } else {
+                return R.error("删除回答失败，请重新尝试哈！");
+            }
+        }
+        return R.error("参数异常，请重新尝试哈！");
+    }
+
     @GetMapping("deleteQustionReply/{rId}")
     public R deleteQustionReply(@PathVariable String rId, HttpServletRequest request) {
         String uId = TokenManager.getMemberIdByJwtToken(request);
