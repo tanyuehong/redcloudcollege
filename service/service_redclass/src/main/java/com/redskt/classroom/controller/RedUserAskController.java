@@ -104,7 +104,6 @@ public class RedUserAskController {
         if (uId.length()>0) {
             QueryWrapper<RedAskReply> replyWrapper = new QueryWrapper<>();
             replyWrapper.eq("uid", uId);
-            replyWrapper.eq("id", rId);
             if(replyService.remove(replyWrapper)) {
                 return R.ok();
             } else {
