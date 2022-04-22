@@ -1,7 +1,10 @@
 package com.redskt.classroom.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import java.util.Date;
+
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
@@ -31,9 +34,7 @@ public class RedBlogComment implements Serializable {
     private String id;
 
     private String uid;
-
-    private String touid;
-
+    
     private String rid;
 
     private String content;
@@ -41,10 +42,11 @@ public class RedBlogComment implements Serializable {
     private Integer good;
 
     @ApiModelProperty(value = "创建时间")
+    @TableField(fill = FieldFill.INSERT)
     private Date gmtCreate;
 
     @ApiModelProperty(value = "更新时间")
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date gmtModified;
-
 
 }

@@ -74,14 +74,26 @@ public class RedBlogController {
     }
 
     @GetMapping("getDetail/{praticeId}")
-    public R index(@PathVariable String praticeId) {
-        if (praticeId.length()>0) {
-            RedClassBlogDetailVo detail = blogService.getRedClassBlogDetail(praticeId);
+    public R index(@PathVariable String pId) {
+        if (pId.length()>0) {
+            RedClassBlogDetailVo detail = blogService.getRedClassBlogDetail(pId);
             return R.ok().data("pitem",detail);
         } else {
             return R.error("参数不合法，请验证");
         }
     }
+
+    @GetMapping("getCommentList/{praticeId}")
+    public R getCommentList(@PathVariable String pId) {
+        if (pId.length()>0) {
+            RedClassBlogDetailVo detail = blogService.getRedClassBlogDetail(pId);
+            return R.ok().data("pitem",detail);
+        } else {
+            return R.error("参数不合法，请验证");
+        }
+    }
+
+
 
     @GetMapping("good/{praticeId}")
     public R getGoodState(@PathVariable String praticeId, HttpServletRequest request) {
