@@ -12,7 +12,7 @@ import com.redskt.classroom.entity.vo.RedClassBlogDetailVo;
  * @author tanyuehong
  * @since 2021-11-17
  */
-public interface OpBlogDetailService extends IService<OpBlogDetail> {
+public interface RedBlogDetailService extends IService<OpBlogDetail> {
 
     RedClassBlogDetailVo getRedClassBlogDetail(String bid);
 

@@ -32,7 +32,7 @@ public class RedCourseController {
     private RedUserService userService;
 
     @Autowired
-    private OpBlogDetailService blogDetailService;
+    private RedBlogDetailService blogDetailService;
 
     @Autowired
     private EduTechnologyBookService bookService;

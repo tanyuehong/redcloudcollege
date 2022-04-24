@@ -1,18 +1,13 @@
 package com.redskt.classroom.controller;
 
 
-import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.redskt.classroom.entity.*;
+import com.redskt.classroom.entity.vo.RedBlogCommentVo;
 import com.redskt.classroom.entity.vo.RedClassBlogDetailVo;
-import com.redskt.classroom.service.OpBlogDetailService;
-import com.redskt.classroom.service.OpBlogTypeService;
-import com.redskt.classroom.service.RedBlogGoodService;
-import com.redskt.classroom.service.RedCourseService;
+import com.redskt.classroom.service.*;
 import com.redskt.commonutils.R;
 import com.redskt.security.TokenManager;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,10 +28,13 @@ import java.util.List;
 public class RedBlogController {
 
     @Autowired
-    private OpBlogTypeService typeService;
+    private RedBlogTypeService typeService;
 
     @Autowired
-    private OpBlogDetailService blogService;
+    private RedBlogDetailService blogService;
+
+    @Autowired
+    private RedBlogCommentService commentService;
 
     @Autowired
     private RedBlogGoodService goodService;
@@ -83,17 +81,15 @@ public class RedBlogController {
         }
     }
 
-    @GetMapping("getCommentList/{pId}")
-    public R getCommentList(@PathVariable String pId) {
-        if (pId.length()>0) {
-            RedClassBlogDetailVo detail = blogService.getRedClassBlogDetail(pId);
-            return R.ok().data("pitem",detail);
+    @GetMapping("getCommentList/{bId}")
+    public R getCommentList(@PathVariable String bId) {
+        if (bId.length()>0) {
+            List<RedBlogCommentVo> commentList = commentService.getRedBlogCommentList(bId,6,1);
+            return R.ok().data("comments",commentList);
         } else {
             return R.error("参数不合法，请验证");
         }
     }
-
-
 
     @GetMapping("good/{praticeId}")
     public R getGoodState(@PathVariable String praticeId, HttpServletRequest request) {

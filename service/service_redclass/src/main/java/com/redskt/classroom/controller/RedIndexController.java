@@ -29,7 +29,7 @@ public class RedIndexController {
     private RedBannerService bannerService;
 
     @Autowired
-    private OpBlogDetailService blogService;
+    private RedBlogDetailService blogService;
 
     @Autowired
     private EduTechnologyBookService bookService;
