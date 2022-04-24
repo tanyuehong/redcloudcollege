@@ -73,7 +73,7 @@ public class RedBlogController {
         return R.ok().data("typeList",typeList).data("subTypeList",subTypeList).data("blogList",blogList);
     }
 
-    @GetMapping("getDetail/{praticeId}")
+    @GetMapping("getDetail/{pId}")
     public R index(@PathVariable String pId) {
         if (pId.length()>0) {
             RedClassBlogDetailVo detail = blogService.getRedClassBlogDetail(pId);
@@ -83,7 +83,7 @@ public class RedBlogController {
         }
     }
 
-    @GetMapping("getCommentList/{praticeId}")
+    @GetMapping("getCommentList/{pId}")
     public R getCommentList(@PathVariable String pId) {
         if (pId.length()>0) {
             RedClassBlogDetailVo detail = blogService.getRedClassBlogDetail(pId);
