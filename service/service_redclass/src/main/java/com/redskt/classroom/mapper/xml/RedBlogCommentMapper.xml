@@ -31,20 +31,16 @@
 
 
     <select id="getRedBlogCommentList" resultMap="blogCommentMap">
-        SELECT comment.id,comment.bid,comment.content,(select count(red_blog_good.id) from red_blog_good) as goo,comment.gmt_create,
-        ruser.id,ruser.username,ruser.avatar,
-
-        rcomment.id as replyId,rcomment.content as rcontent, rcomment.rid,(select count(red_blog_good.id) from red_blog_good) as cgood,
-        rcomment.gmt_create as cgmt_create,
-
+        SELECT comment.id,comment.bid,comment.content,comment.gmt_create,
+        ruser.id as uid,ruser.username,ruser.avatar,
+        rcomment.id as replyId,rcomment.content as rcontent, rcomment.rid,rcomment.gmt_create as cgmt_create,
         rcomment.uid as cuid,cuser.nickname as cname,cuser.avatar as cavatar,
         rcomment.touid as touid,tuser.nickname as tname
 
         FROM red_blog_comment comment
         LEFT JOIN edu_user ruser on comment.uid = ruser.id
         LEFT JOIN (
-            SELECT myc.id,myc.content,myc.good,myc.rid,myc.uid,myc.touid,myc.gmt_create,!isnull(cgood.id) as goodc,
-                (select COUNT(red_blog_good.id) from  red_blog_good  where red_blog_good.bid = #{bid} ) as rgcount
+            SELECT myc.id,myc.content,myc.good,myc.rid,myc.uid,myc.touid,myc.gmt_create,!isnull(cgood.id) as goodc
             FROM (
                  SELECT * FROM  (
                  SELECT ROW_NUMBER() OVER(PARTITION BY rid ORDER BY gmt_create DESC) rn ,red_blog_comment_reply.*
