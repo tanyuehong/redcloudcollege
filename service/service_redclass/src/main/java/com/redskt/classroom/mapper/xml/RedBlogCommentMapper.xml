@@ -17,8 +17,8 @@
 
     <resultMap id="commentMap" type="com.redskt.classroom.entity.vo.RedBlogCommentReplyVo">
         <id column="replyId" property="id"/>
-        <id column="ccontent" property="content"/>
-        <id column="crid" property="rid"/>
+        <id column="rcontent" property="content"/>
+        <id column="rid" property="rid"/>
         <id column="cuid" property="uid"/>
         <id column="touid" property="touid"/>
         <id column="cname" property="name"/>
@@ -31,27 +31,28 @@
 
 
     <select id="getRedBlogCommentList" resultMap="blogCommentMap">
-        SELECT comment.id,comment.bid,comment.content,(select count(select red_blog_good.id from red_blog_good)) as good,comment.gmt_create,
+        SELECT comment.id,comment.bid,comment.content,(select count(red_blog_good.id) from red_blog_good) as goo,comment.gmt_create,
         ruser.id,ruser.username,ruser.avatar,
-        reply.id as replyId,reply.content,reply.good,reply.bad,reply.uid,reply.gmt_create, ruser.nickname as username,
 
-        ruser.avatar, rcomment.id ascommentId, rcomment.content as ccontent,rcomment.good as cgood,rcomment.goodc as goodcomment,
-        rcomment.rid as crid,rcomment.uid as cuid,rcomment.touid,rcomment.gmt_create as cgmt_create,cuser.nickname as cname,cuser.avatar as cavatar,tuser.nickname as tname
+        rcomment.id as replyId,rcomment.content as rcontent, rcomment.rid,(select count(red_blog_good.id) from red_blog_good) as cgood,
+        rcomment.gmt_create as cgmt_create,
+
+        rcomment.uid as cuid,cuser.nickname as cname,cuser.avatar as cavatar,
+        rcomment.touid as touid,tuser.nickname as tname
+
         FROM red_blog_comment comment
         LEFT JOIN edu_user ruser on comment.uid = ruser.id
-
         LEFT JOIN (
             SELECT myc.id,myc.content,myc.good,myc.rid,myc.uid,myc.touid,myc.gmt_create,!isnull(cgood.id) as goodc,
-            ( select COUNT(red_blog_good.id) from  red_blog_good  where red_blog_good.bid = #{bid} ) as rgcount
+                (select COUNT(red_blog_good.id) from  red_blog_good  where red_blog_good.bid = #{bid} ) as rgcount
             FROM (
-                    SELECT * FROM  (
-                         SELECT ROW_NUMBER() OVER(PARTITION BY rid ORDER BY gmt_create DESC) rn ,red_blog_comment_reply.*
-                         FROM red_blog_comment_reply) t2 WHERE t2.rn &lt; #{size}
-                ) myc
-             LEFT JOIN red_blog_good cgood on myc.uid = cgood.uid and myc.id = cgood.bid and cgood.is_deleted = 0
-             ORDER BY gmt_create,goodc DESC
+                 SELECT * FROM  (
+                 SELECT ROW_NUMBER() OVER(PARTITION BY rid ORDER BY gmt_create DESC) rn ,red_blog_comment_reply.*
+                 FROM red_blog_comment_reply) t2 WHERE t2.rn &lt; #{size}
+            ) myc
+            LEFT JOIN red_blog_good cgood on myc.uid = cgood.uid and myc.id = cgood.bid and cgood.is_deleted = 0
+            ORDER BY gmt_create,goodc DESC
         ) as rcomment on  rcomment.rid =comment.id
-
 
         LEFT JOIN edu_user cuser on rcomment.uid = cuser.id
         LEFT JOIN edu_user tuser on rcomment.touid = tuser.id
@@ -59,10 +60,10 @@
         WHERE comment.id in
         ( SELECT id FROM
         ( SELECT id
-        FROM red_ask_reply
-        WHERE id = #{bid}
+        FROM red_blog_comment
+        WHERE bid = #{bid}
         <if test="type == 1">
-            ORDER BY red_blog_comment.good DESC
+            ORDER BY good DESC
         </if>
         <if test="type == 2">
             ORDER BY red_blog_comment.gmt_create DESC
