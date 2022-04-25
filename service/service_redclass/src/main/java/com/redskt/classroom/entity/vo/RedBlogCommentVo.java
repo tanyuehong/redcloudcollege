@@ -11,15 +11,13 @@ public class RedBlogCommentVo {
 
     private String uid;
 
-    private String qid;
+    private String bid;
 
     private String content;
 
     private List<ReplyCommentVo> comments;
 
     private Integer good;
-
-    private Integer bad;
 
     private boolean goodreply;
 
