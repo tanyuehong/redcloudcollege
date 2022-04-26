@@ -24,8 +24,6 @@ public class RedBlogCommentReplyVo {
 
     private String avatar;
 
-    private int good;
-
     private int goodcomment;
 
     private Date gmtCreate;

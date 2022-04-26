@@ -6,7 +6,6 @@
         <id column="id" property="id"/>
         <id column="bid" property="bid"/>
         <id column="content" property="content"/>
-        <id column="good" property="good"/>
         <id column="gmt_create" property="gmtCreate"/>
         <id column="uid" property="uid"/>
         <id column="username" property="username"/>
@@ -24,7 +23,6 @@
         <id column="cname" property="name"/>
         <id column="tname" property="toname"/>
         <id column="cavatar" property="avatar"/>
-        <id column="cgood" property="good"/>
         <id column="goodcomment" property="goodcomment"/>
         <id column="cgmt_create" property="gmtCreate"/>
     </resultMap>
