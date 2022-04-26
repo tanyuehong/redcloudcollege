@@ -1,10 +1,7 @@
 package com.redskt.classroom.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import java.util.Date;
-
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
@@ -19,13 +16,13 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author tanyuehong
- * @since 2022-04-21
+ * @since 2022-04-26
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="RedBlogComment对象", description="")
-public class RedBlogComment implements Serializable {
+@ApiModel(value="RedBlogCommentReply对象", description="")
+public class RedBlogCommentReply implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -34,19 +31,20 @@ public class RedBlogComment implements Serializable {
     private String id;
 
     private String uid;
-    
-    private String bid;
+
+    private String touid;
+
+    private String rid;
 
     private String content;
 
     private Integer good;
 
     @ApiModelProperty(value = "创建时间")
-    @TableField(fill = FieldFill.INSERT)
     private Date gmtCreate;
 
     @ApiModelProperty(value = "更新时间")
-    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date gmtModified;
+
 
 }
