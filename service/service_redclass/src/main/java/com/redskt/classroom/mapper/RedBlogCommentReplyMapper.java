@@ -2,6 +2,8 @@ package com.redskt.classroom.mapper;
 
 import com.redskt.classroom.entity.RedBlogCommentReply;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.redskt.classroom.entity.vo.RedBlogCommentReplyVo;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -12,5 +14,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2022-04-26
  */
 public interface RedBlogCommentReplyMapper extends BaseMapper<RedBlogCommentReply> {
+
+    RedBlogCommentReplyVo getBlogCommentReplyOne(@Param("rid")  String rid);
 
 }

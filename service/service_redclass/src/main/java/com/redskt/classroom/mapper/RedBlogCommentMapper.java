@@ -19,4 +19,6 @@ public interface RedBlogCommentMapper extends BaseMapper<RedBlogComment> {
 
     List<RedBlogCommentVo> getRedBlogCommentList(@Param("bid")  String bid,@Param("size")  Integer rsize,@Param("type")  int type);
 
+    RedBlogCommentVo getBlogCommentOne(@Param("cid")  String cid);
+
 }

@@ -2,6 +2,8 @@ package com.redskt.classroom.controller;
 
 import com.redskt.classroom.entity.RedBlogComment;
 import com.redskt.classroom.entity.RedBlogCommentReply;
+import com.redskt.classroom.entity.vo.RedBlogCommentReplyVo;
+import com.redskt.classroom.entity.vo.RedBlogCommentVo;
 import com.redskt.classroom.service.RedBlogCommentReplyService;
 import com.redskt.classroom.service.RedBlogCommentService;
 import com.redskt.commonutils.R;
@@ -29,6 +31,7 @@ public class RedBlogUserController {
         String uId = TokenManager.getMemberIdByJwtToken(request);
         if(uId.length()>0 && comment.getUid().length()>0 && uId.equals(comment.getUid())) {
             if (commentService.save(comment)) {
+                RedBlogCommentVo curComment = commentService.getBlogCommentOne(comment.getId());
                 return R.ok().data("comment",comment);
             } else  {
                 return R.error("评论文章失败，请重新尝试！");
@@ -43,7 +46,8 @@ public class RedBlogUserController {
         String uId = TokenManager.getMemberIdByJwtToken(request);
         if(uId.length()>0 && reply.getUid().length()>0 && uId.equals(reply.getUid())) {
             if (replyService.save(reply)) {
-                return R.ok().data("reply",reply);
+                RedBlogCommentReplyVo curReply = replyService.getBlogCommentReplyOne(reply.getId());
+                return R.ok().data("reply",curReply);
             } else  {
                 return R.error("评论文章失败，请重新尝试！");
             }

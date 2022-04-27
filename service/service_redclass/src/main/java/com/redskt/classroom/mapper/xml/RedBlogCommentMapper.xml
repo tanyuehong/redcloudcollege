@@ -10,11 +10,11 @@
         <id column="uid" property="uid"/>
         <id column="username" property="username"/>
         <id column="avatar" property="avatar"/>
-        <collection property="comments" resultMap="commentMap">
+        <collection property="comments" resultMap="commentReplyMap">
         </collection>
     </resultMap>
 
-    <resultMap id="commentMap" type="com.redskt.classroom.entity.vo.RedBlogCommentReplyVo">
+    <resultMap id="commentReplyMap" type="com.redskt.classroom.entity.vo.RedBlogCommentReplyVo">
         <id column="replyId" property="id"/>
         <id column="rcontent" property="content"/>
         <id column="rid" property="rid"/>
@@ -64,5 +64,14 @@
         </if>
         LIMIT #{size} ) as subreply )
     </select>
+
+    <select id="getBlogCommentOne" resultMap="blogCommentMap">
+        SELECT comment.id,comment.bid,comment.content,comment.gmt_create,
+        ruser.id as uid,ruser.nickname as username,ruser.avatar
+        FROM red_blog_comment comment
+        LEFT JOIN edu_user ruser on comment.uid = ruser.id
+        WHERE  comment.id = #{cid}
+    </select>
+
 
 </mapper>

@@ -2,4 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.redskt.classroom.mapper.RedBlogCommentReplyMapper">
 
+    <resultMap id="commentReplyMap" type="com.redskt.classroom.entity.vo.RedBlogCommentReplyVo">
+        <id column="replyId" property="id"/>
+        <id column="rcontent" property="content"/>
+        <id column="rid" property="rid"/>
+        <id column="cuid" property="uid"/>
+        <id column="touid" property="touid"/>
+        <id column="cname" property="name"/>
+        <id column="tname" property="toname"/>
+        <id column="cavatar" property="avatar"/>
+        <id column="goodcomment" property="goodcomment"/>
+        <id column="cgmt_create" property="gmtCreate"/>
+    </resultMap>
+
+    <select id="getBlogCommentReplyOne" resultMap="commentReplyMap">
+        SELECT rcomment.id as replyId,rcomment.content as rcontent, rcomment.rid,rcomment.gmt_create as cgmt_create,
+        rcomment.uid as cuid,cuser.nickname as cname,cuser.avatar as cavatar,
+        rcomment.touid as touid,tuser.nickname as tname
+        FROM red_blog_comment_reply rcomment
+        LEFT JOIN edu_user cuser on rcomment.uid = cuser.id
+        LEFT JOIN edu_user tuser on rcomment.touid = tuser.id
+        WHERE  rcomment.id = #{rid}
+    </select>
+
 </mapper>
