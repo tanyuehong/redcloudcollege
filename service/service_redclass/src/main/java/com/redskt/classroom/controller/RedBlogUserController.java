@@ -58,8 +58,8 @@ public class RedBlogUserController {
         }
     }
 
-    @GetMapping("addBlogCommentGood/{cId}/{type}")
-    public R addBlogCommentGood(@PathVariable String cId,@PathVariable int type, HttpServletRequest request) {
+    @GetMapping("addCommentGood/{cId}/{type}")
+    public R addCommentGood(@PathVariable String cId,@PathVariable int type, HttpServletRequest request) {
         String uId = TokenManager.getMemberIdByJwtToken(request);
         if (uId.length() > 0 && cId.length()>0) {
             if(goodService.updateCommentGoodState(uId,cId, type==1?1:2)<=0) {

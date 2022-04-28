@@ -16,6 +16,8 @@ public class RedBlogCommentReplyVo {
 
     private String uid;
 
+    private boolean goodreply;
+
     private String name;
 
     private String touid;

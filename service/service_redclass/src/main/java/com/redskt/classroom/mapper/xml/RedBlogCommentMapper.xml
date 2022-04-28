@@ -7,6 +7,7 @@
         <id column="bid" property="bid"/>
         <id column="content" property="content"/>
         <id column="good" property="good"/>
+        <id column="goodreply" property="goodreply"/>
         <id column="gmt_create" property="gmtCreate"/>
         <id column="uid" property="uid"/>
         <id column="username" property="username"/>
@@ -20,6 +21,7 @@
         <id column="rcontent" property="content"/>
         <id column="rid" property="rid"/>
         <id column="cgood" property="good"/>
+        <id column="goodr" property="goodreply"/>
         <id column="cuid" property="uid"/>
         <id column="touid" property="touid"/>
         <id column="cname" property="name"/>
@@ -31,7 +33,7 @@
 
 
     <select id="getRedBlogCommentList" resultMap="blogCommentMap">
-        SELECT comment.id,comment.bid,comment.content,comment.gmt_create,comment.good,
+        SELECT comment.id,comment.bid,comment.content,comment.gmt_create,comment.good,!isnull(cgood.id) as goodreply,
         ruser.id as uid,ruser.nickname as username,ruser.avatar,
         rcomment.id as replyId,rcomment.content as rcontent, rcomment.rid, rcomment.good as cgood,rcomment.gmt_create as cgmt_create,
         rcomment.uid as cuid,cuser.nickname as cname,cuser.avatar as cavatar,
@@ -40,16 +42,17 @@
         FROM red_blog_comment comment
         LEFT JOIN edu_user ruser on comment.uid = ruser.id
         LEFT JOIN (
-            SELECT myc.id,myc.content,myc.good,myc.rid,myc.uid,myc.touid,myc.gmt_create,!isnull(cgood.id) as goodc
+            SELECT myc.id,myc.content,myc.good,myc.rid,myc.uid,myc.touid,myc.gmt_create,!isnull(rgood.id) as goodr
             FROM (
                  SELECT * FROM  (
                  SELECT ROW_NUMBER() OVER(PARTITION BY rid ORDER BY gmt_create DESC) rn ,red_blog_comment_reply.*
                  FROM red_blog_comment_reply) t2 WHERE t2.rn &lt; #{rsize}
             ) myc
-            LEFT JOIN red_blog_good cgood on myc.uid = cgood.uid and myc.id = cgood.bid and cgood.is_deleted = 0
-            ORDER BY gmt_create,goodc DESC
+            LEFT JOIN red_blog_comment_good rgood on myc.uid = rgood.uid and myc.id = rgood.cid and rgood.gtype = 2 and rgood.is_deleted = 0
+            ORDER BY gmt_create,goodr DESC
         ) as rcomment on  rcomment.rid =comment.id
 
+        LEFT JOIN red_blog_comment_good cgood on comment.uid = cgood.uid and comment.id = cgood.cid and cgood.gtype = 1 and cgood.is_deleted = 0
         LEFT JOIN edu_user cuser on rcomment.uid = cuser.id
         LEFT JOIN edu_user tuser on rcomment.touid = tuser.id
 
