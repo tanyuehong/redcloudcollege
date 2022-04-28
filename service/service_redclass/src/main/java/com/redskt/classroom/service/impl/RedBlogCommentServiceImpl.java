@@ -22,7 +22,11 @@ public class RedBlogCommentServiceImpl extends ServiceImpl<RedBlogCommentMapper,
 
     @Override
     public List<RedBlogCommentVo> getRedBlogCommentList(String bid,Integer rsize,int type) {
-        return baseMapper.getRedBlogCommentList(bid,rsize,type);
+        if (type == 1) {
+            return  baseMapper.getRedBlogCommentList(bid,5,5,1);
+        } else {
+            return  baseMapper.getRedBlogCommentList(bid,5,5,2);
+        }
     }
 
     @Override

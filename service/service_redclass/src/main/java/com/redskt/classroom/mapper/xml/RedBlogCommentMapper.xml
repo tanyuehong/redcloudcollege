@@ -6,6 +6,7 @@
         <id column="id" property="id"/>
         <id column="bid" property="bid"/>
         <id column="content" property="content"/>
+        <id column="good" property="good"/>
         <id column="gmt_create" property="gmtCreate"/>
         <id column="uid" property="uid"/>
         <id column="username" property="username"/>
@@ -18,6 +19,7 @@
         <id column="replyId" property="id"/>
         <id column="rcontent" property="content"/>
         <id column="rid" property="rid"/>
+        <id column="cgood" property="good"/>
         <id column="cuid" property="uid"/>
         <id column="touid" property="touid"/>
         <id column="cname" property="name"/>
@@ -29,9 +31,9 @@
 
 
     <select id="getRedBlogCommentList" resultMap="blogCommentMap">
-        SELECT comment.id,comment.bid,comment.content,comment.gmt_create,
+        SELECT comment.id,comment.bid,comment.content,comment.gmt_create,comment.good,
         ruser.id as uid,ruser.nickname as username,ruser.avatar,
-        rcomment.id as replyId,rcomment.content as rcontent, rcomment.rid,rcomment.gmt_create as cgmt_create,
+        rcomment.id as replyId,rcomment.content as rcontent, rcomment.rid, rcomment.good as cgood,rcomment.gmt_create as cgmt_create,
         rcomment.uid as cuid,cuser.nickname as cname,cuser.avatar as cavatar,
         rcomment.touid as touid,tuser.nickname as tname
 
@@ -42,7 +44,7 @@
             FROM (
                  SELECT * FROM  (
                  SELECT ROW_NUMBER() OVER(PARTITION BY rid ORDER BY gmt_create DESC) rn ,red_blog_comment_reply.*
-                 FROM red_blog_comment_reply) t2 WHERE t2.rn &lt; #{size}
+                 FROM red_blog_comment_reply) t2 WHERE t2.rn &lt; #{rsize}
             ) myc
             LEFT JOIN red_blog_good cgood on myc.uid = cgood.uid and myc.id = cgood.bid and cgood.is_deleted = 0
             ORDER BY gmt_create,goodc DESC

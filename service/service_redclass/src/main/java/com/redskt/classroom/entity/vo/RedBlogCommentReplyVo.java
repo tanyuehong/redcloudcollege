@@ -12,6 +12,8 @@ public class RedBlogCommentReplyVo {
 
     private String content;
 
+    private int good;
+
     private String uid;
 
     private String name;
@@ -23,8 +25,6 @@ public class RedBlogCommentReplyVo {
     private boolean showeditor;
 
     private String avatar;
-
-    private int goodcomment;
 
     private Date gmtCreate;
 }
