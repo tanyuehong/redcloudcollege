@@ -21,4 +21,8 @@ public interface RedBlogCommentMapper extends BaseMapper<RedBlogComment> {
 
     RedBlogCommentVo getBlogCommentOne(@Param("cid")  String cid);
 
+    void addCommentGoodCount(@Param("cid")  String cid);
+
+    void prepCommentGoodCount(@Param("cid")  String cid);
+
 }

@@ -18,4 +18,8 @@ public interface RedBlogCommentService extends IService<RedBlogComment> {
     List<RedBlogCommentVo> getRedBlogCommentList(String bid,Integer rsize,int type);
 
     RedBlogCommentVo getBlogCommentOne(String cid);
+
+    void addCommentGoodCount(String cid);
+
+    void prepCommentGoodCount(String cid);
 }

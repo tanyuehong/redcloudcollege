@@ -16,4 +16,8 @@ public interface RedBlogCommentReplyService extends IService<RedBlogCommentReply
 
     RedBlogCommentReplyVo getBlogCommentReplyOne(String cid);
 
+    void addCommentReplyGoodCount(String cid);
+
+    void prepCommentReplyGoodCount(String cid);
+
 }

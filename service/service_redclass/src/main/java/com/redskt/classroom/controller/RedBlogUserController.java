@@ -1,8 +1,10 @@
 package com.redskt.classroom.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.redskt.classroom.entity.RedBlogComment;
 import com.redskt.classroom.entity.RedBlogCommentGood;
 import com.redskt.classroom.entity.RedBlogCommentReply;
+import com.redskt.classroom.entity.RedQustionGood;
 import com.redskt.classroom.entity.vo.RedBlogCommentReplyVo;
 import com.redskt.classroom.entity.vo.RedBlogCommentVo;
 import com.redskt.classroom.service.RedBlogCommentGoodService;
@@ -73,5 +75,25 @@ public class RedBlogUserController {
         } else {
             return R.error("参数验证失败！");
         }
+    }
+
+    @GetMapping("cancleCommentGood/{cId}/{type}")
+    public R cancleGood(@PathVariable String cId,@PathVariable int type, HttpServletRequest request) {
+        if (cId.length() > 0) {
+            String uId = TokenManager.getMemberIdByJwtToken(request);
+            if (uId.length() > 0) {
+                QueryWrapper<RedBlogCommentGood> goodQueryWrapper = new QueryWrapper<>();
+                goodQueryWrapper.eq("cid", cId);
+                goodQueryWrapper.eq("uid", uId);
+                goodQueryWrapper.eq("gtype", type == 1 ? 1:2);
+                if (goodService.remove(goodQueryWrapper)) {
+                    // userAskService.updateQustionGoodCount(false, qId);
+                    return R.ok().data("goodqustion", false);
+                }
+            } else {
+                return R.error("登录信息异常，请重新登录后尝试！");
+            }
+        }
+        return R.error("取消点赞失败，请稍后重试哈！");
     }
 }

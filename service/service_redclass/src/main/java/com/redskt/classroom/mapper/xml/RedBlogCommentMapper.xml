@@ -78,5 +78,16 @@
         WHERE  comment.id = #{cid}
     </select>
 
+    <update id="addCommentGoodCount">
+        update red_blog_comment
+        set good = good+1
+        where id = #{cid}
+    </update>
+
+    <update id="prepCommentGoodCount">
+        update red_blog_comment
+        set good = good-1
+        where id = #{cid}
+    </update>
 
 </mapper>
