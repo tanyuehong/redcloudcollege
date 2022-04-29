@@ -35,7 +35,7 @@
     <select id="getRedBlogCommentList" resultMap="blogCommentMap">
         SELECT comment.id,comment.bid,comment.content,comment.gmt_create,comment.good,!isnull(cgood.id) as goodreply,
         ruser.id as uid,ruser.nickname as username,ruser.avatar,
-        rcomment.id as replyId,rcomment.content as rcontent, rcomment.rid, rcomment.good as cgood,rcomment.gmt_create as cgmt_create,
+        rcomment.id as replyId,rcomment.content as rcontent, rcomment.rid, rcomment.good as cgood,rcomment.gmt_create as cgmt_create,rcomment.goodr,
         rcomment.uid as cuid,cuser.nickname as cname,cuser.avatar as cavatar,
         rcomment.touid as touid,tuser.nickname as tname
 
