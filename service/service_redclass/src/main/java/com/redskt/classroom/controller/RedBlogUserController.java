@@ -71,6 +71,11 @@ public class RedBlogUserController {
                 good.setGtype(type==1?1:2);
                 goodService.save(good);
             }
+            if(type == 1) {
+                commentService.addCommentGoodCount(cId);
+            } else {
+                replyService.addCommentReplyGoodCount(cId);
+            }
             return R.ok().data("goodState",1);
         } else {
             return R.error("参数验证失败！");
@@ -87,7 +92,11 @@ public class RedBlogUserController {
                 goodQueryWrapper.eq("uid", uId);
                 goodQueryWrapper.eq("gtype", type == 1 ? 1:2);
                 if (goodService.remove(goodQueryWrapper)) {
-                    // userAskService.updateQustionGoodCount(false, qId);
+                    if(type == 1) {
+                        commentService.prepCommentGoodCount(cId);
+                    } else {
+                        replyService.prepCommentReplyGoodCount(cId);
+                    }
                     return R.ok().data("goodqustion", false);
                 }
             } else {

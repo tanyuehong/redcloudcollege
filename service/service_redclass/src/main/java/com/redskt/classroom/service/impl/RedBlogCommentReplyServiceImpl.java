@@ -22,4 +22,14 @@ public class RedBlogCommentReplyServiceImpl extends ServiceImpl<RedBlogCommentRe
     public RedBlogCommentReplyVo getBlogCommentReplyOne(String rid) {
         return baseMapper.getBlogCommentReplyOne(rid);
     }
+
+    @Override
+    public void addCommentReplyGoodCount(String cid) {
+        baseMapper.addCommentReplyGoodCount(cid);
+    }
+
+    @Override
+    public void prepCommentReplyGoodCount(String cid) {
+        baseMapper.prepCommentReplyGoodCount(cid);
+    }
 }

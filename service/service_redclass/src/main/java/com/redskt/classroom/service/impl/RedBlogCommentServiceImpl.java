@@ -35,12 +35,12 @@ public class RedBlogCommentServiceImpl extends ServiceImpl<RedBlogCommentMapper,
     }
 
     @Override
-    public void addCommentReplyGoodCount(String cid) {
-
+    public void addCommentGoodCount(String cid) {
+        baseMapper.addCommentGoodCount(cid);
     }
 
     @Override
-    public void prepCommentReplyGoodCount(String cid) {
-        
+    public void prepCommentGoodCount(String cid) {
+        baseMapper.prepCommentGoodCount(cid);
     }
 }
