@@ -68,6 +68,12 @@
             ORDER BY red_blog_comment.gmt_create DESC
         </if>
         LIMIT #{size} ) as subreply )
+        <if test="type == 1">
+            ORDER BY good DESC
+        </if>
+        <if test="type == 2">
+            ORDER BY gmt_create DESC
+        </if>
     </select>
 
     <select id="getBlogCommentOne" resultMap="blogCommentMap">
