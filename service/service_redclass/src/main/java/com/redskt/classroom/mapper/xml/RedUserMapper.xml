@@ -3,17 +3,42 @@
 <mapper namespace="com.redskt.classroom.mapper.RedUserMapper">
 
     <select id="getUserAskInfo" resultType="com.redskt.classroom.entity.vo.RedUserAskVo">
-        SELECT (SELECT count(reply.id)
+        SELECT eduser.id,
+         (SELECT count(reply.id)
           FROM  red_ask_reply reply
           WHERE reply.uid = #{uid} and reply.state = 1
-        ) as aDopt,(SELECT count(reply.id)
+        ) as aDopt,(SELECT count(askq.id)
+          FROM  edu_user_ask askq
+          WHERE askq.uid = #{uid}
+        ) as qCount,
+        (SELECT count(qqgood.id)
+          FROM  edu_user_ask askq
+          LEFT OUTER JOIN  red_qustion_good qqgood on qqgood.qid = askq.id
+          WHERE askq.uid = #{uid}
+        ) as qGood,
+         (SELECT count(rrgood.id)
+          FROM  red_ask_reply reply
+          LEFT OUTER JOIN  red_reply_good rrgood on rrgood.rid = reply.id
+          WHERE reply.uid = #{uid}
+        ) as rGood,
+        (SELECT count(ccgood.id)
+          FROM  red_ask_reply_comment comment
+          LEFT OUTER JOIN  red_reply_comment_good ccgood on ccgood.cid = comment.id
+          WHERE comment.uid = #{uid}
+        ) as cGood,
+         (SELECT count(reply.id)
           FROM  red_ask_reply reply
           WHERE reply.uid = #{uid}
-        ) as qCount, ( SELECT count(reply.id)
-          FROM  red_reply_good rgood
-
-          WHERE rgood.uid = #{uid}
-        ) as qCount
+        ) as qAnswer,
+        (SELECT count(comment.id)
+          FROM  red_ask_reply reply
+          LEFT OUTER JOIN  red_ask_reply_comment comment on comment.rid = reply.id and comment.touid = null
+          WHERE reply.uid = #{uid}
+        ) as cComment,
+         (SELECT count(comment.id)
+          FROM  red_ask_reply_comment comment
+          WHERE comment.touid = #{uid}
+        ) as crComment
         FROM edu_user eduser
         where eduser.id = #{uid}
     </select>

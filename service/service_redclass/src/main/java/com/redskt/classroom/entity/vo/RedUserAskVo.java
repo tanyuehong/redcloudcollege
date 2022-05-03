@@ -7,6 +7,8 @@ import java.util.List;
 @Data
 public class RedUserAskVo {
 
+    private String id;
+
     private float qMoney;  // 问答余额
 
     private int aDopt; // 被采纳
@@ -21,6 +23,8 @@ public class RedUserAskVo {
 
     private int qAnswer;   //  回答数量
 
-    private int cComment;  //  评论数量
+    private int cComment;  //  回答回复数量
+
+    private int crComment;  //  评论回复数量
 
 }
