@@ -2,6 +2,8 @@ package com.redskt.classroom.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.redskt.classroom.entity.RedClassUser;
+import com.redskt.classroom.entity.RedUserFocus;
+import com.redskt.classroom.service.RedUserFocusService;
 import com.redskt.classroom.service.RedUserService;
 import com.redskt.commonutils.MD5;
 import com.redskt.commonutils.RequestParmUtil;
@@ -29,10 +31,15 @@ import java.util.*;
 @RequestMapping("/ucenter")
 @CrossOrigin(allowCredentials="true",maxAge = 3600)
 public class RedUserController {
+
+    private static final List<String> CONTENT_TYPES = Arrays.asList("image/jpeg", "image/png");
+
     @Autowired
     private RedUserService userService;
 
-    private static final List<String> CONTENT_TYPES = Arrays.asList("image/jpeg", "image/png");
+    @Autowired
+    private RedUserFocusService focusService;
+
 
     //根据token获取用户信息
     @GetMapping("getUserInfo")
@@ -180,5 +187,46 @@ public class RedUserController {
             returnMap.put("tips","密码验证失败");
             return R.ok().data(returnMap);
         }
+    }
+
+    @GetMapping("addUserFocus/{fId}")
+    public R addUserFocus(@PathVariable String fId, HttpServletRequest request) {
+        if (fId.length() > 0) {
+            String uId = TokenManager.getMemberIdByJwtToken(request);
+            if (uId.length() > 0) {
+                int count = focusService.updateUserFocus(uId, fId);
+                if (count <= 0) {
+                    RedUserFocus focus = new RedUserFocus();
+                    focus.setFid(fId);
+                    focus.setUid(uId);
+                    if (focusService.save(focus)) {
+                        return R.ok().data("focus", true);
+                    }
+                } else {
+                    return R.ok().data("focus", true);
+                }
+            } else {
+                return R.error("登录信息异常，请重新登录后尝试！");
+            }
+        }
+        return R.error("关注失败，请稍后重试哈！");
+    }
+
+    @GetMapping("cancleUserFocus/{fId}")
+    public R cancleUserFocus(@PathVariable String fId, HttpServletRequest request) {
+        if (fId.length() > 0) {
+            String uId = TokenManager.getMemberIdByJwtToken(request);
+            if (uId.length() > 0) {
+                QueryWrapper<RedUserFocus> focusWrapper = new QueryWrapper<>();
+                focusWrapper.eq("uid", uId);
+                focusWrapper.eq("fid", fId);
+                if (focusService.remove(focusWrapper)) {
+                    return R.ok().data("focus", false);
+                }
+            } else {
+                return R.error("登录信息异常，请重新登录后尝试！");
+            }
+        }
+        return R.error("取消关注失败，请稍后重试哈！");
     }
 }

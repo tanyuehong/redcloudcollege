@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.redskt.classroom.entity.RedClassUser;
 import com.redskt.classroom.entity.vo.RedClassRegisterVo;
 import com.redskt.classroom.entity.vo.RedClassUserVo;
+import com.redskt.classroom.entity.vo.RedUserAskVo;
 import com.redskt.classroom.mapper.RedUserMapper;
 import com.redskt.classroom.service.RedUserService;
 import com.redskt.commonutils.MD5;
@@ -26,6 +27,11 @@ import java.util.Map;
 @Service
 public class RedUserServiceImpl extends ServiceImpl<RedUserMapper, RedClassUser> implements RedUserService {
 
+
+    @Override
+    public RedUserAskVo getAskUserInfo(String uid) {
+        return baseMapper.getUserAskInfo(uid);
+    }
     @Override
     public RedClassUserVo getUserInfoFocusCount(String uId) {
         return baseMapper.getUserInfoFocusCount(uId);

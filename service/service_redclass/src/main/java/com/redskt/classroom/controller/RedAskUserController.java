@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.qiniu.util.Auth;
 import com.redskt.classroom.entity.*;
 import com.redskt.classroom.entity.vo.RedAskReplyVo;
+import com.redskt.classroom.entity.vo.RedUserAskVo;
 import com.redskt.classroom.entity.vo.ReplyCommentVo;
 import com.redskt.classroom.service.*;
 import com.redskt.commonutils.R;
@@ -41,6 +42,9 @@ public class RedAskUserController {
 
     @Autowired
     private RedAskWaringService waringService;
+
+    @Autowired
+    private RedUserService userService;
 
     @PostMapping("submit")
     public R registerUser(@RequestBody EduUserAsk userAsk) {
@@ -98,17 +102,12 @@ public class RedAskUserController {
         }
     }
 
-    @GetMapping("getUserQustionInfo")
-    public R getUserQustionInfo(HttpServletRequest request) {
+    @GetMapping("getUserAskInfo")
+    public R getUserAskInfo(HttpServletRequest request) {
         String uId = TokenManager.getMemberIdByJwtToken(request);
         if (uId.length()>0) {
-            QueryWrapper<RedAskReply> replyWrapper = new QueryWrapper<>();
-            replyWrapper.eq("uid", uId);
-            if(replyService.remove(replyWrapper)) {
-                return R.ok();
-            } else {
-                return R.error("删除回答失败，请重新尝试哈！");
-            }
+            RedUserAskVo askVo = userService.getAskUserInfo(uId);
+            return R.ok().data("askInfo",askVo);
         }
         return R.error("参数异常，请重新尝试哈！");
     }

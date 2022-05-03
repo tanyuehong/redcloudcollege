@@ -1,11 +1,15 @@
 package com.redskt.classroom.service.impl;
 
 import com.redskt.classroom.entity.OpBlogDetail;
+import com.redskt.classroom.entity.vo.RedBlogUserVo;
 import com.redskt.classroom.entity.vo.RedClassBlogDetailVo;
 import com.redskt.classroom.mapper.OpBlogDetailMapper;
 import com.redskt.classroom.service.RedBlogDetailService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -21,6 +25,16 @@ public class RedBlogDetailServiceImpl extends ServiceImpl<OpBlogDetailMapper, Op
     @Override
     public RedClassBlogDetailVo getRedClassBlogDetail(String bid) {
         return baseMapper.getRedClassBlogDetail(bid);
+    }
+
+    @Override
+    public List<RedClassBlogDetailVo> getRedBlogDetailList(int size,int type) {
+        return baseMapper.getRedBlogDetailList(size,type);
+    }
+
+    @Override
+    public RedBlogUserVo getBlogUserStatus(String bid, String uid) {
+        return baseMapper.getBlogUserStatus(bid,uid);
     }
 
     @Override

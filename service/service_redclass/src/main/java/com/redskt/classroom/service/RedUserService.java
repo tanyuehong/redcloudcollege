@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.redskt.classroom.entity.RedClassUser;
 import com.redskt.classroom.entity.vo.RedClassRegisterVo;
 import com.redskt.classroom.entity.vo.RedClassUserVo;
+import com.redskt.classroom.entity.vo.RedUserAskVo;
 
 import java.util.Map;
 
@@ -18,6 +19,8 @@ import java.util.Map;
 public interface RedUserService extends IService<RedClassUser> {
 
     void register(RedClassRegisterVo registerVo);
+
+    RedUserAskVo getAskUserInfo(String uid);
 
     RedClassUserVo getUserInfoFocusCount(String uId);
     // 从数据库中取出用户信息

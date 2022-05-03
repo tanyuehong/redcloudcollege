@@ -3,6 +3,7 @@ package com.redskt.classroom.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.redskt.classroom.entity.*;
 import com.redskt.classroom.entity.vo.OPHomeGuessLikeVo;
+import com.redskt.classroom.entity.vo.RedClassBlogDetailVo;
 import com.redskt.classroom.entity.vo.RedClassBookVo;
 import com.redskt.classroom.entity.vo.RedClassCourseWebVo;
 import com.redskt.classroom.service.*;
@@ -63,12 +64,8 @@ public class RedIndexController {
         if (blogCunt == 0) {
             blogCunt = 1;
         }
-        QueryWrapper<OpBlogDetail> blogDetailQueryWrapper = new QueryWrapper<>();
-        blogDetailQueryWrapper.select("id","title","type","good","faver","view_count","price","descrb","hot");
-        blogDetailQueryWrapper.orderByDesc("hot");
-        blogDetailQueryWrapper.last(String.format("limit %d",blogCunt));
-        List<OpBlogDetail> blogList = blogService.list(blogDetailQueryWrapper);
 
+        List<RedClassBlogDetailVo> blogList = blogService.getRedBlogDetailList(blogCunt,2);
         // 3。技术书籍的个数
         int bookCount = random.nextInt(4);
         if (bookCount == 0) {
@@ -97,7 +94,7 @@ public class RedIndexController {
                 vo.setContent(couseItem.getCdescribe());
                 type = random.nextInt(3);
             } else if(type == 1 && blogList.size()>0) {
-                OpBlogDetail blog = blogList.get(0);
+                RedClassBlogDetailVo blog = blogList.get(0);
                 blogList.remove(0);
                 BeanUtils.copyProperties(blog, vo);
                 vo.setType(type);

@@ -2,8 +2,11 @@ package com.redskt.classroom.mapper;
 
 import com.redskt.classroom.entity.OpBlogDetail;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.redskt.classroom.entity.vo.RedBlogUserVo;
 import com.redskt.classroom.entity.vo.RedClassBlogDetailVo;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * <p>
@@ -15,11 +18,15 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface OpBlogDetailMapper extends BaseMapper<OpBlogDetail> {
 
-    RedClassBlogDetailVo getRedClassBlogDetail(@Param("bid")  String bid);
+    List<RedClassBlogDetailVo> getRedBlogDetailList(@Param("size") int size,@Param("type") int type);
 
-    int addBlogGoodCount(@Param("bid")  String bid);
+    RedClassBlogDetailVo getRedClassBlogDetail(@Param("bid") String bid);
 
-    int prepBlogGoodCount(@Param("bid")  String bid);
+    RedBlogUserVo getBlogUserStatus(@Param("bid") String bid,@Param("uid") String uid);
 
-    int updateReadCount(@Param("bid")  String bid);
+    int addBlogGoodCount(@Param("bid") String bid);
+
+    int prepBlogGoodCount(@Param("bid") String bid);
+
+    int updateReadCount(@Param("bid") String bid);
 }

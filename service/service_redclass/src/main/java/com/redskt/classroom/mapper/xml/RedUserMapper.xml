@@ -2,17 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.redskt.classroom.mapper.RedUserMapper">
 
-    <select id="getUserQustionInfo" resultType="com.redskt.classroom.entity.vo.RedUserAskVo">
-        SELECT eduser.*,(SELECT COUNT (reply.id)
+    <select id="getUserAskInfo" resultType="com.redskt.classroom.entity.vo.RedUserAskVo">
+        SELECT (SELECT count(reply.id)
           FROM  red_ask_reply reply
           WHERE reply.uid = #{uid} and reply.state = 1
-        ) as aDopt,(SELECT COUNT (reply.id)
+        ) as aDopt,(SELECT count(reply.id)
           FROM  red_ask_reply reply
           WHERE reply.uid = #{uid}
-        ) as qCount,(SELECT COUNT (reply.id)
-          FROM  red_ask_reply reply
-          WHERE reply.uid = #{uid}
-        ) as qCount,
+        ) as qCount, ( SELECT count(reply.id)
+          FROM  red_reply_good rgood
+
+          WHERE rgood.uid = #{uid}
+        ) as qCount
         FROM edu_user eduser
         where eduser.id = #{uid}
     </select>

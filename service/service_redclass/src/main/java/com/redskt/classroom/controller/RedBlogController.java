@@ -4,6 +4,7 @@ package com.redskt.classroom.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.redskt.classroom.entity.*;
 import com.redskt.classroom.entity.vo.RedBlogCommentVo;
+import com.redskt.classroom.entity.vo.RedBlogUserVo;
 import com.redskt.classroom.entity.vo.RedClassBlogDetailVo;
 import com.redskt.classroom.service.*;
 import com.redskt.commonutils.R;
@@ -54,20 +55,13 @@ public class RedBlogController {
             subTypeList = typeService.list(subWrapper);
         }
 
-        QueryWrapper<OpBlogDetail> blogDetailQueryWrapper = new QueryWrapper<>();
-        blogDetailQueryWrapper.select("id","title","type","good","faver","view_count","price","descrb");
-        blogDetailQueryWrapper.orderByDesc("id");
-        blogDetailQueryWrapper.last("limit 8");
-
-        List<OpBlogDetail> blogList = blogService.list(blogDetailQueryWrapper);
-
+        List<RedClassBlogDetailVo> blogList = blogService.getRedBlogDetailList(8,1);
         for (int i=0;i<blogList.size();i++) {
-            OpBlogDetail detail = blogList.get(i);
+            RedClassBlogDetailVo detail = blogList.get(i);
             if (detail.getDescrb().length()>150) {
                 detail.setDescrb(detail.getDescrb().substring(0,150)+"...");
             }
         }
-        
         return R.ok().data("typeList",typeList).data("subTypeList",subTypeList).data("blogList",blogList);
     }
 
@@ -91,19 +85,14 @@ public class RedBlogController {
         }
     }
 
-    @GetMapping("good/{praticeId}")
-    public R getGoodState(@PathVariable String praticeId, HttpServletRequest request) {
-        if (praticeId.length()>0) {
-            blogService.updateReadCount(praticeId);
+    @GetMapping("status/{bid}")
+    public R getBlogUserStatus(@PathVariable String bid, HttpServletRequest request) {
+        if (bid.length()>0) {
+            blogService.updateReadCount(bid);
             String uId = TokenManager.getMemberIdByJwtToken(request);
             if (uId.length()>0) {
-                QueryWrapper<RedBlogGood> goodQueryWrapper = new QueryWrapper<>();
-                goodQueryWrapper.eq("bid", praticeId);
-                goodQueryWrapper.eq("uid", uId);
-                List<RedBlogGood> goodList = goodService.list(goodQueryWrapper);
-                if (goodList.size() > 0) {
-                    return R.ok().data("good", true);
-                }
+                RedBlogUserVo status = blogService.getBlogUserStatus(bid,uId);
+                return R.ok().data("status",status);
             }
         }
         return R.ok().data("good",false);

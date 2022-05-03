@@ -42,6 +42,8 @@ public class OPHomeGuessLikeVo {
 
     private Integer top;
 
+    private int cCount;
+
     private BigDecimal price;
 
     private BigDecimal oldPrice;

@@ -1,12 +1,10 @@
 package com.redskt.classroom.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.redskt.classroom.entity.RedBlogComment;
-import com.redskt.classroom.entity.RedBlogCommentGood;
-import com.redskt.classroom.entity.RedBlogCommentReply;
-import com.redskt.classroom.entity.RedQustionGood;
+import com.redskt.classroom.entity.*;
 import com.redskt.classroom.entity.vo.RedBlogCommentReplyVo;
 import com.redskt.classroom.entity.vo.RedBlogCommentVo;
+import com.redskt.classroom.service.RedBlogCollectService;
 import com.redskt.classroom.service.RedBlogCommentGoodService;
 import com.redskt.classroom.service.RedBlogCommentReplyService;
 import com.redskt.classroom.service.RedBlogCommentService;
@@ -18,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
-@RequestMapping("/blogCommet")
+@RequestMapping("/blog")
 public class RedBlogUserController {
 
     @Autowired
@@ -30,7 +28,10 @@ public class RedBlogUserController {
     @Autowired
     private RedBlogCommentGoodService goodService;
 
-    @PostMapping("submit")
+    @Autowired
+    private RedBlogCollectService collectService;
+
+    @PostMapping("commet/submit")
     public R submitReplyComment(@RequestBody RedBlogComment comment, HttpServletRequest request) {
         String uId = TokenManager.getMemberIdByJwtToken(request);
         if(uId.length()>0 && comment.getUid().length()>0 && uId.equals(comment.getUid())) {
@@ -45,7 +46,7 @@ public class RedBlogUserController {
         }
     }
 
-    @PostMapping("submitReply")
+    @PostMapping("commet/submitReply")
     public R submitReplyComment(@RequestBody RedBlogCommentReply reply, HttpServletRequest request) {
         String uId = TokenManager.getMemberIdByJwtToken(request);
         if(uId.length()>0 && reply.getUid().length()>0 && uId.equals(reply.getUid())) {
@@ -60,7 +61,7 @@ public class RedBlogUserController {
         }
     }
 
-    @GetMapping("addCommentGood/{cId}/{type}")
+    @GetMapping("comment/addCommentGood/{cId}/{type}")
     public R addCommentGood(@PathVariable String cId,@PathVariable int type, HttpServletRequest request) {
         String uId = TokenManager.getMemberIdByJwtToken(request);
         if (uId.length() > 0 && cId.length()>0) {
@@ -82,7 +83,7 @@ public class RedBlogUserController {
         }
     }
 
-    @GetMapping("cancleCommentGood/{cId}/{type}")
+    @GetMapping("comment/cancleCommentGood/{cId}/{type}")
     public R cancleGood(@PathVariable String cId,@PathVariable int type, HttpServletRequest request) {
         if (cId.length() > 0) {
             String uId = TokenManager.getMemberIdByJwtToken(request);
@@ -104,5 +105,36 @@ public class RedBlogUserController {
             }
         }
         return R.error("取消点赞失败，请稍后重试哈！");
+    }
+
+    @GetMapping("collect/addBlogCollect/{bId}")
+    public R addBlogCollect(@PathVariable String bId, HttpServletRequest request) {
+        String uId = TokenManager.getMemberIdByJwtToken(request);
+        if (uId.length() > 0 && bId.length()>0) {
+            if(collectService.updateBlogCollectState(bId,uId)<=0) {
+                RedBlogCollect collect = new RedBlogCollect();
+                collect.setUid(uId);
+                collect.setBid(bId);
+                collect.setType(1);
+                collectService.save(collect);
+            }
+            return R.ok().data("sucess",true);
+        } else {
+            return R.error("参数验证失败！");
+        }
+    }
+
+    @GetMapping("collect/cancleBlogCollect/{bId}")
+    public R cancleBlogCollect(@PathVariable String bId, HttpServletRequest request) {
+        String uId = TokenManager.getMemberIdByJwtToken(request);
+        if (uId.length() > 0 && bId.length()>0) {
+            QueryWrapper<RedBlogCollect> collectQueryWrapper = new QueryWrapper<>();
+            collectQueryWrapper.eq("bid", bId);
+            collectQueryWrapper.eq("uid", uId);
+            collectService.remove(collectQueryWrapper);
+            return R.ok().data("sucess",true);
+        } else {
+            return R.error("参数验证失败！");
+        }
     }
 }

@@ -32,6 +32,8 @@ public class RedClassBlogDetailVo {
 
     private Integer viewCount;
 
+    private int cCount;
+
     private Integer price;
 
     private Date gmtCreate;
