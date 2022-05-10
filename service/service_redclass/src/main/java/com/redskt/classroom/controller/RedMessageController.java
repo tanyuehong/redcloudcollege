@@ -3,6 +3,7 @@ package com.redskt.classroom.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.redskt.classroom.entity.RedMessage;
+import com.redskt.classroom.entity.vo.RedMessageDtailVo;
 import com.redskt.classroom.service.RedMessageService;
 import com.redskt.commonutils.R;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,16 @@ public class RedMessageController {
         wrapper.last("limit 12");
         List<RedMessage> messageList = messageService.list(wrapper);
         return R.ok().data("messageList",messageList);
+    }
+
+    @GetMapping("getMessageDetail/{mId}")
+    public R index(@PathVariable String mId) {
+        if (mId.length()>0) {
+            RedMessageDtailVo detail = messageService.getRedMessageDetail(mId);
+            return R.ok().data("pitem",detail);
+        } else {
+            return R.error("参数不合法，请验证");
+        }
     }
 }
 
