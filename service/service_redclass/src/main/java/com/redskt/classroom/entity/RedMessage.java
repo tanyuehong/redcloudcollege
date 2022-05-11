@@ -44,6 +44,8 @@ public class RedMessage implements Serializable {
 
     private Integer state;
 
+    private Integer viewCount;
+
     @ApiModelProperty(value = "创建时间")
     private Date gmtCreate;
 
