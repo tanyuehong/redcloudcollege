@@ -13,5 +13,8 @@ import com.redskt.classroom.entity.vo.RedMessageDtailVo;
  * @since 2022-05-10
  */
 public interface RedMessageService extends IService<RedMessage> {
+
     RedMessageDtailVo getRedMessageDetail(String mId);
+
+    int updateReadCount(String mid);
 }

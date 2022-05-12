@@ -17,8 +17,14 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class RedMessageServiceImpl extends ServiceImpl<RedMessageMapper, RedMessage> implements RedMessageService {
+
     @Override
     public RedMessageDtailVo getRedMessageDetail(String mId) {
         return baseMapper.getRedMessageDetail(mId);
+    }
+
+    @Override
+    public int updateReadCount(String mid) {
+        return baseMapper.updateReadCount(mid);
     }
 }

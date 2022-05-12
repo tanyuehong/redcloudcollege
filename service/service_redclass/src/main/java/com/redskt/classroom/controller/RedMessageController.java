@@ -43,6 +43,7 @@ public class RedMessageController {
     public R index(@PathVariable String mId) {
         if (mId.length()>0) {
             RedMessageDtailVo detail = messageService.getRedMessageDetail(mId);
+            messageService.updateReadCount(mId);
             return R.ok().data("pitem",detail);
         } else {
             return R.error("参数不合法，请验证");

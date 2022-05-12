@@ -17,4 +17,6 @@ public interface RedMessageMapper extends BaseMapper<RedMessage> {
 
     RedMessageDtailVo getRedMessageDetail(@Param("mid") String mId);
 
+    int updateReadCount(@Param("mid") String mid);
+
 }
