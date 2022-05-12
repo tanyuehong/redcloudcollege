@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.redskt.classroom.mapper.RedMessageCommentReplyMapper">
+
+    <resultMap id="messageReplyMap" type="com.redskt.classroom.entity.vo.RedMessageReplyVo">
+        <id column="replyId" property="id"/>
+        <id column="rcontent" property="content"/>
+        <id column="rid" property="rid"/>
+        <id column="cuid" property="uid"/>
+        <id column="touid" property="touid"/>
+        <id column="cname" property="name"/>
+        <id column="tname" property="toname"/>
+        <id column="cavatar" property="avatar"/>
+        <id column="goodcomment" property="goodcomment"/>
+        <id column="cgmt_create" property="gmtCreate"/>
+    </resultMap>
+
+    <select id="getMessageCommentReplyOne" resultMap="messageReplyMap">
+        SELECT rcomment.id as replyId,rcomment.content as rcontent, rcomment.rid,rcomment.gmt_create as cgmt_create,
+        rcomment.uid as cuid,cuser.nickname as cname,cuser.avatar as cavatar,
+        rcomment.touid as touid,tuser.nickname as tname
+        FROM red_message_comment_reply rcomment
+        LEFT JOIN edu_user cuser on rcomment.uid = cuser.id
+        LEFT JOIN edu_user tuser on rcomment.touid = tuser.id
+        WHERE  rcomment.id = #{rid}
+    </select>
+
+    <update id="addCommentReplyGoodCount">
+        update red_message_comment_reply
+        set good = good+1
+        where id = #{cid}
+    </update>
+
+    <update id="prepCommentReplyGoodCount">
+        update red_message_comment_reply
+        set good = good-1
+        where id = #{cid}
+    </update>
+
+</mapper>

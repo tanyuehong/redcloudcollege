@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.redskt.classroom.mapper.RedMessageCommentMapper">
+
+    <resultMap id="messageCommentMap" type="com.redskt.classroom.entity.vo.RedMessageCommentVo">
+        <id column="id" property="id"/>
+        <id column="bid" property="bid"/>
+        <id column="content" property="content"/>
+        <id column="good" property="good"/>
+        <id column="goodreply" property="goodreply"/>
+        <id column="gmt_create" property="gmtCreate"/>
+        <id column="uid" property="uid"/>
+        <id column="username" property="username"/>
+        <id column="avatar" property="avatar"/>
+        <collection property="comments" resultMap="messageReplyMap">
+        </collection>
+    </resultMap>
+
+    <resultMap id="messageReplyMap" type="com.redskt.classroom.entity.vo.RedMessageReplyVo">
+        <id column="replyId" property="id"/>
+        <id column="rcontent" property="content"/>
+        <id column="rid" property="rid"/>
+        <id column="cgood" property="good"/>
+        <id column="goodr" property="goodreply"/>
+        <id column="cuid" property="uid"/>
+        <id column="touid" property="touid"/>
+        <id column="cname" property="name"/>
+        <id column="tname" property="toname"/>
+        <id column="cavatar" property="avatar"/>
+        <id column="goodcomment" property="goodcomment"/>
+        <id column="cgmt_create" property="gmtCreate"/>
+    </resultMap>
+
+
+    <select id="getRedBlogCommentList" resultMap="messageCommentMap">
+        SELECT comment.id,comment.bid,comment.content,comment.gmt_create,comment.good,!isnull(cgood.id) as goodreply,
+        ruser.id as uid,ruser.nickname as username,ruser.avatar,
+        rcomment.id as replyId,rcomment.content as rcontent, rcomment.rid, rcomment.good as cgood,rcomment.gmt_create as cgmt_create,rcomment.goodr,
+        rcomment.uid as cuid,cuser.nickname as cname,cuser.avatar as cavatar,
+        rcomment.touid as touid,tuser.nickname as tname
+
+        FROM red_message_comment comment
+        LEFT JOIN edu_user ruser on comment.uid = ruser.id
+        LEFT JOIN (
+        SELECT myc.id,myc.content,myc.good,myc.rid,myc.uid,myc.touid,myc.gmt_create,!isnull(rgood.id) as goodr
+        FROM (
+        SELECT * FROM  (
+        SELECT ROW_NUMBER() OVER(PARTITION BY rid ORDER BY gmt_create DESC) rn ,red_blog_comment_reply.*
+        FROM red_message_comment_reply) t2 WHERE t2.rn &lt; #{rsize}
+        ) myc
+        LEFT JOIN red_message_comment_good rgood on myc.uid = rgood.uid and myc.id = rgood.cid and rgood.gtype = 2 and rgood.is_deleted = 0
+        ORDER BY gmt_create,goodr DESC
+        ) as rcomment on  rcomment.rid =comment.id
+
+        LEFT JOIN red_message_comment_good cgood on comment.uid = cgood.uid and comment.id = cgood.cid and cgood.gtype = 1 and cgood.is_deleted = 0
+        LEFT JOIN edu_user cuser on rcomment.uid = cuser.id
+        LEFT JOIN edu_user tuser on rcomment.touid = tuser.id
+
+        WHERE comment.id in
+        ( SELECT id FROM
+        ( SELECT id
+        FROM red_message_comment
+        WHERE mid = #{mid}
+        <if test="type == 1">
+            ORDER BY good DESC
+        </if>
+        <if test="type == 2">
+            ORDER BY red_message_comment.gmt_create DESC
+        </if>
+        LIMIT #{size} ) as subreply )
+        <if test="type == 1">
+            ORDER BY good DESC
+        </if>
+        <if test="type == 2">
+            ORDER BY gmt_create DESC
+        </if>
+    </select>
+
+    <select id="getBlogCommentOne" resultMap="blogCommentMap">
+        SELECT comment.id,comment.bid,comment.content,comment.gmt_create,
+        ruser.id as uid,ruser.nickname as username,ruser.avatar
+        FROM red_message_comment comment
+        LEFT JOIN edu_user ruser on comment.uid = ruser.id
+        WHERE  comment.id = #{cid}
+    </select>
+
+    <update id="addCommentGoodCount">
+        update red_message_comment
+        set good = good+1
+        where id = #{cid}
+    </update>
+
+    <update id="prepCommentGoodCount">
+        update red_message_comment
+        set good = good-1
+        where id = #{cid}
+    </update>
+
+</mapper>
