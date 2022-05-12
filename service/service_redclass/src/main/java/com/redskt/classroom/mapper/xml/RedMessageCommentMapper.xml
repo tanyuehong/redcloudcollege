@@ -76,7 +76,7 @@
         </if>
     </select>
 
-    <select id="getBlogCommentOne" resultMap="blogCommentMap">
+    <select id="getBlogCommentOne" resultMap="messageCommentMap">
         SELECT comment.id,comment.bid,comment.content,comment.gmt_create,
         ruser.id as uid,ruser.nickname as username,ruser.avatar
         FROM red_message_comment comment
