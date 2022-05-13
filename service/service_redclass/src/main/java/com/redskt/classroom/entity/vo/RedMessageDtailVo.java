@@ -25,6 +25,8 @@ public class RedMessageDtailVo {
 
     private Integer allvcount;
 
+    private Integer fanscount;
+
     private int cCount;
 
     private Date gmtCreate;

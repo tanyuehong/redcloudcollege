@@ -4,10 +4,12 @@
 
     <select id="getRedMessageDetail" resultType="com.redskt.classroom.entity.vo.RedMessageDtailVo">
         SELECT message.*,auser.id as aUid,auser.nickName as authorName,auser.avatar as authorAvatar,auser.id as authorUid,
-        sum(cmess.view_count) as allvcount
+        sum(cmess.view_count) as allvcount, sum as fanscount
         FROM red_message message
         LEFT OUTER JOIN edu_user auser ON auser.id=message.uid
         LEFT OUTER JOIN red_message cmess ON cmess.uid=message.uid
+        LEFT OUTER JOIN red_message cmess ON cmess.uid=message.uid
+
         where message.id = #{mid}
     </select>
 
