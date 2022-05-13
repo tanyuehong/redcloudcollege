@@ -2,7 +2,7 @@ package com.redskt.classroom.mapper;
 
 import com.redskt.classroom.entity.OpBlogDetail;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.redskt.classroom.entity.vo.RedBlogUserVo;
+import com.redskt.classroom.entity.vo.RedUserStateVo;
 import com.redskt.classroom.entity.vo.RedClassBlogDetailVo;
 import org.apache.ibatis.annotations.Param;
 
@@ -22,7 +22,7 @@ public interface OpBlogDetailMapper extends BaseMapper<OpBlogDetail> {
 
     RedClassBlogDetailVo getRedClassBlogDetail(@Param("bid") String bid);
 
-    RedBlogUserVo getBlogUserStatus(@Param("bid") String bid,@Param("uid") String uid);
+    RedUserStateVo getBlogUserStatus(@Param("bid") String bid, @Param("uid") String uid);
 
     int addBlogGoodCount(@Param("bid") String bid);
 

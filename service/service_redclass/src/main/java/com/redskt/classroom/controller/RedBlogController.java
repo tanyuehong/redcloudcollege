@@ -4,7 +4,7 @@ package com.redskt.classroom.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.redskt.classroom.entity.*;
 import com.redskt.classroom.entity.vo.RedBlogCommentVo;
-import com.redskt.classroom.entity.vo.RedBlogUserVo;
+import com.redskt.classroom.entity.vo.RedUserStateVo;
 import com.redskt.classroom.entity.vo.RedClassBlogDetailVo;
 import com.redskt.classroom.service.*;
 import com.redskt.commonutils.R;
@@ -91,7 +91,7 @@ public class RedBlogController {
             blogService.updateReadCount(bid);
             String uId = TokenManager.getMemberIdByJwtToken(request);
             if (uId.length()>0) {
-                RedBlogUserVo status = blogService.getBlogUserStatus(bid,uId);
+                RedUserStateVo status = blogService.getBlogUserStatus(bid,uId);
                 return R.ok().data("status",status);
             }
         }

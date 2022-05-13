@@ -11,9 +11,29 @@
         where message.id = #{mid}
     </select>
 
+    <select id="getUserStatus" resultType="com.redskt.classroom.entity.vo.RedUserStateVo">
+        SELECT !isnull(good.id) as goodslect,!isnull(message.id) as isFocus
+        FROM red_message message
+        LEFT OUTER JOIN  red_user_focus focus on focus.uid = #{uid} and focus.uid = message.uid and focus.is_deleted = 0
+        LEFT OUTER JOIN  red_message_good  good  on good.uid = #{uid} and good.mid = #{mid} and good.is_deleted = 0
+        where message.id = #{mid}
+    </select>
+
     <update id="updateReadCount">
         update red_message
         set  view_count=view_count+1
+        where id = #{mid}
+    </update>
+
+    <update id="addGoodCount">
+        update red_message
+        set good=good+1
+        where id = #{mid}
+    </update>
+
+    <update id="prepGoodCount">
+        update red_message
+        set good=good-1
         where id = #{mid}
     </update>
 

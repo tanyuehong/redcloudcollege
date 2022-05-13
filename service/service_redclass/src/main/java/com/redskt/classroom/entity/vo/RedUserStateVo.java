@@ -3,7 +3,7 @@ package com.redskt.classroom.entity.vo;
 import lombok.Data;
 
 @Data
-public class RedBlogUserVo {
+public class RedUserStateVo {
 
     private Boolean goodslect;
 

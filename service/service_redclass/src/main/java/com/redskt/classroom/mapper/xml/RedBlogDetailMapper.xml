@@ -23,7 +23,7 @@
         where blog.id = #{bid}
     </select>
 
-    <select id="getBlogUserStatus" resultType="com.redskt.classroom.entity.vo.RedBlogUserVo">
+    <select id="getBlogUserStatus" resultType="com.redskt.classroom.entity.vo.RedUserStateVo">
         SELECT !isnull(collect.id) as isCollect, !isnull(good.id) as goodslect,!isnull(blog.id) as isFocus
         FROM op_blog_detail blog
         LEFT OUTER JOIN  red_blog_collect collect on collect.uid = #{uid} and collect.bid = #{bid} and collect.is_deleted = 0

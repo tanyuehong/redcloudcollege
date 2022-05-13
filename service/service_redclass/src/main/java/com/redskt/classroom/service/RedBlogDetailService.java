@@ -2,7 +2,7 @@ package com.redskt.classroom.service;
 
 import com.redskt.classroom.entity.OpBlogDetail;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.redskt.classroom.entity.vo.RedBlogUserVo;
+import com.redskt.classroom.entity.vo.RedUserStateVo;
 import com.redskt.classroom.entity.vo.RedClassBlogDetailVo;
 
 import java.util.List;
@@ -21,7 +21,7 @@ public interface RedBlogDetailService extends IService<OpBlogDetail> {
 
     List<RedClassBlogDetailVo> getRedBlogDetailList(int size,int type);
 
-    RedBlogUserVo getBlogUserStatus(String bid,String uid);
+    RedUserStateVo getBlogUserStatus(String bid, String uid);
 
     int updateBlogGoodCount(boolean isAdd,String bid);
 
