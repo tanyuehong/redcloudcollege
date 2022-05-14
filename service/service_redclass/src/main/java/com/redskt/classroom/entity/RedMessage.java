@@ -32,6 +32,8 @@ public class RedMessage implements Serializable {
 
     private String uid;
 
+    private String cover;
+
     private String title;
 
     private String content;

@@ -7,6 +7,8 @@ import java.util.Date;
 public class RedMessageDtailVo {
     private String id;
 
+    private String cover;
+
     private String title;
 
     private String authorName;

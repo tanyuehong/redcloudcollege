@@ -44,6 +44,7 @@ public class RedMessageController {
     @GetMapping("getMessageList")
     public R getCommentList() {
         QueryWrapper<RedMessage> wrapper = new QueryWrapper<>();
+        wrapper.select("id","uid", "title","type","view_count","gmt_create");
         wrapper.orderByAsc("gmt_create");
         wrapper.last("limit 12");
         List<RedMessage> messageList = messageService.list(wrapper);
@@ -64,7 +65,13 @@ public class RedMessageController {
     public R index(@PathVariable String mId) {
         if (mId.length()>0) {
             RedMessageDtailVo detail = messageService.getRedMessageDetail(mId);
-            return R.ok().data("pitem",detail);
+            QueryWrapper<RedMessage> wrapper = new QueryWrapper<>();
+            wrapper.select("id","uid", "title","cover","type","view_count","gmt_create");
+            wrapper.eq("uid",detail.getAuthorUid());
+            wrapper.orderByAsc("gmt_create");
+            wrapper.last("limit 6");
+            List<RedMessage> messageList = messageService.list(wrapper);
+            return R.ok().data("pitem",detail).data("messageList",messageList);
         } else {
             return R.error("参数不合法，请验证");
         }
