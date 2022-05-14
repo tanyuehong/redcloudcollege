@@ -14,7 +14,7 @@ import com.redskt.classroom.entity.vo.RedMessageReplyVo;
  */
 public interface RedMessageCommentReplyService extends IService<RedMessageCommentReply> {
 
-    RedMessageReplyVo getMessageCommentReplyOne(String mid);
+    RedMessageReplyVo getMessageCommentReplyOne(String rid);
 
     void addReplyGoodCount(String mid);
 

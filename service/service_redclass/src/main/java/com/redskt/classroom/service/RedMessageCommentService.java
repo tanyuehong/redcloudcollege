@@ -17,11 +17,11 @@ import java.util.List;
  */
 public interface RedMessageCommentService extends IService<RedMessageComment> {
 
-    List<RedMessageCommentVo> getMessageCommentList(String bid,Integer size,Integer rsize,int type);
+    List<RedMessageCommentVo> getMessageCommentList(String mid,Integer size,Integer rsize,int type);
 
     RedMessageCommentVo getMessageCommentOne(String mid);
 
-    void addCommentGoodCount(String mid);
+    void addCommentGoodCount(String cid);
 
-    void prepCommentGoodCount(String mid);
+    void prepCommentGoodCount(String cid);
 }

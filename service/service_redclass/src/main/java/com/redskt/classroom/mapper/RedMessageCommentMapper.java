@@ -17,12 +17,12 @@ import java.util.List;
  */
 public interface RedMessageCommentMapper extends BaseMapper<RedMessageComment> {
 
-    List<RedMessageCommentVo> getMessageCommentList(@Param("bid") String bid, @Param("size") Integer size, @Param("rsize") Integer rsize, @Param("type") int type);
+    List<RedMessageCommentVo> getMessageCommentList(@Param("mid") String bid, @Param("size") Integer size, @Param("rsize") Integer rsize, @Param("type") int type);
 
     RedMessageCommentVo getMessageCommentOne(@Param("mid")  String mid);
 
-    void addCommentGoodCount(@Param("mid")  String mid);
+    void addCommentGoodCount(@Param("cid")  String cid);
 
-    void prepCommentGoodCount(@Param("mid")  String mid);
+    void prepCommentGoodCount(@Param("cid")  String cid);
 
 }

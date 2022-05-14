@@ -4,19 +4,18 @@
 
     <select id="getRedMessageDetail" resultType="com.redskt.classroom.entity.vo.RedMessageDtailVo">
         SELECT message.*,auser.id as aUid,auser.nickName as authorName,auser.avatar as authorAvatar,auser.id as authorUid,
-        sum(cmess.view_count) as allvcount, sum as fanscount
+        sum(cmess.view_count) as allvcount, count(fans.id) as fanscount
         FROM red_message message
         LEFT OUTER JOIN edu_user auser ON auser.id=message.uid
         LEFT OUTER JOIN red_message cmess ON cmess.uid=message.uid
-        LEFT OUTER JOIN red_message cmess ON cmess.uid=message.uid
-
+        LEFT OUTER JOIN red_user_focus fans ON fans.fid=message.uid and fans.is_deleted = 0
         where message.id = #{mid}
     </select>
 
     <select id="getUserStatus" resultType="com.redskt.classroom.entity.vo.RedUserStateVo">
-        SELECT !isnull(good.id) as goodslect,!isnull(message.id) as isFocus
+        SELECT !isnull(good.id) as goodslect,!isnull(focus.id) as isFocus
         FROM red_message message
-        LEFT OUTER JOIN  red_user_focus focus on focus.uid = #{uid} and focus.uid = message.uid and focus.is_deleted = 0
+        LEFT OUTER JOIN  red_user_focus focus on focus.uid = #{uid} and focus.fid = message.uid and focus.is_deleted = 0
         LEFT OUTER JOIN  red_message_good  good  on good.uid = #{uid} and good.mid = #{mid} and good.is_deleted = 0
         where message.id = #{mid}
     </select>

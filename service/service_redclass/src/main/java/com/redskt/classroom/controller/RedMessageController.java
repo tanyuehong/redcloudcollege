@@ -2,21 +2,13 @@ package com.redskt.classroom.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.redskt.classroom.entity.RedBlogGood;
-import com.redskt.classroom.entity.RedMessage;
-import com.redskt.classroom.entity.RedMessageGood;
-import com.redskt.classroom.entity.vo.RedMessageDtailVo;
-import com.redskt.classroom.entity.vo.RedUserStateVo;
-import com.redskt.classroom.service.RedMessageGoodService;
-import com.redskt.classroom.service.RedMessageService;
+import com.redskt.classroom.entity.*;
+import com.redskt.classroom.entity.vo.*;
+import com.redskt.classroom.service.*;
 import com.redskt.commonutils.R;
 import com.redskt.security.TokenManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -39,6 +31,16 @@ public class RedMessageController {
     @Autowired
     private RedMessageGoodService messageGoodService;
 
+    @Autowired
+    private RedMessageCommentService commentService;
+
+    @Autowired
+    private RedMessageCommentReplyService replyService;
+
+    @Autowired
+    private RedMessageCommentGoodService commentGoodService;
+
+
     @GetMapping("getMessageList")
     public R getCommentList() {
         QueryWrapper<RedMessage> wrapper = new QueryWrapper<>();
@@ -46,6 +48,16 @@ public class RedMessageController {
         wrapper.last("limit 12");
         List<RedMessage> messageList = messageService.list(wrapper);
         return R.ok().data("messageList",messageList);
+    }
+
+    @GetMapping("getCommentList/{mId}/{type}")
+    public R getCommentList(@PathVariable String mId,@PathVariable int type) {
+        if (mId.length()>0) {
+            List<RedMessageCommentVo> commentList = commentService.getMessageCommentList(mId,6,6,type);
+            return R.ok().data("comments",commentList);
+        } else {
+            return R.error("参数不合法，请验证");
+        }
     }
 
     @GetMapping("getMessageDetail/{mId}")
@@ -113,6 +125,82 @@ public class RedMessageController {
             }
         }
         return R.ok();
+    }
+
+    @PostMapping("commet/submit")
+    public R submitReplyComment(@RequestBody RedMessageComment comment, HttpServletRequest request) {
+        String uId = TokenManager.getMemberIdByJwtToken(request);
+        if(uId.length()>0 && comment.getUid().length()>0 && uId.equals(comment.getUid())) {
+            if (commentService.save(comment)) {
+                RedMessageCommentVo curComment = commentService.getMessageCommentOne(comment.getId());
+                return R.ok().data("comment",curComment);
+            } else  {
+                return R.error("评论失败，请重新尝试！");
+            }
+        } else  {
+            return R.error("参数验证失败！");
+        }
+    }
+
+    @PostMapping("commet/submitReply")
+    public R submitReplyComment(@RequestBody RedMessageCommentReply reply, HttpServletRequest request) {
+        String uId = TokenManager.getMemberIdByJwtToken(request);
+        if(uId.length()>0 && reply.getUid().length()>0 && uId.equals(reply.getUid())) {
+            if (replyService.save(reply)) {
+                RedMessageReplyVo curReply = replyService.getMessageCommentReplyOne(reply.getId());
+                return R.ok().data("reply",curReply);
+            } else  {
+                return R.error("评论文章失败，请重新尝试！");
+            }
+        } else  {
+            return R.error("参数验证失败！");
+        }
+    }
+
+    @GetMapping("addCommentGood/{cId}/{type}")
+    public R addCommentGood(@PathVariable String cId,@PathVariable int type, HttpServletRequest request) {
+        String uId = TokenManager.getMemberIdByJwtToken(request);
+        if (uId.length() > 0 && cId.length()>0) {
+            if(commentGoodService.updateCommentGoodState(uId,cId, type==1?1:2)<=0) {
+                RedMessageCommentGood good = new RedMessageCommentGood();
+                good.setUid(uId);
+                good.setCid(cId);
+                good.setGtype(type==1?1:2);
+                commentGoodService.save(good);
+            }
+            if(type == 1) {
+                commentService.addCommentGoodCount(cId);
+            } else {
+                replyService.addReplyGoodCount(cId);
+            }
+            return R.ok().data("goodState",1);
+        } else {
+            return R.error("参数验证失败！");
+        }
+    }
+
+    @GetMapping("cancleCommentGood/{cId}/{type}")
+    public R cancleGood(@PathVariable String cId,@PathVariable int type, HttpServletRequest request) {
+        if (cId.length() > 0) {
+            String uId = TokenManager.getMemberIdByJwtToken(request);
+            if (uId.length() > 0) {
+                QueryWrapper<RedMessageCommentGood> goodQueryWrapper = new QueryWrapper<>();
+                goodQueryWrapper.eq("cid", cId);
+                goodQueryWrapper.eq("uid", uId);
+                goodQueryWrapper.eq("gtype", type == 1 ? 1:2);
+                if (commentGoodService.remove(goodQueryWrapper)) {
+                    if(type == 1) {
+                        commentService.prepCommentGoodCount(cId);
+                    } else {
+                        replyService.prepReplyGoodCount(cId);
+                    }
+                    return R.ok().data("goodqustion", false);
+                }
+            } else {
+                return R.error("登录信息异常，请重新登录后尝试！");
+            }
+        }
+        return R.error("取消点赞失败，请稍后重试哈！");
     }
 }
 

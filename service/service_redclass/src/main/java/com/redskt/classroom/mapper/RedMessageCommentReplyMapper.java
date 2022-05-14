@@ -15,9 +15,9 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface RedMessageCommentReplyMapper extends BaseMapper<RedMessageCommentReply> {
 
-    RedMessageReplyVo getMessageCommentReplyOne(@Param("mid")  String mid);
+    RedMessageReplyVo getMessageCommentReplyOne(@Param("rid")  String mid);
 
-    void addReplyGoodCount(@Param("mid")  String mid);
+    void addReplyGoodCount(@Param("rid")  String rid);
 
-    void prepReplyGoodCount(@Param("mid")  String mid);
+    void prepReplyGoodCount(@Param("rid")  String rid);
 }

@@ -19,8 +19,8 @@ import org.springframework.stereotype.Service;
 public class RedMessageCommentReplyServiceImpl extends ServiceImpl<RedMessageCommentReplyMapper, RedMessageCommentReply> implements RedMessageCommentReplyService {
 
     @Override
-    public RedMessageReplyVo getMessageCommentReplyOne(String mid) {
-        return baseMapper.getMessageCommentReplyOne(mid);
+    public RedMessageReplyVo getMessageCommentReplyOne(String rid) {
+        return baseMapper.getMessageCommentReplyOne(rid);
     }
 
     @Override

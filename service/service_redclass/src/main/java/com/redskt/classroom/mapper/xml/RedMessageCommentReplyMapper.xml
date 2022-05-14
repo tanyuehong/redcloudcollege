@@ -25,16 +25,16 @@
         WHERE  rcomment.id = #{rid}
     </select>
 
-    <update id="addCommentReplyGoodCount">
+    <update id="addReplyGoodCount">
         update red_message_comment_reply
         set good = good+1
-        where id = #{cid}
+        where id = #{rid}
     </update>
 
-    <update id="prepCommentReplyGoodCount">
+    <update id="prepReplyGoodCount">
         update red_message_comment_reply
         set good = good-1
-        where id = #{cid}
+        where id = #{rid}
     </update>
 
 </mapper>

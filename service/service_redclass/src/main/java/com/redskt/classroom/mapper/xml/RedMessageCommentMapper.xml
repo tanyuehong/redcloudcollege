@@ -32,8 +32,8 @@
     </resultMap>
 
 
-    <select id="getRedBlogCommentList" resultMap="messageCommentMap">
-        SELECT comment.id,comment.bid,comment.content,comment.gmt_create,comment.good,!isnull(cgood.id) as goodreply,
+    <select id="getMessageCommentList" resultMap="messageCommentMap">
+        SELECT comment.id,comment.mid,comment.content,comment.gmt_create,comment.good,!isnull(cgood.id) as goodreply,
         ruser.id as uid,ruser.nickname as username,ruser.avatar,
         rcomment.id as replyId,rcomment.content as rcontent, rcomment.rid, rcomment.good as cgood,rcomment.gmt_create as cgmt_create,rcomment.goodr,
         rcomment.uid as cuid,cuser.nickname as cname,cuser.avatar as cavatar,
@@ -45,7 +45,7 @@
         SELECT myc.id,myc.content,myc.good,myc.rid,myc.uid,myc.touid,myc.gmt_create,!isnull(rgood.id) as goodr
         FROM (
         SELECT * FROM  (
-        SELECT ROW_NUMBER() OVER(PARTITION BY rid ORDER BY gmt_create DESC) rn ,red_blog_comment_reply.*
+        SELECT ROW_NUMBER() OVER(PARTITION BY rid ORDER BY gmt_create DESC) rn ,red_message_comment_reply.*
         FROM red_message_comment_reply) t2 WHERE t2.rn &lt; #{rsize}
         ) myc
         LEFT JOIN red_message_comment_good rgood on myc.uid = rgood.uid and myc.id = rgood.cid and rgood.gtype = 2 and rgood.is_deleted = 0
@@ -76,12 +76,12 @@
         </if>
     </select>
 
-    <select id="getBlogCommentOne" resultMap="messageCommentMap">
-        SELECT comment.id,comment.bid,comment.content,comment.gmt_create,
+    <select id="getMessageCommentOne" resultMap="messageCommentMap">
+        SELECT comment.id,comment.mid,comment.content,comment.gmt_create,
         ruser.id as uid,ruser.nickname as username,ruser.avatar
         FROM red_message_comment comment
         LEFT JOIN edu_user ruser on comment.uid = ruser.id
-        WHERE  comment.id = #{cid}
+        WHERE  comment.id = #{mid}
     </select>
 
     <update id="addCommentGoodCount">
