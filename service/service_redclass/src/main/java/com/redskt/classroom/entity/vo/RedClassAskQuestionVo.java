@@ -9,6 +9,8 @@ public class RedClassAskQuestionVo {
 
     private String qId;
 
+    private String uid;
+
     private String nickname;
 
     private String avatar;

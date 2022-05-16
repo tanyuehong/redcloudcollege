@@ -2,6 +2,7 @@ package com.redskt.classroom.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.redskt.classroom.entity.RedClassUser;
 import com.redskt.classroom.entity.RedQustionGood;
 import com.redskt.classroom.entity.RedReplyGood;
 import com.redskt.classroom.entity.RedUserFocus;
@@ -56,6 +57,21 @@ public class RedUserHomeController {
             }
         }
         return R.ok().data("focus", false);
+    }
+
+    //根据token获取用户信息
+    @GetMapping("getShowUserInfo/{uId}")
+    public R getShowUserInfo(@PathVariable String uId) {
+        //1 根据订单号查询订单信息
+        QueryWrapper<RedClassUser> wrapper = new QueryWrapper<>();
+        wrapper.select("id","username", "nickname","sex","age","sign","avatar","position","perpage","company","perintroduction");
+        wrapper.eq("id",uId);
+
+        RedClassUser eduUser = userService.getOne(wrapper);
+        if (eduUser != null && eduUser.getSign()==null) {
+            eduUser.setSign("这位同学很懒，木有签名的说～");
+        }
+        return R.ok().data("userInfo",eduUser);
     }
 }
 
