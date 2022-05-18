@@ -7,6 +7,10 @@
         FROM op_blog_detail blog
         LEFT OUTER JOIN edu_user auser ON auser.id = blog.auid
         LEFT OUTER JOIN (select bid,count(id) as cCount from red_blog_comment group by bid) comment on comment.bid = blog.id
+
+        <if test="uid != null">
+        WHERE blog.auid = #{uid}
+        </if>
         <if test="type == 1">
             ORDER BY blog.gmt_create DESC
         </if>

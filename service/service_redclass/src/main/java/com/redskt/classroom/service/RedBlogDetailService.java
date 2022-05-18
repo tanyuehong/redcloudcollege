@@ -19,7 +19,7 @@ public interface RedBlogDetailService extends IService<OpBlogDetail> {
 
     RedClassBlogDetailVo getRedClassBlogDetail(String bid);
 
-    List<RedClassBlogDetailVo> getRedBlogDetailList(int size,int type);
+    List<RedClassBlogDetailVo> getRedBlogDetailList(int size,int type,String uid);
 
     RedUserStateVo getBlogUserStatus(String bid, String uid);
 

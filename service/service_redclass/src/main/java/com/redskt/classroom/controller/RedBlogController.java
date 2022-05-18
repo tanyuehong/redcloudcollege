@@ -55,7 +55,7 @@ public class RedBlogController {
             subTypeList = typeService.list(subWrapper);
         }
 
-        List<RedClassBlogDetailVo> blogList = blogService.getRedBlogDetailList(8,1);
+        List<RedClassBlogDetailVo> blogList = blogService.getRedBlogDetailList(8,1,null);
         for (int i=0;i<blogList.size();i++) {
             RedClassBlogDetailVo detail = blogList.get(i);
             if (detail.getDescrb().length()>150) {

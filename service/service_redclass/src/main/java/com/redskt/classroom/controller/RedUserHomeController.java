@@ -6,7 +6,9 @@ import com.redskt.classroom.entity.RedClassUser;
 import com.redskt.classroom.entity.RedQustionGood;
 import com.redskt.classroom.entity.RedReplyGood;
 import com.redskt.classroom.entity.RedUserFocus;
+import com.redskt.classroom.entity.vo.RedClassBlogDetailVo;
 import com.redskt.classroom.entity.vo.RedClassRegisterVo;
+import com.redskt.classroom.service.RedBlogDetailService;
 import com.redskt.classroom.service.RedUserFocusService;
 import com.redskt.classroom.service.RedUserService;
 import com.redskt.commonutils.R;
@@ -15,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * <p>
@@ -33,6 +36,21 @@ public class RedUserHomeController {
 
     @Autowired
     private RedUserService userService;
+
+    @Autowired
+    private RedBlogDetailService blogService;
+
+    @GetMapping("getUserArticleList/{uId}")
+    public R getUserArticleList(@PathVariable String uId) {
+        List<RedClassBlogDetailVo> blogList = blogService.getRedBlogDetailList(8,1,uId);
+        for (int i=0;i<blogList.size();i++) {
+            RedClassBlogDetailVo detail = blogList.get(i);
+            if (detail.getDescrb().length()>150) {
+                detail.setDescrb(detail.getDescrb().substring(0,150)+"...");
+            }
+        }
+        return R.ok().data("articleList",blogList);
+    }
 
     //注册
     @PostMapping("register")

@@ -18,7 +18,7 @@ import java.util.List;
  */
 public interface OpBlogDetailMapper extends BaseMapper<OpBlogDetail> {
 
-    List<RedClassBlogDetailVo> getRedBlogDetailList(@Param("size") int size,@Param("type") int type);
+    List<RedClassBlogDetailVo> getRedBlogDetailList(@Param("size") int size,@Param("type") int type,@Param("uid") String uid);
 
     RedClassBlogDetailVo getRedClassBlogDetail(@Param("bid") String bid);
 

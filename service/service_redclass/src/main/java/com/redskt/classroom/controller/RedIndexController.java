@@ -65,7 +65,7 @@ public class RedIndexController {
             blogCunt = 1;
         }
 
-        List<RedClassBlogDetailVo> blogList = blogService.getRedBlogDetailList(blogCunt,2);
+        List<RedClassBlogDetailVo> blogList = blogService.getRedBlogDetailList(blogCunt,2,null);
         // 3。技术书籍的个数
         int bookCount = random.nextInt(4);
         if (bookCount == 0) {

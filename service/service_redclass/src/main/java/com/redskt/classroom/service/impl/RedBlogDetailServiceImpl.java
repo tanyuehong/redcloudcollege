@@ -27,8 +27,8 @@ public class RedBlogDetailServiceImpl extends ServiceImpl<OpBlogDetailMapper, Op
     }
 
     @Override
-    public List<RedClassBlogDetailVo> getRedBlogDetailList(int size,int type) {
-        return baseMapper.getRedBlogDetailList(size,type);
+    public List<RedClassBlogDetailVo> getRedBlogDetailList(int size,int type,String uid) {
+        return baseMapper.getRedBlogDetailList(size,type,uid);
     }
 
     @Override
