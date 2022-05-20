@@ -2,9 +2,12 @@ package com.redskt.classroom.mapper;
 
 import com.redskt.classroom.entity.RedMessage;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.redskt.classroom.entity.vo.RedClassBlogDetailVo;
 import com.redskt.classroom.entity.vo.RedMessageDtailVo;
 import com.redskt.classroom.entity.vo.RedUserStateVo;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * <p>
@@ -15,6 +18,8 @@ import org.apache.ibatis.annotations.Param;
  * @since 2022-05-10
  */
 public interface RedMessageMapper extends BaseMapper<RedMessage> {
+
+    List<RedClassBlogDetailVo> getRedmessageDetailList(@Param("size") int size, @Param("type") int type, @Param("uid") String uid);
 
     RedMessageDtailVo getRedMessageDetail(@Param("mid") String mId);
 

@@ -42,15 +42,15 @@ public class RedBlogController {
 
     @GetMapping("index")
     public R index() {
-        QueryWrapper<OpBlogType> wrapper = new QueryWrapper<>();
+        QueryWrapper<RedBlogType> wrapper = new QueryWrapper<>();
         wrapper.isNull("parentId");
         wrapper.orderByAsc("bsort");
         wrapper.last("limit 8");
-        List<OpBlogType> typeList = typeService.list(wrapper);
+        List<RedBlogType> typeList = typeService.list(wrapper);
 
-        List<OpBlogType> subTypeList = new ArrayList<>();
+        List<RedBlogType> subTypeList = new ArrayList<>();
         if (typeList.size()>0) {
-            QueryWrapper<OpBlogType> subWrapper = new QueryWrapper<>();
+            QueryWrapper<RedBlogType> subWrapper = new QueryWrapper<>();
             subWrapper.eq("parentId",typeList.get(0).getId());
             subTypeList = typeService.list(subWrapper);
         }

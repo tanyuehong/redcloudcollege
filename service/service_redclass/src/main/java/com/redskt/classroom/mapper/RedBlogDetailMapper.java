@@ -1,6 +1,6 @@
 package com.redskt.classroom.mapper;
 
-import com.redskt.classroom.entity.OpBlogDetail;
+import com.redskt.classroom.entity.RedBlogDetail;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.redskt.classroom.entity.vo.RedUserStateVo;
 import com.redskt.classroom.entity.vo.RedClassBlogDetailVo;
@@ -16,7 +16,7 @@ import java.util.List;
  * @author tanyuehong
  * @since 2021-11-17
  */
-public interface OpBlogDetailMapper extends BaseMapper<OpBlogDetail> {
+public interface RedBlogDetailMapper extends BaseMapper<RedBlogDetail> {
 
     List<RedClassBlogDetailVo> getRedBlogDetailList(@Param("size") int size,@Param("type") int type,@Param("uid") String uid);
 

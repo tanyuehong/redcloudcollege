@@ -2,6 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.redskt.classroom.mapper.RedMessageMapper">
 
+    <select id="getRedmessageDetailList" resultType="com.redskt.classroom.entity.vo.RedClassBlogDetailVo">
+        SELECT message.id,message.title,message.type,message.cover,message.good,message.view_count,auser.id as aUid,auser.nickName as authorName,auser.avatar as authorAvatar,auser.id as authorUid,cCount
+        FROM red_message message
+        LEFT OUTER JOIN edu_user auser ON auser.id = message.uid
+        LEFT OUTER JOIN (select mid,count(id) as cCount from red_message_comment group by mid) comment on comment.mid = message.id
+
+        <if test="uid != null">
+            WHERE message.uid = #{uid}
+        </if>
+        <if test="type == 1">
+            ORDER BY message.gmt_create DESC
+        </if>
+        <if test="type == 2">
+            ORDER BY message.view_count DESC
+        </if>
+        LIMIT #{size}
+    </select>
+    
+
     <select id="getRedMessageDetail" resultType="com.redskt.classroom.entity.vo.RedMessageDtailVo">
         SELECT message.*,auser.id as aUid,auser.nickName as authorName,auser.avatar as authorAvatar,auser.id as authorUid,
         sum(cmess.view_count) as allvcount, count(fans.id) as fanscount

@@ -1,10 +1,9 @@
 package com.redskt.classroom.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.util.Date;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableField;
+
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -23,31 +22,39 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="OpBlogType对象", description="")
-public class OpBlogType implements Serializable {
+@ApiModel(value="OpBlogDetail对象", description="")
+@TableName("op_blog_detail")
+public class RedBlogDetail implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "类型ID")
+    @ApiModelProperty(value = "文章主键")
     @TableId(value = "id", type = IdType.ID_WORKER_STR)
     private String id;
 
-    private String name;
+    private String title;
 
-    @TableField("parentId")
-    private String parentId;
+    private String type;
 
-    private Integer bsort;
+    private String blogtype;
 
-    private Integer level;
+    private String content;
+
+    private String descrb;
 
     private Integer hot;
+
+    private Integer good;
+
+    private Integer faver;
+
+    private Integer viewCount;
+
+    private Integer price;
 
     @TableField(fill = FieldFill.INSERT)
     private Date gmtCreate;
 
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date gmtModified;
-
-
 }

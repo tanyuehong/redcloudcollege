@@ -16,7 +16,7 @@ public class RedClassBlogDetailVo {
 
     private String authorAvatar;
 
-    private String type;
+    private String type;   // 文章属于什么类型  前端，后端，等
 
     private String blogtype;
 
@@ -24,9 +24,13 @@ public class RedClassBlogDetailVo {
 
     private String descrb;
 
+    private String cover;
+
     private Integer hot;
 
     private Integer good;
+
+    private Integer ctype;  // 列表显示类型  blog  ,通知
 
     private Integer faver;
 

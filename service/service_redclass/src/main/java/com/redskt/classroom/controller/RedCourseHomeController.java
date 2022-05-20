@@ -6,11 +6,9 @@ import com.redskt.classroom.entity.*;
 import com.redskt.classroom.entity.vo.*;
 import com.redskt.classroom.service.*;
 import com.redskt.commonutils.R;
-import com.redskt.security.TokenManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -86,10 +84,10 @@ public class RedCourseHomeController {
             bookWarp.last("limit 6");
             List<RedClassBook> bookList = bookService.list(bookWarp);
 
-            QueryWrapper<OpBlogDetail> blogWarp = new QueryWrapper<>();
+            QueryWrapper<RedBlogDetail> blogWarp = new QueryWrapper<>();
             blogWarp.eq("auid",teacherId);
             blogWarp.last("limit 6");
-            List<OpBlogDetail> blogDetailList = blogDetailService.list(blogWarp);
+            List<RedBlogDetail> blogDetailList = blogDetailService.list(blogWarp);
             return R.ok().data("teacher", teacher).data("courseList", courseList).data("bookList",bookList).data("praticeList",blogDetailList);
         }
         return R.error("没有对应的老师信息哈");

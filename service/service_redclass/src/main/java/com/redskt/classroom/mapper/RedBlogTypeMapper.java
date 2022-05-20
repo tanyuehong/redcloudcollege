@@ -1,6 +1,6 @@
 package com.redskt.classroom.mapper;
 
-import com.redskt.classroom.entity.OpBlogType;
+import com.redskt.classroom.entity.RedBlogType;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author tanyuehong
  * @since 2021-11-17
  */
-public interface OpBlogTypeMapper extends BaseMapper<OpBlogType> {
+public interface RedBlogTypeMapper extends BaseMapper<RedBlogType> {
 
 }
