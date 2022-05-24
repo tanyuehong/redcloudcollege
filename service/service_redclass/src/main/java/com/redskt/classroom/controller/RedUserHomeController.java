@@ -8,6 +8,7 @@ import com.redskt.classroom.entity.RedReplyGood;
 import com.redskt.classroom.entity.RedUserFocus;
 import com.redskt.classroom.entity.vo.RedClassBlogDetailVo;
 import com.redskt.classroom.entity.vo.RedClassRegisterVo;
+import com.redskt.classroom.entity.vo.RedClassUserVo;
 import com.redskt.classroom.service.RedBlogDetailService;
 import com.redskt.classroom.service.RedMessageService;
 import com.redskt.classroom.service.RedUserFocusService;
@@ -90,15 +91,9 @@ public class RedUserHomeController {
         return R.ok().data("focus", false);
     }
 
-    //根据token获取用户信息
     @GetMapping("getShowUserInfo/{uId}")
     public R getShowUserInfo(@PathVariable String uId) {
-        //1 根据订单号查询订单信息
-        QueryWrapper<RedClassUser> wrapper = new QueryWrapper<>();
-        wrapper.select("id","username", "nickname","sex","age","sign","avatar","position","perpage","company","perintroduction");
-        wrapper.eq("id",uId);
-
-        RedClassUser eduUser = userService.getOne(wrapper);
+        RedClassUserVo eduUser = userService.getShowUserInfo(uId);
         if (eduUser != null && eduUser.getSign()==null) {
             eduUser.setSign("这位同学很懒，木有签名的说～");
         }

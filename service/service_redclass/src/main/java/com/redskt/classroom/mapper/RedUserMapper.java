@@ -20,6 +20,8 @@ public interface RedUserMapper extends BaseMapper<RedClassUser> {
 
     Integer countRegisterDay(String day);
 
+    RedClassUserVo getShowUserInfo(@Param("uid") String uid);
+
     RedUserAskVo getUserAskInfo(@Param("uid") String uid);
 
     RedClassUserVo getUserInfoFocusCount(@Param("uid") String uid);

@@ -32,6 +32,12 @@ public class RedUserServiceImpl extends ServiceImpl<RedUserMapper, RedClassUser>
     public RedUserAskVo getAskUserInfo(String uid) {
         return baseMapper.getUserAskInfo(uid);
     }
+
+    @Override
+    public RedClassUserVo getShowUserInfo(String uId) {
+        return baseMapper.getShowUserInfo(uId);
+    }
+
     @Override
     public RedClassUserVo getUserInfoFocusCount(String uId) {
         return baseMapper.getUserInfoFocusCount(uId);

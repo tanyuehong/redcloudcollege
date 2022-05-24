@@ -20,6 +20,8 @@ public interface RedUserService extends IService<RedClassUser> {
 
     void register(RedClassRegisterVo registerVo);
 
+    RedClassUserVo getShowUserInfo(String uid);
+
     RedUserAskVo getAskUserInfo(String uid);
 
     RedClassUserVo getUserInfoFocusCount(String uId);

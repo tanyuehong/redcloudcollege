@@ -29,7 +29,15 @@ public class RedClassUserVo {
     private Integer age;
 
     @ApiModelProperty(value = "关注数量")
-    private Integer focus;
+    private int focus;   // 粉丝数量
+
+    private int mfocus;  // 自己关注了多少人
+
+    private int viewsum; // 文章总阅读数
+
+    private int bgoodsum; // 文章总点赞数
+
+    private int practice; // 文章总点赞数
 
     @ApiModelProperty(value = "用户头像")
     private String avatar;
