@@ -6,13 +6,11 @@ import com.redskt.classroom.entity.RedClassUser;
 import com.redskt.classroom.entity.RedQustionGood;
 import com.redskt.classroom.entity.RedReplyGood;
 import com.redskt.classroom.entity.RedUserFocus;
+import com.redskt.classroom.entity.vo.RedClassAskQuestionVo;
 import com.redskt.classroom.entity.vo.RedClassBlogDetailVo;
 import com.redskt.classroom.entity.vo.RedClassRegisterVo;
 import com.redskt.classroom.entity.vo.RedClassUserVo;
-import com.redskt.classroom.service.RedBlogDetailService;
-import com.redskt.classroom.service.RedMessageService;
-import com.redskt.classroom.service.RedUserFocusService;
-import com.redskt.classroom.service.RedUserService;
+import com.redskt.classroom.service.*;
 import com.redskt.commonutils.R;
 import com.redskt.security.TokenManager;
 import org.apache.commons.lang3.ArrayUtils;
@@ -20,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -46,8 +45,32 @@ public class RedUserHomeController {
     @Autowired
     private RedMessageService messageService;
 
-    @GetMapping("getUserArticleList/{uId}")
-    public R getUserArticleList(@PathVariable String uId) {
+    @Autowired
+    private RedAskService userAskService;
+
+    @GetMapping("getShowUserInfo/{uId}/{type}")
+    public R getShowUserInfo(@PathVariable String uId,@PathVariable String type) {
+        if(uId == null || uId.length() == 0 || type == null || type.length()==0 ) {
+            return R.error("请求参数异常");
+        }
+        RedClassUserVo eduUser = userService.getShowUserInfo(uId);
+        if (eduUser != null && eduUser.getSign()==null) {
+            eduUser.setSign("这位同学很懒，木有签名的说～");
+        }
+        List<RedClassBlogDetailVo> postList = new ArrayList<>();
+        if(type.equals("blog")) {
+            postList = getArticleList(uId);
+        } else if (type.equals("collect-blog")) {
+            postList = getCollectArticleList(uId);
+        } else if (type.equals("collect-ask")) {
+
+            return R.ok().data("userInfo",eduUser).data("dataList",getCollectAskList(uId));
+        }
+        return R.ok().data("userInfo",eduUser).data("dataList",postList);
+    }
+
+
+    public List<RedClassBlogDetailVo> getArticleList(String uId) {
         List<RedClassBlogDetailVo> postList = messageService.getRedmessageDetailList(8,1,uId);
         for (int i=0;i<postList.size();i++) {
             RedClassBlogDetailVo detail = postList.get(i);
@@ -63,7 +86,23 @@ public class RedUserHomeController {
             }
         }
         postList.addAll(blogList);
-        return R.ok().data("articleList",postList);
+        return postList;
+    }
+
+    public List<RedClassBlogDetailVo> getCollectArticleList(String uId) {
+        List<RedClassBlogDetailVo> blogList = blogService.getCollectDetailList(8,uId);
+        for (int i=0;i<blogList.size();i++) {
+            RedClassBlogDetailVo detail = blogList.get(i);
+            detail.setCtype(1);
+            if (detail.getDescrb().length() > 150) {
+                detail.setDescrb(detail.getDescrb().substring(0, 150) + "...");
+            }
+        }
+        return blogList;
+    }
+
+    public List<RedClassAskQuestionVo> getCollectAskList(String uId) {
+        return userAskService.getCollectQustionLists(8,uId);
     }
 
     //注册
@@ -89,15 +128,6 @@ public class RedUserHomeController {
             }
         }
         return R.ok().data("focus", false);
-    }
-
-    @GetMapping("getShowUserInfo/{uId}")
-    public R getShowUserInfo(@PathVariable String uId) {
-        RedClassUserVo eduUser = userService.getShowUserInfo(uId);
-        if (eduUser != null && eduUser.getSign()==null) {
-            eduUser.setSign("这位同学很懒，木有签名的说～");
-        }
-        return R.ok().data("userInfo",eduUser);
     }
 }
 

@@ -2,6 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.redskt.classroom.mapper.RedBlogDetailMapper">
 
+    <select id="getCollectDetailList" resultType="com.redskt.classroom.entity.vo.RedClassBlogDetailVo">
+        SELECT blog.id,blog.title,blog.descrb,blog.type,blog.good,blog.faver,blog.view_count,blog.price,auser.id as aUid,auser.nickName as authorName,auser.avatar as authorAvatar,auser.id as authorUid,cCount
+        FROM red_blog_collect collect
+        LEFT OUTER JOIN op_blog_detail blog ON blog.id = collect.bid
+        LEFT OUTER JOIN edu_user auser ON auser.id = blog.auid
+        LEFT OUTER JOIN (select bid,count(id) as cCount from red_blog_comment group by bid) comment on comment.bid = blog.id
+        WHERE collect.uid = #{uid}
+        ORDER BY blog.gmt_modified DESC
+        LIMIT #{size}
+    </select>
+
     <select id="getRedBlogDetailList" resultType="com.redskt.classroom.entity.vo.RedClassBlogDetailVo">
         SELECT blog.id,blog.title,blog.descrb,blog.type,blog.good,blog.faver,blog.view_count,blog.price,auser.id as aUid,auser.nickName as authorName,auser.avatar as authorAvatar,auser.id as authorUid,cCount
         FROM op_blog_detail blog

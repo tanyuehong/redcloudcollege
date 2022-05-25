@@ -14,13 +14,15 @@ import java.util.List;
  * @author tanyuehong
  * @since 2020-07-26
  */
-public interface EduUserAskService extends IService<EduUserAsk> {
+public interface RedAskService extends IService<EduUserAsk> {
 
     Boolean saveUserAsk(EduUserAsk userAsk);
 
     void updateUserAskReadCount(String qId,int readCount);
 
     RedClassAskQuestionVo getQustionDetail(String qId);
+
+    List<RedClassAskQuestionVo> getCollectQustionLists(int size,String uid);
 
     List<RedClassAskQuestionVo> getHomeAskQustionList(int type,String typeId);
 

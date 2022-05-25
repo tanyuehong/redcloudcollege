@@ -3,9 +3,7 @@ package com.redskt.classroom.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.redskt.classroom.entity.RedQustionCollect;
-import com.redskt.classroom.entity.RedQustionGood;
-import com.redskt.classroom.service.EduUserAskService;
-import com.redskt.classroom.service.RedAskReplyService;
+import com.redskt.classroom.service.RedAskService;
 import com.redskt.classroom.service.RedQustionCollectService;
 import com.redskt.commonutils.R;
 import com.redskt.security.TokenManager;
@@ -35,7 +33,7 @@ public class RedQustionCollectController {
     private RedQustionCollectService collectService;
 
     @Autowired
-    private EduUserAskService userAskService;
+    private RedAskService userAskService;
 
     // 问题的收藏逻辑
     @GetMapping("qCollectState/{qId}")

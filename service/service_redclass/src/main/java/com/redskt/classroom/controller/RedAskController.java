@@ -32,7 +32,7 @@ public class RedAskController {
     private RedAskTypeService askTypeService;
 
     @Autowired
-    private EduUserAskService userAskService;
+    private RedAskService userAskService;
 
     @Autowired
     private RedAskQustionTagService tagService;

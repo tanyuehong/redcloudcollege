@@ -17,7 +17,7 @@ import java.util.List;
  * @author tanyuehong
  * @since 2020-07-26
  */
-public interface EduUserAskMapper extends BaseMapper<EduUserAsk> {
+public interface RedAskMapper extends BaseMapper<EduUserAsk> {
     List<RedClassAskQuestionVo> getHomeQustionLists(@Param("qustype")  String qustype);
 
     List<RedClassAskQuestionVo> getReplayQustionLists(@Param("qustype")  String qustype);
@@ -29,6 +29,8 @@ public interface EduUserAskMapper extends BaseMapper<EduUserAsk> {
     List<RedClassAskQuestionVo> getTopQustionLists(@Param("qustype")  String qustype);
 
     List<RedClassAskQuestionVo> getPriceQustionLists(@Param("qustype")  String qustype);
+
+    List<RedClassAskQuestionVo> getCollectQustionLists(@Param("uid")  String uid,@Param("size")  int size);
 
     RedClassAskQuestionVo getQustionDetail(String tId);
 

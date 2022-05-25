@@ -20,6 +20,8 @@ public interface RedBlogDetailMapper extends BaseMapper<RedBlogDetail> {
 
     List<RedClassBlogDetailVo> getRedBlogDetailList(@Param("size") int size,@Param("type") int type,@Param("uid") String uid);
 
+    List<RedClassBlogDetailVo> getCollectDetailList(@Param("size") int size,@Param("uid") String uid);
+
     RedClassBlogDetailVo getRedClassBlogDetail(@Param("bid") String bid);
 
     RedUserStateVo getBlogUserStatus(@Param("bid") String bid, @Param("uid") String uid);

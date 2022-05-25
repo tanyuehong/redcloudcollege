@@ -1,10 +1,9 @@
 package com.redskt.classroom.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.redskt.classroom.entity.EduUserAsk;
 import com.redskt.classroom.entity.vo.RedClassAskQuestionVo;
-import com.redskt.classroom.mapper.EduUserAskMapper;
-import com.redskt.classroom.service.EduUserAskService;
+import com.redskt.classroom.mapper.RedAskMapper;
+import com.redskt.classroom.service.RedAskService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +18,12 @@ import java.util.List;
  * @since 2020-07-26
  */
 @Service
-public class EduUserAskServiceImpl extends ServiceImpl<EduUserAskMapper, EduUserAsk> implements EduUserAskService {
+public class RedAskServiceImpl extends ServiceImpl<RedAskMapper, EduUserAsk> implements RedAskService {
+
+    @Override
+    public List<RedClassAskQuestionVo> getCollectQustionLists(int size,String uid) {
+       return baseMapper.getCollectQustionLists(uid,size);
+    }
 
     @Override
     public Boolean saveUserAsk(EduUserAsk userAsk) {

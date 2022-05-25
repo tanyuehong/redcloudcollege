@@ -29,7 +29,7 @@ import javax.servlet.http.HttpServletRequest;
 public class RedAskUserController {
 
     @Autowired
-    private EduUserAskService userAskService;
+    private RedAskService userAskService;
 
     @Autowired
     private RedAskReplyService replyService;
