@@ -68,6 +68,10 @@ public class RedUserHomeController {
             return R.ok().data("userInfo",eduUser).data("dataList",getFocusUserList(uId,1));
         } else if (type.equals("focus-fans")) {
             return R.ok().data("userInfo",eduUser).data("dataList",getFocusUserList(uId,2));
+        } else if (type.equals("good-blog")) {
+            postList = getGoodArticleList(uId);
+        } else if (type.equals("good-ask")) {
+            return R.ok().data("userInfo",eduUser).data("dataList", getGoodAskList(uId));
         }
         return R.ok().data("userInfo",eduUser).data("dataList",postList);
     }
@@ -112,8 +116,24 @@ public class RedUserHomeController {
         return blogList;
     }
 
+    public List<RedClassBlogDetailVo> getGoodArticleList(String uId) {
+        List<RedClassBlogDetailVo> blogList = blogService.getGoodDetailList(8,uId);
+        for (int i=0;i<blogList.size();i++) {
+            RedClassBlogDetailVo detail = blogList.get(i);
+            detail.setCtype(1);
+            if (detail.getDescrb().length() > 150) {
+                detail.setDescrb(detail.getDescrb().substring(0, 150) + "...");
+            }
+        }
+        return blogList;
+    }
+
     public List<RedClassAskQuestionVo> getCollectAskList(String uId) {
         return userAskService.getCollectQustionLists(8,uId);
+    }
+
+    public List<RedClassAskQuestionVo> getGoodAskList(String uId) {
+        return userAskService.getGoodQustionLists(8,uId);
     }
 
     //注册

@@ -20,10 +20,12 @@
     <select id="getShowUserInfo" resultType="com.redskt.classroom.entity.vo.RedClassUserVo">
         SELECT eduser.id,eduser.username,eduser.nickname,eduser.sex,eduser.age,eduser.sign,eduser.avatar,eduser.position,
         eduser.perpage,eduser.company,eduser.perintroduction,eduser.gmt_create,eduser.practice,count(focus.id) as focus,count(mfocus.id) as mfocus,
-        sum(blog.view_count) as viewsum,sum(blog.good) as bgoodsum
+        sum(blog.view_count) as viewsum,sum(blog.good) as bgoodsum,(count(bgood.id)+count(agood.id)) as ccollect
         FROM edu_user eduser
         LEFT OUTER JOIN red_user_focus focus ON eduser.id=focus.fid and focus.is_deleted = 0
         LEFT OUTER JOIN red_user_focus mfocus ON eduser.id=mfocus.uid and mfocus.is_deleted = 0
+        LEFT OUTER JOIN red_blog_collect bgood ON eduser.id=bgood.uid and bgood.is_deleted = 0
+        LEFT OUTER JOIN red_qustion_collect agood ON eduser.id=agood.uid and agood.is_deleted = 0
         LEFT OUTER JOIN op_blog_detail blog ON eduser.id=blog.auid
         where eduser.id = #{uid}
     </select>

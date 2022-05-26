@@ -19,6 +19,8 @@ public interface RedBlogDetailService extends IService<RedBlogDetail> {
 
     RedClassBlogDetailVo getRedClassBlogDetail(String bid);
 
+    List<RedClassBlogDetailVo> getGoodDetailList(int size,String uid);
+
     List<RedClassBlogDetailVo> getCollectDetailList(int size,String uid);
 
     List<RedClassBlogDetailVo> getRedBlogDetailList(int size,int type,String uid);

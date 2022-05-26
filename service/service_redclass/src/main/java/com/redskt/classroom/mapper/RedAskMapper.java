@@ -30,6 +30,8 @@ public interface RedAskMapper extends BaseMapper<EduUserAsk> {
 
     List<RedClassAskQuestionVo> getPriceQustionLists(@Param("qustype")  String qustype);
 
+    List<RedClassAskQuestionVo> getGoodQustionLists(@Param("uid")  String uid,@Param("size")  int size);
+
     List<RedClassAskQuestionVo> getCollectQustionLists(@Param("uid")  String uid,@Param("size")  int size);
 
     RedClassAskQuestionVo getQustionDetail(String tId);

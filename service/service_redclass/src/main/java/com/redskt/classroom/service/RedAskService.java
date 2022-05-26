@@ -22,6 +22,8 @@ public interface RedAskService extends IService<EduUserAsk> {
 
     RedClassAskQuestionVo getQustionDetail(String qId);
 
+    List<RedClassAskQuestionVo> getGoodQustionLists(int size,String uid);
+
     List<RedClassAskQuestionVo> getCollectQustionLists(int size,String uid);
 
     List<RedClassAskQuestionVo> getHomeAskQustionList(int type,String typeId);

@@ -28,6 +28,12 @@ public class RedClassUserVo {
     @ApiModelProperty(value = "年龄")
     private Integer age;
 
+    private int ftag;
+
+    private int ccollect;  // 收藏个数
+
+    private Boolean bfocus;   // 是否被关注
+
     @ApiModelProperty(value = "关注数量")
     private int focus;   // 粉丝数量
 

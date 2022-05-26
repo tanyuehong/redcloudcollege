@@ -26,6 +26,11 @@ public class RedAskServiceImpl extends ServiceImpl<RedAskMapper, EduUserAsk> imp
     }
 
     @Override
+    public List<RedClassAskQuestionVo> getGoodQustionLists(int size,String uid) {
+        return baseMapper.getCollectQustionLists(uid,size);
+    }
+
+    @Override
     public Boolean saveUserAsk(EduUserAsk userAsk) {
         baseMapper.insert(userAsk);
         return true;
