@@ -14,6 +14,7 @@ import com.redskt.servicebase.excepionhandler.RedCloudCollegeExceptionHandler;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -27,6 +28,15 @@ import java.util.Map;
 @Service
 public class RedUserServiceImpl extends ServiceImpl<RedUserMapper, RedClassUser> implements RedUserService {
 
+    @Override
+    public List<RedClassUser> getFocusUserList(String uid) {
+        return baseMapper.getFocusUserList(uid);
+    }
+
+    @Override
+    public List<RedClassUser> getFansUserList(String uid) {
+        return baseMapper.getFansUserList(uid);
+    }
 
     @Override
     public RedUserAskVo getAskUserInfo(String uid) {

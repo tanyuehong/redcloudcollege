@@ -6,6 +6,7 @@ import com.redskt.classroom.entity.vo.RedClassRegisterVo;
 import com.redskt.classroom.entity.vo.RedClassUserVo;
 import com.redskt.classroom.entity.vo.RedUserAskVo;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -17,6 +18,10 @@ import java.util.Map;
  * @since 2020-05-16
  */
 public interface RedUserService extends IService<RedClassUser> {
+
+    List<RedClassUser> getFocusUserList(String uid);
+
+    List<RedClassUser> getFansUserList(String uid);
 
     void register(RedClassRegisterVo registerVo);
 

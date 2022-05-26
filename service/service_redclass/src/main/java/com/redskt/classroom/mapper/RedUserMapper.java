@@ -6,6 +6,7 @@ import com.redskt.classroom.entity.vo.RedClassUserVo;
 import com.redskt.classroom.entity.vo.RedUserAskVo;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,6 +20,10 @@ import java.util.Map;
 public interface RedUserMapper extends BaseMapper<RedClassUser> {
 
     Integer countRegisterDay(String day);
+
+    List<RedClassUser> getFocusUserList(@Param("uid") String uid);
+
+    List<RedClassUser> getFansUserList(@Param("uid") String uid);
 
     RedClassUserVo getShowUserInfo(@Param("uid") String uid);
 

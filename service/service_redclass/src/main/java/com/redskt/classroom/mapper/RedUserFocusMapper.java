@@ -1,8 +1,11 @@
 package com.redskt.classroom.mapper;
 
+import com.redskt.classroom.entity.RedClassUser;
 import com.redskt.classroom.entity.RedUserFocus;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,5 +16,6 @@ import org.apache.ibatis.annotations.Param;
  * @since 2022-04-05
  */
 public interface RedUserFocusMapper extends BaseMapper<RedUserFocus> {
+
     int updateUserFocusState(@Param("uid")  String uid, @Param("fid")  String fid);
 }

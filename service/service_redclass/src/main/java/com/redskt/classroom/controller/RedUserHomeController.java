@@ -63,10 +63,21 @@ public class RedUserHomeController {
         } else if (type.equals("collect-blog")) {
             postList = getCollectArticleList(uId);
         } else if (type.equals("collect-ask")) {
-
             return R.ok().data("userInfo",eduUser).data("dataList",getCollectAskList(uId));
+        } else if (type.equals("focus-mine")) {
+            return R.ok().data("userInfo",eduUser).data("dataList",getFocusUserList(uId,1));
+        } else if (type.equals("focus-fans")) {
+            return R.ok().data("userInfo",eduUser).data("dataList",getFocusUserList(uId,2));
         }
         return R.ok().data("userInfo",eduUser).data("dataList",postList);
+    }
+
+    public List<RedClassUser> getFocusUserList(String uid,int type) {
+        if(type == 1) {
+            return userService.getFocusUserList(uid);
+        } else {
+            return userService.getFansUserList(uid);
+        }
     }
 
 
