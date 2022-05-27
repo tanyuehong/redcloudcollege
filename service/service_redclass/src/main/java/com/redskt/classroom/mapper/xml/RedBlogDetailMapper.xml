@@ -19,7 +19,7 @@
         LEFT OUTER JOIN op_blog_detail blog ON blog.id = collect.bid
         LEFT OUTER JOIN edu_user auser ON auser.id = blog.auid
         LEFT OUTER JOIN (select bid,count(id) as cCount from red_blog_comment group by bid) comment on comment.bid = blog.id
-        WHERE collect.uid = #{uid}
+        WHERE collect.uid = #{uid} and collect.is_deleted = 0
         ORDER BY blog.gmt_modified DESC
         LIMIT #{size}
     </select>
