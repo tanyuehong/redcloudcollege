@@ -76,7 +76,7 @@ public class RedUserHomeController {
         return R.ok().data("userInfo",eduUser).data("dataList",postList);
     }
 
-    public List<RedClassUser> getFocusUserList(String uid,int type) {
+    public List<RedClassUserVo> getFocusUserList(String uid,int type) {
         if(type == 1) {
             return userService.getFocusUserList(uid);
         } else {
@@ -159,6 +159,18 @@ public class RedUserHomeController {
             }
         }
         return R.ok().data("focus", false);
+    }
+
+    @PostMapping("getUserFocusState")
+    public R getUserFocusState(@RequestBody List<String> fIds, HttpServletRequest request) {
+        if (fIds.size() > 0) {
+            String uId = TokenManager.getMemberIdByJwtToken(request);
+            if (uId.length() > 0) {
+                List<RedReplyGood> goodList = focusService.getUserFocusState(fIds, uId);
+                return R.ok().data("focusList", goodList);
+            }
+        }
+        return R.ok();
     }
 }
 

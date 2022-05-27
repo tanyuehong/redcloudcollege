@@ -19,9 +19,9 @@ import java.util.Map;
  */
 public interface RedUserService extends IService<RedClassUser> {
 
-    List<RedClassUser> getFocusUserList(String uid);
+    List<RedClassUserVo> getFocusUserList(String uid);
 
-    List<RedClassUser> getFansUserList(String uid);
+    List<RedClassUserVo> getFansUserList(String uid);
 
     void register(RedClassRegisterVo registerVo);
 

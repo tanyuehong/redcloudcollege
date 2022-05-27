@@ -2,14 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.redskt.classroom.mapper.RedUserMapper">
 
-    <select id="getFocusUserList" resultType="com.redskt.classroom.entity.RedClassUser">
+    <select id="getFocusUserList" resultType="com.redskt.classroom.entity.vo.RedClassUserVo">
         SELECT eduser.id,eduser.username,eduser.nickname,eduser.sign,eduser.avatar,eduser.position
         FROM red_user_focus focus
         LEFT OUTER JOIN edu_user eduser ON eduser.id=focus.fid and focus.is_deleted = 0
         where focus.uid = #{uid}
     </select>
 
-    <select id="getFansUserList" resultType="com.redskt.classroom.entity.RedClassUser">
+    <select id="getFansUserList" resultType="com.redskt.classroom.entity.vo.RedClassUserVo">
         SELECT eduser.id,eduser.username,eduser.nickname,eduser.sign,eduser.avatar,eduser.position
         FROM red_user_focus focus
         LEFT OUTER JOIN edu_user eduser ON eduser.id=focus.uid and focus.is_deleted = 0

@@ -29,12 +29,12 @@ import java.util.Map;
 public class RedUserServiceImpl extends ServiceImpl<RedUserMapper, RedClassUser> implements RedUserService {
 
     @Override
-    public List<RedClassUser> getFocusUserList(String uid) {
+    public List<RedClassUserVo> getFocusUserList(String uid) {
         return baseMapper.getFocusUserList(uid);
     }
 
     @Override
-    public List<RedClassUser> getFansUserList(String uid) {
+    public List<RedClassUserVo> getFansUserList(String uid) {
         return baseMapper.getFansUserList(uid);
     }
 

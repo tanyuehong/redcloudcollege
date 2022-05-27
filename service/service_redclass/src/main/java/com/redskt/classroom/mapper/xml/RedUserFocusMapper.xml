@@ -2,6 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.redskt.classroom.mapper.RedUserFocusMapper">
 
+    <select id="getUserFocusState" resultType="com.redskt.classroom.entity.RedUserFocus">
+        SELECT focus.id,focus.uid,focus.fid
+        FROM red_user_focus focus
+        <where>
+            <foreach item="item" index="index" collection="map"
+                     open="is_deleted = 0 and uid = #{uid} and fid in (" separator="," close=")">
+                #{item}
+            </foreach>
+        </where>
+    </select>
+
     <update id="updateUserFocusState">
         update red_user_focus
         set is_deleted = 0

@@ -21,9 +21,9 @@ public interface RedUserMapper extends BaseMapper<RedClassUser> {
 
     Integer countRegisterDay(String day);
 
-    List<RedClassUser> getFocusUserList(@Param("uid") String uid);
+    List<RedClassUserVo> getFocusUserList(@Param("uid") String uid);
 
-    List<RedClassUser> getFansUserList(@Param("uid") String uid);
+    List<RedClassUserVo> getFansUserList(@Param("uid") String uid);
 
     RedClassUserVo getShowUserInfo(@Param("uid") String uid);
 
