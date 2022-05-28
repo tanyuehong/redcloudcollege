@@ -6,14 +6,14 @@
         SELECT eduser.id,eduser.username,eduser.nickname,eduser.sign,eduser.avatar,eduser.position
         FROM red_user_focus focus
         LEFT OUTER JOIN edu_user eduser ON eduser.id=focus.fid and focus.is_deleted = 0
-        where focus.uid = #{uid}
+        where focus.uid = #{uid} and focus.is_deleted = 0
     </select>
 
     <select id="getFansUserList" resultType="com.redskt.classroom.entity.vo.RedClassUserVo">
         SELECT eduser.id,eduser.username,eduser.nickname,eduser.sign,eduser.avatar,eduser.position
         FROM red_user_focus focus
         LEFT OUTER JOIN edu_user eduser ON eduser.id=focus.uid and focus.is_deleted = 0
-        where focus.fid = #{uid}
+        where focus.fid = #{uid} and focus.is_deleted = 0
     </select>
 
     <select id="getShowUserInfo" resultType="com.redskt.classroom.entity.vo.RedClassUserVo">
