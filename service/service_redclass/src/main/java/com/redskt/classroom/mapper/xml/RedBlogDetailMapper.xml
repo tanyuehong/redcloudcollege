@@ -39,6 +39,9 @@
         <if test="type == 2">
             ORDER BY blog.hot DESC
         </if>
+        <if test="type == 3">
+            ORDER BY cCount DESC
+        </if>
         LIMIT #{size}
     </select>
 

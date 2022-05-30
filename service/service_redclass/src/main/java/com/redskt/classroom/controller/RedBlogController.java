@@ -69,12 +69,19 @@ public class RedBlogController {
     public R index(@PathVariable String pId) {
         if (pId.length()>0) {
             RedClassBlogDetailVo detail = blogService.getRedClassBlogDetail(pId);
-            return R.ok().data("pitem",detail);
+            List<RedClassBlogDetailVo> blogList = blogService.getRedBlogDetailList(6, 3, null);
+            for (int i = 0; i < blogList.size(); i++) {
+                RedClassBlogDetailVo fdetail = blogList.get(i);
+                if (fdetail.getDescrb().length() > 150) {
+                    fdetail.setDescrb(fdetail.getDescrb().substring(0, 150) + "...");
+                }
+            }
+            return R.ok().data("pitem", detail).data("blogList", blogList);
         } else {
             return R.error("参数不合法，请验证");
         }
     }
-
+   
     @GetMapping("getCommentList/{bId}/{type}")
     public R getCommentList(@PathVariable String bId,@PathVariable int type) {
         if (bId.length()>0) {
