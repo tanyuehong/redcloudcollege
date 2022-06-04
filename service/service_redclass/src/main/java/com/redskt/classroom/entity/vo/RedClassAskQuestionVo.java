@@ -39,5 +39,7 @@ public class RedClassAskQuestionVo {
 
     private Integer hotnum;
 
+    private int state;
+
     private Date gmtCreate;
 }

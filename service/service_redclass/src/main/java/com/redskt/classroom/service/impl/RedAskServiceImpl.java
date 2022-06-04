@@ -1,10 +1,11 @@
 package com.redskt.classroom.service.impl;
 
-import com.redskt.classroom.entity.EduUserAsk;
+import com.redskt.classroom.entity.RedAskQuestion;
 import com.redskt.classroom.entity.vo.RedClassAskQuestionVo;
 import com.redskt.classroom.mapper.RedAskMapper;
 import com.redskt.classroom.service.RedAskService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,7 +19,12 @@ import java.util.List;
  * @since 2020-07-26
  */
 @Service
-public class RedAskServiceImpl extends ServiceImpl<RedAskMapper, EduUserAsk> implements RedAskService {
+public class RedAskServiceImpl extends ServiceImpl<RedAskMapper, RedAskQuestion> implements RedAskService {
+
+    @Override
+    public int updateQustionState(String qId, String uId,int state) {
+        return baseMapper.updateQustionState(qId,uId,state);
+    }
 
     @Override
     public List<RedClassAskQuestionVo> getCollectQustionLists(int size,String uid) {
@@ -31,7 +37,7 @@ public class RedAskServiceImpl extends ServiceImpl<RedAskMapper, EduUserAsk> imp
     }
 
     @Override
-    public Boolean saveUserAsk(EduUserAsk userAsk) {
+    public Boolean saveUserAsk(RedAskQuestion userAsk) {
         baseMapper.insert(userAsk);
         return true;
     }

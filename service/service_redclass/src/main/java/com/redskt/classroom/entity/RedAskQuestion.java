@@ -1,11 +1,9 @@
 package com.redskt.classroom.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.util.Date;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -25,7 +23,8 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @ApiModel(value="EduUserAsk对象", description="")
-public class EduUserAsk implements Serializable {
+@TableName("edu_user_ask")
+public class RedAskQuestion implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -56,6 +55,8 @@ public class EduUserAsk implements Serializable {
     private Integer price;
 
     private Integer hotnum;
+
+    private int state;
 
     @ApiModelProperty(value = "创建时间")
     @TableField(fill = FieldFill.INSERT)

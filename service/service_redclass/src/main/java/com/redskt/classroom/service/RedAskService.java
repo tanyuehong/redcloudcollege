@@ -1,6 +1,6 @@
 package com.redskt.classroom.service;
 
-import com.redskt.classroom.entity.EduUserAsk;
+import com.redskt.classroom.entity.RedAskQuestion;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.redskt.classroom.entity.vo.RedClassAskQuestionVo;
 
@@ -14,9 +14,11 @@ import java.util.List;
  * @author tanyuehong
  * @since 2020-07-26
  */
-public interface RedAskService extends IService<EduUserAsk> {
+public interface RedAskService extends IService<RedAskQuestion> {
 
-    Boolean saveUserAsk(EduUserAsk userAsk);
+    Boolean saveUserAsk(RedAskQuestion userAsk);
+
+    int updateQustionState(String qId,String uId,int state);
 
     void updateUserAskReadCount(String qId,int readCount);
 

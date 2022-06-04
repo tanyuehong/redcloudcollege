@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * <p>
@@ -29,7 +30,7 @@ import javax.servlet.http.HttpServletRequest;
 public class RedAskUserController {
 
     @Autowired
-    private RedAskService userAskService;
+    private RedAskService askService;
 
     @Autowired
     private RedAskReplyService replyService;
@@ -47,8 +48,8 @@ public class RedAskUserController {
     private RedUserService userService;
 
     @PostMapping("submit")
-    public R registerUser(@RequestBody EduUserAsk userAsk) {
-        if (userAskService.saveUserAsk(userAsk)) {
+    public R submitQuestion(@RequestBody RedAskQuestion userAsk) {
+        if (askService.saveUserAsk(userAsk)) {
             return R.ok();
         } else  {
             return R.error("问题提交失败，请重新尝试！");
@@ -112,15 +113,39 @@ public class RedAskUserController {
         return R.error("参数异常，请重新尝试哈！");
     }
 
-    @GetMapping("deleteQustionReply/{rId}")
-    public R deleteQustionReply(@PathVariable String rId, HttpServletRequest request) {
+    @GetMapping("deleteQuestion/{qId}")
+    public R deleteQuestion(@PathVariable String qId, HttpServletRequest request) {
+        String uId = TokenManager.getMemberIdByJwtToken(request);
+        if (qId.length()>0 && uId.length()>0) {
+            QueryWrapper<RedAskReply> replyWrapper = new QueryWrapper<>();
+            replyWrapper.eq("qid", qId);
+            List<RedAskReply> replyList = replyService.list(replyWrapper);
+            if (replyList.size()>0) {
+                QueryWrapper<RedAskQuestion> questionWrapper = new QueryWrapper<>();
+                askService.updateQustionState(qId,uId,99);
+                return R.ok().data("sucess",false).data("tips","有回答的问题不支持删除，已经提交删除申请,审核成功后删除哈");
+            }
+            QueryWrapper<RedAskQuestion> questionWrapper = new QueryWrapper<>();
+            questionWrapper.eq("uid", uId);
+            questionWrapper.eq("id", qId);
+            if(askService.remove(questionWrapper)) {
+                return R.ok().data("sucess",true);
+            } else {
+                return R.error("删除回答失败，请重新尝试哈！");
+            }
+        }
+        return R.error("参数异常，请重新尝试哈！");
+    }
+
+    @GetMapping("deleteQuestionReply/{rId}")
+    public R deleteQuestionReply(@PathVariable String rId, HttpServletRequest request) {
         String uId = TokenManager.getMemberIdByJwtToken(request);
         if (rId.length()>0 && uId.length()>0) {
             QueryWrapper<RedAskReply> replyWrapper = new QueryWrapper<>();
             replyWrapper.eq("uid", uId);
             replyWrapper.eq("id", rId);
             if(replyService.remove(replyWrapper)) {
-                return R.ok();
+                return R.ok().data("rId",rId);
             } else {
                 return R.error("删除回答失败，请重新尝试哈！");
             }
@@ -136,7 +161,7 @@ public class RedAskUserController {
             commentWrapper.eq("uid", uId);
             commentWrapper.eq("id", cId);
             if(commentService.remove(commentWrapper)) {
-                return R.ok();
+                return R.ok().data("cId",cId);
             } else {
                 return R.error("删除回答失败，请重新尝试哈！");
             }

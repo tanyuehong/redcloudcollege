@@ -1,12 +1,10 @@
 package com.redskt.classroom.mapper;
 
-import com.redskt.classroom.entity.EduUserAsk;
+import com.redskt.classroom.entity.RedAskQuestion;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.redskt.classroom.entity.vo.RedClassAskQuestionVo;
 import org.apache.ibatis.annotations.Param;
 
-import java.io.Serializable;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -17,7 +15,7 @@ import java.util.List;
  * @author tanyuehong
  * @since 2020-07-26
  */
-public interface RedAskMapper extends BaseMapper<EduUserAsk> {
+public interface RedAskMapper extends BaseMapper<RedAskQuestion> {
     List<RedClassAskQuestionVo> getHomeQustionLists(@Param("qustype")  String qustype);
 
     List<RedClassAskQuestionVo> getReplayQustionLists(@Param("qustype")  String qustype);
@@ -35,6 +33,8 @@ public interface RedAskMapper extends BaseMapper<EduUserAsk> {
     List<RedClassAskQuestionVo> getCollectQustionLists(@Param("uid")  String uid,@Param("size")  int size);
 
     RedClassAskQuestionVo getQustionDetail(String tId);
+
+    int updateQustionState(@Param("qid")  String qId,@Param("uid")  String uId,@Param("state") int state);
 
     int changReadCount(@Param("id")  String qId,@Param("readCount") int readCount);
 
