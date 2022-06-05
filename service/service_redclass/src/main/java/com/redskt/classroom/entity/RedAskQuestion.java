@@ -56,6 +56,8 @@ public class RedAskQuestion implements Serializable {
 
     private Integer hotnum;
 
+    private String qustype;
+
     private int state;
 
     @ApiModelProperty(value = "创建时间")
