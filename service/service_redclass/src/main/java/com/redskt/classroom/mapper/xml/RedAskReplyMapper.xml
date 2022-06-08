@@ -96,6 +96,20 @@
         LIMIT #{size} ) as subreply )
     </select>
 
+    <update id="updateReplyState">
+        update red_ask_reply
+        set state = #{state}
+        where id = #{rid} and qid in
+        (
+           select id from (
+            select ask.id
+            from red_ask_reply reply
+            left join edu_user_ask ask on ask.id = reply.qid
+            WHERE reply.id = #{rid}
+            ) b
+        )
+    </update>
+
     <update id="addReplyGoodCount">
         update red_ask_reply
         set good=good+1

@@ -137,6 +137,42 @@ public class RedAskUserController {
         return R.error("参数异常，请重新尝试哈！");
     }
 
+    @GetMapping("fixQuestion/{qId}")
+    public R fixQuestion(@PathVariable String qId, HttpServletRequest request) {
+        String uId = TokenManager.getMemberIdByJwtToken(request);
+        if (qId.length()>0 && uId.length()>0) {
+            QueryWrapper<RedAskReply> replyWrapper = new QueryWrapper<>();
+            replyWrapper.eq("qid", qId);
+            List<RedAskReply> replyList = replyService.list(replyWrapper);
+            if (replyList.size()>0) {
+                QueryWrapper<RedAskQuestion> questionWrapper = new QueryWrapper<>();
+                askService.updateQustionState(qId,uId,99);
+                return R.ok().data("sucess",false).data("tips","有回答的问题不支持删除，已经提交删除申请,审核成功后删除哈");
+            }
+            QueryWrapper<RedAskQuestion> questionWrapper = new QueryWrapper<>();
+            questionWrapper.eq("uid", uId);
+            questionWrapper.eq("id", qId);
+            if(askService.remove(questionWrapper)) {
+                return R.ok().data("sucess",true);
+            } else {
+                return R.error("删除回答失败，请重新尝试哈！");
+            }
+        }
+        return R.error("参数异常，请重新尝试哈！");
+    }
+
+    @GetMapping("questionGoodReply/{rId}")
+    public R questionGoodReply(@PathVariable String rId, HttpServletRequest request) {
+        String uId = TokenManager.getMemberIdByJwtToken(request);
+        if (rId.length()>0 && uId.length()>0) {
+            if(replyService.updateReplyState(rId,9)>0) {
+                return R.ok().data("state", 9);
+            }
+        }
+        return R.error("参数异常，请重新尝试哈！");
+
+    }
+
     @GetMapping("deleteQuestionReply/{rId}")
     public R deleteQuestionReply(@PathVariable String rId, HttpServletRequest request) {
         String uId = TokenManager.getMemberIdByJwtToken(request);

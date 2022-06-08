@@ -21,11 +21,13 @@ public interface RedAskReplyMapper extends BaseMapper<RedAskReply> {
 
     List<RedAskReplyVo> getQustionReplyList(@Param("qId")  String qId,@Param("size") Integer size,@Param("csize") Integer csize,@Param("type") Integer type);
 
-    int addReplyGoodCount(@Param("rid")  String qId);
+    int addReplyGoodCount(@Param("rid") String rId);
 
-    int prepReplyGoodCount(@Param("rid")  String qId);
+    int prepReplyGoodCount(@Param("rid") String rId);
 
-    int addReplyBadCount(@Param("rid")  String qId);
+    int addReplyBadCount(@Param("rid") String rId);
 
-    int prepReplyBadCount(@Param("rid")  String qId);
+    int prepReplyBadCount(@Param("rid") String rId);
+
+    int updateReplyState(@Param("rid") String rId,@Param("state") int state);
 }

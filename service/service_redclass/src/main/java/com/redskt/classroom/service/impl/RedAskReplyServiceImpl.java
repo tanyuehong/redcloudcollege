@@ -21,6 +21,11 @@ import java.util.List;
 public class RedAskReplyServiceImpl extends ServiceImpl<RedAskReplyMapper, RedAskReply> implements RedAskReplyService {
 
     @Override
+    public int updateReplyState(String rId,int state) {
+        return baseMapper.updateReplyState(rId,state);
+    }
+
+    @Override
     public RedAskReplyVo getUserLasterReply(String uid) {
         return baseMapper.getUserLasterReply(uid);
     }

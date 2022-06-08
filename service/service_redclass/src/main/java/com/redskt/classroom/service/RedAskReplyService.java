@@ -24,4 +24,6 @@ public interface RedAskReplyService extends IService<RedAskReply> {
 
     int updateReplyBadCount(boolean isAdd,String rId);
 
+    int updateReplyState(String rId,int state);
+
 }
