@@ -78,9 +78,9 @@ public class RedAskController {
         }
 
         List<RedClassAskQuestionVo> list = userAskService.getHomeAskQustionList(type, qustionType);
-        QueryWrapper<RedAskQustionTag> tagQueryWrapper = new QueryWrapper<>();
+        QueryWrapper<RedCategoryTag> tagQueryWrapper = new QueryWrapper<>();
         tagQueryWrapper.eq("asktype", askList.get(0).getId());
-        List<RedAskQustionTag> tagList = tagService.list(tagQueryWrapper);
+        List<RedCategoryTag> tagList = tagService.list(tagQueryWrapper);
         return R.ok().data("list", list).data("qustionType", askList).data("tagList", tagList);
     }
 

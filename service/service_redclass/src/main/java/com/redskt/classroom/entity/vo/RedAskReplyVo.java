@@ -22,6 +22,8 @@ public class RedAskReplyVo {
 
     private Integer bad;
 
+    private int state;
+
     private boolean goodreply;
 
     private boolean badreply;

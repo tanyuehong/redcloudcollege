@@ -1,6 +1,6 @@
 package com.redskt.classroom.service;
 
-import com.redskt.classroom.entity.RedAskQustionTag;
+import com.redskt.classroom.entity.RedCategoryTag;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author tanyuehong
  * @since 2022-01-16
  */
-public interface RedAskQustionTagService extends IService<RedAskQustionTag> {
+public interface RedAskQustionTagService extends IService<RedCategoryTag> {
 
 }

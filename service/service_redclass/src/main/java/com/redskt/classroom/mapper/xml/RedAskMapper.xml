@@ -3,7 +3,7 @@
 <mapper namespace="com.redskt.classroom.mapper.RedAskMapper">
 
     <select id="getGoodQustionLists" resultType="com.redskt.classroom.entity.vo.RedClassAskQuestionVo">
-        SELECT ask.id as qId, ask.title,ask.type,ask.tag,ask.content,ask.collect,ask.readcount,ask.hotnum,ask.price,ask.good,ask.gmt_create,user.nickname,
+        SELECT ask.id as qId, ask.title,ask.type,ask.tag,ask.content,ask.collect,ask.readcount,ask.hotnum,ask.price,ask.good,ask.state,ask.gmt_create,user.nickname,
         ask.uid,(select count(reply.id) as replaycount from red_ask_reply reply where reply.qid=ask.id) as  reply
         FROM red_qustion_good good
         LEFT OUTER JOIN edu_user_ask ask ON ask.id = good.qid
@@ -14,7 +14,7 @@
     </select>
 
     <select id="getCollectQustionLists" resultType="com.redskt.classroom.entity.vo.RedClassAskQuestionVo">
-        SELECT ask.id as qId, ask.title,ask.type,ask.tag,ask.content,ask.collect,ask.readcount,ask.hotnum,ask.price,ask.good,ask.gmt_create,user.nickname,
+        SELECT ask.id as qId, ask.title,ask.type,ask.tag,ask.content,ask.collect,ask.readcount,ask.hotnum,ask.price,ask.good,ask.state,ask.gmt_create,user.nickname,
         ask.uid,(select count(reply.id) as replaycount from red_ask_reply reply where reply.qid=ask.id) as  reply
         FROM red_qustion_collect collect
         LEFT OUTER JOIN edu_user_ask ask ON ask.id=collect.qid
@@ -25,7 +25,7 @@
     </select>
 
     <select id="getHomeQustionLists" resultType="com.redskt.classroom.entity.vo.RedClassAskQuestionVo">
-        SELECT ask.id as qId, ask.title,ask.type,ask.tag,ask.content,ask.collect,ask.readcount,ask.hotnum,ask.price,ask.good,ask.gmt_create,user.nickname,
+        SELECT ask.id as qId, ask.title,ask.type,ask.tag,ask.content,ask.collect,ask.readcount,ask.hotnum,ask.price,ask.good,ask.state,ask.gmt_create,user.nickname,
         ask.uid,(select count(reply.id) as replaycount from red_ask_reply reply where reply.qid=ask.id) as  reply
         FROM edu_user_ask ask
         LEFT OUTER JOIN edu_user user ON ask.uid=user.id
@@ -36,7 +36,7 @@
     </select>
 
     <select id="getReplayQustionLists" resultType="com.redskt.classroom.entity.vo.RedClassAskQuestionVo">
-        SELECT ask.id as qId,ask.title,ask.type,ask.tag,ask.content,ask.collect,ask.readcount,ask.hotnum,ask.price,ask.good,ask.gmt_create,user.nickname,
+        SELECT ask.id as qId,ask.title,ask.type,ask.tag,ask.content,ask.collect,ask.readcount,ask.hotnum,ask.price,ask.good,ask.state,ask.gmt_create,user.nickname,
         ask.uid,(select count(reply.id) from red_ask_reply reply where reply.qid=ask.id) as  reply
         FROM edu_user_ask ask
         LEFT OUTER JOIN edu_user user ON ask.uid=user.id
@@ -48,7 +48,7 @@
     </select>
 
     <select id="getUnReplayQustionLists" resultType="com.redskt.classroom.entity.vo.RedClassAskQuestionVo">
-        SELECT ask.id as qId, ask.title,ask.type,ask.tag,ask.content,ask.collect,ask.readcount,ask.hotnum,ask.price,ask.good,ask.gmt_create,user.nickname,
+        SELECT ask.id as qId, ask.title,ask.type,ask.tag,ask.content,ask.collect,ask.readcount,ask.hotnum,ask.price,ask.good,ask.state,ask.gmt_create,user.nickname,
         ask.uid,(select count(reply.id) from red_ask_reply reply where reply.qid=ask.id) as  reply
         FROM edu_user_ask ask
         LEFT OUTER JOIN edu_user user ON ask.uid=user.id
@@ -60,7 +60,7 @@
     </select>
 
     <select id="getReplayCountQustionLists" resultType="com.redskt.classroom.entity.vo.RedClassAskQuestionVo">
-        SELECT ask.id as qId, ask.title,ask.type,ask.tag,ask.content,ask.collect,ask.readcount,ask.hotnum,ask.price,ask.good,ask.gmt_create,user.nickname,
+        SELECT ask.id as qId, ask.title,ask.type,ask.tag,ask.content,ask.collect,ask.readcount,ask.hotnum,ask.price,ask.good,ask.state,ask.gmt_create,user.nickname,
         ask.uid,(select count(reply.id)  from red_ask_reply reply where reply.qid=ask.id) as  reply
         FROM edu_user_ask ask
         LEFT OUTER JOIN edu_user user ON ask.uid=user.id
@@ -71,7 +71,7 @@
     </select>
 
     <select id="getTopQustionLists" resultType="com.redskt.classroom.entity.vo.RedClassAskQuestionVo">
-        SELECT ask.id as qId, ask.title,ask.type,ask.tag,ask.content,ask.collect,ask.readcount,ask.hotnum,ask.price,ask.good,ask.gmt_create,user.nickname,
+        SELECT ask.id as qId, ask.title,ask.type,ask.tag,ask.content,ask.collect,ask.readcount,ask.hotnum,ask.price,ask.good,ask.state,ask.gmt_create,user.nickname,
         ask.uid,(select count(reply.id) from red_ask_reply reply where reply.qid=ask.id) as  reply
         FROM edu_user_ask ask
         LEFT OUTER JOIN edu_user user ON ask.uid=user.id
@@ -82,7 +82,7 @@
     </select>
 
     <select id="getPriceQustionLists" resultType="com.redskt.classroom.entity.vo.RedClassAskQuestionVo">
-        SELECT ask.id as qId, ask.title,ask.type, ask.price, ask.tag,ask.content,ask.collect,ask.readcount,ask.hotnum,ask.price,ask.good,ask.gmt_create,user.nickname,
+        SELECT ask.id as qId, ask.title,ask.type, ask.price, ask.tag,ask.content,ask.collect,ask.readcount,ask.hotnum,ask.price,ask.good,ask.state,ask.gmt_create,user.nickname,
         (select count(reply.id) from red_ask_reply reply where reply.qid=ask.id) as  reply
         FROM edu_user_ask ask
         LEFT OUTER JOIN edu_user user ON ask.uid=user.id

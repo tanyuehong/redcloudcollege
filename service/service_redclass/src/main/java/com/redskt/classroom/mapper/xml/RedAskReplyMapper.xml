@@ -7,6 +7,7 @@
         <id column="qid" property="qid"/>
         <id column="good" property="good"/>
         <id column="bad" property="bad"/>
+        <id column="state" property="state"/>
         <id column="uid" property="uid"/>
         <id column="username" property="username"/>
         <id column="avatar" property="avatar"/>
@@ -41,7 +42,7 @@
     </select>
 
     <select id="getQustionReplyList" resultMap="replyMap">
-        SELECT reply.id, reply.qid,reply.content,reply.good,reply.bad,reply.uid,reply.gmt_create, ruser.nickname as username,
+        SELECT reply.id, reply.qid,reply.content,reply.good,reply.bad,reply.uid,reply.state,reply.gmt_create, ruser.nickname as username,
         ruser.avatar, rcomment.id as replyId, rcomment.content as ccontent,rcomment.good as cgood,rcomment.goodc as goodcomment,
         rcomment.rid as crid,rcomment.uid as cuid,rcomment.touid,rcomment.gmt_create as cgmt_create,cuser.nickname as cname,cuser.avatar as cavatar,tuser.nickname as tname
         FROM red_ask_reply reply
