@@ -16,17 +16,13 @@ import java.util.List;
  * @since 2020-07-26
  */
 public interface RedAskMapper extends BaseMapper<RedAskQuestion> {
-    List<RedClassAskQuestionVo> getHomeQustionLists(@Param("qustype")  String qustype);
 
-    List<RedClassAskQuestionVo> getReplayQustionLists(@Param("qustype")  String qustype);
-
-    List<RedClassAskQuestionVo> getUnReplayQustionLists(@Param("qustype")  String qustype);
-
-    List<RedClassAskQuestionVo> getReplayCountQustionLists(@Param("qustype")  String qustype);
-
-    List<RedClassAskQuestionVo> getTopQustionLists(@Param("qustype")  String qustype);
-
-    List<RedClassAskQuestionVo> getPriceQustionLists(@Param("qustype")  String qustype);
+    List<RedClassAskQuestionVo> getHomeQustionLists(@Param("qpath") String qpath,@Param("tag") String tag);
+    List<RedClassAskQuestionVo> getReplayQustionLists(@Param("qpath") String qpath,@Param("tag") String tag);
+    List<RedClassAskQuestionVo> getUnReplayQustionLists(@Param("qpath") String qpath,@Param("tag") String tag);
+    List<RedClassAskQuestionVo> getReplayCountQustionLists(@Param("qpath") String qpath,@Param("tag") String tag);
+    List<RedClassAskQuestionVo> getTopQustionLists(@Param("qpath") String qpath,@Param("tag") String tag);
+    List<RedClassAskQuestionVo> getPriceQustionLists(@Param("qpath") String qpath,@Param("tag") String tag);
 
     List<RedClassAskQuestionVo> getGoodQustionLists(@Param("uid")  String uid,@Param("size")  int size);
 

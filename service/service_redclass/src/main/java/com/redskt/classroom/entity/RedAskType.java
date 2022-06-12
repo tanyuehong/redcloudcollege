@@ -39,6 +39,8 @@ public class RedAskType implements Serializable {
     @ApiModelProperty(value = "排序")
     private Integer sort;
 
+    private String type;
+
     @ApiModelProperty(value = "创建时间")
     @TableField(fill = FieldFill.INSERT)
     private Date gmtCreate;

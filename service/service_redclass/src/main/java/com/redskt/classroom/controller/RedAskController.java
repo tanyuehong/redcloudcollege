@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -67,21 +69,69 @@ public class RedAskController {
         QueryWrapper<RedAskType> askWarper = new QueryWrapper<>();
         parameterMap = RequestParmUtil.transToMAP(parameterMap);
 
-        String qustionType = (String) parameterMap.get("qtype");
-        int type = Integer.parseInt((String) parameterMap.get("type"));
+        String type = (String) parameterMap.get("type");
+        String sort = (String) parameterMap.get("sort");
+        String tag  = (String) parameterMap.get("tag");
+
+        int sortType = 1;
+        if(sort == "" || sort == null || sort == "hot") {  // 代表 全部的逻辑
+            sortType = 1;
+        } else if(sort == "latestq") {
+            sortType = 2;
+        } else if(type == "latesta") {
+            sortType = 3;
+        } else if(type == "wait") {
+            sortType = 4;
+        } else if(type == "mosta") {
+            sortType = 5;
+        } else if(type == "payq") {
+            sortType = 6;
+        }
 
         askWarper.orderByAsc("sort");
         List<RedAskType> askList = askTypeService.list(askWarper);
 
-        if (qustionType == null || qustionType.length() == 0) {
-            qustionType = "";
+        if (type == null || type.length() == 0) {
+            type = "";
         }
 
-        List<RedClassAskQuestionVo> list = userAskService.getHomeAskQustionList(type, qustionType);
+        List<RedClassAskQuestionVo> list = userAskService.getHomeAskQustionList(sortType, type,tag);
         QueryWrapper<RedCategoryTag> tagQueryWrapper = new QueryWrapper<>();
         tagQueryWrapper.eq("asktype", askList.get(0).getId());
         List<RedCategoryTag> tagList = tagService.list(tagQueryWrapper);
-        return R.ok().data("list", list).data("qustionType", askList).data("tagList", tagList);
+
+        List<Map> sortList = new ArrayList<>();
+        Map<String, String> hotMap = new HashMap<>();
+        hotMap.put("name","热门排行");
+        hotMap.put("path","hot");
+        sortList.add(hotMap);
+
+        Map<String, String> latestQMap = new HashMap<>();
+        latestQMap.put("name","最新提问");
+        latestQMap.put("path","latestq");
+        sortList.add(latestQMap);
+
+        Map<String, String> latestAMap = new HashMap<>();
+        latestAMap.put("name","最新回答");
+        latestAMap.put("path","latesta");
+        sortList.add(latestAMap);
+
+        Map<String, String> waitMap = new HashMap<>();
+        waitMap.put("name","等待回答");
+        waitMap.put("path","wait");
+        sortList.add(waitMap);
+
+        Map<String, String> mostAMap = new HashMap<>();
+        mostAMap.put("name","最多回答");
+        mostAMap.put("path","mosta");
+        sortList.add(mostAMap);
+
+        Map<String, String> payqMap = new HashMap<>();
+        payqMap.put("name","付费问答");
+        payqMap.put("path","payq");
+        sortList.add(payqMap);
+
+        return R.ok().data("list", list).data("qustionType", askList).data("tagList", tagList).data("sortList",sortList);
     }
 
     @GetMapping("getquestiondetail/{qId}")

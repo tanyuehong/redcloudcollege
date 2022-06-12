@@ -33,7 +33,7 @@ public class RedAskServiceImpl extends ServiceImpl<RedAskMapper, RedAskQuestion>
 
     @Override
     public List<RedClassAskQuestionVo> getGoodQustionLists(int size,String uid) {
-        return baseMapper.getCollectQustionLists(uid,size);
+        return baseMapper.getGoodQustionLists(uid,size);
     }
 
     @Override
@@ -48,19 +48,21 @@ public class RedAskServiceImpl extends ServiceImpl<RedAskMapper, RedAskQuestion>
     }
 
     @Override
-    public List<RedClassAskQuestionVo> getHomeAskQustionList(int type,String typeId) {
-       if(type == 2) {
-            return baseMapper.getReplayQustionLists(typeId);
-        } else if(type == 3) {
-            return baseMapper.getUnReplayQustionLists(typeId);
-        } else if(type == 4) {
-            return baseMapper.getReplayCountQustionLists(typeId);
-        } else if(type == 5) {
-            return baseMapper.getTopQustionLists(typeId);
-        } else if(type == 6) {
-            return baseMapper.getPriceQustionLists(typeId);
+    public List<RedClassAskQuestionVo> getHomeAskQustionList(int sort,String typePath,String tag) {
+       if(sort == 1) {
+           return baseMapper.getTopQustionLists(typePath,tag);
+        } else if(sort == 2) {
+           return baseMapper.getHomeQustionLists(typePath,tag);
+       } else if(sort == 3) {
+           return baseMapper.getReplayQustionLists(typePath,tag);
+        } else if(sort == 4) {
+           return baseMapper.getUnReplayQustionLists(typePath,tag);
+        } else if(sort == 5) {
+           return baseMapper.getReplayCountQustionLists(typePath,tag);
+        } else if(sort == 6) {
+           return baseMapper.getPriceQustionLists(typePath,tag);
         } else {
-           return baseMapper.getHomeQustionLists(typeId);
+           return baseMapper.getTopQustionLists(typePath,tag);
        }
     }
 
