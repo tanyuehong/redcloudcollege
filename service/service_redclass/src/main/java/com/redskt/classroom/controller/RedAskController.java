@@ -74,27 +74,26 @@ public class RedAskController {
         String tag  = (String) parameterMap.get("tag");
 
         int sortType = 1;
-        if(sort == "" || sort == null || sort == "hot") {  // 代表 全部的逻辑
+        if(sort == "" || sort == null || sort.equals("hot")) {  // 代表 全部的逻辑
             sortType = 1;
-        } else if(sort == "latestq") {
+        } else if(sort.equals("latestq")) {
             sortType = 2;
-        } else if(type == "latesta") {
+        } else if(sort.equals("latesta")) {
             sortType = 3;
-        } else if(type == "wait") {
+        } else if(sort.equals("wait")) {
             sortType = 4;
-        } else if(type == "mosta") {
+        } else if(sort.equals("mosta")) {
             sortType = 5;
-        } else if(type == "payq") {
+        } else if(sort.equals("payq")) {
             sortType = 6;
         }
 
         askWarper.orderByAsc("sort");
         List<RedAskType> askList = askTypeService.list(askWarper);
 
-        if (type == null || type.length() == 0) {
-            type = "";
+        if (type.length() == 0 || type.equals("all")) {
+            type = null;
         }
-
         List<RedClassAskQuestionVo> list = userAskService.getHomeAskQustionList(sortType, type,tag);
         QueryWrapper<RedCategoryTag> tagQueryWrapper = new QueryWrapper<>();
         tagQueryWrapper.eq("asktype", askList.get(0).getId());

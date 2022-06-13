@@ -36,8 +36,6 @@ public class RedAskType implements Serializable {
     @ApiModelProperty(value = "类型名字")
     private String name;
 
-    private String type;
-
     @ApiModelProperty(value = "排序")
     private Integer sort;
 
