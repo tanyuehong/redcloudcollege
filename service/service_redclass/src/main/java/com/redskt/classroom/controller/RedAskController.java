@@ -64,10 +64,10 @@ public class RedAskController {
         return R.ok().data("typeList",typeList);
     }
 
-    @GetMapping("getTagList/{typeId}")
-    public R getTagList(@PathVariable String typeId) {
+    @GetMapping("getAskTagList/{typeId}")
+    public R getAskTagList(@PathVariable String typeId) {
         QueryWrapper<RedCategoryTag> tagQueryWrapper = new QueryWrapper<>();
-        if(typeId.length()>0) {
+        if(typeId.length()>0 && !typeId.equals("1")) {
             tagQueryWrapper.eq("asktype", typeId);
         }
         List<RedCategoryTag> tagList = tagService.list(tagQueryWrapper);
