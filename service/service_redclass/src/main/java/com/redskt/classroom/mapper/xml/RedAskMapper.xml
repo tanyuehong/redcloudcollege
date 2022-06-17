@@ -2,20 +2,54 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.redskt.classroom.mapper.RedAskMapper">
 
-    <select id="getGoodQustionLists" resultType="com.redskt.classroom.entity.vo.RedClassAskQuestionVo">
+    <resultMap id="questionMap" type="com.redskt.classroom.entity.vo.RedClassAskQuestionVo">
+        <id column="qid" property="qId"/>
+        <id column="uid" property="uid"/>
+        <id column="nickname" property="nickname"/>
+        <id column="avatar" property="avatar"/>
+        <id column="title" property="title"/>
+        <id column="type" property="type"/>
+        <id column="typeString" property="typeString"/>
+        <id column="content" property="content"/>
+        <id column="reply" property="reply"/>
+        <id column="readcount" property="readcount"/>
+        <id column="collect" property="collect"/>
+        <id column="good" property="good"/>
+        <id column="price" property="price"/>
+        <id column="hotnum" property="hotnum"/>
+        <id column="state" property="state"/>
+        <id column="gmt_create" property="gmtCreate"/>
+
+        <collection property="tags" resultMap="tagMap">
+        </collection>
+    </resultMap>
+
+    <resultMap id="tagMap" type="com.redskt.classroom.entity.RedCategoryTag">
+        <id column="ctid" property="id"/>
+        <id column="tname" property="name"/>
+        <id column="timg" property="img"/>
+        <id column="tsort" property="sort"/>
+        <id column="asktype" property="asktype"/>
+    </resultMap>
+
+    <select id="getGoodQustionLists" resultMap="questionMap">
         SELECT ask.id as qId, ask.title,ask.type,ask.tag,ask.content,ask.collect,ask.readcount,ask.hotnum,ask.price,ask.good,ask.state,ask.gmt_create,user.nickname,
         ask.uid,(select count(reply.id) as replaycount from red_ask_reply reply where reply.qid=ask.id) as  reply
+        ,tags.id as ctid,tags.name as tname,tags.img as timg,tags.sort as tsort,tags.asktype
         FROM edu_user_ask ask
         LEFT OUTER JOIN red_qustion_good good ON ask.id = good.qid
         LEFT OUTER JOIN edu_user user ON user.id = ask.uid
+        LEFT OUTER JOIN red_ask_tags tag ON tag.qid = ask.id
+        LEFT OUTER JOIN red_category_tag tags ON tags.id = tag.tid
         WHERE good.uid = #{uid}
         ORDER BY good.gmt_modified DESC
         LIMIT #{size}
     </select>
 
-    <select id="getCollectQustionLists" resultType="com.redskt.classroom.entity.vo.RedClassAskQuestionVo">
+    <select id="getCollectQustionLists" resultMap="questionMap">
         SELECT ask.id as qId, ask.title,ask.type,ask.tag,ask.content,ask.collect,ask.readcount,ask.hotnum,ask.price,ask.good,ask.state,ask.gmt_create,user.nickname,
         ask.uid,(select count(reply.id) as replaycount from red_ask_reply reply where reply.qid=ask.id) as  reply
+        ,tags.id as ctid,tags.name as tname,tags.img as timg,tags.sort as tsort,tags.asktype
         FROM edu_user_ask ask
         LEFT OUTER JOIN red_qustion_collect collect ON ask.id=collect.qid
         LEFT OUTER JOIN edu_user user ON user.id = ask.uid
@@ -24,19 +58,22 @@
         LIMIT #{size}
     </select>
 
-    <select id="getHomeQustionLists" resultType="com.redskt.classroom.entity.vo.RedClassAskQuestionVo">
+    <select id="getHomeQustionLists" resultMap="questionMap">
         SELECT ask.id as qId, ask.title,ask.type,ask.tag,ask.content,ask.collect,ask.readcount,ask.hotnum,ask.price,ask.good,ask.state,ask.gmt_create,user.nickname,
         ask.uid,(select count(reply.id) as replaycount from red_ask_reply reply where reply.qid=ask.id) as  reply
+        ,tags.id as ctid,tags.name as tname,tags.img as timg,tags.sort as tsort,tags.asktype
         FROM edu_user_ask ask
         LEFT OUTER JOIN red_ask_type atype ON ask.qustype = atype.id
         LEFT OUTER JOIN edu_user user ON ask.uid=user.id
+        LEFT OUTER JOIN red_ask_tags tag ON tag.qid = ask.id
+        LEFT OUTER JOIN red_category_tag tags ON tags.id = tag.tid
         <if test="qpath != null">
             where atype.type = #{qpath}
         </if>
         ORDER BY ask.gmt_create DESC limit 20
     </select>
 
-    <select id="getReplayQustionLists" resultType="com.redskt.classroom.entity.vo.RedClassAskQuestionVo">
+    <select id="getReplayQustionLists" resultMap="questionMap">
         SELECT ask.id as qId,ask.title,ask.type,ask.tag,ask.content,ask.collect,ask.readcount,ask.hotnum,ask.price,ask.good,ask.state,ask.gmt_create,user.nickname,
         ask.uid,(select count(reply.id) from red_ask_reply reply where reply.qid=ask.id) as  reply
         FROM edu_user_ask ask
@@ -49,7 +86,7 @@
         ORDER BY ask.gmt_create DESC limit 20
     </select>
 
-    <select id="getUnReplayQustionLists" resultType="com.redskt.classroom.entity.vo.RedClassAskQuestionVo">
+    <select id="getUnReplayQustionLists" resultMap="questionMap">
         SELECT ask.id as qId, ask.title,ask.type,ask.tag,ask.content,ask.collect,ask.readcount,ask.hotnum,ask.price,ask.good,ask.state,ask.gmt_create,user.nickname,
         ask.uid,(select count(reply.id) from red_ask_reply reply where reply.qid=ask.id) as  reply
         FROM edu_user_ask ask
@@ -62,7 +99,7 @@
         ORDER BY ask.gmt_create DESC limit 20
     </select>
 
-    <select id="getReplayCountQustionLists" resultType="com.redskt.classroom.entity.vo.RedClassAskQuestionVo">
+    <select id="getReplayCountQustionLists" resultMap="questionMap">
         SELECT ask.id as qId, ask.title,ask.type,ask.tag,ask.content,ask.collect,ask.readcount,ask.hotnum,ask.price,ask.good,ask.state,ask.gmt_create,user.nickname,
         ask.uid,(select count(reply.id)  from red_ask_reply reply where reply.qid=ask.id) as  reply
         FROM edu_user_ask ask
@@ -74,7 +111,7 @@
         ORDER BY reply DESC limit 20
     </select>
 
-    <select id="getTopQustionLists" resultType="com.redskt.classroom.entity.vo.RedClassAskQuestionVo">
+    <select id="getTopQustionLists" resultMap="questionMap">
         SELECT ask.id as qId, ask.title,ask.type,ask.tag,ask.content,ask.collect,ask.readcount,ask.hotnum,ask.price,ask.good,ask.state,ask.gmt_create,user.nickname,
         ask.uid,(select count(reply.id) from red_ask_reply reply where reply.qid=ask.id) as  reply
         FROM edu_user_ask ask
@@ -86,7 +123,7 @@
         ORDER BY ask.readcount DESC limit 20
     </select>
 
-    <select id="getPriceQustionLists" resultType="com.redskt.classroom.entity.vo.RedClassAskQuestionVo">
+    <select id="getPriceQustionLists" resultMap="questionMap">
         SELECT ask.id as qId, ask.title,ask.type, ask.price, ask.tag,ask.content,ask.collect,ask.readcount,ask.hotnum,ask.price,ask.good,ask.state,ask.gmt_create,user.nickname,
         (select count(reply.id) from red_ask_reply reply where reply.qid=ask.id) as  reply
         FROM edu_user_ask ask
@@ -99,7 +136,7 @@
         ORDER BY ask.gmt_create DESC limit 20
     </select>
 
-    <select id="getQustionDetail" resultType="com.redskt.classroom.entity.vo.RedClassAskQuestionVo">
+    <select id="getQustionDetail" resultMap="questionMap">
         SELECT ask.id as qId, ask.uid,ask.title,ask.type,ask.tag,ask.content,ask.collect,ask.readcount,ask.hotnum,ask.price,ask.good,ask.state,ask.gmt_create, user.nickname,
             user.avatar,(select count(reply.id) from red_ask_reply reply where reply.qid=ask.id) as reply,qtype.name as typeString
         FROM edu_user_ask ask

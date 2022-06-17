@@ -1,8 +1,10 @@
 package com.redskt.classroom.entity.vo;
 
+import com.redskt.classroom.entity.RedCategoryTag;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class RedClassAskQuestionVo {
@@ -40,6 +42,8 @@ public class RedClassAskQuestionVo {
     private Integer hotnum;
 
     private int state;
+
+    private List<RedCategoryTag> tags;
 
     private Date gmtCreate;
 }

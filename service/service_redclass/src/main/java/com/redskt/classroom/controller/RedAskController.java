@@ -83,11 +83,11 @@ public class RedAskController {
         String sort = (String) parameterMap.get("sort");
         String tag  = (String) parameterMap.get("tag");
 
-        int sortType = 1;
-        if(sort == "" || sort == null || sort.equals("hot")) {  // 代表 全部的逻辑
-            sortType = 1;
-        } else if(sort.equals("latestq")) {
+        int sortType = 2;
+        if(sort == "" || sort == null || sort.equals("latestq")) {  // 代表 默认的逻辑
             sortType = 2;
+        } else if(sort.equals("hot")) {
+            sortType = 1 ;
         } else if(sort.equals("latesta")) {
             sortType = 3;
         } else if(sort.equals("wait")) {
@@ -109,16 +109,18 @@ public class RedAskController {
         tagQueryWrapper.eq("asktype", askList.get(0).getId());
         List<RedCategoryTag> tagList = tagService.list(tagQueryWrapper);
 
+
         List<Map> sortList = new ArrayList<>();
-        Map<String, String> hotMap = new HashMap<>();
-        hotMap.put("name","热门排行");
-        hotMap.put("path","hot");
-        sortList.add(hotMap);
 
         Map<String, String> latestQMap = new HashMap<>();
         latestQMap.put("name","最新提问");
         latestQMap.put("path","latestq");
         sortList.add(latestQMap);
+
+        Map<String, String> hotMap = new HashMap<>();
+        hotMap.put("name","热门排行");
+        hotMap.put("path","hot");
+        sortList.add(hotMap);
 
         Map<String, String> latestAMap = new HashMap<>();
         latestAMap.put("name","最新回答");
