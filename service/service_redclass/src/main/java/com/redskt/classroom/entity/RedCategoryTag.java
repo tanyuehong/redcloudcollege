@@ -31,6 +31,8 @@ public class RedCategoryTag implements Serializable {
 
     private String name;
 
+    private String img;
+
     private Integer sort;
 
     private String asktype;

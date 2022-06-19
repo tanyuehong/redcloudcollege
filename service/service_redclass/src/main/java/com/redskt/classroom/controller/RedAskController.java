@@ -4,6 +4,7 @@ package com.redskt.classroom.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.redskt.classroom.entity.*;
 import com.redskt.classroom.entity.vo.RedAskReplyVo;
+import com.redskt.classroom.entity.vo.RedCategoryTagVo;
 import com.redskt.classroom.entity.vo.RedClassAskQuestionVo;
 import com.redskt.classroom.service.*;
 import com.redskt.commonutils.R;
@@ -37,7 +38,7 @@ public class RedAskController {
     private RedAskService userAskService;
 
     @Autowired
-    private RedAskQustionTagService tagService;
+    private RedCategoryTagService tagService;
 
     @Autowired
     private RedAskReplyService replyService;
@@ -71,6 +72,12 @@ public class RedAskController {
             tagQueryWrapper.eq("asktype", typeId);
         }
         List<RedCategoryTag> tagList = tagService.list(tagQueryWrapper);
+        return R.ok().data("tagList",tagList);
+    }
+
+    @GetMapping("getAllTagList")
+    public R getAskTagList() {
+        List<RedCategoryTagVo> tagList = tagService.getAllTagList();
         return R.ok().data("tagList",tagList);
     }
 

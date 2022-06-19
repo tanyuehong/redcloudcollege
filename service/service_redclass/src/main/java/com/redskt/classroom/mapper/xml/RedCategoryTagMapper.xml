@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.redskt.classroom.mapper.RedCategoryTagMapper">
+
+    <select id="getAllTagList" resultType="com.redskt.classroom.entity.vo.RedCategoryTagVo">
+        SELECT tag.id, tag.name,tag.img,tag.sort,tag.describ,(select count(atag.id) as acount from red_ask_tags atag where atag.tid=tag.id) as  askcount
+        FROM red_category_tag tag
+        ORDER BY tag.gmt_create DESC
+    </select>
+
+</mapper>
