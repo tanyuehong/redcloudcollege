@@ -65,22 +65,6 @@ public class RedAskController {
         return R.ok().data("typeList",typeList);
     }
 
-    @GetMapping("getAskTagList/{typeId}")
-    public R getAskTagList(@PathVariable String typeId) {
-        QueryWrapper<RedCategoryTag> tagQueryWrapper = new QueryWrapper<>();
-        if(typeId.length()>0 && !typeId.equals("1")) {
-            tagQueryWrapper.eq("asktype", typeId);
-        }
-        List<RedCategoryTag> tagList = tagService.list(tagQueryWrapper);
-        return R.ok().data("tagList",tagList);
-    }
-
-    @GetMapping("getAllTagList")
-    public R getAskTagList() {
-        List<RedCategoryTagVo> tagList = tagService.getAllTagList();
-        return R.ok().data("tagList",tagList);
-    }
-
     @PostMapping("questionlist")
     public R getHomeQuestionList(@RequestBody Map parameterMap) {
         QueryWrapper<RedAskType> askWarper = new QueryWrapper<>();

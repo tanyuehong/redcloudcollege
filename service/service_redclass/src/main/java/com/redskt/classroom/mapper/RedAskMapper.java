@@ -17,6 +17,7 @@ import java.util.List;
  */
 public interface RedAskMapper extends BaseMapper<RedAskQuestion> {
 
+    List<RedClassAskQuestionVo> getTagQustionLists(@Param("tid") String tid);
     List<RedClassAskQuestionVo> getHomeQustionLists(@Param("qpath") String qpath,@Param("tag") String tag);
     List<RedClassAskQuestionVo> getReplayQustionLists(@Param("qpath") String qpath,@Param("tag") String tag);
     List<RedClassAskQuestionVo> getUnReplayQustionLists(@Param("qpath") String qpath,@Param("tag") String tag);

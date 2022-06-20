@@ -8,4 +8,13 @@
         ORDER BY tag.gmt_create DESC
     </select>
 
+
+    <select id="getTagDetail" resultType="com.redskt.classroom.entity.vo.RedCategoryTagVo">
+        SELECT tag.id, tag.name,tag.img,tag.sort,tag.describ
+        FROM red_category_tag tag
+        LEFT OUTER JOIN red_ask_tags tags ON tags.tid=tag.id
+        LEFT OUTER JOIN edu_user_ask ask  ON ask.id=tags.qid
+        WHERE tag.id = {#tid}
+    </select>
+
 </mapper>

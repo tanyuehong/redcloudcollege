@@ -21,6 +21,12 @@ import java.util.List;
 @Service
 public class RedAskServiceImpl extends ServiceImpl<RedAskMapper, RedAskQuestion> implements RedAskService {
 
+
+    @Override
+    public List<RedClassAskQuestionVo> getTagQustionLists(String tid) {
+        return baseMapper.getTagQustionLists(tid);
+    }
+
     @Override
     public int updateQustionState(String qId, String uId,int state) {
         return baseMapper.updateQustionState(qId,uId,state);
