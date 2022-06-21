@@ -3,6 +3,8 @@ package com.redskt.classroom.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.redskt.classroom.entity.RedCategoryTag;
 import com.redskt.classroom.entity.vo.RedCategoryTagVo;
+import com.redskt.classroom.entity.vo.RedClassAskQuestionVo;
+import com.redskt.classroom.service.RedAskService;
 import com.redskt.classroom.service.RedCategoryTagService;
 import com.redskt.commonutils.R;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,9 @@ public class RedTagsController {
 
     @Autowired
     private RedCategoryTagService tagService;
+
+    @Autowired
+    private RedAskService userAskService;
 
 
     @GetMapping("getAskTagList/{typeId}")
@@ -43,7 +48,9 @@ public class RedTagsController {
             QueryWrapper<RedCategoryTag> tagQueryWrapper = new QueryWrapper<>();
             tagQueryWrapper.eq("id", tId);
             RedCategoryTag tag = tagService.getOne(tagQueryWrapper);
-            return R.ok().data("tag",tag);
+
+            List<RedClassAskQuestionVo> qustionLists = userAskService.getTagQustionLists(tId);
+            return R.ok().data("tag",tag).data("qustionList",qustionLists);
         } else {
             return R.error("参数异常，请重新尝试");
         }

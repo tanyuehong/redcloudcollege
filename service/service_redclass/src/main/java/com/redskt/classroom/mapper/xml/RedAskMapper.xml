@@ -41,7 +41,7 @@
         LEFT OUTER JOIN edu_user user ON ask.uid=user.id
         LEFT OUTER JOIN red_ask_tags tag ON tag.qid = ask.id
         LEFT OUTER JOIN red_category_tag tags ON tags.id = tag.tid
-        where tag.id = #{tid}
+        where tags.id = #{tid}
         ORDER BY ask.gmt_create DESC limit 20
     </select>
 
