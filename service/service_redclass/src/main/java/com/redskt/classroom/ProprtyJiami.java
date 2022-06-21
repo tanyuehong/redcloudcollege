@@ -39,11 +39,11 @@ class SpringBootConfigEncryptApplication implements CommandLineRunner {
         // 打印加密前后的结果对比
         System.out.println( "MySQL原始明文密码为：" + mysqlOriginPswd );
         System.out.println( "Redis原始明文密码为：" + redisOriginPswd );
-        System.out.println( "Redis原始明文密码为：" + qiniu );
+        System.out.println( "qiuniu原始明文密码为：" + qiniu );
         System.out.println( "====================================" );
         System.out.println( "MySQL原始明文密码加密后的结果为：" + mysqlEncryptedPswd );
         System.out.println( "Redis原始明文密码加密后的结果为：" + redisEncryptedPswd );
-        System.out.println( "Redis原始明文密码加密后的结果为：" + qiniuEncryptedPswd );
+        System.out.println( "qiuniu原始明文密码加密后的结果为：" + qiniuEncryptedPswd );
     }
 
     private String encrypt( String originPassord ) {

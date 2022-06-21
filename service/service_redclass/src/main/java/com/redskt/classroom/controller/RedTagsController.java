@@ -55,6 +55,5 @@ public class RedTagsController {
         } else {
             return R.error("参数异常，请重新尝试");
         }
-
     }
 }
