@@ -1,6 +1,7 @@
 package com.redskt.classroom.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.redskt.classroom.entity.RedAskQuestion;
 import com.redskt.classroom.entity.RedCategoryTag;
 import com.redskt.classroom.entity.vo.RedCategoryTagVo;
 import com.redskt.classroom.entity.vo.RedClassAskQuestionVo;
