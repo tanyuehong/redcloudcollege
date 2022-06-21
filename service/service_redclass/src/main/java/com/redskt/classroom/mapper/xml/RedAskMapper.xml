@@ -66,6 +66,8 @@
         FROM edu_user_ask ask
         LEFT OUTER JOIN red_qustion_collect collect ON ask.id=collect.qid
         LEFT OUTER JOIN edu_user user ON user.id = ask.uid
+        LEFT OUTER JOIN red_ask_tags tag ON tag.qid = ask.id
+        LEFT OUTER JOIN red_category_tag tags ON tags.id = tag.tid
         WHERE collect.uid = #{uid}  and collect.is_deleted = 0
         ORDER BY collect.gmt_modified DESC
         LIMIT #{size}

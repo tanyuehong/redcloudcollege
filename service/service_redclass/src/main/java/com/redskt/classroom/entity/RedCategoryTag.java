@@ -37,6 +37,8 @@ public class RedCategoryTag implements Serializable {
 
     private String asktype;
 
+    private String describ;
+
     private Date gmtCreate;
 
     private Date gmtModified;
