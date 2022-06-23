@@ -33,6 +33,8 @@ public class RedBlogType implements Serializable {
 
     private String name;
 
+    private String type;
+
     @TableField("parentId")
     private String parentId;
 

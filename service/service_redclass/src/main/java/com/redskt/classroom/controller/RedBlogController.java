@@ -8,6 +8,7 @@ import com.redskt.classroom.entity.vo.RedUserStateVo;
 import com.redskt.classroom.entity.vo.RedClassBlogDetailVo;
 import com.redskt.classroom.service.*;
 import com.redskt.commonutils.R;
+import com.redskt.commonutils.RequestParmUtil;
 import com.redskt.security.TokenManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -40,29 +42,53 @@ public class RedBlogController {
     @Autowired
     private RedBlogGoodService goodService;
 
+    @Autowired
+    private RedCategoryTagService tagService;
+
+
     @GetMapping("index")
-    public R index() {
+    public R index(@RequestBody Map parameterMap) {
+        parameterMap = RequestParmUtil.transToMAP(parameterMap);
+        String type = (String) parameterMap.get("type");
+        String sort = (String) parameterMap.get("sort");
+        String tag  = (String) parameterMap.get("tag");
+
+        if(type.equals("1")) {
+            
+        }
+        int sortIndex = 1;
+        if(sort.equals("recommand")) {
+            sortIndex = 2;
+        }
+        if(sort.equals("latest")) {
+            sortIndex = 1;
+        }
+        if(sort.equals("latest")) {
+            sortIndex = 3;
+        }
+
+
+
+
         QueryWrapper<RedBlogType> wrapper = new QueryWrapper<>();
-        wrapper.isNull("parentId");
         wrapper.orderByAsc("bsort");
         wrapper.last("limit 8");
         List<RedBlogType> typeList = typeService.list(wrapper);
 
-        List<RedBlogType> subTypeList = new ArrayList<>();
-        if (typeList.size()>0) {
-            QueryWrapper<RedBlogType> subWrapper = new QueryWrapper<>();
-            subWrapper.eq("parentId",typeList.get(0).getId());
-            subTypeList = typeService.list(subWrapper);
-        }
 
-        List<RedClassBlogDetailVo> blogList = blogService.getRedBlogDetailList(8,1,null);
+        QueryWrapper<RedCategoryTag> tagQueryWrapper = new QueryWrapper<>();
+        tagQueryWrapper.eq("asktype", askList.get(0).getId());
+        List<RedCategoryTag> tagList = tagService.list(tagQueryWrapper);
+
+
+        List<RedClassBlogDetailVo> blogList = blogService.getRedBlogDetailList(20,1,null);
         for (int i=0;i<blogList.size();i++) {
             RedClassBlogDetailVo detail = blogList.get(i);
             if (detail.getDescrb().length()>150) {
                 detail.setDescrb(detail.getDescrb().substring(0,150)+"...");
             }
         }
-        return R.ok().data("typeList",typeList).data("subTypeList",subTypeList).data("blogList",blogList);
+        return R.ok().data("typeList",typeList).data("tagList",tagList).data("blogList",blogList);
     }
 
     @GetMapping("getDetail/{pId}")

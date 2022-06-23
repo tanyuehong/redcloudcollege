@@ -18,6 +18,8 @@ import java.util.List;
  */
 public interface RedBlogDetailMapper extends BaseMapper<RedBlogDetail> {
 
+    List<RedClassBlogDetailVo> getIndexBlogList(@Param("size") int size,@Param("sort") int type,@Param("tid") String tid);
+
     List<RedClassBlogDetailVo> getRedBlogDetailList(@Param("size") int size,@Param("type") int type,@Param("uid") String uid);
 
     List<RedClassBlogDetailVo> getGoodDetailList(@Param("size") int size,@Param("uid") String uid);

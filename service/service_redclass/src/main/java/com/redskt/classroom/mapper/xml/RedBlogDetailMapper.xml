@@ -45,6 +45,27 @@
         LIMIT #{size}
     </select>
 
+    <select id="getIndexBlogList" resultType="com.redskt.classroom.entity.vo.RedClassBlogDetailVo">
+        SELECT blog.id,blog.title,blog.descrb,blog.type,blog.good,blog.faver,blog.view_count,blog.price,auser.id as aUid,auser.nickName as authorName,auser.avatar as authorAvatar,auser.id as authorUid,cCount
+        FROM op_blog_detail blog
+        LEFT OUTER JOIN edu_user auser ON auser.id = blog.auid
+        LEFT OUTER JOIN (select bid,count(id) as cCount from red_blog_comment group by bid) comment on comment.bid = blog.id
+        LEFT OUTER JOIN red_blog_tags tag ON tag.bid = blog.id
+        <if test="tid != null">
+            WHERE tag.tid = #{tid}
+        </if>
+        <if test="sort == 1">
+            ORDER BY blog.gmt_create DESC
+        </if>
+        <if test="sort == 2">
+            ORDER BY blog.hot DESC
+        </if>
+        <if test="sort == 3">
+            ORDER BY cCount DESC
+        </if>
+        LIMIT #{size}
+    </select>
+
     <select id="getRedClassBlogDetail" resultType="com.redskt.classroom.entity.vo.RedClassBlogDetailVo">
         SELECT blog.*,auser.id as aUid,auser.nickName as authorName,auser.avatar as authorAvatar,auser.id as authorUid
         FROM op_blog_detail blog
