@@ -23,4 +23,9 @@ public class RedCategoryTagServiceImpl extends ServiceImpl<RedCategoryTagMapper,
     public List<RedCategoryTagVo> getAllTagList() {
         return baseMapper.getAllTagList();
     }
+
+    @Override
+    public List<RedCategoryTagVo> getBlogTypeTagList(String bType) {
+        return baseMapper.getBlogTypeTagList(bType);
+    }
 }

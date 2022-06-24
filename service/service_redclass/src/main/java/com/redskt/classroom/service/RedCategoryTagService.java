@@ -18,4 +18,6 @@ public interface RedCategoryTagService extends IService<RedCategoryTag> {
 
     List<RedCategoryTagVo> getAllTagList();
 
+    List<RedCategoryTagVo> getBlogTypeTagList(String bType);
+
 }

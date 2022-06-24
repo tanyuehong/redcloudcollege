@@ -51,9 +51,12 @@
         LEFT OUTER JOIN edu_user auser ON auser.id = blog.auid
         LEFT OUTER JOIN (select bid,count(id) as cCount from red_blog_comment group by bid) comment on comment.bid = blog.id
         LEFT OUTER JOIN red_blog_tags tag ON tag.bid = blog.id
-        <if test="tid != null">
-            WHERE tag.tid = #{tid}
-        </if>
+        LEFT OUTER JOIN op_blog_type otype ON otype.id = blog.tyid
+
+        <where>
+            <if test="tid != null">tag.tid = #{tid}</if>
+            <if test="type != null">and otype.type = #{type}</if>
+        </where>
         <if test="sort == 1">
             ORDER BY blog.gmt_create DESC
         </if>

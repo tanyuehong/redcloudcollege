@@ -22,6 +22,11 @@ import java.util.List;
 public class RedBlogDetailServiceImpl extends ServiceImpl<RedBlogDetailMapper, RedBlogDetail> implements RedBlogDetailService {
 
     @Override
+    public List<RedClassBlogDetailVo> getIndexBlogList(String type,String tid,int sort,int size) {
+        return baseMapper.getIndexBlogList(type, tid, sort, size);
+    }
+
+    @Override
     public List<RedClassBlogDetailVo> getGoodDetailList(int size,String uid) {
         return baseMapper.getGoodDetailList(size,uid);
     }

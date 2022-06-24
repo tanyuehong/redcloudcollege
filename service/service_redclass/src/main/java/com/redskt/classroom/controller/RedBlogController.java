@@ -4,6 +4,7 @@ package com.redskt.classroom.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.redskt.classroom.entity.*;
 import com.redskt.classroom.entity.vo.RedBlogCommentVo;
+import com.redskt.classroom.entity.vo.RedCategoryTagVo;
 import com.redskt.classroom.entity.vo.RedUserStateVo;
 import com.redskt.classroom.entity.vo.RedClassBlogDetailVo;
 import com.redskt.classroom.service.*;
@@ -46,46 +47,53 @@ public class RedBlogController {
     private RedCategoryTagService tagService;
 
 
-    @GetMapping("index")
+    @PostMapping("index")
     public R index(@RequestBody Map parameterMap) {
         parameterMap = RequestParmUtil.transToMAP(parameterMap);
         String type = (String) parameterMap.get("type");
         String sort = (String) parameterMap.get("sort");
-        String tag  = (String) parameterMap.get("tag");
+        String tagId  = (String) parameterMap.get("tag");
 
-        if(type.equals("1")) {
-            
+        if(type != null && type.equals("focus")) {
+
         }
+
         int sortIndex = 1;
-        if(sort.equals("recommand")) {
-            sortIndex = 2;
+        if(sort!=null) {
+            if (sort.equals("recommand")) {
+                sortIndex = 2;
+            }
+            if (sort.equals("latest")) {
+                sortIndex = 1;
+            }
+            if (sort.equals("latest")) {
+                sortIndex = 3;
+            }
         }
-        if(sort.equals("latest")) {
-            sortIndex = 1;
-        }
-        if(sort.equals("latest")) {
-            sortIndex = 3;
-        }
-
-
-
 
         QueryWrapper<RedBlogType> wrapper = new QueryWrapper<>();
         wrapper.orderByAsc("bsort");
-        wrapper.last("limit 8");
         List<RedBlogType> typeList = typeService.list(wrapper);
 
+        if(type!=null && type.equals("all")) {  // 类型为null时 不需要过滤类型
+            type = null;
+        }
 
-        QueryWrapper<RedCategoryTag> tagQueryWrapper = new QueryWrapper<>();
-        tagQueryWrapper.eq("asktype", askList.get(0).getId());
-        List<RedCategoryTag> tagList = tagService.list(tagQueryWrapper);
-
-
-        List<RedClassBlogDetailVo> blogList = blogService.getRedBlogDetailList(20,1,null);
+        List<RedClassBlogDetailVo> blogList = blogService.getIndexBlogList(type,tagId,sortIndex,20);
         for (int i=0;i<blogList.size();i++) {
             RedClassBlogDetailVo detail = blogList.get(i);
             if (detail.getDescrb().length()>150) {
                 detail.setDescrb(detail.getDescrb().substring(0,150)+"...");
+            }
+        }
+        List<RedCategoryTagVo> tagList = new ArrayList<>();
+        if(type!=null && type.length()>0) {
+            tagList =  tagService.getBlogTypeTagList(type);
+            if(tagList.size()>0) {
+                RedCategoryTagVo allTag = new RedCategoryTagVo();
+                allTag.setName("全部");
+                allTag.setId("all");
+                tagList.add(0,allTag);
             }
         }
         return R.ok().data("typeList",typeList).data("tagList",tagList).data("blogList",blogList);
