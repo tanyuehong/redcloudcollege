@@ -6,7 +6,7 @@
 
 安装教程：https://www.jianshu.com/p/9531db583f08
 
-本项目前端项目:
+本项目前端:
 github地址:       https://github.com/tanyuehong/redcloudcollege-index
 国内专用gitee地址: https://gitee.com/redskt/redcloudcollege-index
 
