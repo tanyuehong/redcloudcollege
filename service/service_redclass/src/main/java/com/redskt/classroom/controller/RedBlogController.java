@@ -65,7 +65,7 @@ public class RedBlogController {
             if (sort.equals("latest")) {
                 sortIndex = 1;
             }
-            if (sort.equals("latest")) {
+            if (sort.equals("hot")) {
                 sortIndex = 3;
             }
         }
