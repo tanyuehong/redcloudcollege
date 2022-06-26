@@ -33,9 +33,12 @@ public class TokenManager {
         return token;
     }
 
-    public String getUserFromToken(String token) {
-        String user = Jwts.parser().setSigningKey(tokenSignKey).parseClaimsJws(token).getBody().getSubject();
-        return user;
+    public static String getUserFromToken(String token) {
+        try {
+            return  Jwts.parser().setSigningKey(tokenSignKey).parseClaimsJws(token).getBody().getSubject();
+        } catch (Exception e) {
+            return "";
+        }
     }
 
     /**

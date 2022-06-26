@@ -53,10 +53,9 @@ public class RedBlogController {
         String type = (String) parameterMap.get("type");
         String sort = (String) parameterMap.get("sort");
         String tagId  = (String) parameterMap.get("tag");
+        String token  = (String) parameterMap.get("token");
 
-        if(type != null && type.equals("focus")) {
-
-        }
+        String uId = TokenManager.getUserFromToken(token);
 
         int sortIndex = 1;
         if(sort!=null) {
@@ -72,6 +71,9 @@ public class RedBlogController {
         }
 
         QueryWrapper<RedBlogType> wrapper = new QueryWrapper<>();
+        if(uId.length()<=0) {
+            wrapper.ne("type", "focus");
+        }
         wrapper.orderByAsc("bsort");
         List<RedBlogType> typeList = typeService.list(wrapper);
 
@@ -79,7 +81,13 @@ public class RedBlogController {
             type = null;
         }
 
-        List<RedClassBlogDetailVo> blogList = blogService.getIndexBlogList(type,tagId,sortIndex,20);
+        List<RedClassBlogDetailVo> blogList = new ArrayList<>();
+        if(type!=null && type.equals("focus")) {
+            blogList = blogService.getFocusBlogList(uId,sortIndex,20);
+        } else {
+            blogList = blogService.getIndexBlogList(type,tagId,sortIndex,20);
+        }
+
         for (int i=0;i<blogList.size();i++) {
             RedClassBlogDetailVo detail = blogList.get(i);
             if (detail.getDescrb().length()>150) {

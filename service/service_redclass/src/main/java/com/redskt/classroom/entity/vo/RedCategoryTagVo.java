@@ -19,4 +19,8 @@ public class RedCategoryTagVo {
 
     private String describ;
 
+    private String bdescrib;
+
+    private String keywords;
+
 }

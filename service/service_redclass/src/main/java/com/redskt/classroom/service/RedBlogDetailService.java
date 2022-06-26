@@ -17,6 +17,8 @@ import java.util.List;
  */
 public interface RedBlogDetailService extends IService<RedBlogDetail> {
 
+    List<RedClassBlogDetailVo> getFocusBlogList(String uid,int sort,int size);
+
     List<RedClassBlogDetailVo> getIndexBlogList(String type,String tid,int sort,int size);
 
     RedClassBlogDetailVo getRedClassBlogDetail(String bid);

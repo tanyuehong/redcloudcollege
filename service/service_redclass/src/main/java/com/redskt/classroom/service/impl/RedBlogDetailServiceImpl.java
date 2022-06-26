@@ -6,6 +6,7 @@ import com.redskt.classroom.entity.vo.RedClassBlogDetailVo;
 import com.redskt.classroom.mapper.RedBlogDetailMapper;
 import com.redskt.classroom.service.RedBlogDetailService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +21,11 @@ import java.util.List;
  */
 @Service
 public class RedBlogDetailServiceImpl extends ServiceImpl<RedBlogDetailMapper, RedBlogDetail> implements RedBlogDetailService {
+
+    @Override
+    public List<RedClassBlogDetailVo> getFocusBlogList(String uid, int sort, int size) {
+        return baseMapper.getFocusBlogList(uid, sort, size);
+    }
 
     @Override
     public List<RedClassBlogDetailVo> getIndexBlogList(String type,String tid,int sort,int size) {

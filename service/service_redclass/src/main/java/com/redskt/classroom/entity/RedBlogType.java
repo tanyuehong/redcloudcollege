@@ -44,6 +44,10 @@ public class RedBlogType implements Serializable {
 
     private Integer hot;
 
+    private String describ;
+
+    private String keywords;
+
     @TableField(fill = FieldFill.INSERT)
     private Date gmtCreate;
 
