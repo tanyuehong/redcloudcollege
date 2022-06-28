@@ -39,6 +39,8 @@ public class RedClassBook implements Serializable {
 
     private String describ;
 
+    private String keywords;
+
     private String author;
 
     private String auid;
