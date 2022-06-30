@@ -144,7 +144,8 @@ public class RedBlogController {
                 return R.ok().data("status",status);
             }
         }
-        return R.ok().data("good",false);
+        RedUserStateVo status = new RedUserStateVo();
+        return R.ok().data("status",status);
     }
 
     @GetMapping("addGood/{praticeId}")
