@@ -57,7 +57,6 @@ public class TokenAuthenticationFilter extends BasicAuthenticationFilter {
             // 这里是token过期了 需要重新登录
             ResponseUtil.out(res, R.LoginExpired());
         } catch (Exception e) {
-            ResponseUtil.out(res, R.error());
             logger.info("=================5"+e.getLocalizedMessage());
         }
         if (authentication != null) {
