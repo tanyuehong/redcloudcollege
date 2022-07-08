@@ -7,8 +7,9 @@
 安装教程：https://www.jianshu.com/p/9531db583f08
 
 本项目前端:
-github地址:       https://github.com/tanyuehong/redcloudcollege-index
+github地址:       https://github.com/tanyuehong/redcloudcollege-index<br>
 国内专用gitee地址: https://gitee.com/redskt/redcloudcollege-index
+
 
 
 
@@ -19,6 +20,7 @@ github地址:       https://github.com/tanyuehong/redcloudcollege-index
 #### 安装教程
 
 1.  git clone https://gitee.com/redskt/redcloudcollege
+2.  下载数据库表结构文件：https://static.redskt.com/file/redcloudcollege.sql ，创建数据库 ，配置连接密码
 2.  使用idea 打开项目，等待同步
 3.  配置好参数，点击运行即可
 
