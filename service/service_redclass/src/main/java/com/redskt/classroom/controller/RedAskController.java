@@ -112,6 +112,7 @@ public class RedAskController {
         hotMap.put("name","热门排行");
         hotMap.put("path","hot");
         sortList.add(hotMap);
+        Map<String, String> mostAMap = new HashMap<>();
 
         Map<String, String> latestAMap = new HashMap<>();
         latestAMap.put("name","最新回答");
@@ -123,7 +124,6 @@ public class RedAskController {
         waitMap.put("path","wait");
         sortList.add(waitMap);
 
-        Map<String, String> mostAMap = new HashMap<>();
         mostAMap.put("name","最多回答");
         mostAMap.put("path","mosta");
         sortList.add(mostAMap);
