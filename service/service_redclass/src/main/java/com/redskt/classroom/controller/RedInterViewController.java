@@ -4,12 +4,10 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.redskt.classroom.entity.RedAskType;
 import com.redskt.classroom.entity.RedBlogType;
 import com.redskt.classroom.entity.RedCategoryTag;
-import com.redskt.classroom.entity.vo.RedCategoryTagVo;
+import com.redskt.classroom.entity.RedInterviewType;
+import com.redskt.classroom.entity.vo.RedBlogCommentVo;
 import com.redskt.classroom.entity.vo.RedClassAskQuestionVo;
-import com.redskt.classroom.service.RedAskService;
-import com.redskt.classroom.service.RedAskTypeService;
-import com.redskt.classroom.service.RedBlogTypeService;
-import com.redskt.classroom.service.RedCategoryTagService;
+import com.redskt.classroom.service.*;
 import com.redskt.commonutils.R;
 import com.redskt.commonutils.RequestParmUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +23,7 @@ import java.util.Map;
 public class RedInterViewController {
 
     @Autowired
-    private RedBlogTypeService typeService;
+    private RedInterviewTypeService typeService;
 
     @Autowired
     private RedAskTypeService askTypeService;
@@ -68,23 +66,28 @@ public class RedInterViewController {
         }
         List<RedClassAskQuestionVo> list = userAskService.getHomeAskQustionList(sortType, type,tag);
 
-        QueryWrapper<RedBlogType> wrapper = new QueryWrapper<>();
-        wrapper.orderByAsc("bsort");
-        wrapper.ne("type", "focus");
-        List<RedBlogType> typeList = typeService.list(wrapper);
+        QueryWrapper<RedInterviewType> typeQueryWrapper = new QueryWrapper<>();
+        typeQueryWrapper.orderByAsc("sort");
+        List<RedInterviewType> typeList = typeService.list(typeQueryWrapper);
 
-        List<RedCategoryTagVo> tagList = new ArrayList<>();
-        if(type!=null && type.length()>0) {
-            tagList =  tagService.getBlogTypeTagList(type);
-            if(tagList.size()>0) {
-                RedCategoryTagVo allTag = new RedCategoryTagVo();
-                allTag.setName("全部");
-                allTag.setId("all");
-                tagList.add(0,allTag);
-            }
+        QueryWrapper<RedCategoryTag> twrapper = new QueryWrapper<>();
+        twrapper.orderByAsc("sort");
+        twrapper.eq("interview",1);
+        List<RedCategoryTag> tagList =  tagService.list(twrapper);
+        if(tagList.size()>0) {
+            RedCategoryTag allTag = new RedCategoryTag();
+            allTag.setName("全部");
+            allTag.setId("all");
+            tagList.add(0,allTag);
         }
-
         return R.ok().data("list", list).data("qustionType", askList).data("tagList", tagList).data("typeList",typeList);
     }
 
+    @GetMapping("typelist")
+    public R getInterviewTypeList() {
+        QueryWrapper<RedInterviewType> typeQueryWrapper = new QueryWrapper<>();
+        typeQueryWrapper.orderByAsc("sort");
+        List<RedInterviewType> typeList = typeService.list(typeQueryWrapper);
+        return R.ok().data("typeList",typeList);
+    }
 }
