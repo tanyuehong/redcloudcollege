@@ -90,4 +90,16 @@ public class RedInterViewController {
         List<RedInterviewType> typeList = typeService.list(typeQueryWrapper);
         return R.ok().data("typeList",typeList);
     }
+
+    @GetMapping("tagList/{tId}")
+    public R getTypeTagList(@PathVariable String tId) {
+        if(tId.length()>0) {
+            QueryWrapper<RedCategoryTag> typeQueryWrapper = new QueryWrapper<>();
+            typeQueryWrapper.orderByAsc("sort");
+            List<RedCategoryTag> tagList = typeService.getInterviewTypeTagList(tId);
+            return R.ok().data("tagList",tagList);
+        } else {
+            return R.error("参数错误，请重新尝试");
+        }
+    }
 }
