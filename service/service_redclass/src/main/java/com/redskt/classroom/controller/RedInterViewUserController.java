@@ -6,9 +6,11 @@ import com.redskt.classroom.entity.*;
 import com.redskt.classroom.service.*;
 import com.redskt.commonutils.R;
 import com.redskt.commonutils.RequestParmUtil;
+import com.redskt.security.TokenManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,33 +31,36 @@ public class RedInterViewUserController {
 
 
     @PostMapping("submit")
-    public R submitQuestion(@RequestBody Map parameterMap) {
+    public R submitQuestion(@RequestBody Map parameterMap, HttpServletRequest request) {
         parameterMap = RequestParmUtil.transToMAP(parameterMap);
+        String uid = (String) parameterMap.get("uid");
+        String uId = TokenManager.getMemberIdByJwtToken(request);
+        if (uid.length()>0 && uId.length()>0 && uid.equals(uId))  {
+            String title    = (String) parameterMap.get("title");
+            String content  = (String) parameterMap.get("content");
+            String qustype  = (String) parameterMap.get("qustype");
+            List<String> tags = JSON.parseArray((String) parameterMap.get("tagList"),String.class);
 
-        String uid      = (String) parameterMap.get("uid");
-        String title    = (String) parameterMap.get("title");
-        String content  = (String) parameterMap.get("content");
-        String qustype  = (String) parameterMap.get("qustype");
-
-        List<String> tags = JSON.parseArray((String) parameterMap.get("tagList"),String.class);
-
-        RedInterviewQuestion question= new RedInterviewQuestion();
-        question.setUid(uid);
-        question.setTitle(title);
-        question.setContent(content);
-        question.setQustype(qustype);
-        if (questionService.save(question)) {
-            List<RedInterviewTags> tagsList = new ArrayList<>();
-            for (int i=0;i<tags.size();i++) {
-                RedInterviewTags tag = new RedInterviewTags();
-                tag.setQid(question.getId());
-                tag.setTid(tags.get(i));
-                tagsList.add(tag);
+            RedInterviewQuestion question= new RedInterviewQuestion();
+            question.setUid(uid);
+            question.setTitle(title);
+            question.setContent(content);
+            question.setQustype(qustype);
+            if (questionService.save(question)) {
+                List<RedInterviewTags> tagsList = new ArrayList<>();
+                for (int i=0;i<tags.size();i++) {
+                    RedInterviewTags tag = new RedInterviewTags();
+                    tag.setQid(question.getId());
+                    tag.setTid(tags.get(i));
+                    tagsList.add(tag);
+                }
+                tagsService.saveBatch(tagsList);
+                return R.ok();
+            } else  {
+                return R.error("问题提交失败，请重新尝试！");
             }
-            tagsService.saveBatch(tagsList);
-            return R.ok();
-        } else  {
-            return R.error("问题提交失败，请重新尝试！");
+        } else {
+            return R.error("参数验证失败，请重新尝试");
         }
     }
 }
