@@ -2,10 +2,8 @@ package com.redskt.classroom.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.redskt.classroom.entity.RedAskType;
-import com.redskt.classroom.entity.RedBlogType;
 import com.redskt.classroom.entity.RedCategoryTag;
 import com.redskt.classroom.entity.RedInterviewType;
-import com.redskt.classroom.entity.vo.RedBlogCommentVo;
 import com.redskt.classroom.entity.vo.RedClassAskQuestionVo;
 import com.redskt.classroom.service.*;
 import com.redskt.commonutils.R;
