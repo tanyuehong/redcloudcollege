@@ -5,6 +5,7 @@ import com.redskt.classroom.entity.RedAskType;
 import com.redskt.classroom.entity.RedCategoryTag;
 import com.redskt.classroom.entity.RedInterviewType;
 import com.redskt.classroom.entity.vo.RedClassAskQuestionVo;
+import com.redskt.classroom.entity.vo.RedInterviewQuestionVo;
 import com.redskt.classroom.service.*;
 import com.redskt.commonutils.R;
 import com.redskt.commonutils.RequestParmUtil;
@@ -24,49 +25,19 @@ public class RedInterViewController {
     private RedInterviewTypeService typeService;
 
     @Autowired
-    private RedAskTypeService askTypeService;
+    private RedInterviewQuestionService questionService;
 
     @Autowired
     private RedCategoryTagService tagService;
 
-    @Autowired
-    private RedAskService userAskService;
-
     @PostMapping("index")
     public R getInterviewIndex(@RequestBody Map parameterMap) {
-        QueryWrapper<RedAskType> askWarper = new QueryWrapper<>();
         parameterMap = RequestParmUtil.transToMAP(parameterMap);
 
-        String type = (String) parameterMap.get("type");
         String sort = (String) parameterMap.get("sort");
         String tag  = (String) parameterMap.get("tag");
 
-        int sortType = 2;
-        if(sort == "" || sort == null || sort.equals("latestq")) {  // 代表 默认的逻辑
-            sortType = 2;
-        } else if(sort.equals("hot")) {
-            sortType = 1 ;
-        } else if(sort.equals("latesta")) {
-            sortType = 3;
-        } else if(sort.equals("wait")) {
-            sortType = 4;
-        } else if(sort.equals("mosta")) {
-            sortType = 5;
-        } else if(sort.equals("payq")) {
-            sortType = 6;
-        }
-
-        askWarper.orderByAsc("sort");
-        List<RedAskType> askList = askTypeService.list(askWarper);
-
-        if (type.length() == 0 || type.equals("all")) {
-            type = null;
-        }
-        List<RedClassAskQuestionVo> list = userAskService.getHomeAskQustionList(sortType, type,tag);
-
-        QueryWrapper<RedInterviewType> typeQueryWrapper = new QueryWrapper<>();
-        typeQueryWrapper.orderByAsc("sort");
-        List<RedInterviewType> typeList = typeService.list(typeQueryWrapper);
+        List<RedInterviewQuestionVo> list = questionService.getHomeInterviewQustionList(sort,tag);
 
         QueryWrapper<RedCategoryTag> twrapper = new QueryWrapper<>();
         twrapper.orderByAsc("sort");
@@ -78,7 +49,12 @@ public class RedInterViewController {
             allTag.setId("all");
             tagList.add(0,allTag);
         }
-        return R.ok().data("list", list).data("qustionType", askList).data("tagList", tagList).data("typeList",typeList);
+
+        QueryWrapper<RedInterviewType> typeQueryWrapper = new QueryWrapper<>();
+        typeQueryWrapper.orderByAsc("sort");
+        List<RedInterviewType> typeList = typeService.list(typeQueryWrapper);
+
+        return R.ok().data("list", list).data("tagList", tagList).data("typeList",typeList);
     }
 
     @GetMapping("typelist")
