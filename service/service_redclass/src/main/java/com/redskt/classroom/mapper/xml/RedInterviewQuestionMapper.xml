@@ -9,6 +9,7 @@
         <id column="avatar" property="avatar"/>
         <id column="title" property="title"/>
         <id column="type" property="type"/>
+        <id column="deep" property="deep"/>
         <id column="typeString" property="typeString"/>
         <id column="content" property="content"/>
         <id column="reply" property="reply"/>
@@ -34,7 +35,7 @@
 
 
     <select id="getHomeInterviewQustionList" resultMap="interviewQuestionMap">
-        SELECT qustion.id as qId, qustion.title,qustion.type,qustion.tag,qustion.content,qustion.collect,qustion.readcount,qustion.hotnum,qustion.price,qustion.good,qustion.state,qustion.gmt_create,user.nickname,
+        SELECT qustion.id as qId, qustion.title,qustion.type,qustion.content,qustion.deep,qustion.collect,qustion.readcount,qustion.hotnum,qustion.price,qustion.good,qustion.state,qustion.gmt_create,user.nickname,
         qustion.uid,(select count(reply.id) as replaycount from red_ask_reply reply where reply.qid=qustion.id) as  reply
         ,tags.id as ctid,tag.name as tname,tag.img as timg,tag.sort as tsort
         FROM red_interview_question qustion

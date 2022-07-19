@@ -37,9 +37,9 @@ public class RedInterviewQuestion implements Serializable {
 
     private String title;
 
-    private Integer type;
+    private String type;
 
-    private String tag;
+    private String deep;
 
     private String content;
 
