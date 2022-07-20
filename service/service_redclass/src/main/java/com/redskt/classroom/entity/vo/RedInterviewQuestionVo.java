@@ -41,7 +41,7 @@ public class RedInterviewQuestionVo {
 
     private Integer hotnum;
 
-    private int state;
+    private int meet;
 
     private List<RedCategoryTag> tags;
 

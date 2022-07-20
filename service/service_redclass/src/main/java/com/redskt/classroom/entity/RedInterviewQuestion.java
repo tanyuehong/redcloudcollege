@@ -59,7 +59,7 @@ public class RedInterviewQuestion implements Serializable {
 
     private String qustype;
 
-    private Integer state;
+    private Integer meet;
 
     @ApiModelProperty(value = "创建时间")
     @TableField(fill = FieldFill.INSERT)
