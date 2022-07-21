@@ -36,4 +36,14 @@ public class RedInterviewQuestionServiceImpl extends ServiceImpl<RedInterviewQue
         }
         return baseMapper.getHomeInterviewQustionList(sortInt, tag);
     }
+
+    @Override
+    public void updateQuestionReadCount(String qId,int readCount) {
+        baseMapper.updateQuestionReadCount(qId,readCount);
+    }
+
+    @Override
+    public RedInterviewQuestionVo getQustionDetail(String qId) {
+        return baseMapper.getQustionDetail(qId);
+    }
 }

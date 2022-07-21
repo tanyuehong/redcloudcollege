@@ -57,4 +57,20 @@
         DESC limit 20
     </select>
 
+    <update id="updateQuestionReadCount">
+        update red_interview_question
+        set readcount = #{readCount}
+        where id = #{id}
+    </update>
+
+    <select id="getQustionDetail" resultMap="interviewQuestionMap">
+        SELECT question.id as qId, question.uid,question.title,question.type,question.content,question.collect,question.readcount,question.hotnum,question.price,question.good,question.gmt_create, user.nickname,
+            user.avatar,(select count(reply.id) from red_ask_reply reply where reply.qid=question.id) as reply,tag.id as ctid,tag.name as tname,tag.img as timg,tag.sort as tsort
+        FROM red_interview_question question
+        LEFT OUTER JOIN edu_user user ON question.uid=user.id
+        LEFT OUTER JOIN red_interview_tags tags ON tags.qid = question.id
+        LEFT OUTER JOIN red_category_tag tag ON tag.id = tags.tid
+        WHERE question.id=#{tId}
+    </select>
+
 </mapper>

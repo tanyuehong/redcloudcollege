@@ -1,10 +1,9 @@
 package com.redskt.classroom.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.redskt.classroom.entity.RedAskType;
 import com.redskt.classroom.entity.RedCategoryTag;
 import com.redskt.classroom.entity.RedInterviewType;
-import com.redskt.classroom.entity.vo.RedClassAskQuestionVo;
+import com.redskt.classroom.entity.vo.RedAskReplyVo;
 import com.redskt.classroom.entity.vo.RedInterviewQuestionVo;
 import com.redskt.classroom.service.*;
 import com.redskt.commonutils.R;
@@ -29,6 +28,10 @@ public class RedInterViewController {
 
     @Autowired
     private RedCategoryTagService tagService;
+
+    @Autowired
+    private RedInterviewReplyService replyService;
+
 
     @PostMapping("index")
     public R getInterviewIndex(@RequestBody Map parameterMap) {
@@ -55,6 +58,16 @@ public class RedInterViewController {
         List<RedInterviewType> typeList = typeService.list(typeQueryWrapper);
 
         return R.ok().data("list", list).data("tagList", tagList).data("typeList",typeList);
+    }
+
+    @GetMapping("getQuestionDetail/{qId}")
+    public R getQuestionDetail(@PathVariable String qId) {
+        RedInterviewQuestionVo qDetail = questionService.getQustionDetail(qId);
+        int readCount = qDetail.getReadcount() + 1;
+        questionService.updateQuestionReadCount(qDetail.getQId(), readCount);
+
+        List<RedAskReplyVo> replyList = new ArrayList<>();
+        return R.ok().data("qdetail", qDetail).data("replyList", replyList);
     }
 
     @GetMapping("typelist")

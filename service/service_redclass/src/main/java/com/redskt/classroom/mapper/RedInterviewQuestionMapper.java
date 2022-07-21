@@ -2,7 +2,6 @@ package com.redskt.classroom.mapper;
 
 import com.redskt.classroom.entity.RedInterviewQuestion;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.redskt.classroom.entity.vo.RedClassAskQuestionVo;
 import com.redskt.classroom.entity.vo.RedInterviewQuestionVo;
 import org.apache.ibatis.annotations.Param;
 
@@ -19,5 +18,9 @@ import java.util.List;
 public interface RedInterviewQuestionMapper extends BaseMapper<RedInterviewQuestion> {
 
     List<RedInterviewQuestionVo> getHomeInterviewQustionList(@Param("sort") int sort, @Param("tag") String tag);
+
+    int updateQuestionReadCount(@Param("id")  String qId,@Param("readCount") int readCount);
+
+    RedInterviewQuestionVo getQustionDetail(String qId);
 
 }
