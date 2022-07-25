@@ -3,7 +3,7 @@ package com.redskt.classroom.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.redskt.classroom.entity.*;
 import com.redskt.classroom.entity.vo.RedBlogCommentReplyVo;
-import com.redskt.classroom.entity.vo.RedBlogCommentVo;
+import com.redskt.classroom.entity.vo.RedCommentVo;
 import com.redskt.classroom.service.RedBlogCollectService;
 import com.redskt.classroom.service.RedBlogCommentGoodService;
 import com.redskt.classroom.service.RedBlogCommentReplyService;
@@ -36,7 +36,7 @@ public class RedBlogUserController {
         String uId = TokenManager.getMemberIdByJwtToken(request);
         if(uId.length()>0 && comment.getUid().length()>0 && uId.equals(comment.getUid())) {
             if (commentService.save(comment)) {
-                RedBlogCommentVo curComment = commentService.getBlogCommentOne(comment.getId());
+                RedCommentVo curComment = commentService.getBlogCommentOne(comment.getId());
                 return R.ok().data("comment",curComment);
             } else  {
                 return R.error("评论文章失败，请重新尝试！");

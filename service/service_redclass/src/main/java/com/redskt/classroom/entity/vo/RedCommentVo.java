@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-public class RedBlogCommentVo {
+public class RedCommentVo {
     private String id;
 
     private String uid;

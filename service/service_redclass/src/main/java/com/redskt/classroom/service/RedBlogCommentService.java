@@ -2,7 +2,7 @@ package com.redskt.classroom.service;
 
 import com.redskt.classroom.entity.RedBlogComment;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.redskt.classroom.entity.vo.RedBlogCommentVo;
+import com.redskt.classroom.entity.vo.RedCommentVo;
 
 import java.util.List;
 
@@ -15,9 +15,9 @@ import java.util.List;
  * @since 2022-04-21
  */
 public interface RedBlogCommentService extends IService<RedBlogComment> {
-    List<RedBlogCommentVo> getRedBlogCommentList(String bid,Integer rsize,int type);
+    List<RedCommentVo> getRedBlogCommentList(String bid, Integer rsize, int type);
 
-    RedBlogCommentVo getBlogCommentOne(String cid);
+    RedCommentVo getBlogCommentOne(String cid);
 
     void addCommentGoodCount(String cid);
 

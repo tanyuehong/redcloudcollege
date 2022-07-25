@@ -3,7 +3,7 @@ package com.redskt.classroom.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.redskt.classroom.entity.*;
-import com.redskt.classroom.entity.vo.RedBlogCommentVo;
+import com.redskt.classroom.entity.vo.RedCommentVo;
 import com.redskt.classroom.entity.vo.RedCategoryTagVo;
 import com.redskt.classroom.entity.vo.RedUserStateVo;
 import com.redskt.classroom.entity.vo.RedClassBlogDetailVo;
@@ -127,7 +127,7 @@ public class RedBlogController {
     @GetMapping("getCommentList/{bId}/{type}")
     public R getCommentList(@PathVariable String bId,@PathVariable int type) {
         if (bId.length()>0) {
-            List<RedBlogCommentVo> commentList = commentService.getRedBlogCommentList(bId,6,type);
+            List<RedCommentVo> commentList = commentService.getRedBlogCommentList(bId,6,type);
             return R.ok().data("comments",commentList);
         } else {
             return R.error("参数不合法，请验证");
