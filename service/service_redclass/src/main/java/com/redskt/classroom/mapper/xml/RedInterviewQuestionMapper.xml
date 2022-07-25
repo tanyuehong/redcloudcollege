@@ -68,7 +68,7 @@
             user.avatar,(select count(reply.id) from red_ask_reply reply where reply.qid=question.id) as reply,tag.id as ctid,tag.name as tname,tag.img as timg,tag.sort as tsort
         FROM red_interview_question question
         LEFT OUTER JOIN edu_user user ON question.uid=user.id
-        LEFT OUTER JOIN red_interview_tags tags ON tags.qid =.qustion-content question.id
+        LEFT OUTER JOIN red_interview_tags tags ON tags.qid = question.id
         LEFT OUTER JOIN red_category_tag tag ON tag.id = tags.tid
         WHERE question.id=#{tId}
     </select>
