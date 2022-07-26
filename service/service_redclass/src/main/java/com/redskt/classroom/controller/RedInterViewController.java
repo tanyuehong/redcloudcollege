@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.redskt.classroom.entity.RedCategoryTag;
 import com.redskt.classroom.entity.RedInterviewType;
 import com.redskt.classroom.entity.vo.RedAskReplyVo;
+import com.redskt.classroom.entity.vo.RedCommentVo;
 import com.redskt.classroom.entity.vo.RedInterviewQuestionVo;
 import com.redskt.classroom.service.*;
 import com.redskt.commonutils.R;
@@ -31,6 +32,9 @@ public class RedInterViewController {
 
     @Autowired
     private RedInterviewReplyService replyService;
+
+    @Autowired
+    private RedInterviewCommentService commentService;
 
 
     @PostMapping("index")
@@ -60,14 +64,21 @@ public class RedInterViewController {
         return R.ok().data("list", list).data("tagList", tagList).data("typeList",typeList);
     }
 
-    @GetMapping("getQuestionDetail/{qId}")
-    public R getQuestionDetail(@PathVariable String qId) {
+    @GetMapping("getQuestionDetail/{qId}/{type}")
+    public R getQuestionDetail(@PathVariable String qId,@PathVariable int type) {
         RedInterviewQuestionVo qDetail = questionService.getQustionDetail(qId);
         int readCount = qDetail.getReadcount() + 1;
         questionService.updateQuestionReadCount(qDetail.getQId(), readCount);
 
         List<RedAskReplyVo> replyList = new ArrayList<>();
-        return R.ok().data("qdetail", qDetail).data("replyList", replyList);
+        if(type == 1) {
+            return R.ok().data("qdetail", qDetail).data("dataList", replyList);
+        } else if(type==2) {
+            List<RedCommentVo> commentVoList = commentService.getRedCommentList(qId,5,2);
+            return R.ok().data("qdetail", qDetail).data("dataList", commentVoList);
+        } else {
+            return R.ok().data("qdetail", qDetail).data("dataList", replyList);
+        }
     }
 
     @GetMapping("typelist")

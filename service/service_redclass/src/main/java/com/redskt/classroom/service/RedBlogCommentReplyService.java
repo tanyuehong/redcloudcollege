@@ -2,7 +2,7 @@ package com.redskt.classroom.service;
 
 import com.redskt.classroom.entity.RedBlogCommentReply;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.redskt.classroom.entity.vo.RedBlogCommentReplyVo;
+import com.redskt.classroom.entity.vo.RedCommentReplyVo;
 
 /**
  * <p>
@@ -14,7 +14,7 @@ import com.redskt.classroom.entity.vo.RedBlogCommentReplyVo;
  */
 public interface RedBlogCommentReplyService extends IService<RedBlogCommentReply> {
 
-    RedBlogCommentReplyVo getBlogCommentReplyOne(String cid);
+    RedCommentReplyVo getBlogCommentReplyOne(String cid);
 
     void addCommentReplyGoodCount(String cid);
 

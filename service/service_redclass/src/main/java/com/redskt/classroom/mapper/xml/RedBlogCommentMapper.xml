@@ -16,7 +16,7 @@
         </collection>
     </resultMap>
 
-    <resultMap id="commentReplyMap" type="com.redskt.classroom.entity.vo.RedBlogCommentReplyVo">
+    <resultMap id="commentReplyMap" type="com.redskt.classroom.entity.vo.RedCommentReplyVo">
         <id column="replyId" property="id"/>
         <id column="rcontent" property="content"/>
         <id column="rid" property="rid"/>

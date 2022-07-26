@@ -1,7 +1,7 @@
 package com.redskt.classroom.service.impl;
 
 import com.redskt.classroom.entity.RedBlogCommentReply;
-import com.redskt.classroom.entity.vo.RedBlogCommentReplyVo;
+import com.redskt.classroom.entity.vo.RedCommentReplyVo;
 import com.redskt.classroom.mapper.RedBlogCommentReplyMapper;
 import com.redskt.classroom.service.RedBlogCommentReplyService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 public class RedBlogCommentReplyServiceImpl extends ServiceImpl<RedBlogCommentReplyMapper, RedBlogCommentReply> implements RedBlogCommentReplyService {
 
     @Override
-    public RedBlogCommentReplyVo getBlogCommentReplyOne(String rid) {
+    public RedCommentReplyVo getBlogCommentReplyOne(String rid) {
         return baseMapper.getBlogCommentReplyOne(rid);
     }
 

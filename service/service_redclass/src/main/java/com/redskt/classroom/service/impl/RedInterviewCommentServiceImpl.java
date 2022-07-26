@@ -1,10 +1,14 @@
 package com.redskt.classroom.service.impl;
 
 import com.redskt.classroom.entity.RedInterviewComment;
+import com.redskt.classroom.entity.vo.RedCommentVo;
 import com.redskt.classroom.mapper.RedInterviewCommentMapper;
 import com.redskt.classroom.service.RedInterviewCommentService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -17,4 +21,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class RedInterviewCommentServiceImpl extends ServiceImpl<RedInterviewCommentMapper, RedInterviewComment> implements RedInterviewCommentService {
 
+    @Override
+    public List<RedCommentVo> getRedCommentList(String id, Integer rSize, int type) {
+        return baseMapper.getRedCommentList(id,5,5, type);
+    }
 }

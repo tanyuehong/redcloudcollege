@@ -2,7 +2,7 @@ package com.redskt.classroom.mapper;
 
 import com.redskt.classroom.entity.RedBlogCommentReply;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.redskt.classroom.entity.vo.RedBlogCommentReplyVo;
+import com.redskt.classroom.entity.vo.RedCommentReplyVo;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -15,7 +15,7 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface RedBlogCommentReplyMapper extends BaseMapper<RedBlogCommentReply> {
 
-    RedBlogCommentReplyVo getBlogCommentReplyOne(@Param("rid")  String rid);
+    RedCommentReplyVo getBlogCommentReplyOne(@Param("rid")  String rid);
 
     void addCommentReplyGoodCount(@Param("cid")  String cid);
 

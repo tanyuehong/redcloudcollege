@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class RedBlogCommentReplyVo {
+public class RedCommentReplyVo {
     private String id;
 
     private String rid;
