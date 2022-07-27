@@ -3,6 +3,7 @@ package com.redskt.classroom.controller;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.redskt.classroom.entity.*;
+import com.redskt.classroom.entity.vo.RedCommentVo;
 import com.redskt.classroom.service.*;
 import com.redskt.commonutils.R;
 import com.redskt.commonutils.RequestParmUtil;
@@ -61,6 +62,21 @@ public class RedInterViewUserController {
             }
         } else {
             return R.error("参数验证失败，请重新尝试");
+        }
+    }
+
+    @PostMapping("submitCommet")
+    public R submitComment(@RequestBody RedBlogComment comment, HttpServletRequest request) {
+        String uId = TokenManager.getMemberIdByJwtToken(request);
+        if(uId.length()>0 && comment.getUid().length()>0 && uId.equals(comment.getUid())) {
+            if (commentService.save(comment)) {
+                RedCommentVo curComment = commentService.getBlogCommentOne(comment.getId());
+                return R.ok().data("comment",curComment);
+            } else  {
+                return R.error("评论文章失败，请重新尝试！");
+            }
+        } else  {
+            return R.error("参数验证失败！");
         }
     }
 }
