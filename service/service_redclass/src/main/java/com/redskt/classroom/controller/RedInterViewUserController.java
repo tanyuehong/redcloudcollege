@@ -3,6 +3,7 @@ package com.redskt.classroom.controller;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.redskt.classroom.entity.*;
+import com.redskt.classroom.entity.vo.RedCommentReplyVo;
 import com.redskt.classroom.entity.vo.RedCommentVo;
 import com.redskt.classroom.service.*;
 import com.redskt.commonutils.R;
@@ -29,6 +30,12 @@ public class RedInterViewUserController {
 
     @Autowired
     private RedInterviewTagsService tagsService;
+
+    @Autowired
+    private RedInterviewCommentService commentService;
+
+    @Autowired
+    private RedInterviewCommentReplyService replyService;
 
 
     @PostMapping("submit")
@@ -65,13 +72,28 @@ public class RedInterViewUserController {
         }
     }
 
-    @PostMapping("submitCommet")
-    public R submitComment(@RequestBody RedBlogComment comment, HttpServletRequest request) {
+    @PostMapping("commet")
+    public R submitcommet(@RequestBody RedInterviewComment comment, HttpServletRequest request) {
         String uId = TokenManager.getMemberIdByJwtToken(request);
         if(uId.length()>0 && comment.getUid().length()>0 && uId.equals(comment.getUid())) {
             if (commentService.save(comment)) {
-                RedCommentVo curComment = commentService.getBlogCommentOne(comment.getId());
+                RedCommentVo curComment = commentService.getCommentOne(comment.getId());
                 return R.ok().data("comment",curComment);
+            } else  {
+                return R.error("评论失败，请重新尝试！");
+            }
+        } else  {
+            return R.error("参数验证失败！");
+        }
+    }
+
+    @PostMapping("commet/reply")
+    public R submitReplyComment(@RequestBody RedInterviewCommentReply reply, HttpServletRequest request) {
+        String uId = TokenManager.getMemberIdByJwtToken(request);
+        if(uId.length()>0 && reply.getUid().length()>0 && uId.equals(reply.getUid())) {
+            if (replyService.save(reply)) {
+                RedCommentReplyVo curReply = replyService.getBlogCommentReplyOne(reply.getId());
+                return R.ok().data("reply",curReply);
             } else  {
                 return R.error("评论文章失败，请重新尝试！");
             }

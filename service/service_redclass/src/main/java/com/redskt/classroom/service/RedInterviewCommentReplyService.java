@@ -2,6 +2,7 @@ package com.redskt.classroom.service;
 
 import com.redskt.classroom.entity.RedInterviewCommentReply;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.redskt.classroom.entity.vo.RedCommentReplyVo;
 
 /**
  * <p>
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface RedInterviewCommentReplyService extends IService<RedInterviewCommentReply> {
 
+    RedCommentReplyVo getCommentReplyOne(String rId);
 }

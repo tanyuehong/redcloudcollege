@@ -25,4 +25,9 @@ public class RedInterviewCommentServiceImpl extends ServiceImpl<RedInterviewComm
     public List<RedCommentVo> getRedCommentList(String id, Integer rSize, int type) {
         return baseMapper.getRedCommentList(id,5,5, type);
     }
+
+    @Override
+    public  RedCommentVo getCommentOne(String cId) {
+        return baseMapper.getCommentOne(cId);
+    }
 }

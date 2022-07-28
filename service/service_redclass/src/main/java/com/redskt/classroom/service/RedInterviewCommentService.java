@@ -18,4 +18,6 @@ public interface RedInterviewCommentService extends IService<RedInterviewComment
 
     List<RedCommentVo> getRedCommentList(String id, Integer rSize, int type);
 
+    RedCommentVo getCommentOne(String cId);
+
 }

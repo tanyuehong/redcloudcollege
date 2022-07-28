@@ -19,4 +19,5 @@ public interface RedInterviewCommentMapper extends BaseMapper<RedInterviewCommen
 
     List<RedCommentVo> getRedCommentList(@Param("id") String id, @Param("size") Integer size, @Param("rSize") Integer rSize, @Param("type") int type);
 
+    RedCommentVo getCommentOne(@Param("cid")  String cId);
 }
