@@ -31,8 +31,8 @@ import java.util.List;
  * @since 2019-11-08
  */
 public class TokenAuthenticationFilter extends BasicAuthenticationFilter {
-    private TokenManager tokenManager;
-    private RedisTemplate redisTemplate;
+    private final TokenManager tokenManager;
+    private final RedisTemplate redisTemplate;
 
     public TokenAuthenticationFilter(AuthenticationManager authManager, TokenManager tokenManager,RedisTemplate redisTemplate) {
         super(authManager);

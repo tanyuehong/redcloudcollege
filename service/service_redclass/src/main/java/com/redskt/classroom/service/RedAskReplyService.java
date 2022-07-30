@@ -2,7 +2,7 @@ package com.redskt.classroom.service;
 
 import com.redskt.classroom.entity.RedAskReply;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.redskt.classroom.entity.vo.RedAskReplyVo;
+import com.redskt.classroom.entity.vo.RedClassReplyVo;
 
 import java.util.List;
 
@@ -16,9 +16,9 @@ import java.util.List;
  */
 public interface RedAskReplyService extends IService<RedAskReply> {
 
-    RedAskReplyVo getUserLasterReply(String uid);
+    RedClassReplyVo getUserLasterReply(String uid);
 
-    List<RedAskReplyVo> getHomeAskReplyList(String qId,int sortType);
+    List<RedClassReplyVo> getHomeAskReplyList(String qId, int sortType);
 
     int updateReplyGoodCount(boolean isAdd,String rId);
 

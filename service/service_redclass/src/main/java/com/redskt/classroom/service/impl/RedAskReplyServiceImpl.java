@@ -1,7 +1,7 @@
 package com.redskt.classroom.service.impl;
 
 import com.redskt.classroom.entity.RedAskReply;
-import com.redskt.classroom.entity.vo.RedAskReplyVo;
+import com.redskt.classroom.entity.vo.RedClassReplyVo;
 import com.redskt.classroom.mapper.RedAskReplyMapper;
 import com.redskt.classroom.service.RedAskReplyService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -26,12 +26,12 @@ public class RedAskReplyServiceImpl extends ServiceImpl<RedAskReplyMapper, RedAs
     }
 
     @Override
-    public RedAskReplyVo getUserLasterReply(String uid) {
+    public RedClassReplyVo getUserLasterReply(String uid) {
         return baseMapper.getUserLasterReply(uid);
     }
 
     @Override
-    public List<RedAskReplyVo> getHomeAskReplyList(String qId,int sortType) {
+    public List<RedClassReplyVo> getHomeAskReplyList(String qId, int sortType) {
         if(sortType == 1) {
             return baseMapper.getQustionReplyList(qId,10,5,1);
         } else {

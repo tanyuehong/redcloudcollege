@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.redskt.classroom.mapper.RedInterviewAnswerMapper">
+
+    <resultMap id="replyMap" type="com.redskt.classroom.entity.vo.RedClassAnswerVo">
+        <id column="id" property="id"/>
+        <id column="qid" property="qid"/>
+        <id column="good" property="good"/>
+        <id column="bad" property="bad"/>
+        <id column="state" property="state"/>
+        <id column="uid" property="uid"/>
+        <id column="username" property="username"/>
+        <id column="avatar" property="avatar"/>
+        <id column="content" property="content"/>
+        <id column="gmt_create" property="gmtCreate"/>
+        <collection property="comments" resultMap="commentMap">
+        </collection>
+    </resultMap>
+
+    <resultMap id="commentMap" type="com.redskt.classroom.entity.vo.ReplyCommentVo">
+        <id column="replyId" property="id"/>
+        <id column="ccontent" property="content"/>
+        <id column="crid" property="rid"/>
+        <id column="cuid" property="uid"/>
+        <id column="touid" property="touid"/>
+        <id column="cname" property="name"/>
+        <id column="tname" property="toname"/>
+        <id column="cavatar" property="avatar"/>
+        <id column="cgood" property="good"/>
+        <id column="goodcomment" property="goodcomment"/>
+        <id column="cgmt_create" property="gmtCreate"/>
+    </resultMap>
+
+    <select id="getInterviewAnswerList" resultMap="replyMap">
+        SELECT answer.id, answer.qid,answer.content,answer.good,answer.bad,answer.uid,answer.state,answer.gmt_create, ruser.nickname as username,
+        ruser.avatar, rcomment.id as replyId, rcomment.content as ccontent,rcomment.good as cgood,rcomment.goodc as goodcomment,
+        rcomment.rid as crid,rcomment.uid as cuid,rcomment.touid,rcomment.gmt_create as cgmt_create,cuser.nickname as cname,cuser.avatar as cavatar,tuser.nickname as tname
+        FROM red_interview_answer answer
+        LEFT JOIN edu_user ruser on answer.uid = ruser.id
+        LEFT JOIN (
+        SELECT myc.id,myc.content,myc.good,myc.rid,myc.uid,myc.touid,myc.gmt_create,!isnull(ccgood.id) as goodc
+        FROM (
+        SELECT * FROM  (
+        SELECT ROW_NUMBER() OVER(PARTITION BY rid ORDER BY gmt_create DESC) rn ,red_interview_answer_comment.*
+        FROM red_interview_answer_comment) t2 WHERE t2.rn &lt; #{csize}
+        ) myc
+        LEFT JOIN red_interview_answer_good ccgood on myc.uid = ccgood.uid and myc.id = ccgood.cid and ccgood.is_deleted = 0
+        ORDER BY gmt_create,goodc DESC
+        ) as rcomment on  rcomment.rid = answer.id
+        LEFT JOIN edu_user cuser on rcomment.uid = cuser.id
+        LEFT JOIN edu_user tuser on rcomment.touid = tuser.id
+
+        WHERE  answer.id in
+        ( SELECT id FROM
+        ( SELECT id
+        FROM red_interview_answer
+        WHERE qid = #{qId}
+        <if test="type == 1">
+            ORDER BY red_interview_answer.good DESC
+        </if>
+        <if test="type == 2">
+            ORDER BY red_interview_answer.gmt_create DESC
+        </if>
+        LIMIT #{size} ) as subreply )
+    </select>
+
+    <select id="getUserLasterReply" resultMap="replyMap">
+        SELECT  answer.id, answer.qid,answer.content,answer.good,answer.bad,answer.uid,answer.gmt_create, ruser.nickname as username,
+        ruser.avatar
+        FROM red_interview_answer answer
+        LEFT JOIN edu_user ruser on answer.uid = ruser.id
+        WHERE  answer.uid = #{uid}
+        ORDER BY  answer.gmt_create DESC
+        LIMIT 1
+    </select>
+
+</mapper>

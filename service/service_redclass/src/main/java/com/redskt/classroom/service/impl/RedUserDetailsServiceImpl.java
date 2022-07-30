@@ -36,7 +36,7 @@ public class RedUserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // 从数据库中取出用户信息
-        RedClassUser user =  userService.selectByUsername(username);;
+        RedClassUser user =  userService.selectByUsername(username);
 
         // 判断用户是否存在
         if (null == user){

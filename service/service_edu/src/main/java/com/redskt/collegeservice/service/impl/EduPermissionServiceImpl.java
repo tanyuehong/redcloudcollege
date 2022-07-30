@@ -148,10 +148,7 @@ public class EduPermissionServiceImpl extends ServiceImpl<EduPermissionMapper, E
     private boolean isSysAdmin(String userId) {
         EduAdminUser user = userService.getById(userId);
 
-        if(null != user && "admin".equals(user.getUsername())) {
-            return true;
-        }
-        return false;
+        return null != user && "admin".equals(user.getUsername());
     }
 
     /**

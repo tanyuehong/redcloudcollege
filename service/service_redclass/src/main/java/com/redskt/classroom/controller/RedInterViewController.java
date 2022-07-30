@@ -3,7 +3,8 @@ package com.redskt.classroom.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.redskt.classroom.entity.RedCategoryTag;
 import com.redskt.classroom.entity.RedInterviewType;
-import com.redskt.classroom.entity.vo.RedAskReplyVo;
+import com.redskt.classroom.entity.vo.RedClassAnswerVo;
+import com.redskt.classroom.entity.vo.RedClassReplyVo;
 import com.redskt.classroom.entity.vo.RedCommentVo;
 import com.redskt.classroom.entity.vo.RedInterviewQuestionVo;
 import com.redskt.classroom.service.*;
@@ -13,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,7 +31,7 @@ public class RedInterViewController {
     private RedCategoryTagService tagService;
 
     @Autowired
-    private RedInterviewReplyService replyService;
+    private RedInterviewAnswerService answerService;
 
     @Autowired
     private RedInterviewCommentService commentService;
@@ -66,18 +66,23 @@ public class RedInterViewController {
 
     @GetMapping("getQuestionDetail/{qId}/{type}")
     public R getQuestionDetail(@PathVariable String qId,@PathVariable int type) {
-        RedInterviewQuestionVo qDetail = questionService.getQustionDetail(qId);
-        int readCount = qDetail.getReadcount() + 1;
-        questionService.updateQuestionReadCount(qDetail.getQId(), readCount);
+        if(qId.length()>0) {
+            RedInterviewQuestionVo qDetail = questionService.getQustionDetail(qId);
+            int readCount = qDetail.getReadcount() + 1;
+            questionService.updateQuestionReadCount(qDetail.getQId(), readCount);
 
-        List<RedAskReplyVo> replyList = new ArrayList<>();
-        if(type == 1) {
-            return R.ok().data("qdetail", qDetail).data("dataList", replyList);
-        } else if(type==2) {
-            List<RedCommentVo> commentVoList = commentService.getRedCommentList(qId,5,2);
-            return R.ok().data("qdetail", qDetail).data("dataList", commentVoList);
+            List<RedClassReplyVo> replyList = new ArrayList<>();
+            if(type == 1) {
+                List<RedClassAnswerVo> answerVoList = answerService.getInterviewAnswerList(qId,1);
+                return R.ok().data("qdetail", qDetail).data("dataList", answerVoList);
+            } else if(type==2) {
+                List<RedCommentVo> commentVoList = commentService.getRedCommentList(qId,5,2);
+                return R.ok().data("qdetail", qDetail).data("dataList", commentVoList);
+            } else {
+                return R.ok().data("qdetail", qDetail).data("dataList", replyList);
+            }
         } else {
-            return R.ok().data("qdetail", qDetail).data("dataList", replyList);
+            return R.error("参数错误，请重新尝试");
         }
     }
 

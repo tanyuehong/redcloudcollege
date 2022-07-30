@@ -1,8 +1,8 @@
 
 package com.redskt.classroom.controller;
 import com.alibaba.fastjson.JSON;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.redskt.classroom.entity.*;
+import com.redskt.classroom.entity.vo.RedClassReplyVo;
 import com.redskt.classroom.entity.vo.RedCommentReplyVo;
 import com.redskt.classroom.entity.vo.RedCommentVo;
 import com.redskt.classroom.service.*;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +22,7 @@ import java.util.Map;
 public class RedInterViewUserController {
 
     @Autowired
-    private RedInterviewTypeService typeService;
+    private RedInterviewAnswerService answerService;
 
     @Autowired
     private RedInterviewQuestionService questionService;
@@ -87,12 +86,12 @@ public class RedInterViewUserController {
         }
     }
 
-    @PostMapping("commet/reply")
+    @PostMapping("reply")
     public R submitReplyComment(@RequestBody RedInterviewCommentReply reply, HttpServletRequest request) {
         String uId = TokenManager.getMemberIdByJwtToken(request);
         if(uId.length()>0 && reply.getUid().length()>0 && uId.equals(reply.getUid())) {
             if (replyService.save(reply)) {
-                RedCommentReplyVo curReply = replyService.getBlogCommentReplyOne(reply.getId());
+                RedCommentReplyVo curReply = replyService.getCommentReplyOne(reply.getId());
                 return R.ok().data("reply",curReply);
             } else  {
                 return R.error("评论文章失败，请重新尝试！");
@@ -101,4 +100,19 @@ public class RedInterViewUserController {
             return R.error("参数验证失败！");
         }
     }
+
+    @PostMapping("answer")
+    public R registerUser(@RequestBody RedInterviewAnswer answer, HttpServletRequest request) {
+        String uId = TokenManager.getMemberIdByJwtToken(request);
+        if (uId.length()>0 && uId.equals(answer.getUid())) {
+            if (answerService.save(answer)) {
+                RedClassReplyVo rReply = answerService.getUserLasterReply(uId);
+                return R.ok().data("reply",rReply);
+            } else {
+                return R.error("提交解答失败败,请重新尝试！");
+            }
+        }
+        return  R.error("登录信息验证失败，请重新尝试！");
+    }
+
 }

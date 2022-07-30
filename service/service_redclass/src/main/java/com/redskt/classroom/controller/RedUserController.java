@@ -98,7 +98,7 @@ public class RedUserController {
             testFils.add(fileName);
         }
 
-        MultipartFile files[] = {};
+        MultipartFile[] files = {};
 
         String userName = TokenManager.getMemberIdByJwtToken(request);
         if (userName == null||userName.length()==0) {

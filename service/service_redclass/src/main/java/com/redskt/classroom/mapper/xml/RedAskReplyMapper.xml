@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.redskt.classroom.mapper.RedAskReplyMapper">
 
-    <resultMap id="replyMap" type="com.redskt.classroom.entity.vo.RedAskReplyVo">
+    <resultMap id="replyMap" type="com.redskt.classroom.entity.vo.RedClassReplyVo">
         <id column="id" property="id"/>
         <id column="qid" property="qid"/>
         <id column="good" property="good"/>

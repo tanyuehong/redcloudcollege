@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.qiniu.util.Auth;
 import com.redskt.classroom.entity.*;
-import com.redskt.classroom.entity.vo.RedAskReplyVo;
+import com.redskt.classroom.entity.vo.RedClassReplyVo;
 import com.redskt.classroom.entity.vo.RedUserAskVo;
 import com.redskt.classroom.entity.vo.ReplyCommentVo;
 import com.redskt.classroom.service.*;
@@ -90,7 +90,7 @@ public class RedAskUserController {
         String uId = TokenManager.getMemberIdByJwtToken(request);
         if (uId.length()>0 && uId.equals(reply.getUid())) {
             if (replyService.save(reply)) {
-                RedAskReplyVo rReply = replyService.getUserLasterReply(uId);
+                RedClassReplyVo rReply = replyService.getUserLasterReply(uId);
                 return R.ok().data("reply",rReply);
             } else {
                 return R.error("回答存储失败,请重新尝试！");

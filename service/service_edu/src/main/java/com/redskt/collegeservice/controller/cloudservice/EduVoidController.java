@@ -34,7 +34,7 @@ public class EduVoidController {
     public R removeAlyVideo(@PathVariable String id) {
         try {
             //初始化对象
-            DefaultAcsClient client = InitVodCilent.initVodClient(ConstantVodUtils.ACCESS_KEY_ID, ConstantVodUtils.ACCESS_KEY_SECRET);
+            DefaultAcsClient client = InitVodClient.initVodClient(ConstantVodUtils.ACCESS_KEY_ID, ConstantVodUtils.ACCESS_KEY_SECRET);
             //创建删除视频request对象
             DeleteVideoRequest request = new DeleteVideoRequest();
             //向request设置视频id

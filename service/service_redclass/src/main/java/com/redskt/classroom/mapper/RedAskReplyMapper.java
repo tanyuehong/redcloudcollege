@@ -2,7 +2,7 @@ package com.redskt.classroom.mapper;
 
 import com.redskt.classroom.entity.RedAskReply;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.redskt.classroom.entity.vo.RedAskReplyVo;
+import com.redskt.classroom.entity.vo.RedClassReplyVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -17,9 +17,9 @@ import java.util.List;
  */
 public interface RedAskReplyMapper extends BaseMapper<RedAskReply> {
 
-    RedAskReplyVo getUserLasterReply(@Param("uid")  String uid);
+    RedClassReplyVo getUserLasterReply(@Param("uid")  String uid);
 
-    List<RedAskReplyVo> getQustionReplyList(@Param("qId")  String qId,@Param("size") Integer size,@Param("csize") Integer csize,@Param("type") Integer type);
+    List<RedClassReplyVo> getQustionReplyList(@Param("qId")  String qId, @Param("size") Integer size, @Param("csize") Integer csize, @Param("type") Integer type);
 
     int addReplyGoodCount(@Param("rid") String rId);
 

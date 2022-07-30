@@ -3,8 +3,7 @@ package com.redskt.classroom.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.redskt.classroom.entity.*;
-import com.redskt.classroom.entity.vo.RedAskReplyVo;
-import com.redskt.classroom.entity.vo.RedCategoryTagVo;
+import com.redskt.classroom.entity.vo.RedClassReplyVo;
 import com.redskt.classroom.entity.vo.RedClassAskQuestionVo;
 import com.redskt.classroom.service.*;
 import com.redskt.commonutils.R;
@@ -142,14 +141,14 @@ public class RedAskController {
         int readCount = qDetail.getReadcount() + 1;
         userAskService.updateUserAskReadCount(qDetail.getQId(), readCount);
 
-        List<RedAskReplyVo> replyList = replyService.getHomeAskReplyList(qDetail.getQId(),1);
+        List<RedClassReplyVo> replyList = replyService.getHomeAskReplyList(qDetail.getQId(),1);
         return R.ok().data("qdetail", qDetail).data("replyList", replyList);
     }
 
     @GetMapping("getQustionReplyList/{qId}/{sortType}")
     public R getQustionReplyList(@PathVariable String qId,@PathVariable int sortType) {
         if(qId.length()>0) {
-            List<RedAskReplyVo> replyList = replyService.getHomeAskReplyList(qId,sortType);
+            List<RedClassReplyVo> replyList = replyService.getHomeAskReplyList(qId,sortType);
             return R.ok().data("replyList", replyList);
         }
         return R.error("参数异常");

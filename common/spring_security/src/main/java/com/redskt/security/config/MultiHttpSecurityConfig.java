@@ -25,10 +25,10 @@ public class MultiHttpSecurityConfig {
     public static class AdminSecurityConfig
             extends WebSecurityConfigurerAdapter {
 
-        private UserDetailsService userDetailsService;
-        private TokenManager tokenManager;
-        private DefaultPasswordEncoder defaultPasswordEncoder;
-        private RedisTemplate redisTemplate;
+        private final UserDetailsService userDetailsService;
+        private final TokenManager tokenManager;
+        private final DefaultPasswordEncoder defaultPasswordEncoder;
+        private final RedisTemplate redisTemplate;
 
 
         @Autowired
@@ -80,10 +80,10 @@ public class MultiHttpSecurityConfig {
     @Configuration
     public static class HomeSecurityConfig extends WebSecurityConfigurerAdapter{
 
-        private UserDetailsService userDetailsService;
-        private TokenManager tokenManager;
-        private DefaultPasswordEncoder defaultPasswordEncoder;
-        private RedisTemplate redisTemplate;
+        private final UserDetailsService userDetailsService;
+        private final TokenManager tokenManager;
+        private final DefaultPasswordEncoder defaultPasswordEncoder;
+        private final RedisTemplate redisTemplate;
 
         @Autowired
         public HomeSecurityConfig(UserDetailsService userDetailsService, DefaultPasswordEncoder defaultPasswordEncoder,

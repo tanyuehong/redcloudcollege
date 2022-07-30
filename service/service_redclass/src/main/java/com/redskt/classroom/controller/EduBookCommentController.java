@@ -30,7 +30,7 @@ public class EduBookCommentController {
     public R getBookComments(@RequestBody String jsonString) {
         //查询前8条热门课程
         JSONObject jsonObject = JSONObject.parseObject(jsonString);
-        String bookId = (String)jsonObject.get("bookId");;
+        String bookId = (String)jsonObject.get("bookId");
         int type = (int)jsonObject.get("type");
         QueryWrapper<EduBookComment> wrapper = new QueryWrapper<>();
         wrapper.eq("book_id",bookId);
