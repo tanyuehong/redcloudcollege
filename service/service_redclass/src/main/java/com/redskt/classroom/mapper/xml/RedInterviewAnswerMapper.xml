@@ -5,6 +5,7 @@
     <resultMap id="replyMap" type="com.redskt.classroom.entity.vo.RedClassAnswerVo">
         <id column="id" property="id"/>
         <id column="qid" property="qid"/>
+        <id column="view" property="view"/>
         <id column="good" property="good"/>
         <id column="bad" property="bad"/>
         <id column="state" property="state"/>
@@ -32,7 +33,7 @@
     </resultMap>
 
     <select id="getInterviewAnswerList" resultMap="replyMap">
-        SELECT answer.id, answer.qid,answer.content,answer.good,answer.bad,answer.uid,answer.state,answer.gmt_create, ruser.nickname as username,
+        SELECT answer.id, answer.qid,answer.content,answer.view,answer.good,answer.bad,answer.uid,answer.state,answer.gmt_create, ruser.nickname as username,
         ruser.avatar, rcomment.id as replyId, rcomment.content as ccontent,rcomment.good as cgood,rcomment.goodc as goodcomment,
         rcomment.rid as crid,rcomment.uid as cuid,rcomment.touid,rcomment.gmt_create as cgmt_create,cuser.nickname as cname,cuser.avatar as cavatar,tuser.nickname as tname
         FROM red_interview_answer answer

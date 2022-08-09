@@ -29,6 +29,8 @@ public class RedInterviewQuestionVo {
 
     private String content;
 
+    private String answer;
+
     private Integer reply;
 
     private Integer readcount;

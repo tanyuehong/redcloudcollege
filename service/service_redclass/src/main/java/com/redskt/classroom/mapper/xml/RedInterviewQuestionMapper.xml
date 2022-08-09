@@ -12,6 +12,7 @@
         <id column="deep" property="deep"/>
         <id column="typeString" property="typeString"/>
         <id column="content" property="content"/>
+        <id column="answer" property="answer"/>
         <id column="reply" property="reply"/>
         <id column="readcount" property="readcount"/>
         <id column="collect" property="collect"/>
@@ -64,7 +65,7 @@
     </update>
 
     <select id="getQustionDetail" resultMap="interviewQuestionMap">
-        SELECT question.id as qId, question.uid,question.title,question.type,question.content,question.collect,question.readcount,question.hotnum,question.price,question.deep,question.good,question.gmt_create, user.nickname,
+        SELECT question.id as qId, question.uid,question.title,question.type,question.content,question.answer,question.collect,question.readcount,question.hotnum,question.price,question.deep,question.good,question.gmt_create, user.nickname,
             user.avatar,(select count(reply.id) from red_ask_reply reply where reply.qid=question.id) as reply,tag.id as ctid,tag.name as tname,tag.img as timg,tag.sort as tsort
         FROM red_interview_question question
         LEFT OUTER JOIN edu_user user ON question.uid=user.id
