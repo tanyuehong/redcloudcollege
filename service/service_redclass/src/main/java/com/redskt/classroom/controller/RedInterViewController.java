@@ -2,17 +2,17 @@ package com.redskt.classroom.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.redskt.classroom.entity.RedCategoryTag;
+import com.redskt.classroom.entity.RedInterviewGood;
 import com.redskt.classroom.entity.RedInterviewType;
-import com.redskt.classroom.entity.vo.RedClassAnswerVo;
-import com.redskt.classroom.entity.vo.RedClassReplyVo;
-import com.redskt.classroom.entity.vo.RedCommentVo;
-import com.redskt.classroom.entity.vo.RedInterviewQuestionVo;
+import com.redskt.classroom.entity.vo.*;
 import com.redskt.classroom.service.*;
 import com.redskt.commonutils.R;
 import com.redskt.commonutils.RequestParmUtil;
+import com.redskt.security.TokenManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -35,6 +35,9 @@ public class RedInterViewController {
 
     @Autowired
     private RedInterviewCommentService commentService;
+
+    @Autowired
+    private RedInterviewGoodService goodService;
 
 
     @PostMapping("index")
@@ -104,5 +107,62 @@ public class RedInterViewController {
         } else {
             return R.error("参数错误，请重新尝试");
         }
+    }
+
+    @GetMapping("addGood/{qId}")
+    public R addGood(@PathVariable String qId, HttpServletRequest request) {
+        if (qId.length() > 0) {
+            String uId = TokenManager.getMemberIdByJwtToken(request);
+            if (uId.length() > 0) {
+                int count = goodService.updateGoodState(uId, qId);
+                if (count <= 0) {
+                    RedInterviewGood good = new RedInterviewGood();
+                    good.setQid(qId);
+                    good.setUid(uId);
+                    if (goodService.save(good)) {
+                        questionService.updateGoodCount(true, qId);
+                        return R.ok().data("goodqustion", true);
+                    }
+                } else {
+                    questionService.updateGoodCount(true, qId);
+                    return R.ok().data("goodqustion", true);
+                }
+            } else {
+                return R.error("请登录以后在点赞哈！");
+            }
+        }
+        return R.error("点赞失败，请稍后重试哈！");
+    }
+
+    @GetMapping("cancleGood/{qId}")
+    public R cancleGood(@PathVariable String qId, HttpServletRequest request) {
+        if (qId.length() > 0) {
+            String uId = TokenManager.getMemberIdByJwtToken(request);
+            if (uId.length() > 0) {
+                QueryWrapper<RedInterviewGood> goodQueryWrapper = new QueryWrapper<>();
+                goodQueryWrapper.eq("qid", qId);
+                goodQueryWrapper.eq("uid", uId);
+                if (goodService.remove(goodQueryWrapper)) {
+                    questionService.updateGoodCount(false, qId);
+                    return R.ok().data("goodqustion", false);
+                }
+            } else {
+                return R.error("登录信息异常，请重新登录后尝试！");
+            }
+        }
+        return R.error("取消点赞失败，请稍后重试哈！");
+    }
+
+    @GetMapping("status/{qid}")
+    public R getInterviewUserStatus(@PathVariable String qid, HttpServletRequest request) {
+        if (qid.length()>0) {
+            String uId = TokenManager.getMemberIdByJwtToken(request);
+            if (uId.length()>0) {
+                RedUserStateVo status = questionService.getUserStatus(qid,uId);
+                return R.ok().data("status",status);
+            }
+        }
+        RedUserStateVo status = new RedUserStateVo();
+        return R.ok().data("status",status);
     }
 }

@@ -3,6 +3,7 @@ package com.redskt.classroom.service;
 import com.redskt.classroom.entity.RedInterviewQuestion;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.redskt.classroom.entity.vo.RedInterviewQuestionVo;
+import com.redskt.classroom.entity.vo.RedUserStateVo;
 
 import java.util.List;
 
@@ -21,5 +22,11 @@ public interface RedInterviewQuestionService extends IService<RedInterviewQuesti
     void updateQuestionReadCount(String qId,int readCount);
 
     RedInterviewQuestionVo getQustionDetail(String qId);
+
+    int updateGoodCount(boolean isAdd,String qId);
+
+    int updateCollectCount(boolean isAdd,String qId);
+
+    RedUserStateVo getUserStatus(String qid, String uid);
 
 }

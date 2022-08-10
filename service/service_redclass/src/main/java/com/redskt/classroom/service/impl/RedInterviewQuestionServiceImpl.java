@@ -2,6 +2,7 @@ package com.redskt.classroom.service.impl;
 
 import com.redskt.classroom.entity.RedInterviewQuestion;
 import com.redskt.classroom.entity.vo.RedInterviewQuestionVo;
+import com.redskt.classroom.entity.vo.RedUserStateVo;
 import com.redskt.classroom.mapper.RedInterviewQuestionMapper;
 import com.redskt.classroom.service.RedInterviewQuestionService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -45,5 +46,28 @@ public class RedInterviewQuestionServiceImpl extends ServiceImpl<RedInterviewQue
     @Override
     public RedInterviewQuestionVo getQustionDetail(String qId) {
         return baseMapper.getQustionDetail(qId);
+    }
+
+    @Override
+    public int updateGoodCount(boolean isAdd,String qId) {
+        if(isAdd) {
+            return baseMapper.addGoodCount(qId);
+        } else {
+            return baseMapper.prepGoodCount(qId);
+        }
+    }
+
+    @Override
+    public int updateCollectCount(boolean isAdd,String qId) {
+        if(isAdd) {
+            return baseMapper.addCollectCount(qId);
+        } else {
+            return baseMapper.prepCollectCount(qId);
+        }
+    }
+
+    @Override
+    public RedUserStateVo getUserStatus(String qid, String uid) {
+        return baseMapper.getUserStatus(qid, uid);
     }
 }

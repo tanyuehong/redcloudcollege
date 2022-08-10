@@ -74,4 +74,38 @@
         WHERE question.id=#{tId}
     </select>
 
+
+    <update id="addGoodCount">
+        update red_interview_question
+        set good=good+1
+        where id = #{qid}
+    </update>
+
+    <update id="prepGoodCount">
+        update red_interview_question
+        set good=good-1
+        where id = #{qid}
+    </update>
+
+    <update id="addCollectCount">
+        update red_interview_question
+        set collect=collect+1
+        where id = #{qid}
+    </update>
+
+    <update id="prepCollectCount">
+        update red_interview_question
+        set collect=collect-1
+        where id = #{qid}
+    </update>
+
+    <select id="getUserStatus" resultType="com.redskt.classroom.entity.vo.RedUserStateVo">
+        SELECT !isnull(collect.id) as isCollect, !isnull(good.id) as goodslect,!isnull(interview.id) as isFocus
+        FROM red_interview_question interview
+        LEFT OUTER JOIN  red_interview_collect collect on collect.uid = #{uid} and collect.qid = #{qid} and collect.is_deleted = 0
+        LEFT OUTER JOIN  red_user_focus focus on focus.uid = #{uid} and focus.fid = interview.uid and focus.is_deleted = 0
+        LEFT OUTER JOIN  red_interview_good  good  on good.uid = #{uid} and good.qid = #{qid}
+        where interview.id = #{qid}
+    </select>
+
 </mapper>
