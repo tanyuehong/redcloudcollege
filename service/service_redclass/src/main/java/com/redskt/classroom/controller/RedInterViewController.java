@@ -2,6 +2,7 @@ package com.redskt.classroom.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.redskt.classroom.entity.RedCategoryTag;
+import com.redskt.classroom.entity.RedInterviewCollect;
 import com.redskt.classroom.entity.RedInterviewGood;
 import com.redskt.classroom.entity.RedInterviewType;
 import com.redskt.classroom.entity.vo.*;
@@ -38,6 +39,9 @@ public class RedInterViewController {
 
     @Autowired
     private RedInterviewGoodService goodService;
+
+    @Autowired
+    private RedInterviewCollectService collectService;
 
 
     @PostMapping("index")
@@ -145,6 +149,50 @@ public class RedInterViewController {
                 if (goodService.remove(goodQueryWrapper)) {
                     questionService.updateGoodCount(false, qId);
                     return R.ok().data("goodqustion", false);
+                }
+            } else {
+                return R.error("登录信息异常，请重新登录后尝试！");
+            }
+        }
+        return R.error("取消点赞失败，请稍后重试哈！");
+    }
+
+    @GetMapping("addCollect/{qId}")
+    public R addCollect(@PathVariable String qId, HttpServletRequest request) {
+        if (qId.length() > 0) {
+            String uId = TokenManager.getMemberIdByJwtToken(request);
+            if (uId.length() > 0) {
+                int count = collectService.updateCollectState(uId, qId);
+                if (count <= 0) {
+                    RedInterviewCollect collect = new RedInterviewCollect();
+                    collect.setQid(qId);
+                    collect.setUid(uId);
+                    if (collectService.save(collect)) {
+                        questionService.updateCollectCount(true, qId);
+                        return R.ok().data("goodqustion", true);
+                    }
+                } else {
+                    questionService.updateGoodCount(true, qId);
+                    return R.ok().data("result", true);
+                }
+            } else {
+                return R.error("请登录以后在点赞哈！");
+            }
+        }
+        return R.error("点赞失败，请稍后重试哈！");
+    }
+
+    @GetMapping("cancleCollect/{qId}")
+    public R cancleCollect(@PathVariable String qId, HttpServletRequest request) {
+        if (qId.length() > 0) {
+            String uId = TokenManager.getMemberIdByJwtToken(request);
+            if (uId.length() > 0) {
+                QueryWrapper<RedInterviewCollect> collectQueryWrapper = new QueryWrapper<>();
+                collectQueryWrapper.eq("qid", qId);
+                collectQueryWrapper.eq("uid", uId);
+                if (collectService.remove(collectQueryWrapper)) {
+                    questionService.updateGoodCount(false, qId);
+                    return R.ok().data("result", false);
                 }
             } else {
                 return R.error("登录信息异常，请重新登录后尝试！");
