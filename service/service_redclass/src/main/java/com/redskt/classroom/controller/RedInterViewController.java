@@ -1,10 +1,7 @@
 package com.redskt.classroom.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.redskt.classroom.entity.RedCategoryTag;
-import com.redskt.classroom.entity.RedInterviewCollect;
-import com.redskt.classroom.entity.RedInterviewGood;
-import com.redskt.classroom.entity.RedInterviewType;
+import com.redskt.classroom.entity.*;
 import com.redskt.classroom.entity.vo.*;
 import com.redskt.classroom.service.*;
 import com.redskt.commonutils.R;
@@ -212,5 +209,45 @@ public class RedInterViewController {
         }
         RedUserStateVo status = new RedUserStateVo();
         return R.ok().data("status",status);
+    }
+
+    @GetMapping("deleteQuestion/{qId}")
+    public R deleteQuestion(@PathVariable String qId, HttpServletRequest request) {
+        String uId = TokenManager.getMemberIdByJwtToken(request);
+        if (qId.length()>0 && uId.length()>0) {
+            QueryWrapper<RedInterviewAnswer> replyWrapper = new QueryWrapper<>();
+            replyWrapper.eq("qid", qId);
+            List<RedInterviewAnswer> replyList = answerService.list(replyWrapper);
+            if (replyList.size()>0) {
+                QueryWrapper<RedAskQuestion> questionWrapper = new QueryWrapper<>();
+                questionService.updateQustionState(qId,uId,99);
+                return R.ok().data("sucess",false).data("tips","有回答的问题不支持删除，已经提交删除申请,审核成功后删除哈");
+            }
+            QueryWrapper<RedInterviewQuestion> questionWrapper = new QueryWrapper<>();
+            questionWrapper.eq("uid", uId);
+            questionWrapper.eq("id", qId);
+            if(questionService.remove(questionWrapper)) {
+                return R.ok().data("sucess",true);
+            } else {
+                return R.error("删除回答失败，请重新尝试哈！");
+            }
+        }
+        return R.error("参数异常，请重新尝试哈！");
+    }
+
+    @GetMapping("deleteAnswer/{qId}")
+    public R deleteQuestionReply(@PathVariable String qId, HttpServletRequest request) {
+        String uId = TokenManager.getMemberIdByJwtToken(request);
+        if (qId.length()>0 && uId.length()>0) {
+            QueryWrapper<RedInterviewAnswer> replyWrapper = new QueryWrapper<>();
+            replyWrapper.eq("uid", uId);
+            replyWrapper.eq("id", qId);
+            if(answerService.remove(replyWrapper)) {
+                return R.ok().data("rId",qId);
+            } else {
+                return R.error("删除题解失败，请重新尝试哈！");
+            }
+        }
+        return R.error("参数异常，请重新尝试哈！");
     }
 }

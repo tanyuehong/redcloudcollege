@@ -3,8 +3,6 @@ package com.redskt.classroom.service;
 import com.redskt.classroom.entity.RedInterviewAnswer;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.redskt.classroom.entity.vo.RedClassAnswerVo;
-import com.redskt.classroom.entity.vo.RedClassReplyVo;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -18,7 +16,7 @@ import java.util.List;
  */
 public interface RedInterviewAnswerService extends IService<RedInterviewAnswer> {
 
-    RedClassReplyVo getUserLasterReply(@Param("uid")  String uid);
+    RedClassAnswerVo getUserLasterReply(String qid);
 
     List<RedClassAnswerVo> getInterviewAnswerList(String qId, int sortType);
 }

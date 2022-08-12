@@ -29,7 +29,7 @@ public class RedInterviewAnswerServiceImpl extends ServiceImpl<RedInterviewAnswe
     }
 
     @Override
-    public RedClassReplyVo getUserLasterReply(@Param("uid")  String uid) {
-        return  baseMapper.getUserLasterReply(uid);
+    public RedClassAnswerVo getUserLasterReply(String qid) {
+        return  baseMapper.getUserLasterReply(qid);
     }
 }

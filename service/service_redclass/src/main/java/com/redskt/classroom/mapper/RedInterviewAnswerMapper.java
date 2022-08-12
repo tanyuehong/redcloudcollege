@@ -20,5 +20,5 @@ public interface RedInterviewAnswerMapper extends BaseMapper<RedInterviewAnswer>
 
     List<RedClassAnswerVo> getInterviewAnswerList(@Param("qId")  String qId, @Param("size") Integer size, @Param("csize") Integer csize, @Param("type") Integer type);
 
-    RedClassReplyVo getUserLasterReply(@Param("uid")  String uid);
+    RedClassAnswerVo getUserLasterReply(@Param("qid")  String qid);
 }

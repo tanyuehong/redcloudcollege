@@ -70,4 +70,10 @@ public class RedInterviewQuestionServiceImpl extends ServiceImpl<RedInterviewQue
     public RedUserStateVo getUserStatus(String qid, String uid) {
         return baseMapper.getUserStatus(qid, uid);
     }
+
+
+    @Override
+    public int updateQustionState(String qId,String uId,int state) {
+        return baseMapper.updateQustionState(qId,uId,state);
+    }
 }

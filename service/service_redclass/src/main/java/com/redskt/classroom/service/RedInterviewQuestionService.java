@@ -29,4 +29,6 @@ public interface RedInterviewQuestionService extends IService<RedInterviewQuesti
 
     RedUserStateVo getUserStatus(String qid, String uid);
 
+    int updateQustionState(String qId,String uId,int state);
+
 }

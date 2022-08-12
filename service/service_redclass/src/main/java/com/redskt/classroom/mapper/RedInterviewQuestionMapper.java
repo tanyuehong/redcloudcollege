@@ -34,4 +34,6 @@ public interface RedInterviewQuestionMapper extends BaseMapper<RedInterviewQuest
 
     RedUserStateVo getUserStatus(@Param("qid") String qid, @Param("uid") String uid);
 
+    int updateQustionState(@Param("qid")  String qId,@Param("uid")  String uId,@Param("state") int state);
+
 }

@@ -70,9 +70,7 @@
         ruser.avatar
         FROM red_interview_answer answer
         LEFT JOIN edu_user ruser on answer.uid = ruser.id
-        WHERE  answer.uid = #{uid}
-        ORDER BY  answer.gmt_create DESC
-        LIMIT 1
+        WHERE  answer.id = #{qid}
     </select>
 
 </mapper>

@@ -1,7 +1,9 @@
 
 package com.redskt.classroom.controller;
 import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.redskt.classroom.entity.*;
+import com.redskt.classroom.entity.vo.RedClassAnswerVo;
 import com.redskt.classroom.entity.vo.RedClassReplyVo;
 import com.redskt.classroom.entity.vo.RedCommentReplyVo;
 import com.redskt.classroom.entity.vo.RedCommentVo;
@@ -106,8 +108,8 @@ public class RedInterViewUserController {
         String uId = TokenManager.getMemberIdByJwtToken(request);
         if (uId.length()>0 && uId.equals(answer.getUid())) {
             if (answerService.save(answer)) {
-                RedClassReplyVo rReply = answerService.getUserLasterReply(uId);
-                return R.ok().data("reply",rReply);
+                RedClassAnswerVo answerVo = answerService.getUserLasterReply(answer.getId());
+                return R.ok().data("reply","rReply");
             } else {
                 return R.error("提交解答失败败,请重新尝试！");
             }

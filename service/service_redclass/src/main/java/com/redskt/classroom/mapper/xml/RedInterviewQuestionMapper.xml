@@ -108,4 +108,10 @@
         where interview.id = #{qid}
     </select>
 
+    <update id="updateQustionState">
+        update red_interview_question
+        set state = #{state}
+        where id = #{qid} and uid = #{uid}
+    </update>
+
 </mapper>
