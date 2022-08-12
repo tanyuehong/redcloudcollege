@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.redskt.classroom.mapper.RedInterviewAnswerGoodMapper">
+
+    <update id="updateAnswerGoodState">
+        update red_interview_answer_good
+        set is_deleted = 0
+        where uid = #{uid} and aid = #{aid}
+    </update>
+
+</mapper>

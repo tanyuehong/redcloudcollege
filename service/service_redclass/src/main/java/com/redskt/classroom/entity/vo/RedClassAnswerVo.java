@@ -22,6 +22,8 @@ public class RedClassAnswerVo {
 
     private Integer good;
 
+    private boolean isgood;
+
     private Integer bad;
 
     private int state;

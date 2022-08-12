@@ -40,6 +40,9 @@ public class RedInterViewController {
     @Autowired
     private RedInterviewCollectService collectService;
 
+    @Autowired
+    private RedInterviewAnswerGoodService answerGoodService;
+
 
     @PostMapping("index")
     public R getInterviewIndex(@RequestBody Map parameterMap) {
@@ -68,8 +71,13 @@ public class RedInterViewController {
         return R.ok().data("list", list).data("tagList", tagList).data("typeList",typeList);
     }
 
-    @GetMapping("getQuestionDetail/{qId}/{type}")
-    public R getQuestionDetail(@PathVariable String qId,@PathVariable int type) {
+    @PostMapping("getQuestionDetail")
+    public R getQuestionDetail(@RequestBody Map parameterMap) {
+        parameterMap = RequestParmUtil.transToMAP(parameterMap);
+        Integer type = (Integer) parameterMap.get("type");
+        String qId = (String) parameterMap.get("qId");
+        String token = (String) parameterMap.get("token");
+        String uId = TokenManager.getUserFromToken(token);
         if(qId.length()>0) {
             RedInterviewQuestionVo qDetail = questionService.getQustionDetail(qId);
             int readCount = qDetail.getReadcount() + 1;
@@ -249,5 +257,66 @@ public class RedInterViewController {
             }
         }
         return R.error("参数异常，请重新尝试哈！");
+    }
+
+    @GetMapping("updateAnswerGood/{aId}/{type}")
+    public R cancleRelpyGood(@PathVariable String aId, @PathVariable int type, HttpServletRequest request) {
+        if (aId.length() > 0) {
+            String uId = TokenManager.getMemberIdByJwtToken(request);
+            if (uId.length() > 0) {
+                if (type == 1) {
+                    int count = answerGoodService.updateAnswerGoodState(uId, aId);
+                    if (count <= 0) {
+                        RedReplyGood good = new RedReplyGood();
+                        good.setRid(rId);
+                        good.setUid(uId);
+                        good.setType(type);
+                        if (replyGoodService.save(good)) {
+                            if (type == 1) {
+                                replyService.updateReplyGoodCount(true, rId);
+                            } else {
+                                replyService.updateReplyBadCount(true, rId);
+                            }
+                            return R.ok().data("goodqustion", true);
+                        }
+                    } else {
+                        if (type == 1) {
+                            replyService.updateReplyGoodCount(true, rId);
+                        } else {
+                            replyService.updateReplyBadCount(true, rId);
+                        }
+                        return R.ok().data("goodqustion", true);
+                    }
+                } else if (type == 3 || type == 4) {
+                    QueryWrapper<RedReplyGood> goodQueryWrapper = new QueryWrapper<>();
+                    goodQueryWrapper.eq("rid", rId);
+                    goodQueryWrapper.eq("uid", uId);
+                    if (replyGoodService.remove(goodQueryWrapper)) {
+                        if (type == 3) {
+                            replyService.updateReplyGoodCount(false, rId);
+                        } else {
+                            replyService.updateReplyBadCount(false, rId);
+                        }
+
+                        return R.ok().data("goodqustion", false);
+                    }
+                } else if (type == 5) {
+                    int count = replyGoodService.updateReplyGoodState(uId, rId, 2);
+                    if (count > 0) {
+                        replyService.updateReplyBadCount(true, rId);
+                    }
+                    return R.ok().data("goodqustion", true);
+                } else if (type == 6) {
+                    int count = replyGoodService.updateReplyGoodState(uId, rId, 1);
+                    if (count > 0) {
+                        replyService.updateReplyGoodCount(true, rId);
+                    }
+                    return R.ok().data("goodqustion", true);
+                }
+            } else {
+                return R.error("登录信息异常，请重新登录后尝试！");
+            }
+        }
+        return R.ok().data("goodqustion", true);
     }
 }
