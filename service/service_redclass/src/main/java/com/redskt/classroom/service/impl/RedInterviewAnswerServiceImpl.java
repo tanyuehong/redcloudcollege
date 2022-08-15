@@ -29,6 +29,15 @@ public class RedInterviewAnswerServiceImpl extends ServiceImpl<RedInterviewAnswe
     }
 
     @Override
+    public int updateGoodCount(boolean isAdd,String aId) {
+        if (isAdd) {
+            return  baseMapper.addGoodCount(aId);
+        } else {
+            return baseMapper.prepGoodCount(aId);
+        }
+    }
+
+    @Override
     public RedClassAnswerVo getUserLasterReply(String qid) {
         return  baseMapper.getUserLasterReply(qid);
     }

@@ -45,7 +45,7 @@
         SELECT ROW_NUMBER() OVER(PARTITION BY rid ORDER BY gmt_create DESC) rn ,red_interview_answer_comment.*
         FROM red_interview_answer_comment) t2 WHERE t2.rn &lt; #{csize}
         ) myc
-        LEFT JOIN red_interview_answer_good ccgood on myc.uid = ccgood.uid and myc.id = ccgood.cid and ccgood.is_deleted = 0
+        LEFT JOIN red_interview_answer_good ccgood on myc.uid = ccgood.uid and myc.id = ccgood.aid and ccgood.is_deleted = 0
         ORDER BY gmt_create,goodc DESC
         ) as rcomment on  rcomment.rid = answer.id
         LEFT JOIN edu_user cuser on rcomment.uid = cuser.id
@@ -72,5 +72,18 @@
         LEFT JOIN edu_user ruser on answer.uid = ruser.id
         WHERE  answer.id = #{qid}
     </select>
+
+
+    <update id="addGoodCount">
+        update red_interview_answer
+        set good=good+1
+        where id = #{rid}
+    </update>
+
+    <update id="prepGoodCount">
+        update red_interview_answer
+        set good=good-1
+        where id = #{rid}
+    </update>
 
 </mapper>

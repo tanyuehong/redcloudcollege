@@ -74,7 +74,9 @@ public class RedInterViewController {
     @PostMapping("getQuestionDetail")
     public R getQuestionDetail(@RequestBody Map parameterMap) {
         parameterMap = RequestParmUtil.transToMAP(parameterMap);
-        Integer type = (Integer) parameterMap.get("type");
+        String typeString= (String) parameterMap.get("type");
+        Integer type = Integer.parseInt(typeString);
+
         String qId = (String) parameterMap.get("qId");
         String token = (String) parameterMap.get("token");
         String uId = TokenManager.getUserFromToken(token);
@@ -260,56 +262,28 @@ public class RedInterViewController {
     }
 
     @GetMapping("updateAnswerGood/{aId}/{type}")
-    public R cancleRelpyGood(@PathVariable String aId, @PathVariable int type, HttpServletRequest request) {
+    public R updateAnswerGood(@PathVariable String aId, @PathVariable int type, HttpServletRequest request) {
         if (aId.length() > 0) {
             String uId = TokenManager.getMemberIdByJwtToken(request);
             if (uId.length() > 0) {
-                if (type == 1) {
-                    int count = answerGoodService.updateAnswerGoodState(uId, aId);
-                    if (count <= 0) {
-                        RedReplyGood good = new RedReplyGood();
-                        good.setRid(rId);
-                        good.setUid(uId);
-                        good.setType(type);
-                        if (replyGoodService.save(good)) {
-                            if (type == 1) {
-                                replyService.updateReplyGoodCount(true, rId);
-                            } else {
-                                replyService.updateReplyBadCount(true, rId);
-                            }
-                            return R.ok().data("goodqustion", true);
-                        }
-                    } else {
+                int count = answerGoodService.updateAnswerGoodState(uId, aId);
+                if (count <= 0) {
+                    RedInterviewAnswerGood good = new RedInterviewAnswerGood();
+                    good.setId(aId);
+                    good.setUid(uId);
+                    if (answerGoodService.save(good)) {
                         if (type == 1) {
-                            replyService.updateReplyGoodCount(true, rId);
+                            answerService.updateGoodCount(true, aId);
                         } else {
-                            replyService.updateReplyBadCount(true, rId);
+                            answerService.updateGoodCount(true, aId);
                         }
                         return R.ok().data("goodqustion", true);
                     }
-                } else if (type == 3 || type == 4) {
-                    QueryWrapper<RedReplyGood> goodQueryWrapper = new QueryWrapper<>();
-                    goodQueryWrapper.eq("rid", rId);
-                    goodQueryWrapper.eq("uid", uId);
-                    if (replyGoodService.remove(goodQueryWrapper)) {
-                        if (type == 3) {
-                            replyService.updateReplyGoodCount(false, rId);
-                        } else {
-                            replyService.updateReplyBadCount(false, rId);
-                        }
-
-                        return R.ok().data("goodqustion", false);
-                    }
-                } else if (type == 5) {
-                    int count = replyGoodService.updateReplyGoodState(uId, rId, 2);
-                    if (count > 0) {
-                        replyService.updateReplyBadCount(true, rId);
-                    }
-                    return R.ok().data("goodqustion", true);
-                } else if (type == 6) {
-                    int count = replyGoodService.updateReplyGoodState(uId, rId, 1);
-                    if (count > 0) {
-                        replyService.updateReplyGoodCount(true, rId);
+                } else {
+                    if (type == 1) {
+                        answerService.updateGoodCount(true, aId);
+                    } else {
+                        answerService.updateGoodCount(true, aId);
                     }
                     return R.ok().data("goodqustion", true);
                 }
@@ -317,6 +291,6 @@ public class RedInterViewController {
                 return R.error("登录信息异常，请重新登录后尝试！");
             }
         }
-        return R.ok().data("goodqustion", true);
+        return R.error("参数异常，请重新尝试哈！");
     }
 }
