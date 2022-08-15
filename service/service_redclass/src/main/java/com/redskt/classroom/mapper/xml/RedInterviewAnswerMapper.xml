@@ -77,13 +77,13 @@
     <update id="addGoodCount">
         update red_interview_answer
         set good=good+1
-        where id = #{rid}
+        where id = #{aId}
     </update>
 
     <update id="prepGoodCount">
         update red_interview_answer
         set good=good-1
-        where id = #{rid}
+        where id = #{aId}
     </update>
 
 </mapper>

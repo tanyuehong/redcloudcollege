@@ -266,26 +266,28 @@ public class RedInterViewController {
         if (aId.length() > 0) {
             String uId = TokenManager.getMemberIdByJwtToken(request);
             if (uId.length() > 0) {
-                int count = answerGoodService.updateAnswerGoodState(uId, aId);
-                if (count <= 0) {
-                    RedInterviewAnswerGood good = new RedInterviewAnswerGood();
-                    good.setId(aId);
-                    good.setUid(uId);
-                    if (answerGoodService.save(good)) {
-                        if (type == 1) {
-                            answerService.updateGoodCount(true, aId);
-                        } else {
-                            answerService.updateGoodCount(true, aId);
+                if (type == 1) {
+                    int count = answerGoodService.updateAnswerGoodState(uId, aId);
+                    if(count <= 0) {
+                        RedInterviewAnswerGood good = new RedInterviewAnswerGood();
+                        good.setAid(aId);
+                        good.setUid(uId);
+                        if (!answerGoodService.save(good)) {
+                            return R.error("点赞失败，请重新尝试哈！");
                         }
-                        return R.ok().data("goodqustion", true);
                     }
-                } else {
-                    if (type == 1) {
-                        answerService.updateGoodCount(true, aId);
-                    } else {
-                        answerService.updateGoodCount(true, aId);
-                    }
+                    answerService.updateGoodCount(true, aId);
                     return R.ok().data("goodqustion", true);
+                } else {
+                    QueryWrapper<RedInterviewAnswerGood> answerGoodQueryWrapper = new QueryWrapper<>();
+                    answerGoodQueryWrapper.eq("uid", uId);
+                    answerGoodQueryWrapper.eq("aid", aId);
+                    if(answerGoodService.remove(answerGoodQueryWrapper)) {
+                        answerService.updateGoodCount(false, aId);
+                        return R.ok().data("goodqustion", true);
+                    } else {
+                        return R.error("取消点赞失败，请重新尝试哈！");
+                    }
                 }
             } else {
                 return R.error("登录信息异常，请重新登录后尝试！");
