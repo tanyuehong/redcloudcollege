@@ -41,6 +41,9 @@ public class RedInterViewController {
     private RedInterviewCollectService collectService;
 
     @Autowired
+    private RedInterviewAnswerCollectService answerCollectService;
+
+    @Autowired
     private RedInterviewAnswerGoodService answerGoodService;
 
 
@@ -183,10 +186,10 @@ public class RedInterViewController {
                     return R.ok().data("result", true);
                 }
             } else {
-                return R.error("请登录以后在点赞哈！");
+                return R.error("请登录以后在收藏哈！");
             }
         }
-        return R.error("点赞失败，请稍后重试哈！");
+        return R.error("收藏失败，请稍后重试哈！");
     }
 
     @GetMapping("cancleCollect/{qId}")
@@ -205,7 +208,7 @@ public class RedInterViewController {
                 return R.error("登录信息异常，请重新登录后尝试！");
             }
         }
-        return R.error("取消点赞失败，请稍后重试哈！");
+        return R.error("取消收藏失败，请稍后重试哈！");
     }
 
     @GetMapping("status/{qid}")
@@ -294,5 +297,47 @@ public class RedInterViewController {
             }
         }
         return R.error("参数异常，请重新尝试哈！");
+    }
+
+
+    @GetMapping("addAnswerCollect/{aId}")
+    public R addAnswerCollect(@PathVariable String aId, HttpServletRequest request) {
+        if (aId.length() > 0) {
+            String uId = TokenManager.getMemberIdByJwtToken(request);
+            if (uId.length() > 0) {
+                int count = answerCollectService.updateCollectState(uId, aId);
+                if (count <= 0) {
+                    RedInterviewAnswerCollect collect = new RedInterviewAnswerCollect();
+                    collect.setAid(aId);
+                    collect.setUid(uId);
+                    if (answerCollectService.save(collect)) {
+                        return R.ok().data("goodqustion", true);
+                    }
+                } else {
+                    return R.ok().data("result", true);
+                }
+            } else {
+                return R.error("请登录以后在收藏哈！");
+            }
+        }
+        return R.error("收藏失败，请稍后重试哈！");
+    }
+
+    @GetMapping("cancleAnswerCollect/{aId}")
+    public R cancleAnswerCollect(@PathVariable String aId, HttpServletRequest request) {
+        if (aId.length() > 0) {
+            String uId = TokenManager.getMemberIdByJwtToken(request);
+            if (uId.length() > 0) {
+                QueryWrapper<RedInterviewAnswerCollect> collectQueryWrapper = new QueryWrapper<>();
+                collectQueryWrapper.eq("aid", aId);
+                collectQueryWrapper.eq("uid", uId);
+                if (answerCollectService.remove(collectQueryWrapper)) {
+                    return R.ok().data("result", false);
+                }
+            } else {
+                return R.error("登录信息异常，请重新登录后尝试！");
+            }
+        }
+        return R.error("取消点赞失败，请稍后重试哈！");
     }
 }
