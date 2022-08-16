@@ -24,8 +24,8 @@ import java.util.List;
 public class RedInterviewAnswerServiceImpl extends ServiceImpl<RedInterviewAnswerMapper, RedInterviewAnswer> implements RedInterviewAnswerService {
 
     @Override
-    public List<RedClassAnswerVo> getInterviewAnswerList(String qId, int sortType) {
-        return baseMapper.getInterviewAnswerList(qId,5,5,sortType);
+    public List<RedClassAnswerVo> getInterviewAnswerList(String qId, String uId, int sortType) {
+        return baseMapper.getInterviewAnswerList(qId,uId,5,5,sortType);
     }
 
     @Override

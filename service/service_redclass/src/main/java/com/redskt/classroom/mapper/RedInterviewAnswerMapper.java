@@ -18,7 +18,7 @@ import java.util.List;
  */
 public interface RedInterviewAnswerMapper extends BaseMapper<RedInterviewAnswer> {
 
-    List<RedClassAnswerVo> getInterviewAnswerList(@Param("qId")  String qId, @Param("size") Integer size, @Param("csize") Integer csize, @Param("type") Integer type);
+    List<RedClassAnswerVo> getInterviewAnswerList(@Param("qId")  String qId, @Param("uid")  String uid,@Param("size") Integer size, @Param("csize") Integer csize, @Param("type") Integer type);
 
     RedClassAnswerVo getUserLasterReply(@Param("qid")  String qid);
 

@@ -7,6 +7,7 @@
         <id column="qid" property="qid"/>
         <id column="view" property="view"/>
         <id column="good" property="good"/>
+        <id column="isgood" property="isgood"/>
         <id column="bad" property="bad"/>
         <id column="state" property="state"/>
         <id column="uid" property="uid"/>
@@ -34,22 +35,25 @@
 
     <select id="getInterviewAnswerList" resultMap="replyMap">
         SELECT answer.id, answer.qid,answer.content,answer.view,answer.good,answer.bad,answer.uid,answer.state,answer.gmt_create, ruser.nickname as username,
-        ruser.avatar, rcomment.id as replyId, rcomment.content as ccontent,rcomment.good as cgood,rcomment.goodc as goodcomment,
+        ruser.avatar, rcomment.id as replyId, rcomment.content as ccontent,rcomment.good as cgood,!isnull(agood.id) as isgood,
         rcomment.rid as crid,rcomment.uid as cuid,rcomment.touid,rcomment.gmt_create as cgmt_create,cuser.nickname as cname,cuser.avatar as cavatar,tuser.nickname as tname
         FROM red_interview_answer answer
         LEFT JOIN edu_user ruser on answer.uid = ruser.id
         LEFT JOIN (
-        SELECT myc.id,myc.content,myc.good,myc.rid,myc.uid,myc.touid,myc.gmt_create,!isnull(ccgood.id) as goodc
+        SELECT myc.id,myc.content,myc.good,myc.rid,myc.uid,myc.touid,myc.gmt_create
         FROM (
         SELECT * FROM  (
         SELECT ROW_NUMBER() OVER(PARTITION BY rid ORDER BY gmt_create DESC) rn ,red_interview_answer_comment.*
         FROM red_interview_answer_comment) t2 WHERE t2.rn &lt; #{csize}
         ) myc
-        LEFT JOIN red_interview_answer_good ccgood on myc.uid = ccgood.uid and myc.id = ccgood.aid and ccgood.is_deleted = 0
-        ORDER BY gmt_create,goodc DESC
+        ORDER BY gmt_create DESC
         ) as rcomment on  rcomment.rid = answer.id
         LEFT JOIN edu_user cuser on rcomment.uid = cuser.id
         LEFT JOIN edu_user tuser on rcomment.touid = tuser.id
+        <if test="uid != null">
+            LEFT JOIN  ( select  id,aid from red_interview_answer_good where uid = #{uid} and is_deleted = 0)
+            agood on agood.aid = answer.id
+        </if>
 
         WHERE  answer.id in
         ( SELECT id FROM
