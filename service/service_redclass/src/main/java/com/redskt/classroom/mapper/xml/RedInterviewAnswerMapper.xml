@@ -98,4 +98,18 @@
         where id = #{aId}
     </update>
 
+    <update id="updateState">
+        update red_interview_answer
+        set state = #{state}
+        where id = #{aid} and qid in
+        (
+           select id from (
+            select question.id
+            from red_interview_answer reply
+            left join red_interview_question question on question.id = reply.qid
+            WHERE reply.id = #{aid}
+            ) b
+        )
+    </update>
+
 </mapper>

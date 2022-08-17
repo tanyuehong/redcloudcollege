@@ -25,4 +25,6 @@ public interface RedInterviewAnswerMapper extends BaseMapper<RedInterviewAnswer>
     int addGoodCount(@Param("aId") String aId);
 
     int prepGoodCount(@Param("aId") String aId);
+
+    int updateState(@Param("aid") String rId,@Param("state") int state);
 }

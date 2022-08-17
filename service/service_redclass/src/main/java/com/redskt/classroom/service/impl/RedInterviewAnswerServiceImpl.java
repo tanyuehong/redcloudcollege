@@ -38,6 +38,11 @@ public class RedInterviewAnswerServiceImpl extends ServiceImpl<RedInterviewAnswe
     }
 
     @Override
+    public int updateState(String aId,int state) {
+        return baseMapper.updateState(aId,state);
+    }
+
+    @Override
     public RedClassAnswerVo getUserLasterReply(String qid) {
         return  baseMapper.getUserLasterReply(qid);
     }

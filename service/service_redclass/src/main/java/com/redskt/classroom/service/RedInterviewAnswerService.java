@@ -20,5 +20,7 @@ public interface RedInterviewAnswerService extends IService<RedInterviewAnswer> 
 
     int updateGoodCount(boolean isAdd,String aId);
 
+     int updateState(String aId,int state);
+
     List<RedClassAnswerVo> getInterviewAnswerList(String qId, String uId, int sortType);
 }

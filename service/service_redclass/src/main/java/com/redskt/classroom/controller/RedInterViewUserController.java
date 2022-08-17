@@ -117,4 +117,15 @@ public class RedInterViewUserController {
         return  R.error("登录信息验证失败，请重新尝试！");
     }
 
+    @GetMapping("goodAnswer/{aId}")
+    public R goodAnswer(@PathVariable String aId, HttpServletRequest request) {
+        String uId = TokenManager.getMemberIdByJwtToken(request);
+        if (aId.length()>0 && uId.length()>0) {
+            if(answerService.updateState(aId,9)>0) {
+                return R.ok().data("state", 9);
+            }
+        }
+        return R.error("参数异常，请重新尝试哈！");
+    }
+
 }
