@@ -13,4 +13,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface RedInterviewCommentGoodService extends IService<RedInterviewCommentGood> {
 
+    int updateGoodState(String uid,String cId);
+
 }

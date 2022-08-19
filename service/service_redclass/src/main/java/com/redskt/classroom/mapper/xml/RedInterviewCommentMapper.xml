@@ -78,7 +78,7 @@
     <select id="getCommentOne" resultMap="commentMap">
         SELECT comment.id,comment.bid,comment.content,comment.gmt_create,
         ruser.id as uid,ruser.nickname as username,ruser.avatar
-        FROM red_blog_comment comment
+        FROM red_interview_comment comment
         LEFT JOIN edu_user ruser on comment.uid = ruser.id
         WHERE  comment.id = #{cid}
     </select>

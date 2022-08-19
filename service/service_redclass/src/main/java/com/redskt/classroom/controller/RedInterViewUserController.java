@@ -38,6 +38,9 @@ public class RedInterViewUserController {
     @Autowired
     private RedInterviewCommentReplyService replyService;
 
+    @Autowired
+    private RedInterviewAnswerGoodService answerGoodService;
+
 
     @PostMapping("submit")
     public R submitQuestion(@RequestBody Map parameterMap, HttpServletRequest request) {
@@ -123,6 +126,76 @@ public class RedInterViewUserController {
         if (aId.length()>0 && uId.length()>0) {
             if(answerService.updateState(aId,9)>0) {
                 return R.ok().data("state", 9);
+            }
+        }
+        return R.error("参数异常，请重新尝试哈！");
+    }
+
+    @GetMapping("updateAnswerGood/{aId}/{type}")
+    public R updateAnswerGood(@PathVariable String aId, @PathVariable int type, HttpServletRequest request) {
+        if (aId.length() > 0) {
+            String uId = TokenManager.getMemberIdByJwtToken(request);
+            if (uId.length() > 0) {
+                if (type == 1) {
+                    int count = answerGoodService.updateAnswerGoodState(uId, aId);
+                    if(count <= 0) {
+                        RedInterviewAnswerGood good = new RedInterviewAnswerGood();
+                        good.setAid(aId);
+                        good.setUid(uId);
+                        if (!answerGoodService.save(good)) {
+                            return R.error("点赞失败，请重新尝试哈！");
+                        }
+                    }
+                    answerService.updateGoodCount(true, aId);
+                    return R.ok().data("goodqustion", true);
+                } else {
+                    QueryWrapper<RedInterviewAnswerGood> answerGoodQueryWrapper = new QueryWrapper<>();
+                    answerGoodQueryWrapper.eq("uid", uId);
+                    answerGoodQueryWrapper.eq("aid", aId);
+                    if(answerGoodService.remove(answerGoodQueryWrapper)) {
+                        answerService.updateGoodCount(false, aId);
+                        return R.ok().data("goodqustion", true);
+                    } else {
+                        return R.error("取消点赞失败，请重新尝试哈！");
+                    }
+                }
+            } else {
+                return R.error("登录信息异常，请重新登录后尝试！");
+            }
+        }
+        return R.error("参数异常，请重新尝试哈！");
+    }
+
+    @GetMapping("updateCommentGood/{cId}/{type}")
+    public R updateCommentGood(@PathVariable String cId, @PathVariable int type, HttpServletRequest request) {
+        if (cId.length() > 0) {
+            String uId = TokenManager.getMemberIdByJwtToken(request);
+            if (uId.length() > 0) {
+                if (type == 1) {
+                    int count = commentService.updateAnswerGoodState(uId, aId);
+                    if(count <= 0) {
+                        RedInterviewAnswerGood good = new RedInterviewAnswerGood();
+                        good.setAid(aId);
+                        good.setUid(uId);
+                        if (!answerGoodService.save(good)) {
+                            return R.error("点赞失败，请重新尝试哈！");
+                        }
+                    }
+                    answerService.updateGoodCount(true, aId);
+                    return R.ok().data("goodqustion", true);
+                } else {
+                    QueryWrapper<RedInterviewAnswerGood> answerGoodQueryWrapper = new QueryWrapper<>();
+                    answerGoodQueryWrapper.eq("uid", uId);
+                    answerGoodQueryWrapper.eq("aid", aId);
+                    if(answerGoodService.remove(answerGoodQueryWrapper)) {
+                        answerService.updateGoodCount(false, aId);
+                        return R.ok().data("goodqustion", true);
+                    } else {
+                        return R.error("取消点赞失败，请重新尝试哈！");
+                    }
+                }
+            } else {
+                return R.error("登录信息异常，请重新登录后尝试！");
             }
         }
         return R.error("参数异常，请重新尝试哈！");
