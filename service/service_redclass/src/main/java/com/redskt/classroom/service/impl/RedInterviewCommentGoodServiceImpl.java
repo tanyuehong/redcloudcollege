@@ -17,4 +17,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class RedInterviewCommentGoodServiceImpl extends ServiceImpl<RedInterviewCommentGoodMapper, RedInterviewCommentGood> implements RedInterviewCommentGoodService {
 
+    @Override
+    public int updateGoodState(String uid, String cId, int type) {
+        return baseMapper.updateCommentGoodState(uid, cId, type);
+    }
 }

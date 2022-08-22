@@ -30,4 +30,13 @@ public class RedInterviewCommentServiceImpl extends ServiceImpl<RedInterviewComm
     public  RedCommentVo getCommentOne(String cId) {
         return baseMapper.getCommentOne(cId);
     }
+
+    @Override
+    public int updateGoodCount(boolean isAdd,String cId) {
+        if(isAdd) {
+            return  baseMapper.addGoodCount(cId);
+        } else {
+            return baseMapper.prepGoodCount(cId);
+        }
+    }
 }

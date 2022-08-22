@@ -2,4 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.redskt.classroom.mapper.RedInterviewCommentGoodMapper">
 
+    <update id="updateCommentGoodState">
+        update red_interview_comment_good
+        set is_deleted = 0
+        where uid = #{uid} and cid = #{cid} and gtype = #{type }
+    </update>
+
 </mapper>

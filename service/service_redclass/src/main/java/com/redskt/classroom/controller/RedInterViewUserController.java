@@ -41,6 +41,9 @@ public class RedInterViewUserController {
     @Autowired
     private RedInterviewAnswerGoodService answerGoodService;
 
+    @Autowired
+    private RedInterviewCommentGoodService commentGoodService;
+
 
     @PostMapping("submit")
     public R submitQuestion(@RequestBody Map parameterMap, HttpServletRequest request) {
@@ -172,23 +175,23 @@ public class RedInterViewUserController {
             String uId = TokenManager.getMemberIdByJwtToken(request);
             if (uId.length() > 0) {
                 if (type == 1) {
-                    int count = commentService.updateAnswerGoodState(uId, aId);
+                    int count = commentGoodService.updateGoodState(uId, cId,1);
                     if(count <= 0) {
-                        RedInterviewAnswerGood good = new RedInterviewAnswerGood();
-                        good.setAid(aId);
+                        RedInterviewCommentGood good = new RedInterviewCommentGood();
+                        good.setCid(cId);
                         good.setUid(uId);
-                        if (!answerGoodService.save(good)) {
+                        if (!commentGoodService.save(good)) {
                             return R.error("点赞失败，请重新尝试哈！");
                         }
                     }
-                    answerService.updateGoodCount(true, aId);
+                    commentService.updateGoodCount(true, cId);
                     return R.ok().data("goodqustion", true);
-                } else {
-                    QueryWrapper<RedInterviewAnswerGood> answerGoodQueryWrapper = new QueryWrapper<>();
-                    answerGoodQueryWrapper.eq("uid", uId);
-                    answerGoodQueryWrapper.eq("aid", aId);
-                    if(answerGoodService.remove(answerGoodQueryWrapper)) {
-                        answerService.updateGoodCount(false, aId);
+                } else if(type == 2) {
+                    QueryWrapper<RedInterviewCommentGood> commentGoodQueryWrapper = new QueryWrapper<>();
+                    commentGoodQueryWrapper.eq("uid", uId);
+                    commentGoodQueryWrapper.eq("cid", cId);
+                    if(commentGoodService.remove(commentGoodQueryWrapper)) {
+                        commentService.updateGoodCount(false, cId);
                         return R.ok().data("goodqustion", true);
                     } else {
                         return R.error("取消点赞失败，请重新尝试哈！");

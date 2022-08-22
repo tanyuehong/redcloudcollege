@@ -20,4 +20,6 @@ public interface RedInterviewCommentService extends IService<RedInterviewComment
 
     RedCommentVo getCommentOne(String cId);
 
+    int updateGoodCount(boolean isAdd,String cId);
+
 }
