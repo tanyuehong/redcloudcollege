@@ -17,7 +17,7 @@ import java.util.List;
  */
 public interface RedInterviewCommentMapper extends BaseMapper<RedInterviewComment> {
 
-    List<RedCommentVo> getRedCommentList(@Param("id") String id, @Param("size") Integer size, @Param("rSize") Integer rSize, @Param("type") int type);
+    List<RedCommentVo> getRedCommentList(@Param("id") String id, @Param("uid") String uId, @Param("size") Integer size, @Param("rSize") Integer rSize, @Param("type") int type);
 
     RedCommentVo getCommentOne(@Param("cid")  String cId);
 

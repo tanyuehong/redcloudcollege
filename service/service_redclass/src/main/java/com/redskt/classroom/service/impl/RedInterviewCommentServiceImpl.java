@@ -22,8 +22,8 @@ import java.util.List;
 public class RedInterviewCommentServiceImpl extends ServiceImpl<RedInterviewCommentMapper, RedInterviewComment> implements RedInterviewCommentService {
 
     @Override
-    public List<RedCommentVo> getRedCommentList(String id, Integer rSize, int type) {
-        return baseMapper.getRedCommentList(id,5,5, type);
+    public List<RedCommentVo> getRedCommentList(String id, String uId, Integer rSize, int type) {
+        return baseMapper.getRedCommentList(id,uId,5,5, type);
     }
 
     @Override

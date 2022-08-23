@@ -90,7 +90,7 @@ public class RedInterViewController {
                 List<RedClassAnswerVo> answerVoList = answerService.getInterviewAnswerList(qId,uId,1);
                 return R.ok().data("qdetail", qDetail).data("dataList", answerVoList);
             } else if(type==2) {
-                List<RedCommentVo> commentVoList = commentService.getRedCommentList(qId,5,2);
+                List<RedCommentVo> commentVoList = commentService.getRedCommentList(qId,uId,5,2);
                 return R.ok().data("qdetail", qDetail).data("dataList", commentVoList);
             } else {
                 return R.ok().data("qdetail", qDetail).data("dataList", replyList);

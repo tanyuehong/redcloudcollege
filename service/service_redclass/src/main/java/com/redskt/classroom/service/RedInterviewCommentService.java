@@ -16,7 +16,7 @@ import java.util.List;
  */
 public interface RedInterviewCommentService extends IService<RedInterviewComment> {
 
-    List<RedCommentVo> getRedCommentList(String id, Integer rSize, int type);
+    List<RedCommentVo> getRedCommentList(String id, String uId,Integer rSize, int type);
 
     RedCommentVo getCommentOne(String cId);
 
