@@ -3,10 +3,7 @@ package com.redskt.classroom.controller;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.redskt.classroom.entity.*;
-import com.redskt.classroom.entity.vo.RedClassAnswerVo;
-import com.redskt.classroom.entity.vo.RedClassReplyVo;
-import com.redskt.classroom.entity.vo.RedCommentReplyVo;
-import com.redskt.classroom.entity.vo.RedCommentVo;
+import com.redskt.classroom.entity.vo.*;
 import com.redskt.classroom.service.*;
 import com.redskt.commonutils.R;
 import com.redskt.commonutils.RequestParmUtil;
@@ -43,6 +40,9 @@ public class RedInterViewUserController {
 
     @Autowired
     private RedInterviewCommentGoodService commentGoodService;
+
+    @Autowired
+    private RedInterviewCommentReplyService commentReplyService;
 
 
     @PostMapping("submit")
@@ -95,14 +95,14 @@ public class RedInterViewUserController {
     }
 
     @PostMapping("reply")
-    public R submitReplyComment(@RequestBody RedInterviewCommentReply reply, HttpServletRequest request) {
+    public R submitReply(@RequestBody RedInterviewCommentReply reply, HttpServletRequest request) {
         String uId = TokenManager.getMemberIdByJwtToken(request);
         if(uId.length()>0 && reply.getUid().length()>0 && uId.equals(reply.getUid())) {
             if (replyService.save(reply)) {
                 RedCommentReplyVo curReply = replyService.getCommentReplyOne(reply.getId());
                 return R.ok().data("reply",curReply);
             } else  {
-                return R.error("评论文章失败，请重新尝试！");
+                return R.error("回复评论失败，请重新尝试！");
             }
         } else  {
             return R.error("参数验证失败！");
@@ -203,5 +203,4 @@ public class RedInterViewUserController {
         }
         return R.error("参数异常，请重新尝试哈！");
     }
-
 }
