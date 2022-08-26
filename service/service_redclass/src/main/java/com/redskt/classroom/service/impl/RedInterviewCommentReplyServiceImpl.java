@@ -22,4 +22,13 @@ public class RedInterviewCommentReplyServiceImpl extends ServiceImpl<RedIntervie
     public RedCommentReplyVo getCommentReplyOne(String rId) {
         return baseMapper.getCommentReplyOne(rId);
     }
+
+    @Override
+    public int updateGoodCount(boolean isAdd,String cId) {
+        if(isAdd) {
+            return  baseMapper.addGoodCount(cId);
+        } else {
+            return baseMapper.prepGoodCount(cId);
+        }
+    }
 }

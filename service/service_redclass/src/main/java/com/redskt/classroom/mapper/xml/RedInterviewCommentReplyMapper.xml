@@ -25,4 +25,16 @@
         WHERE  rcomment.id = #{rid}
     </select>
 
+    <update id="addGoodCount">
+        update red_interview_comment_reply
+        set good=good+1
+        where id = #{cId}
+    </update>
+
+    <update id="prepGoodCount">
+        update red_interview_comment_reply
+        set good=good-1
+        where id = #{cId}
+    </update>
+
 </mapper>

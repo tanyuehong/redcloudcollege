@@ -15,4 +15,6 @@ import com.redskt.classroom.entity.vo.RedCommentReplyVo;
 public interface RedInterviewCommentReplyService extends IService<RedInterviewCommentReply> {
 
     RedCommentReplyVo getCommentReplyOne(String rId);
+
+    int updateGoodCount(boolean isAdd,String cId);
 }

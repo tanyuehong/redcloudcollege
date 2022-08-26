@@ -16,4 +16,8 @@ import org.apache.ibatis.annotations.Param;
 public interface RedInterviewCommentReplyMapper extends BaseMapper<RedInterviewCommentReply> {
 
     RedCommentReplyVo getCommentReplyOne(@Param("rid")  String rId);
+
+    int addGoodCount(@Param("cId") String cId);
+
+    int prepGoodCount(@Param("cId") String cId);
 }
