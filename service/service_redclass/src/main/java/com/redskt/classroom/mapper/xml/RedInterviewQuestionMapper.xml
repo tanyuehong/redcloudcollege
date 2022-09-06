@@ -38,7 +38,7 @@
     <select id="getHomeInterviewQustionList" resultMap="interviewQuestionMap">
         SELECT qustion.id as qId, qustion.title,qustion.type,qustion.content,qustion.deep,qustion.collect,qustion.readcount,qustion.hotnum,qustion.price,qustion.good,qustion.meet,qustion.gmt_create,user.nickname,
         qustion.uid,(select count(reply.id) as replaycount from red_ask_reply reply where reply.qid=qustion.id) as  reply
-        ,tags.id as ctid,tag.name as tname,tag.img as timg,tag.sort as tsort
+        ,tag.id as ctid,tag.name as tname,tag.img as timg,tag.sort as tsort
         FROM red_interview_question qustion
         LEFT OUTER JOIN edu_user user ON qustion.uid=user.id
         LEFT OUTER JOIN red_interview_tags tags ON tags.qid = qustion.id
