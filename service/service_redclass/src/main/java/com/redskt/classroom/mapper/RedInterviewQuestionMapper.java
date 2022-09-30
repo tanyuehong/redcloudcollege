@@ -36,4 +36,9 @@ public interface RedInterviewQuestionMapper extends BaseMapper<RedInterviewQuest
 
     int updateQustionState(@Param("qid")  String qId,@Param("uid")  String uId,@Param("state") int state);
 
+    int addSmeetCount(@Param("qid")  String qId);
+    int addTmeetCount(@Param("qid")  String qId);
+    int addPmeetCount(@Param("qid")  String qId);
+    int addUmeetCount(@Param("qid")  String qId);
+
 }

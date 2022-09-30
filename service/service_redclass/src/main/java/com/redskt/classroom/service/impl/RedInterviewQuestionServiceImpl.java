@@ -76,4 +76,17 @@ public class RedInterviewQuestionServiceImpl extends ServiceImpl<RedInterviewQue
     public int updateQustionState(String qId,String uId,int state) {
         return baseMapper.updateQustionState(qId,uId,state);
     }
+
+    @Override
+    public void updateMeetType(String qId,int type) {
+        if (type == 1) {
+            baseMapper.addSmeetCount(qId);
+        } else if (type == 2) {
+            baseMapper.addTmeetCount(qId);
+        } else if (type == 3) {
+            baseMapper.addPmeetCount(qId);
+        } else {
+            baseMapper.addUmeetCount(qId);
+        }
+    }
 }

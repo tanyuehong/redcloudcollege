@@ -114,4 +114,26 @@
         where id = #{qid} and uid = #{uid}
     </update>
 
+    <update id="addSmeetCount">
+        update red_interview_question
+        set smeet=smeet+1
+        where id = #{qid}
+    </update>
+
+    <update id="addTmeetCount">
+        update red_interview_question
+        set tmeet=tmeet+1
+        where id = #{qid}
+    </update>
+    <update id="addPmeetCount">
+        update red_interview_question
+        set pmeet=pmeet+1
+        where id = #{qid}
+    </update>
+    <update id="addUmeetCount">
+        update red_interview_question
+        set umeet=umeet+1
+        where id = #{qid}
+    </update>
+
 </mapper>

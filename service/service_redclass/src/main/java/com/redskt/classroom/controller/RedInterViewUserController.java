@@ -47,6 +47,9 @@ public class RedInterViewUserController {
     @Autowired
     private RedInterviewCommentReplyService commentReplyService;
 
+    @Autowired
+    private RedInterviewQuestionMeetService meetService;
+
 
     @PostMapping("submit")
     public R submitQuestion(@RequestBody Map parameterMap, HttpServletRequest request) {
@@ -78,7 +81,7 @@ public class RedInterViewUserController {
                 return R.error("问题提交失败，请重新尝试！");
             }
         } else {
-            return R.error("参数验证失败，请重新尝试");
+            return R.errorParam();
         }
     }
 
@@ -93,7 +96,7 @@ public class RedInterViewUserController {
                 return R.error("评论失败，请重新尝试！");
             }
         } else  {
-            return R.error("参数验证失败！");
+            return R.errorParam();
         }
     }
 
@@ -108,7 +111,7 @@ public class RedInterViewUserController {
                 return R.error("回复评论失败，请重新尝试！");
             }
         } else  {
-            return R.error("参数验证失败！");
+            return R.errorParam();
         }
     }
 
@@ -134,7 +137,7 @@ public class RedInterViewUserController {
                 return R.ok().data("state", 9);
             }
         }
-        return R.error("参数异常，请重新尝试哈！");
+        return R.errorParam();
     }
 
     @GetMapping("updateAnswerGood/{aId}/{type}")
@@ -169,7 +172,7 @@ public class RedInterViewUserController {
                 return R.error("登录信息异常，请重新登录后尝试！");
             }
         }
-        return R.error("参数异常，请重新尝试哈！");
+        return R.errorParam();
     }
 
     @GetMapping("updateCommentGood/{cId}/{type}")
@@ -204,7 +207,7 @@ public class RedInterViewUserController {
                 return R.error("登录信息异常，请重新登录后尝试！");
             }
         }
-        return R.error("参数异常，请重新尝试哈！");
+        return R.errorParam();
     }
 
     @GetMapping("deleteComment/{cId}/{type}")
@@ -231,7 +234,7 @@ public class RedInterViewUserController {
                 }
             }
         }
-        return R.error("参数异常，请重新尝试哈！");
+        return R.errorParam();
     }
 
 
@@ -267,6 +270,23 @@ public class RedInterViewUserController {
                 return R.error("登录信息异常，请重新登录后尝试！");
             }
         }
-        return R.error("参数异常，请重新尝试哈！");
+        return R.errorParam();
+    }
+
+    @GetMapping("updateMeetType/{qId}/{type}")
+    public R updateMeetType(@PathVariable String qId, @PathVariable int type, HttpServletRequest request) {
+        String uId = TokenManager.getMemberIdByJwtToken(request);
+        if (qId.length()>0 && uId.length()>0) {
+            RedInterviewQuestionMeet meet = new RedInterviewQuestionMeet();
+            meet.setQid(qId);
+            meet.setUid(uId);
+            if(meetService.save(meet)) {
+                questionService.updateMeetType(qId,type);
+                return R.okSucessTips("真诚感谢您的反馈～～");
+            } else {
+                return R.error("操作失败，请重新尝试");
+            }
+        }
+        return R.errorParam();
     }
 }

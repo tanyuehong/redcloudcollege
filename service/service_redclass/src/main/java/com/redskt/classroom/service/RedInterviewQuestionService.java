@@ -31,4 +31,6 @@ public interface RedInterviewQuestionService extends IService<RedInterviewQuesti
 
     int updateQustionState(String qId,String uId,int state);
 
+    void updateMeetType(String qId,int type);
+
 }

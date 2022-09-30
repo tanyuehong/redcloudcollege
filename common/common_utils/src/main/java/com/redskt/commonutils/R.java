@@ -19,6 +19,9 @@ public class R {
     @ApiModelProperty(value = "返回消息")
     private String message;
 
+    @ApiModelProperty(value = "成功提示消息")
+    private String sucessTips;
+
     @ApiModelProperty(value = "返回数据")
     private Map<String, Object> data = new HashMap<String, Object>();
 
@@ -31,6 +34,15 @@ public class R {
         r.setSuccess(true);
         r.setCode(ResultCode.SUCCESS);
         r.setMessage("成功");
+        return r;
+    }
+
+    public static R okSucessTips(String message) {
+        R r = new R();
+        r.setSuccess(true);
+        r.setCode(ResultCode.SUCCESS);
+        r.setMessage("成功");
+        r.setSucessTips(message);
         return r;
     }
 
@@ -58,6 +70,14 @@ public class R {
         r.setSuccess(false);
         r.setCode(ResultCode.LOGINNoToken);
         r.setMessage("该功能需要登录后使用，正在跳转登录页面中！");
+        return r;
+    }
+
+    public static R errorParam() {
+        R r = new R();
+        r.setSuccess(false);
+        r.setCode(ResultCode.ERROR);
+        r.setMessage("参数异常，请重新尝试哈！");
         return r;
     }
 
