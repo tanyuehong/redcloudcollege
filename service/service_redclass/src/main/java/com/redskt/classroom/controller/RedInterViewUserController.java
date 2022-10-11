@@ -50,6 +50,9 @@ public class RedInterViewUserController {
     @Autowired
     private RedInterviewQuestionMeetService meetService;
 
+    @Autowired
+    private RedInterviewQuestionCompanyService companyService;
+
 
     @PostMapping("submit")
     public R submitQuestion(@RequestBody Map parameterMap, HttpServletRequest request) {
@@ -288,5 +291,12 @@ public class RedInterViewUserController {
             }
         }
         return R.errorParam();
+    }
+
+    @GetMapping("comPanyList")
+    public R getcomPanyList() {
+        QueryWrapper<RedInterviewQuestionCompany> companyQueryWrapper = new QueryWrapper<>();
+        List<RedInterviewQuestionCompany> companyList = companyService.list(companyQueryWrapper);
+        return R.ok().data("companyList",companyList);
     }
 }
