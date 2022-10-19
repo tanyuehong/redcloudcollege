@@ -116,7 +116,7 @@
 
     <update id="addSmeetCount">
         update red_interview_question
-        set smeet=smeet+1
+        set smeet=smeet+1,
         where id = #{qid}
     </update>
 

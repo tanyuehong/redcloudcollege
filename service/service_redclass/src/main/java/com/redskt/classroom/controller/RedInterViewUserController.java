@@ -53,6 +53,12 @@ public class RedInterViewUserController {
     @Autowired
     private RedInterviewQuestionCompanyService companyService;
 
+    @Autowired
+    private RedInterviewQuestionMeetCompanyService meetCompanyService;
+
+    @Autowired
+    private RedInterviewQuestionMeetPositionService positionService;
+
 
     @PostMapping("submit")
     public R submitQuestion(@RequestBody Map parameterMap, HttpServletRequest request) {
@@ -284,6 +290,41 @@ public class RedInterViewUserController {
             meet.setQid(qId);
             meet.setUid(uId);
             if(meetService.save(meet)) {
+                questionService.updateMeetType(qId,type);
+                return R.okSucessTips("真诚感谢您的反馈～～");
+            } else {
+                return R.error("操作失败，请重新尝试");
+            }
+        }
+        return R.errorParam();
+    }
+
+    @GetMapping("commitMeetCompany/{qId}/{cId}")
+    public R commitMeetCompany(@PathVariable String qId, @PathVariable String cId, HttpServletRequest request) {
+        String uId = TokenManager.getMemberIdByJwtToken(request);
+        if (qId.length()>0 && uId.length()>0) {
+            RedInterviewQuestionMeetCompany meetCompany = new RedInterviewQuestionMeetCompany();
+            meetCompany.setQid(qId);
+            meetCompany.setUid(uId);
+            meetCompany.setCid(cId);
+            if(meetCompanyService.save(meetCompany)) {
+                return R.okSucessTips("真诚感谢您的反馈～～");
+            } else {
+                return R.error("操作失败，请重新尝试");
+            }
+        }
+        return R.errorParam();
+    }
+
+    @GetMapping("commitMeetPosition/{qId}/{pId}")
+    public R commitMeetPosition(@PathVariable String qId, @PathVariable String pId, HttpServletRequest request) {
+        String uId = TokenManager.getMemberIdByJwtToken(request);
+        if (qId.length()>0 && uId.length()>0) {
+            RedInterviewQuestionMeetPosition meet = new RedInterviewQuestionMeetPosition();
+            meet.setQid(qId);
+            meet.setUid(uId);
+            meet.setPid(pId);
+            if(positionService.save(meet)) {
                 questionService.updateMeetType(qId,type);
                 return R.okSucessTips("真诚感谢您的反馈～～");
             } else {
