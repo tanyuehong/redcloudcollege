@@ -57,7 +57,10 @@ public class RedInterViewUserController {
     private RedInterviewQuestionMeetCompanyService meetCompanyService;
 
     @Autowired
-    private RedInterviewQuestionMeetPositionService positionService;
+    private RedInterviewQuestionMeetPositionService meetPositionService;
+
+    @Autowired
+    private RedInterviewQuestionPositionService positionService;
 
 
     @PostMapping("submit")
@@ -308,7 +311,7 @@ public class RedInterViewUserController {
             meetCompany.setUid(uId);
             meetCompany.setCid(cId);
             if(meetCompanyService.save(meetCompany)) {
-                return R.okSucessTips("真诚感谢您的反馈～～");
+                return R.okSucessTips("真诚感谢您面试公司反馈～～");
             } else {
                 return R.error("操作失败，请重新尝试");
             }
@@ -324,8 +327,8 @@ public class RedInterViewUserController {
             meet.setQid(qId);
             meet.setUid(uId);
             meet.setPid(pId);
-            if(positionService.save(meet)) {
-                questionService.updateMeetType(qId,type);
+            if(meetPositionService.save(meet)) {
+                //questionService.updateMeetType(qId,type);
                 return R.okSucessTips("真诚感谢您的反馈～～");
             } else {
                 return R.error("操作失败，请重新尝试");
@@ -339,5 +342,12 @@ public class RedInterViewUserController {
         QueryWrapper<RedInterviewQuestionCompany> companyQueryWrapper = new QueryWrapper<>();
         List<RedInterviewQuestionCompany> companyList = companyService.list(companyQueryWrapper);
         return R.ok().data("companyList",companyList);
+    }
+
+    @GetMapping("positionList")
+    public R getPositionList() {
+        QueryWrapper<RedInterviewQuestionPosition> positionQueryWrapper = new QueryWrapper<>();
+        List<RedInterviewQuestionPosition> positionList = positionService.list(positionQueryWrapper);
+        return R.ok().data("positionList",positionList);
     }
 }
