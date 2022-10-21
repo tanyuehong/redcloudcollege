@@ -319,7 +319,53 @@ public class RedInterViewUserController {
         return R.errorParam();
     }
 
-        @GetMapping("commitMeetPosition/{qId}/{pId}")
+    @PostMapping("addAndSubmitCompany")
+    public R addAndSubmitCompany(@RequestBody Map paramMap, HttpServletRequest request) {
+        paramMap = RequestParmUtil.transToMAP(paramMap);
+        String title = (String) paramMap.get("title");
+        String qId = (String) paramMap.get("qId");
+        String uId = TokenManager.getMemberIdByJwtToken(request);
+        if (title.length()>0 && uId.length()>0) {
+            RedInterviewQuestionCompany company = new RedInterviewQuestionCompany();
+            company.setTitle(title);
+            company.setSort(0);
+            if (companyService.save(company)) {
+                RedInterviewQuestionMeetCompany meetCompany = new RedInterviewQuestionMeetCompany();
+                meetCompany.setQid(qId);
+                meetCompany.setUid(uId);
+                meetCompany.setCid(company.getId());
+                if(meetCompanyService.save(meetCompany)) {
+                    return R.okSucessTips("真诚感谢您的面试公司反馈～～");
+                }
+            }
+            return R.error("操作失败，请重新尝试");
+        }
+        return R.errorParam();
+    }
+
+    @PostMapping("addAndSubmitPosition")
+    public R addAndSubmitPosition(@RequestBody Map paramMap, HttpServletRequest request) {
+        paramMap = RequestParmUtil.transToMAP(paramMap);
+        String title = (String) paramMap.get("title");
+        String qId = (String) paramMap.get("qId");
+        String uId = TokenManager.getMemberIdByJwtToken(request);
+        RedInterviewQuestionPosition position = new RedInterviewQuestionPosition();
+        position.setTitle(title);
+        position.setSort(0);
+        if (positionService.save(position)) {
+            RedInterviewQuestionMeetPosition meet = new RedInterviewQuestionMeetPosition();
+            meet.setQid(qId);
+            meet.setUid(uId);
+            meet.setPid(position.getId());
+            if(meetPositionService.save(meet)) {
+                return R.okSucessTips("真诚感谢您的面试职位反馈～～");
+            }
+            return R.error("操作失败，请重新尝试");
+        }
+        return R.errorParam();
+    }
+
+    @GetMapping("commitMeetPosition/{qId}/{pId}")
     public R commitMeetPosition(@PathVariable String qId, @PathVariable String pId, HttpServletRequest request) {
         String uId = TokenManager.getMemberIdByJwtToken(request);
         if (qId.length()>0 && uId.length()>0) {
