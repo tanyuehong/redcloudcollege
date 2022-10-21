@@ -311,7 +311,7 @@ public class RedInterViewUserController {
             meetCompany.setUid(uId);
             meetCompany.setCid(cId);
             if(meetCompanyService.save(meetCompany)) {
-                return R.okSucessTips("真诚感谢您面试公司反馈～～");
+                return R.okSucessTips("真诚感谢您的面试公司反馈～～");
             } else {
                 return R.error("操作失败，请重新尝试");
             }
@@ -319,7 +319,7 @@ public class RedInterViewUserController {
         return R.errorParam();
     }
 
-    @GetMapping("commitMeetPosition/{qId}/{pId}")
+        @GetMapping("commitMeetPosition/{qId}/{pId}")
     public R commitMeetPosition(@PathVariable String qId, @PathVariable String pId, HttpServletRequest request) {
         String uId = TokenManager.getMemberIdByJwtToken(request);
         if (qId.length()>0 && uId.length()>0) {
@@ -328,8 +328,7 @@ public class RedInterViewUserController {
             meet.setUid(uId);
             meet.setPid(pId);
             if(meetPositionService.save(meet)) {
-                //questionService.updateMeetType(qId,type);
-                return R.okSucessTips("真诚感谢您的反馈～～");
+                return R.okSucessTips("真诚感谢您的面试职位反馈～～");
             } else {
                 return R.error("操作失败，请重新尝试");
             }
