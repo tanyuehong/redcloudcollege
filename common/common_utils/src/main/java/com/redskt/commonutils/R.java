@@ -55,6 +55,15 @@ public class R {
         return r;
     }
 
+    // 没有用户信息的逻辑
+    public static R NoUserSuccess() {
+        R r = new R();
+        r.setSuccess(false);
+        r.setCode(ResultCode.NOSUCCESS);
+        r.setMessage("");
+        return r;
+    }
+
     // 登录过期的方法封装
     public static R LoginExpired() {
         R r = new R();

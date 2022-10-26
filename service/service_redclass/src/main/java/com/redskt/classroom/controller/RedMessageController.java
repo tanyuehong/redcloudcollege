@@ -130,8 +130,9 @@ public class RedMessageController {
                 RedUserStateVo status = messageService.getUserStatus(mid,uId);
                 return R.ok().data("status",status);
             }
+            return R.NoUserSuccess();
         }
-        return R.ok();
+        return R.error().message("接口参数错误");
     }
 
     @PostMapping("commet/submit")
