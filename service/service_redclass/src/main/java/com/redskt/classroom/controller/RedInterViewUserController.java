@@ -128,12 +128,12 @@ public class RedInterViewUserController {
     }
 
     @PostMapping("answer")
-    public R registerUser(@RequestBody RedInterviewAnswer answer, HttpServletRequest request) {
+    public R submitAnswer(@RequestBody RedInterviewAnswer answer, HttpServletRequest request) {
         String uId = TokenManager.getMemberIdByJwtToken(request);
         if (uId.length()>0 && uId.equals(answer.getUid())) {
             if (answerService.save(answer)) {
                 RedClassAnswerVo answerVo = answerService.getUserLasterReply(answer.getId());
-                return R.ok().data("reply","rReply");
+                return R.ok().data("reply",answerVo);
             } else {
                 return R.error("提交解答失败败,请重新尝试！");
             }
