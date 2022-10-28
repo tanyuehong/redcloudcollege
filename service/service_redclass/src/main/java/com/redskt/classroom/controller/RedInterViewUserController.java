@@ -79,6 +79,9 @@ public class RedInterViewUserController {
             question.setTitle(title);
             question.setContent(content);
             question.setQustype(qustype);
+            question.setType("简答题");
+            question.setDeep("中等");
+
             if (questionService.save(question)) {
                 List<RedInterviewTags> tagsList = new ArrayList<>();
                 for (int i=0;i<tags.size();i++) {
