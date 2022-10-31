@@ -18,6 +18,8 @@ public class RedClassAnswerVo {
 
     private List<ReplyCommentVo> comments;
 
+    private int allcomment;
+
     private Integer view;
 
     private Integer good;
