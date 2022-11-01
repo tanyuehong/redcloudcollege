@@ -86,53 +86,29 @@ public class RedUserController {
     }
 
     @PostMapping("uploadImage")
-    public  R uploadImage(HttpServletRequest request) {
-        MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
-        Iterator<String> fileNames = multipartHttpServletRequest.getFileNames();
-
-        List<String> testFils = new ArrayList<>();
-
-        while (fileNames.hasNext()) {
-            MultipartFile file = multipartHttpServletRequest.getFile(fileNames.next());
-            String fileName = file.getOriginalFilename();
-            testFils.add(fileName);
+    public  R uploadUerImage(@RequestParam(value = "file") MultipartFile file,HttpServletRequest request) {
+        if (file.isEmpty()) {
+            return R.error("上传失败，请选择文件");
         }
-
-        MultipartFile[] files = {};
-
+        String contentType = file.getContentType();
+        if (!CONTENT_TYPES.contains(contentType)){
+            // 文件类型不合法，直接返回null
+            return R.error("图片格式不正确!");
+        }
+        String fileName = file.getOriginalFilename();
         String userName = TokenManager.getMemberIdByJwtToken(request);
         if (userName == null||userName.length()==0) {
             return R.error("用户验证失败，请登录后重试");
         }
-        if(files.length == 0) {
-            return R.error("上传失败，请选择文件");
-        }
-        for (int i = 0; i < files.length; i++) {
-            MultipartFile file = files[i];
-            if (file.isEmpty()) {
-                return R.error("上传失败，请选择文件");
-            }
-            String contentType = file.getContentType();
-            if (!CONTENT_TYPES.contains(contentType)){
-                // 文件类型不合法，直接返回null
-                return R.error("图片格式不正确!");
-            }
-        }
-        List<String> reuslt = new ArrayList<>();
+        String userPath = MD5.getMD5(userName);
+        File dest = new File("/home/redsktsource/user/"+ userPath +"/"+fileName);
         try {
-            for (int i = 0; i < files.length; i++) {
-                MultipartFile file = files[i];
-                String fileName = file.getOriginalFilename();
-                fileName = UUID.randomUUID().toString()+fileName;
-                File dest = new File("/home/redsktsource/qustion/"+fileName);
-                if (!dest.exists()) dest.mkdirs(); // 要是目录不存在,创建一个
-                file.transferTo(dest);
-                reuslt.add("https://static.redskt.com/qustion/"+fileName);
-            }
+            if (!dest.exists()) dest.mkdirs(); // 要是目录不存在,创建一个
+            file.transferTo(dest);
+            return R.ok().data("imageUrl","https://static.redskt.com/user/"+userPath+"/"+fileName);
         } catch (IOException e) {
             return R.error(e.getLocalizedMessage());
         }
-        return R.ok();
     }
 
     @PostMapping("updateUserInfo")
