@@ -86,7 +86,7 @@ public class RedUserController {
     }
 
     @PostMapping("uploadImage")
-    public  R uploadUerImage(@RequestParam(value = "file") MultipartFile file,HttpServletRequest request) {
+    public  R uploadImage(@RequestParam(value = "file") MultipartFile file,HttpServletRequest request) {
         if (file.isEmpty()) {
             return R.error("上传失败，请选择文件");
         }
