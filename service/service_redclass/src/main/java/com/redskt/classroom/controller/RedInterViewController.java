@@ -1,6 +1,8 @@
 package com.redskt.classroom.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.redskt.classroom.entity.*;
 import com.redskt.classroom.entity.vo.*;
 import com.redskt.classroom.service.*;
@@ -51,7 +53,9 @@ public class RedInterViewController {
         String sort = (String) parameterMap.get("sort");
         String tag  = (String) parameterMap.get("tag");
 
+        PageHelper.startPage(1, 5);
         List<RedInterviewQuestionVo> list = questionService.getHomeInterviewQustionList(sort,tag);
+        PageInfo page = new PageInfo(list);
 
         QueryWrapper<RedCategoryTag> twrapper = new QueryWrapper<>();
         twrapper.orderByAsc("sort");
