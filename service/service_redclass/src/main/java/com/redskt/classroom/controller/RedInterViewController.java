@@ -64,6 +64,7 @@ public class RedInterViewController {
         if(tagList.size()>0) {
             RedCategoryTag allTag = new RedCategoryTag();
             allTag.setName("全部");
+            allTag.setPath("all");
             allTag.setId("all");
             tagList.add(0,allTag);
         }
