@@ -44,7 +44,7 @@
         LEFT OUTER JOIN red_interview_tags tags ON tags.qid = qustion.id
         LEFT OUTER JOIN red_category_tag tag ON tag.id = tags.tid
         <if test="tag != null">
-            where tag.id = #{tag}
+            where tag.path = #{tag}
         </if>
         <if test="sort==1">
             ORDER BY qustion.hotnum
@@ -55,7 +55,7 @@
         <if test="sort==3">
             ORDER BY qustion.readcount
         </if>
-        DESC
+        DESC limit 20
     </select>
 
     <update id="updateQuestionReadCount">

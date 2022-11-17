@@ -53,7 +53,7 @@ public class RedInterViewController {
         String sort = (String) parameterMap.get("sort");
         String tag  = (String) parameterMap.get("tag");
 
-        PageHelper.startPage(1, 20  );
+//        PageHelper.startPage(1, 20  );
         List<RedInterviewQuestionVo> list = questionService.getHomeInterviewQustionList(sort,tag);
         PageInfo page = new PageInfo(list);
 
