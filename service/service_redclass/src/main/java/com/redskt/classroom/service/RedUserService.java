@@ -23,7 +23,7 @@ public interface RedUserService extends IService<RedClassUser> {
 
     List<RedClassUserVo> getFansUserList(String uid);
 
-    void register(RedClassRegisterVo registerVo);
+    int register(RedClassRegisterVo registerVo);
 
     RedClassUserVo getShowUserInfo(String uid);
 

@@ -14,8 +14,11 @@ import com.redskt.servicebase.excepionhandler.RedCloudCollegeExceptionHandler;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * <p>
@@ -54,7 +57,7 @@ public class RedUserServiceImpl extends ServiceImpl<RedUserMapper, RedClassUser>
     }
     //注册的方法
     @Override
-    public void register(RedClassRegisterVo registerVo) {
+    public int register(RedClassRegisterVo registerVo) {
         //获取注册的数据
         String code = registerVo.getCode(); //验证码
         String username = registerVo.getMobile(); //手机号
@@ -64,7 +67,7 @@ public class RedUserServiceImpl extends ServiceImpl<RedUserMapper, RedClassUser>
         //非空判断
         if(StringUtils.isEmpty(username) || StringUtils.isEmpty(password)
                || StringUtils.isEmpty(nickname)) {
-            throw new RedCloudCollegeExceptionHandler(20001,"注册失败");
+            return 4;
         }
         //判断验证码
         //获取redis验证码
@@ -78,7 +81,7 @@ public class RedUserServiceImpl extends ServiceImpl<RedUserMapper, RedClassUser>
         wrapper.eq("username",username);
         Integer count = baseMapper.selectCount(wrapper);
         if(count > 0) {
-            throw new RedCloudCollegeExceptionHandler(20001,"注册失败");
+            return 5;
         }
 
         //数据添加数据库中
@@ -89,7 +92,7 @@ public class RedUserServiceImpl extends ServiceImpl<RedUserMapper, RedClassUser>
         member.setPassword(MD5.encrypt(password));//密码需要加密的
         member.setIsDisabled(false);//用户不禁用
         member.setAvatar("https://static.redskt.com/assets/img/yonghutouxiangnan.png");
-        baseMapper.insert(member);
+        return baseMapper.insert(member) ==1?1:6;
     }
 
     @Override
