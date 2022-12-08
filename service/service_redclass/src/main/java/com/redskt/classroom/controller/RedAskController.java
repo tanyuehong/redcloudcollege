@@ -10,13 +10,16 @@ import com.redskt.commonutils.R;
 import com.redskt.commonutils.RequestParmUtil;
 import com.redskt.security.TokenManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * <p>
@@ -29,30 +32,24 @@ import java.util.Map;
 @RestController
 @RequestMapping("/home/eduask")
 public class RedAskController {
-
     @Autowired
     private RedAskTypeService askTypeService;
-
     @Autowired
     private RedAskService userAskService;
-
     @Autowired
     private RedCategoryTagService tagService;
-
     @Autowired
     private RedAskReplyService replyService;
-
     @Autowired
     private RedQustionGoodService qustionGoodService;
-
     @Autowired
     private RedReplyGoodService replyGoodService;
-
     @Autowired
     private RedReplyCommentGoodService replyCGoodService;
-
     @Autowired
     private RedAskReplyCommentService commentService;
+    @Autowired
+    private RedisTemplate redisTemplate;  //存储对象
 
 
     @GetMapping("questionTypeList")
@@ -61,7 +58,14 @@ public class RedAskController {
         askWarper.orderByAsc("sort");
         List<RedAskType> typeList = askTypeService.list(askWarper);
         typeList.remove(0);
-        return R.ok().data("typeList",typeList);
+
+        String key = RequestParmUtil.generateKeyAndIv();
+        String pagekey1 =  RequestParmUtil.getPageKey("submitQustion",key);
+        String pagekey = URLEncoder.encode(pagekey1);
+
+        this.redisTemplate.opsForValue().set(pagekey,key,30, TimeUnit.MINUTES);
+
+        return R.ok().data("typeList",typeList).data("pageKey", pagekey);
     }
 
     @PostMapping("questionlist")
@@ -141,8 +145,14 @@ public class RedAskController {
         int readCount = qDetail.getReadcount() + 1;
         userAskService.updateUserAskReadCount(qDetail.getQId(), readCount);
 
+        String key = RequestParmUtil.generateKeyAndIv();
+        String pagekey1 =  RequestParmUtil.getPageKey("submitQustion",key);
+        String pagekey = URLEncoder.encode(pagekey1);
+
+        this.redisTemplate.opsForValue().set(pagekey,key,30, TimeUnit.MINUTES);
+
         List<RedClassReplyVo> replyList = replyService.getHomeAskReplyList(qDetail.getQId(),1);
-        return R.ok().data("qdetail", qDetail).data("replyList", replyList);
+        return R.ok().data("qdetail", qDetail).data("replyList", replyList).data("pageKey",pagekey);
     }
 
     @GetMapping("getQustionReplyList/{qId}/{sortType}")

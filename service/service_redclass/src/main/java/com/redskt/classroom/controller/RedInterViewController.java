@@ -10,12 +10,15 @@ import com.redskt.commonutils.R;
 import com.redskt.commonutils.RequestParmUtil;
 import com.redskt.security.TokenManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/home/interview")
@@ -44,6 +47,9 @@ public class RedInterViewController {
 
     @Autowired
     private RedInterviewAnswerCollectService answerCollectService;
+
+    @Autowired
+    private RedisTemplate redisTemplate;  //存储对象
 
 
     @PostMapping("index")
@@ -85,6 +91,13 @@ public class RedInterViewController {
         String qId = (String) parameterMap.get("qId");
         String token = (String) parameterMap.get("token");
         String uId = TokenManager.getUserFromToken(token);
+
+        String key = RequestParmUtil.generateKeyAndIv();
+        String pagekey1 =  RequestParmUtil.getPageKey("submitQustion",key);
+        String pagekey = URLEncoder.encode(pagekey1);
+
+        this.redisTemplate.opsForValue().set(pagekey,key,30, TimeUnit.MINUTES);
+
         if(qId.length()>0) {
             RedInterviewQuestionVo qDetail = questionService.getQustionDetail(qId);
             int readCount = qDetail.getReadcount() + 1;
@@ -93,12 +106,12 @@ public class RedInterViewController {
             List<RedClassReplyVo> replyList = new ArrayList<>();
             if(type == 1) {
                 List<RedClassAnswerVo> answerVoList = answerService.getInterviewAnswerList(qId,uId,1);
-                return R.ok().data("qdetail", qDetail).data("dataList", answerVoList);
+                return R.ok().data("qdetail", qDetail).data("dataList", answerVoList).data("pageKey",pagekey);
             } else if(type==2) {
                 List<RedCommentVo> commentVoList = commentService.getRedCommentList(qId,uId,5,2);
-                return R.ok().data("qdetail", qDetail).data("dataList", commentVoList);
+                return R.ok().data("qdetail", qDetail).data("dataList", commentVoList).data("pageKey",pagekey);
             } else {
-                return R.ok().data("qdetail", qDetail).data("dataList", replyList);
+                return R.ok().data("qdetail", qDetail).data("dataList", replyList).data("pageKey",pagekey);
             }
         } else {
             return R.error("参数错误，请重新尝试");

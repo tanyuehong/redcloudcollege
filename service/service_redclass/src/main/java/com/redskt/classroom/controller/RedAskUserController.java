@@ -4,6 +4,7 @@ package com.redskt.classroom.controller;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.qiniu.util.Auth;
+import com.qiniu.util.StringUtils;
 import com.redskt.classroom.entity.*;
 import com.redskt.classroom.entity.vo.RedClassReplyVo;
 import com.redskt.classroom.entity.vo.RedUserAskVo;
@@ -13,12 +14,15 @@ import com.redskt.commonutils.R;
 import com.redskt.commonutils.RequestParmUtil;
 import com.redskt.security.TokenManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * <p>
@@ -32,33 +36,37 @@ import java.util.Map;
 @RequestMapping("/eduask")
 @CrossOrigin(allowCredentials="true",maxAge = 3600)
 public class RedAskUserController {
-
     @Autowired
     private RedAskService askService;
-
     @Autowired
     private RedAskReplyService replyService;
-
     @Autowired
     private RedAskReplyCommentService commentService;
-
     @Autowired
     private RedAskAdviseService adviseService;
-
     @Autowired
     private RedAskWaringService waringService;
-
     @Autowired
     private RedUserService userService;
-
     @Autowired
     private RedAskTagsService tagsService;
+    @Autowired
+    private RedisTemplate redisTemplate;  //存储对象
 
     @PostMapping("submit")
     public R submitQuestion(@RequestBody Map parameterMap) {
         parameterMap = RequestParmUtil.transToMAP(parameterMap);
-
         String uid      = (String) parameterMap.get("uid");
+        if(uid.isEmpty()) {
+            return R.errorParam();
+        }
+        String key = "submit-"+uid;
+        String submitCount = (String) this.redisTemplate.opsForValue().get(key);
+        if(submitCount!=null && Integer.parseInt(submitCount) > 0) {
+            return R.error("暂时只能提交一次哈！");
+        }
+        this.redisTemplate.opsForValue().set(key,"1",12,TimeUnit.HOURS);
+
         String title    = (String) parameterMap.get("title");
         String content  = (String) parameterMap.get("content");
         String qustype  = (String) parameterMap.get("qustype");
@@ -86,8 +94,18 @@ public class RedAskUserController {
     }
 
     @PostMapping("submitReply")
-    public R registerUser(@RequestBody RedAskReply reply, HttpServletRequest request) {
+    public R registerUser(@RequestBody RedAskReply reply,HttpServletRequest request) {
         String uId = TokenManager.getMemberIdByJwtToken(request);
+        if(uId!=null && uId.isEmpty()) {
+            return R.errorParam();
+        }
+        String submitCount = (String) this.redisTemplate.opsForValue().get("submitReply-"+uId);
+        if(submitCount!=null && Integer.parseInt(submitCount) > 0) {
+            return R.error("暂时只能提交一次哈！");
+        }
+        this.redisTemplate.opsForValue().set("submitReply-"+uId,"1",12,TimeUnit.HOURS);
+
+
         if (uId.length()>0 && uId.equals(reply.getUid())) {
             if (replyService.save(reply)) {
                 RedClassReplyVo rReply = replyService.getUserLasterReply(uId);
@@ -100,7 +118,17 @@ public class RedAskUserController {
     }
 
     @PostMapping("submitReplyComment")
-    public R submitReplyComment(@RequestBody RedAskReplyComment replyComment) {
+    public R submitReplyComment(@RequestBody RedAskReplyComment replyComment,HttpServletRequest request) {
+        String uId = TokenManager.getMemberIdByJwtToken(request);
+        if(!(uId!=null && replyComment.getUid()!=null&&uId.equals(replyComment.getUid()))) {
+            return R.errorParam();
+        }
+        String submitCount = (String) this.redisTemplate.opsForValue().get("submitReplyComment-"+uId);
+        if(submitCount!=null && Integer.parseInt(submitCount) > 0) {
+            return R.error("暂时只能提交一次哈！");
+        }
+        this.redisTemplate.opsForValue().set("submitReplyComment-"+uId,"1",12,TimeUnit.HOURS);
+
         replyComment.setGood(0);
         if (commentService.save(replyComment)) {
             ReplyCommentVo myComment = commentService.getUerCommentOne(replyComment.getUid());
