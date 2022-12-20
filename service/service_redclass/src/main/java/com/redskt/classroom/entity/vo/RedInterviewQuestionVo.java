@@ -21,6 +21,8 @@ public class RedInterviewQuestionVo {
 
     private String type;
 
+    private String qustype;
+
     private String deep;
 
     private String typeString;

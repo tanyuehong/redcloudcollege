@@ -92,26 +92,32 @@ public class RedInterViewController {
         String token = (String) parameterMap.get("token");
         String uId = TokenManager.getUserFromToken(token);
 
-        String key = RequestParmUtil.generateKeyAndIv();
-        String pagekey1 =  RequestParmUtil.getPageKey("submitQustion",key);
-        String pagekey = URLEncoder.encode(pagekey1);
-
-        this.redisTemplate.opsForValue().set(pagekey,key,30, TimeUnit.MINUTES);
 
         if(qId.length()>0) {
             RedInterviewQuestionVo qDetail = questionService.getQustionDetail(qId);
             int readCount = qDetail.getReadcount() + 1;
             questionService.updateQuestionReadCount(qDetail.getQId(), readCount);
 
+            QueryWrapper<RedInterviewType> typeQueryWrapper = new QueryWrapper<>();
+            typeQueryWrapper.orderByAsc("sort");
+            typeQueryWrapper.last("limit 4");
+            List<RedInterviewType> positionList = typeService.list(typeQueryWrapper);
+
+            RedInterviewType currentPosition = typeService.getById(qDetail.getQustype());
+            List<RedInterviewQuestionVo> hotList = questionService.getHotInterviewQustionList(qDetail.getQustype(),qDetail.getQId());
+
             List<RedClassReplyVo> replyList = new ArrayList<>();
             if(type == 1) {
                 List<RedClassAnswerVo> answerVoList = answerService.getInterviewAnswerList(qId,uId,1);
-                return R.ok().data("qdetail", qDetail).data("dataList", answerVoList).data("pageKey",pagekey);
+                return R.ok().data("qdetail", qDetail).data("dataList", answerVoList).data("positionList", positionList)
+                        .data("currentPosition", currentPosition).data("hotList",hotList);
             } else if(type==2) {
                 List<RedCommentVo> commentVoList = commentService.getRedCommentList(qId,uId,5,2);
-                return R.ok().data("qdetail", qDetail).data("dataList", commentVoList).data("pageKey",pagekey);
+                return R.ok().data("qdetail", qDetail).data("dataList", commentVoList).data("positionList", positionList)
+                        .data("currentPosition", currentPosition).data("hotList",hotList);
             } else {
-                return R.ok().data("qdetail", qDetail).data("dataList", replyList).data("pageKey",pagekey);
+                return R.ok().data("qdetail", qDetail).data("dataList", replyList).data("positionList", positionList)
+                        .data("currentPosition", currentPosition).data("hotList",hotList);
             }
         } else {
             return R.error("参数错误，请重新尝试");

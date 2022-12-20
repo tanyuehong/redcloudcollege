@@ -35,7 +35,12 @@ public class RedInterviewQuestionServiceImpl extends ServiceImpl<RedInterviewQue
         if(tag.length()==0) {
             tag = null;
         }
-        return baseMapper.getHomeInterviewQustionList(sortInt, tag);
+        return baseMapper.getHomeInterviewQustionList(sortInt,20, tag,null,null);
+    }
+
+    @Override
+    public List<RedInterviewQuestionVo> getHotInterviewQustionList(String qType,String qId) {
+        return baseMapper.getHomeInterviewQustionList(4,10, null, qType,qId);
     }
 
     @Override
