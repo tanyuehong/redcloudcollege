@@ -33,16 +33,27 @@ public class RedInterviewUserSignController {
     @PostMapping("commitSign")
     public R commitSign(@RequestBody Map parameterMap, HttpServletRequest request) {
         parameterMap = RequestParmUtil.transToMAP(parameterMap);
-        String signDate = (String) parameterMap.get("date");
-        String uId = TokenManager.getMemberIdByJwtToken(request);
-        if (uId.length()>0 && signDate.length()>0) {
-            RedInterviewUserSign sign = new RedInterviewUserSign();
-            sign.setUid(uId);
-            sign.setDate(signDate);
-            if (signService.save(sign)) {
-                return R.okSucessTips("签到成功");
+        if (parameterMap.size()>0) {
+            String signDate = (String) parameterMap.get("date");
+            String uId = TokenManager.getMemberIdByJwtToken(request);
+            if (uId.length() > 0 && signDate.length() > 0) {
+                QueryWrapper<RedInterviewUserSign> signQueryWrapper = new QueryWrapper<>();
+                signQueryWrapper.eq("uid",uId);
+                signQueryWrapper.eq("date",signDate);
+
+                List<RedInterviewUserSign> signList = signService.list(signQueryWrapper);
+                if (signList.size()>0) {
+                    return R.okSucessTips("已经签到过了哈，无需反复签到哦~");
+                } else {
+                    RedInterviewUserSign sign = new RedInterviewUserSign();
+                    sign.setUid(uId);
+                    sign.setDate(signDate);
+                    if (signService.save(sign)) {
+                        return R.okSucessTips("签到成功哈～");
+                    }
+                }
+                return R.error("签到异常，请重新尝试哈～");
             }
-            return R.error("签到异常，请重新尝试哈～");
         }
         return R.errorParam();
     }
@@ -54,7 +65,7 @@ public class RedInterviewUserSignController {
 
         QueryWrapper<RedInterviewUserSign> signQueryWrapper = new QueryWrapper<>();
         signQueryWrapper.eq("uid",uId);
-        signQueryWrapper.orderByAsc("gmtCreate");
+        signQueryWrapper.orderByAsc("date");
         
         List<RedInterviewUserSign> signList = signService.list(signQueryWrapper);
         List<String> dateList = new ArrayList<>();
