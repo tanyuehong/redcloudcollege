@@ -35,10 +35,9 @@
         <id column="asktype" property="asktype"/>
     </resultMap>
 
-
     <select id="getHomeInterviewQustionList" resultMap="interviewQuestionMap">
         SELECT qustion.id as qId, qustion.title,qustion.type,qustion.content,qustion.deep,qustion.collect,qustion.readcount,qustion.hotnum,qustion.price,qustion.good,(tmeet+smeet+pmeet) as meet,qustion.gmt_create,user.nickname,
-        qustion.uid,(select count(reply.id) as replaycount from red_interview_answer reply where reply.qid=qustion.id) as reply
+        qustion.uid,(pmeet+tmeet+smeet)/ (readcount + 0.0 ) as frequency,(select count(reply.id) as replaycount from red_interview_answer reply where reply.qid=qustion.id) as reply
         ,tag.id as ctid,tag.name as tname,tag.img as timg,tag.sort as tsort
         FROM red_interview_question qustion
         LEFT OUTER JOIN edu_user user ON qustion.uid=user.id
@@ -68,6 +67,35 @@
         DESC limit #{size}
     </select>
 
+    <select id="getInterviewPositionQuestionList" resultMap="interviewQuestionMap">
+        SELECT qustion.id as qId, qustion.title,qustion.type,qustion.content,qustion.deep,qustion.collect,qustion.readcount,qustion.hotnum,qustion.price,qustion.good,(tmeet+smeet+pmeet) as meet,qustion.gmt_create,user.nickname,
+        qustion.uid,(select count(reply.id) as replaycount from red_interview_answer reply where reply.qid=qustion.id) as reply
+        ,tag.id as ctid,tag.name as tname,tag.img as timg,tag.sort as tsort
+        FROM red_interview_question qustion
+        LEFT OUTER JOIN edu_user user ON qustion.uid=user.id
+        LEFT OUTER JOIN red_interview_tags tags ON tags.qid = qustion.id
+        LEFT OUTER JOIN red_category_tag tag ON tag.id = tags.tid
+        LEFT OUTER JOIN red_interview_question_position tposition ON tposition.qid = qustion.id
+        where tposition.pid = #{pid}
+        <if test="tag != null">
+            where tag.path = #{tag}
+        </if>
+
+        <if test="sort==1">
+            ORDER BY qustion.hotnum
+        </if>
+        <if test="sort==2">
+            ORDER BY ddegree
+        </if>
+        <if test="sort==3">
+            ORDER BY reply
+        </if>
+        <if test="sort==4">
+            ORDER BY frequency
+        </if>
+        DESC limit #{size}
+    </select>
+
     <update id="updateQuestionReadCount">
         update red_interview_question
         set readcount = #{readCount}
@@ -83,7 +111,6 @@
         LEFT OUTER JOIN red_category_tag tag ON tag.id = tags.tid
         WHERE question.id=#{tId}
     </select>
-
 
     <update id="addGoodCount">
         update red_interview_question
@@ -135,11 +162,13 @@
         set tmeet=tmeet+1
         where id = #{qid}
     </update>
+
     <update id="addPmeetCount">
         update red_interview_question
         set pmeet=pmeet+1
         where id = #{qid}
     </update>
+
     <update id="addUmeetCount">
         update red_interview_question
         set umeet=umeet+1

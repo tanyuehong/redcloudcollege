@@ -45,6 +45,8 @@ public class RedInterviewQuestionVo {
 
     private Integer hotnum;
 
+    private float frequency;   // 面试频率
+
     private int meet;
 
     private List<RedCategoryTag> tags;
