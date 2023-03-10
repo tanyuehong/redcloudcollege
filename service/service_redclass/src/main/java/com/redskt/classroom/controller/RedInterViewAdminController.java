@@ -28,7 +28,7 @@ public class RedInterViewAdminController {
     private RedInterviewQuestionService questionService;
 
     @Autowired
-    private RedCategoryTagService tagService;
+    private RedInterviewPositionClassifyService classifyService;
 
     @Autowired
     private RedInterviewAnswerService answerService;
@@ -54,6 +54,22 @@ public class RedInterViewAdminController {
         List<RedInterviewType> typeList = typeService.list(typeQueryWrapper);
 //            PageInfo page = new PageInfo(typeList);
         return R.ok().data("positionList", typeList);
+    }
+
+    @GetMapping("positionClassifyList/{pId}")
+    public R positionClassifyList(@PathVariable String pId) {
+        if (pId.length()>0) {
+            QueryWrapper<RedInterviewPositionClassify> classifyQueryWrapper = new QueryWrapper<>();
+            classifyQueryWrapper.eq("pid",pId);
+            classifyQueryWrapper.orderByAsc("gmt_create");
+
+//            PageHelper.startPage(pId, 20);
+            List<RedInterviewPositionClassify> classifyList = classifyService.list(classifyQueryWrapper);
+//            PageInfo page = new PageInfo(typeList);
+            return R.ok().data("positionClassifyList", classifyList);
+        }
+        return R.errorParam();
+
     }
 
     @PostMapping("getQuestionDetail")
