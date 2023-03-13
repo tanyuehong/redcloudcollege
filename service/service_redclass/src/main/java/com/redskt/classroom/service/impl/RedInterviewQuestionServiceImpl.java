@@ -6,6 +6,7 @@ import com.redskt.classroom.entity.vo.RedUserStateVo;
 import com.redskt.classroom.mapper.RedInterviewQuestionMapper;
 import com.redskt.classroom.service.RedInterviewQuestionService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.apache.ibatis.annotations.Param;
 import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 import org.springframework.stereotype.Service;
 
@@ -41,6 +42,11 @@ public class RedInterviewQuestionServiceImpl extends ServiceImpl<RedInterviewQue
     @Override
     public List<RedInterviewQuestionVo> getHotInterviewQustionList(String qType,String qId) {
         return baseMapper.getHomeInterviewQustionList(4,10, null, qType,qId);
+    }
+
+    @Override
+    public List<RedInterviewQuestionVo> getPositionQuestionList(String sort,String pId,String classify) {
+        return baseMapper.getPositionQuestionList(4,10, pId);
     }
 
     @Override

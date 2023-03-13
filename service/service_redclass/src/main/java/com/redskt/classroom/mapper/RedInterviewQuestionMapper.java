@@ -20,6 +20,8 @@ public interface RedInterviewQuestionMapper extends BaseMapper<RedInterviewQuest
 
     List<RedInterviewQuestionVo> getHomeInterviewQustionList(@Param("sort") int sort,@Param("size") int size, @Param("tag") String tag,@Param("qustype") String qType,@Param("qid") String qId);
 
+    List<RedInterviewQuestionVo> getPositionQuestionList(@Param("sort") int sort,@Param("size") int size,@Param("pid") String pId);
+
     int updateQuestionReadCount(@Param("id")  String qId,@Param("readCount") int readCount);
 
     RedInterviewQuestionVo getQustionDetail(String qId);

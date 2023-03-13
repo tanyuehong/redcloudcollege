@@ -67,7 +67,7 @@
         DESC limit #{size}
     </select>
 
-    <select id="getInterviewPositionQuestionList" resultMap="interviewQuestionMap">
+    <select id="getPositionQuestionList" resultMap="interviewQuestionMap">
         SELECT qustion.id as qId, qustion.title,qustion.type,qustion.content,qustion.deep,qustion.collect,qustion.readcount,qustion.hotnum,qustion.price,qustion.good,(tmeet+smeet+pmeet) as meet,qustion.gmt_create,user.nickname,
         qustion.uid,(select count(reply.id) as replaycount from red_interview_answer reply where reply.qid=qustion.id) as reply
         ,tag.id as ctid,tag.name as tname,tag.img as timg,tag.sort as tsort
@@ -77,10 +77,6 @@
         LEFT OUTER JOIN red_category_tag tag ON tag.id = tags.tid
         LEFT OUTER JOIN red_interview_question_position tposition ON tposition.qid = qustion.id
         where tposition.pid = #{pid}
-        <if test="tag != null">
-            where tag.path = #{tag}
-        </if>
-
         <if test="sort==1">
             ORDER BY qustion.hotnum
         </if>

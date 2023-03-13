@@ -47,8 +47,7 @@ public class RedInterViewController {
     private RedInterviewAnswerCollectService answerCollectService;
 
     @Autowired
-    private RedisTemplate redisTemplate;  //存储对象
-
+    private RedInterviewPositionClassifyService classifyService;
 
     @PostMapping("index")
     public R getInterviewIndex(@RequestBody Map parameterMap) {
@@ -78,6 +77,24 @@ public class RedInterViewController {
         List<RedInterviewType> typeList = typeService.list(typeQueryWrapper);
 
         return R.ok().data("list", list).data("tagList", tagList).data("typeList",typeList);
+    }
+
+    @PostMapping("pindex")
+    public R getPositionInterviewIndex(@RequestBody Map parameterMap) {
+        parameterMap = RequestParmUtil.transToMAP(parameterMap);
+        String sort = (String) parameterMap.get("sort");
+        String pId = (String) parameterMap.get("pId");
+        String clssify  = (String) parameterMap.get("clssify");
+
+//        PageHelper.startPage(1, 20  );
+        List<RedInterviewQuestionVo> list = questionService.getPositionQuestionList(sort,pId,clssify);
+        PageInfo page = new PageInfo(list);
+
+        QueryWrapper<RedInterviewPositionClassify> classifyQueryWrapper = new QueryWrapper<>();
+        classifyQueryWrapper.orderByAsc("sort");
+        List<RedInterviewPositionClassify> classifyList = classifyService.list(classifyQueryWrapper);
+
+        return R.ok().data("list", list).data("classifyList", classifyList);
     }
 
     @PostMapping("getQuestionDetail")

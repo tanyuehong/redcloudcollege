@@ -45,6 +45,9 @@ public class RedInterViewAdminController {
     @Autowired
     private RedInterviewAnswerCollectService answerCollectService;
 
+    @Autowired
+    private RedUserService userService;
+
     @GetMapping("positionList")
     public R getInterviewIndex() {
         QueryWrapper<RedInterviewType> typeQueryWrapper = new QueryWrapper<>();
@@ -61,7 +64,7 @@ public class RedInterViewAdminController {
         if (pId.length()>0) {
             QueryWrapper<RedInterviewPositionClassify> classifyQueryWrapper = new QueryWrapper<>();
             classifyQueryWrapper.eq("pid",pId);
-            classifyQueryWrapper.orderByAsc("gmt_create");
+            classifyQueryWrapper.orderByAsc("sort");
 
 //            PageHelper.startPage(pId, 20);
             List<RedInterviewPositionClassify> classifyList = classifyService.list(classifyQueryWrapper);
@@ -69,7 +72,43 @@ public class RedInterViewAdminController {
             return R.ok().data("positionClassifyList", classifyList);
         }
         return R.errorParam();
+    }
 
+    @PostMapping("submitClassify")
+    public R submitClassify(@RequestBody RedInterviewPositionClassify classify,HttpServletRequest request) {
+        String uId = TokenManager.getMemberIdByJwtToken(request);
+        if (uId.length()>0 && this.checkIsAdmin(uId)) {
+            if(classifyService.save(classify)) {
+                return R.okSucessTips("添加成功");
+            }
+            return R.error("存储失败,请重试哈~");
+        } else {
+            return  R.error("没有对应的权限~");
+        }
+    }
+
+    @GetMapping("deleteClassify/{cid}")
+    public R positionClassifyList(@PathVariable String cid,HttpServletRequest request) {
+        String uId = TokenManager.getMemberIdByJwtToken(request);
+        if (cid.length()>0 && this.checkIsAdmin(uId)) {
+            if (classifyService.removeById(cid)) {
+                return R.okSucessTips("删除成功！");
+            } else {
+                return R.error("操作异常，请重新操作哦~");
+            }
+        }
+        return R.errorParam();
+    }
+
+    private boolean checkIsAdmin(String uId) {
+        QueryWrapper<RedClassUser> wrapper = new QueryWrapper<>();
+        wrapper.select("id","username","authority");
+        wrapper.eq("id",uId);
+        RedClassUser eduUser = userService.getOne(wrapper);
+        if (eduUser!=null && eduUser.getAuthority() == 100) {
+            return true;
+        }
+        return false;
     }
 
     @PostMapping("getQuestionDetail")
