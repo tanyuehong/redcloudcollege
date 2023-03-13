@@ -48,6 +48,17 @@ public class RedInterViewAdminController {
     @Autowired
     private RedUserService userService;
 
+
+    @GetMapping("questionList")
+    public R getQuestionList() {
+        QueryWrapper<RedInterviewQuestion> questionQueryWrapper = new QueryWrapper<>();
+        questionQueryWrapper.orderByAsc("gmt_create");
+//            PageHelper.startPage(pId, 20);
+        List<RedInterviewQuestion> questionList = questionService.list(questionQueryWrapper);
+//            PageInfo page = new PageInfo(typeList);
+        return R.ok().data("questionList", questionList);
+    }
+
     @GetMapping("positionList")
     public R getInterviewIndex() {
         QueryWrapper<RedInterviewType> typeQueryWrapper = new QueryWrapper<>();
