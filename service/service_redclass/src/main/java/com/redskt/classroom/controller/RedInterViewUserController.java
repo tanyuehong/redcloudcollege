@@ -57,7 +57,10 @@ public class RedInterViewUserController {
     private RedInterviewQuestionMeetCompanyService meetCompanyService;
 
     @Autowired
-    private RedInterviewQuestionMeetPositionService meetPositionService;
+    private RedInterviewQuestionMeetPositionService questionMeetPositionService;
+
+    @Autowired
+    private RedInterviewMeetPositionService meetPositionService;
 
     @Autowired
     private RedInterviewQuestionPositionService positionService;
@@ -349,15 +352,15 @@ public class RedInterViewUserController {
         String title = (String) paramMap.get("title");
         String qId = (String) paramMap.get("qId");
         String uId = TokenManager.getMemberIdByJwtToken(request);
-        RedInterviewQuestionPosition position = new RedInterviewQuestionPosition();
+        RedInterviewMeetPosition position = new RedInterviewMeetPosition();
         position.setTitle(title);
         position.setSort(0);
-        if (positionService.save(position)) {
+        if (meetPositionService.save(position)) {
             RedInterviewQuestionMeetPosition meet = new RedInterviewQuestionMeetPosition();
             meet.setQid(qId);
             meet.setUid(uId);
             meet.setPid(position.getId());
-            if(meetPositionService.save(meet)) {
+            if(questionMeetPositionService.save(meet)) {
                 return R.okSucessTips("真诚感谢您的面试职位反馈～～");
             }
             return R.error("操作失败，请重新尝试");
@@ -373,7 +376,7 @@ public class RedInterViewUserController {
             meet.setQid(qId);
             meet.setUid(uId);
             meet.setPid(pId);
-            if(meetPositionService.save(meet)) {
+            if(questionMeetPositionService.save(meet)) {
                 return R.okSucessTips("真诚感谢您的面试职位反馈～～");
             } else {
                 return R.error("操作失败，请重新尝试");
