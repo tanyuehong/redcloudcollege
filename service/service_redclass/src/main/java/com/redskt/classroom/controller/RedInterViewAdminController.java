@@ -28,6 +28,9 @@ public class RedInterViewAdminController {
     private RedInterviewQuestionService questionService;
 
     @Autowired
+    private RedInterviewQuestionPositionService questionPositionService;
+
+    @Autowired
     private RedInterviewPositionClassifyService classifyService;
 
     @Autowired
@@ -91,6 +94,30 @@ public class RedInterViewAdminController {
         if (uId.length()>0 && this.checkIsAdmin(uId)) {
             if(classifyService.save(classify)) {
                 return R.okSucessTips("添加成功");
+            }
+            return R.error("存储失败,请重试哈~");
+        } else {
+            return  R.error("没有对应的权限~");
+        }
+    }
+
+    @PostMapping("submitQuestionPosition")
+    public R submitQuestionPosition(@RequestBody RedInterviewQuestionPosition questionPosition,HttpServletRequest request) {
+        if (questionPosition.getPid()==null ||questionPosition.getPid().length() == 0 ||
+                questionPosition.getQid()==null ||questionPosition.getQid().length() == 0) {
+            return R.errorParam();
+        }
+        String uId = TokenManager.getMemberIdByJwtToken(request);
+        if (uId.length()>0 && this.checkIsAdmin(uId)) {
+            QueryWrapper<RedInterviewQuestionPosition> positionQueryWrapper = new QueryWrapper<>();
+            positionQueryWrapper.eq("qid",questionPosition.getQid());
+            positionQueryWrapper.eq("pid",questionPosition.getPid());
+            List<RedInterviewQuestionPosition> questionPositionList = questionPositionService.list(positionQueryWrapper);
+            if (questionPositionList.size()>0) {
+                return R.error("本题目已经绑定当前职位，请在列表页面编辑修改哈～");
+            }
+            if(questionPositionService.save(questionPosition)) {
+                return R.okSucessTips("添加题目职位信息成功");
             }
             return R.error("存储失败,请重试哈~");
         } else {

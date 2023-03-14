@@ -29,15 +29,18 @@ public class RedInterviewQuestionPosition implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "课程类别ID")
+    @ApiModelProperty(value = "ID")
     @TableId(value = "id", type = IdType.ID_WORKER_STR)
     private String id;
 
-    @ApiModelProperty(value = "类别名称")
-    private String title;
+    @ApiModelProperty(value = "职位id")
+    private String pid;
 
-    @ApiModelProperty(value = "排序字段")
-    private Integer sort;
+    @ApiModelProperty(value = "面试题id")
+    private String qid;
+
+    @ApiModelProperty(value = "职业子分类id")
+    private String sid;
 
     @ApiModelProperty(value = "创建时间")
     @TableField(fill = FieldFill.INSERT)
@@ -46,6 +49,5 @@ public class RedInterviewQuestionPosition implements Serializable {
     @ApiModelProperty(value = "更新时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date gmtModified;
-
 
 }
