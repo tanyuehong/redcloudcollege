@@ -88,6 +88,21 @@ public class RedInterViewAdminController {
         return R.errorParam();
     }
 
+    @GetMapping("questionClassifyList/{qId}")
+    public R questionClassifyList(@PathVariable String qId) {
+        if (qId.length()>0) {
+            QueryWrapper<RedInterviewQuestionPosition> questionPositionQueryWrapper = new QueryWrapper<>();
+            questionPositionQueryWrapper.eq("qid",qId);
+            questionPositionQueryWrapper.orderByAsc("gmt_modified");
+
+//            PageHelper.startPage(pId, 20);
+            List<RedInterviewQuestionPosition> questionPositionList = questionPositionService.list(questionPositionQueryWrapper);
+//            PageInfo page = new PageInfo(typeList);
+            return R.ok().data("questionClassifyList", questionPositionList);
+        }
+        return R.errorParam();
+    }
+
     @PostMapping("submitClassify")
     public R submitClassify(@RequestBody RedInterviewPositionClassify classify,HttpServletRequest request) {
         String uId = TokenManager.getMemberIdByJwtToken(request);
