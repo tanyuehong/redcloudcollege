@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.redskt.classroom.entity.*;
+import com.redskt.classroom.entity.admin.vo.RedInterviewQuestionPositionVo;
 import com.redskt.classroom.entity.vo.*;
 import com.redskt.classroom.service.*;
 import com.redskt.commonutils.R;
@@ -91,14 +92,8 @@ public class RedInterViewAdminController {
     @GetMapping("questionClassifyList/{qId}")
     public R questionClassifyList(@PathVariable String qId) {
         if (qId.length()>0) {
-            QueryWrapper<RedInterviewQuestionPosition> questionPositionQueryWrapper = new QueryWrapper<>();
-            questionPositionQueryWrapper.eq("qid",qId);
-            questionPositionQueryWrapper.orderByAsc("gmt_modified");
-
-//            PageHelper.startPage(pId, 20);
-            List<RedInterviewQuestionPosition> questionPositionList = questionPositionService.list(questionPositionQueryWrapper);
-//            PageInfo page = new PageInfo(typeList);
-            return R.ok().data("questionClassifyList", questionPositionList);
+            List<RedInterviewQuestionPositionVo> questionPositionClassifyList = questionPositionService.getQuestionPositionClassifyList(qId);
+            return R.ok().data("questionClassifyList", questionPositionClassifyList);
         }
         return R.errorParam();
     }

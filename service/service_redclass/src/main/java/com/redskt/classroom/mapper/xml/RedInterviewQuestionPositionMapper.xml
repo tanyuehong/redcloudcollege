@@ -2,4 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.redskt.classroom.mapper.RedInterviewQuestionPositionMapper">
 
+    <resultMap id="questionPositionClassifyMap" type="com.redskt.classroom.entity.admin.vo.RedInterviewQuestionPositionVo">
+        <id column="id" property="id"/>
+        <id column="pid" property="pId"/>
+        <id column="pName" property="pName"/>
+        <id column="sId" property="sId"/>
+        <id column="sName" property="sName"/>
+    </resultMap>
+
+
+    <select id="getQuestionPositionClassifyList" resultMap="questionPositionClassifyMap">
+        SELECT qpclassify.id, qpclassify.pid, qpclassify.sid,pPosition.name as pName,classify.name as sName
+        FROM red_interview_question_position qpclassify
+        LEFT OUTER JOIN red_interview_position pPosition ON pPosition.id=qpclassify.pid
+        LEFT OUTER JOIN red_interview_position_classify classify ON classify.id = qpclassify.sid
+        where qid = #{qId}
+        ORDER BY qpclassify.gmt_create
+    </select>
+
 </mapper>
