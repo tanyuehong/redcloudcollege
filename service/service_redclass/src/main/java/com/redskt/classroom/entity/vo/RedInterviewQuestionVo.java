@@ -17,6 +17,8 @@ public class RedInterviewQuestionVo {
 
     private String avatar;
 
+    private String snum;
+
     private String title;
 
     private String type;

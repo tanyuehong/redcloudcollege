@@ -25,7 +25,7 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @ApiModel(value="RedInterviewType对象", description="")
-public class RedInterviewType implements Serializable {
+public class RedInterviewPosition implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

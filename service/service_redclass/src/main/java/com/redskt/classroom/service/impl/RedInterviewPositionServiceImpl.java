@@ -1,10 +1,10 @@
 package com.redskt.classroom.service.impl;
 
 import com.redskt.classroom.entity.RedCategoryTag;
-import com.redskt.classroom.entity.RedInterviewType;
-import com.redskt.classroom.mapper.RedInterviewTypeMapper;
-import com.redskt.classroom.service.RedInterviewTypeService;
+import com.redskt.classroom.entity.RedInterviewPosition;
+import com.redskt.classroom.mapper.RedInterviewPositionMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.redskt.classroom.service.RedInterviewPositionService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,7 +18,7 @@ import java.util.List;
  * @since 2022-07-12
  */
 @Service
-public class RedInterviewTypeServiceImpl extends ServiceImpl<RedInterviewTypeMapper, RedInterviewType> implements RedInterviewTypeService {
+public class RedInterviewPositionServiceImpl extends ServiceImpl<RedInterviewPositionMapper, RedInterviewPosition> implements RedInterviewPositionService {
 
     @Override
     public List<RedCategoryTag> getInterviewTypeTagList(String tid) {

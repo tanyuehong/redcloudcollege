@@ -7,6 +7,7 @@
         <id column="uid" property="uid"/>
         <id column="nickname" property="nickname"/>
         <id column="avatar" property="avatar"/>
+        <id column="snum" property="snum"/>
         <id column="title" property="title"/>
         <id column="type" property="type"/>
         <id column="qustype" property="qustype"/>
@@ -35,8 +36,8 @@
         <id column="asktype" property="asktype"/>
     </resultMap>
 
-    <select id="getHomeInterviewQustionList" resultMap="interviewQuestionMap">
-        SELECT qustion.id as qId, qustion.title,qustion.type,qustion.content,qustion.deep,qustion.collect,qustion.readcount,qustion.hotnum,qustion.price,qustion.good,(tmeet+smeet+pmeet) as meet,qustion.gmt_create,user.nickname,
+    <select id="getHomeInterviewQuestionList" resultMap="interviewQuestionMap">
+        SELECT qustion.id as qId,qustion.title,qustion.snum,qustion.type,qustion.content,qustion.deep,qustion.collect,qustion.readcount,qustion.hotnum,qustion.price,qustion.good,(tmeet+smeet+pmeet) as meet,qustion.gmt_create,user.nickname,
         qustion.uid,(pmeet+tmeet+smeet)/ (readcount + 0.0 ) as frequency,(select count(reply.id) as replaycount from red_interview_answer reply where reply.qid=qustion.id) as reply
         ,tag.id as ctid,tag.name as tname,tag.img as timg,tag.sort as tsort
         FROM red_interview_question qustion
@@ -68,7 +69,7 @@
     </select>
 
     <select id="getPositionQuestionList" resultMap="interviewQuestionMap">
-        SELECT qustion.id as qId, qustion.title,qustion.type,qustion.content,qustion.deep,qustion.collect,qustion.readcount,qustion.hotnum,qustion.price,qustion.good,(tmeet+smeet+pmeet) as meet,qustion.gmt_create,user.nickname,
+        SELECT qustion.id as qId,qustion.title,qustion.snum,qustion.type,qustion.content,qustion.deep,qustion.collect,qustion.readcount,qustion.hotnum,qustion.price,qustion.good,(tmeet+smeet+pmeet) as meet,qustion.gmt_create,user.nickname,
         qustion.uid,(pmeet+tmeet+smeet)/ (readcount + 0.0 ) as frequency,(select count(reply.id) as replaycount from red_interview_answer reply where reply.qid=qustion.id) as reply
         ,tag.id as ctid,tag.name as tname,tag.img as timg,tag.sort as tsort
         FROM red_interview_question qustion
@@ -78,18 +79,27 @@
         LEFT OUTER JOIN red_interview_question_position tposition ON tposition.qid = qustion.id
         where tposition.pid = #{pid}
         <if test="sort==1">
-            ORDER BY qustion.hotnum
+            ORDER BY qustion.snum
         </if>
         <if test="sort==2">
-            ORDER BY ddegree
-        </if>
-        <if test="sort==3">
             ORDER BY reply
         </if>
+        <if test="sort==3">
+            ORDER BY qustion.hotnum
+        </if>
         <if test="sort==4">
+            ORDER BY ddegree
+        </if>
+        <if test="sort==5">
             ORDER BY frequency
         </if>
-        DESC limit #{size}
+        <if test="orderType==1">
+            ASC
+        </if>
+        <if test="orderType==2">
+            DESC
+        </if>
+        limit #{size}
     </select>
 
     <update id="updateQuestionReadCount">

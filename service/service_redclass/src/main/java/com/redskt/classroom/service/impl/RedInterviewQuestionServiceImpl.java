@@ -36,17 +36,17 @@ public class RedInterviewQuestionServiceImpl extends ServiceImpl<RedInterviewQue
         if(tag.length()==0) {
             tag = null;
         }
-        return baseMapper.getHomeInterviewQustionList(sortInt,20, tag,null,null);
+        return baseMapper.getHomeInterviewQuestionList(sortInt,20, tag,null,null);
     }
 
     @Override
     public List<RedInterviewQuestionVo> getHotInterviewQustionList(String qType,String qId) {
-        return baseMapper.getHomeInterviewQustionList(4,10, null, qType,qId);
+        return baseMapper.getHomeInterviewQuestionList(4,10, null, qType,qId);
     }
 
     @Override
-    public List<RedInterviewQuestionVo> getPositionQuestionList(String sort,String pId,String classify) {
-        return baseMapper.getPositionQuestionList(4,10, pId);
+    public List<RedInterviewQuestionVo> getPositionQuestionList(int sort,String pId,String classify,int orderType) {
+        return baseMapper.getPositionQuestionList(sort,20, pId,orderType);
     }
 
     @Override
@@ -55,8 +55,8 @@ public class RedInterviewQuestionServiceImpl extends ServiceImpl<RedInterviewQue
     }
 
     @Override
-    public RedInterviewQuestionVo getQustionDetail(String qId) {
-        return baseMapper.getQustionDetail(qId);
+    public RedInterviewQuestionVo getQuestionDetail(String qId) {
+        return baseMapper.getQuestionDetail(qId);
     }
 
     @Override

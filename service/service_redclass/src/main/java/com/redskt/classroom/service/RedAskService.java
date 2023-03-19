@@ -22,7 +22,7 @@ public interface RedAskService extends IService<RedAskQuestion> {
 
     void updateUserAskReadCount(String qId,int readCount);
 
-    RedClassAskQuestionVo getQustionDetail(String qId);
+    RedClassAskQuestionVo getQuestionDetail(String qId);
 
     List<RedClassAskQuestionVo> getGoodQustionLists(int size,String uid);
 

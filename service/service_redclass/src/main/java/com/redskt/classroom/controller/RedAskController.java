@@ -141,7 +141,7 @@ public class RedAskController {
 
     @GetMapping("getquestiondetail/{qId}")
     public R getQustionDetil(@PathVariable String qId) {
-        RedClassAskQuestionVo qDetail = userAskService.getQustionDetail(qId);
+        RedClassAskQuestionVo qDetail = userAskService.getQuestionDetail(qId);
         int readCount = qDetail.getReadcount() + 1;
         userAskService.updateUserAskReadCount(qDetail.getQId(), readCount);
 

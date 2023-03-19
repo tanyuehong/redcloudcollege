@@ -23,7 +23,7 @@ import java.util.Map;
 public class RedInterViewController {
 
     @Autowired
-    private RedInterviewTypeService typeService;
+    private RedInterviewPositionService positionService;
 
     @Autowired
     private RedInterviewQuestionService questionService;
@@ -72,22 +72,31 @@ public class RedInterViewController {
             tagList.add(0,allTag);
         }
 
-        QueryWrapper<RedInterviewType> typeQueryWrapper = new QueryWrapper<>();
-        typeQueryWrapper.orderByAsc("sort");
-        List<RedInterviewType> typeList = typeService.list(typeQueryWrapper);
+        QueryWrapper<RedInterviewPosition> positionQueryWrapper = new QueryWrapper<>();
+        positionQueryWrapper.orderByAsc("sort");
+        List<RedInterviewPosition> typeList = positionService.list(positionQueryWrapper);
 
-        return R.ok().data("list", list).data("tagList", tagList).data("typeList",typeList);
+        return R.ok().data("list", list).data("tagList", tagList).data("positionList",typeList);
     }
 
     @PostMapping("pindex")
     public R getPositionInterviewIndex(@RequestBody Map parameterMap) {
         parameterMap = RequestParmUtil.transToMAP(parameterMap);
-        String sort = (String) parameterMap.get("sort");
-        String pId = (String) parameterMap.get("pId");
+        String stringSort = (String)parameterMap.get("sort");
+        String orderType  = (String)parameterMap.get("orderType");
+        int sort = 1;
+        try {
+            sort = Integer.parseInt(stringSort);
+        } catch (NumberFormatException e) {}
+        int oType = 1;
+        try {
+            oType = Integer.parseInt(orderType);
+        } catch (NumberFormatException e) {}
+        String pId      = (String) parameterMap.get("pId");
         String clssify  = (String) parameterMap.get("clssify");
 
 //        PageHelper.startPage(1, 20  );
-        List<RedInterviewQuestionVo> list = questionService.getPositionQuestionList(sort,pId,clssify);
+        List<RedInterviewQuestionVo> list = questionService.getPositionQuestionList(sort,pId,clssify,oType);
         PageInfo page = new PageInfo(list);
 
         QueryWrapper<RedInterviewPositionClassify> classifyQueryWrapper = new QueryWrapper<>();
@@ -109,16 +118,16 @@ public class RedInterViewController {
 
 
         if(qId.length()>0) {
-            RedInterviewQuestionVo qDetail = questionService.getQustionDetail(qId);
+            RedInterviewQuestionVo qDetail = questionService.getQuestionDetail(qId);
             int readCount = qDetail.getReadcount() + 1;
             questionService.updateQuestionReadCount(qDetail.getQId(), readCount);
 
-            QueryWrapper<RedInterviewType> typeQueryWrapper = new QueryWrapper<>();
-            typeQueryWrapper.orderByAsc("sort");
-            typeQueryWrapper.last("limit 4");
-            List<RedInterviewType> positionList = typeService.list(typeQueryWrapper);
+            QueryWrapper<RedInterviewPosition> positionQueryWrapper = new QueryWrapper<>();
+            positionQueryWrapper.orderByAsc("sort");
+            positionQueryWrapper.last("limit 4");
+            List<RedInterviewPosition> positionList = positionService.list(positionQueryWrapper);
 
-            RedInterviewType currentPosition = typeService.getById(qDetail.getQustype());
+            RedInterviewPosition currentPosition = positionService.getById(qDetail.getQustype());
             List<RedInterviewQuestionVo> hotList = questionService.getHotInterviewQustionList(qDetail.getQustype(),qDetail.getQId());
 
             List<RedClassReplyVo> replyList = new ArrayList<>();
@@ -139,12 +148,12 @@ public class RedInterViewController {
         }
     }
 
-    @GetMapping("typelist")
-    public R getInterviewTypeList() {
-        QueryWrapper<RedInterviewType> typeQueryWrapper = new QueryWrapper<>();
-        typeQueryWrapper.orderByAsc("sort");
-        List<RedInterviewType> typeList = typeService.list(typeQueryWrapper);
-        return R.ok().data("typeList",typeList);
+    @GetMapping("positionList")
+    public R getInterviewPositionList() {
+        QueryWrapper<RedInterviewPosition> positionQueryWrapper = new QueryWrapper<>();
+        positionQueryWrapper.orderByAsc("sort");
+        List<RedInterviewPosition> positionList = positionService.list(positionQueryWrapper);
+        return R.ok().data("positionList",positionList);
     }
 
     @GetMapping("tagList/{tId}")
@@ -152,7 +161,7 @@ public class RedInterViewController {
         if(tId.length()>0) {
             QueryWrapper<RedCategoryTag> typeQueryWrapper = new QueryWrapper<>();
             typeQueryWrapper.orderByAsc("sort");
-            List<RedCategoryTag> tagList = typeService.getInterviewTypeTagList(tId);
+            List<RedCategoryTag> tagList = positionService.getInterviewTypeTagList(tId);
             return R.ok().data("tagList",tagList);
         } else {
             return R.error("参数错误，请重新尝试");
