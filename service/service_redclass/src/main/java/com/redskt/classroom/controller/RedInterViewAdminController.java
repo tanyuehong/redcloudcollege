@@ -5,10 +5,8 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.redskt.classroom.entity.*;
 import com.redskt.classroom.entity.admin.vo.RedInterviewQuestionPositionVo;
-import com.redskt.classroom.entity.vo.*;
 import com.redskt.classroom.service.*;
 import com.redskt.commonutils.R;
-import com.redskt.commonutils.RequestParmUtil;
 import com.redskt.security.TokenManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -35,19 +33,7 @@ public class RedInterViewAdminController {
     private RedInterviewPositionClassifyService classifyService;
 
     @Autowired
-    private RedInterviewAnswerService answerService;
-
-    @Autowired
-    private RedInterviewCommentService commentService;
-
-    @Autowired
-    private RedInterviewGoodService goodService;
-
-    @Autowired
-    private RedInterviewCollectService collectService;
-
-    @Autowired
-    private RedInterviewAnswerCollectService answerCollectService;
+    private RedInterviewQuestionEverydayService everydayService;
 
     @Autowired
     private RedUserService userService;
@@ -133,6 +119,18 @@ public class RedInterViewAdminController {
         } else {
             return  R.error("没有对应的权限~");
         }
+    }
+
+    @GetMapping("getEveryDayQuestionList/{date}")
+    public R getEveryDayQuestionList(@PathVariable String date,HttpServletRequest request) {
+        String uId = TokenManager.getMemberIdByJwtToken(request);
+        if (date.length()>0 && this.checkIsAdmin(uId)) {
+            QueryWrapper<RedInterviewQuestionEveryday> everydayQueryWrapper = new QueryWrapper<>();
+            everydayQueryWrapper.eq("date",date);
+            List<RedInterviewQuestionEveryday> everydayList = everydayService.list(everydayQueryWrapper);
+            return R.ok().data("everydayList",everydayList);
+        }
+        return R.errorParam();
     }
 
     @GetMapping("deleteClassify/{cid}")

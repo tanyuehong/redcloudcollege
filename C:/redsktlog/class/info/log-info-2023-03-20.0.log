@@ -1,0 +1,295 @@
+2023-03-20 13:20:28.575 [main] INFO  com.redskt.classroom.RedClassApplication - Starting RedClassApplication on tanyuehongs-MacBook-Pro.local with PID 3371 (/Users/zyb/Documents/redcloudcollege/service/service_redclass/target/classes started by zyb in /Users/zyb/Documents/redcloudcollege)
+2023-03-20 13:20:28.577 [main] INFO  com.redskt.classroom.RedClassApplication - The following profiles are active: dev
+2023-03-20 13:20:29.642 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2023-03-20 13:20:29.646 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data repositories in DEFAULT mode.
+2023-03-20 13:20:29.693 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 26ms. Found 0 repository interfaces.
+2023-03-20 13:20:29.909 [main] INFO  c.u.j.c.EnableEncryptablePropertiesBeanFactoryPostProcessor - Post-processing PropertySource instances
+2023-03-20 13:20:29.954 [main] INFO  c.u.j.EncryptablePropertySourceConverter - Converting PropertySource configurationProperties [org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource] to AOP Proxy
+2023-03-20 13:20:29.954 [main] INFO  c.u.j.EncryptablePropertySourceConverter - Converting PropertySource servletConfigInitParams [org.springframework.core.env.PropertySource$StubPropertySource] to EncryptablePropertySourceWrapper
+2023-03-20 13:20:29.955 [main] INFO  c.u.j.EncryptablePropertySourceConverter - Converting PropertySource servletContextInitParams [org.springframework.core.env.PropertySource$StubPropertySource] to EncryptablePropertySourceWrapper
+2023-03-20 13:20:29.955 [main] INFO  c.u.j.EncryptablePropertySourceConverter - Converting PropertySource systemProperties [org.springframework.core.env.PropertiesPropertySource] to EncryptableMapPropertySourceWrapper
+2023-03-20 13:20:29.956 [main] INFO  c.u.j.EncryptablePropertySourceConverter - Converting PropertySource systemEnvironment [org.springframework.boot.env.SystemEnvironmentPropertySourceEnvironmentPostProcessor$OriginAwareSystemEnvironmentPropertySource] to EncryptableSystemEnvironmentPropertySourceWrapper
+2023-03-20 13:20:29.956 [main] INFO  c.u.j.EncryptablePropertySourceConverter - Converting PropertySource random [org.springframework.boot.env.RandomValuePropertySource] to EncryptablePropertySourceWrapper
+2023-03-20 13:20:29.956 [main] INFO  c.u.j.EncryptablePropertySourceConverter - Converting PropertySource applicationConfig: [classpath:/application.properties] [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
+2023-03-20 13:20:30.053 [main] INFO  c.u.j.filter.DefaultLazyPropertyFilter - Property Filter custom Bean not found with name 'encryptablePropertyFilter'. Initializing Default Property Filter
+2023-03-20 13:20:30.074 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'redisConfig' of type [com.redskt.servicebase.RedisConfig$$EnhancerBySpringCGLIB$$9c921958] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-20 13:20:30.079 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-20 13:20:30.189 [main] INFO  c.u.j.resolver.DefaultLazyPropertyResolver - Property Resolver custom Bean not found with name 'encryptablePropertyResolver'. Initializing Default Property Resolver
+2023-03-20 13:20:30.190 [main] INFO  c.u.j.detector.DefaultLazyPropertyDetector - Property Detector custom Bean not found with name 'encryptablePropertyDetector'. Initializing Default Property Detector
+2023-03-20 13:20:30.429 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8001 (http)
+2023-03-20 13:20:30.439 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8001"]
+2023-03-20 13:20:30.440 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-03-20 13:20:30.440 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.27]
+2023-03-20 13:20:30.538 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-03-20 13:20:30.538 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 1929 ms
+2023-03-20 13:20:30.696 [main] INFO  c.u.j.encryptor.DefaultLazyEncryptor - String Encryptor custom Bean not found with name 'jasyptStringEncryptor'. Initializing Default String Encryptor
+2023-03-20 13:20:30.705 [main] INFO  c.u.j.encryptor.DefaultLazyEncryptor - Encryptor config not found for property jasypt.encryptor.algorithm, using default value: PBEWITHHMACSHA512ANDAES_256
+2023-03-20 13:20:30.706 [main] INFO  c.u.j.encryptor.DefaultLazyEncryptor - Encryptor config not found for property jasypt.encryptor.key-obtention-iterations, using default value: 1000
+2023-03-20 13:20:30.706 [main] INFO  c.u.j.encryptor.DefaultLazyEncryptor - Encryptor config not found for property jasypt.encryptor.pool-size, using default value: 1
+2023-03-20 13:20:30.706 [main] INFO  c.u.j.encryptor.DefaultLazyEncryptor - Encryptor config not found for property jasypt.encryptor.provider-name, using default value: null
+2023-03-20 13:20:30.707 [main] INFO  c.u.j.encryptor.DefaultLazyEncryptor - Encryptor config not found for property jasypt.encryptor.provider-class-name, using default value: null
+2023-03-20 13:20:30.707 [main] INFO  c.u.j.encryptor.DefaultLazyEncryptor - Encryptor config not found for property jasypt.encryptor.salt-generator-classname, using default value: org.jasypt.salt.RandomSaltGenerator
+2023-03-20 13:20:30.709 [main] INFO  c.u.j.encryptor.DefaultLazyEncryptor - Encryptor config not found for property jasypt.encryptor.iv-generator-classname, using default value: org.jasypt.iv.RandomIvGenerator
+2023-03-20 13:20:30.710 [main] INFO  c.u.j.encryptor.DefaultLazyEncryptor - Encryptor config not found for property jasypt.encryptor.string-output-type, using default value: base64
+2023-03-20 13:20:30.873 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-03-20 13:20:34.864 [main] INFO  org.apache.catalina.core.StandardService - Stopping service [Tomcat]
+2023-03-20 13:20:34.875 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2023-03-20 13:21:17.445 [main] INFO  com.redskt.classroom.RedClassApplication - Starting RedClassApplication on tanyuehongs-MacBook-Pro.local with PID 3386 (/Users/zyb/Documents/redcloudcollege/service/service_redclass/target/classes started by zyb in /Users/zyb/Documents/redcloudcollege)
+2023-03-20 13:21:17.447 [main] INFO  com.redskt.classroom.RedClassApplication - The following profiles are active: dev
+2023-03-20 13:21:18.215 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2023-03-20 13:21:18.217 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data repositories in DEFAULT mode.
+2023-03-20 13:21:18.253 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 27ms. Found 0 repository interfaces.
+2023-03-20 13:21:18.497 [main] INFO  c.u.j.c.EnableEncryptablePropertiesBeanFactoryPostProcessor - Post-processing PropertySource instances
+2023-03-20 13:21:18.545 [main] INFO  c.u.j.EncryptablePropertySourceConverter - Converting PropertySource configurationProperties [org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource] to AOP Proxy
+2023-03-20 13:21:18.545 [main] INFO  c.u.j.EncryptablePropertySourceConverter - Converting PropertySource servletConfigInitParams [org.springframework.core.env.PropertySource$StubPropertySource] to EncryptablePropertySourceWrapper
+2023-03-20 13:21:18.545 [main] INFO  c.u.j.EncryptablePropertySourceConverter - Converting PropertySource servletContextInitParams [org.springframework.core.env.PropertySource$StubPropertySource] to EncryptablePropertySourceWrapper
+2023-03-20 13:21:18.546 [main] INFO  c.u.j.EncryptablePropertySourceConverter - Converting PropertySource systemProperties [org.springframework.core.env.PropertiesPropertySource] to EncryptableMapPropertySourceWrapper
+2023-03-20 13:21:18.546 [main] INFO  c.u.j.EncryptablePropertySourceConverter - Converting PropertySource systemEnvironment [org.springframework.boot.env.SystemEnvironmentPropertySourceEnvironmentPostProcessor$OriginAwareSystemEnvironmentPropertySource] to EncryptableSystemEnvironmentPropertySourceWrapper
+2023-03-20 13:21:18.546 [main] INFO  c.u.j.EncryptablePropertySourceConverter - Converting PropertySource random [org.springframework.boot.env.RandomValuePropertySource] to EncryptablePropertySourceWrapper
+2023-03-20 13:21:18.546 [main] INFO  c.u.j.EncryptablePropertySourceConverter - Converting PropertySource applicationConfig: [classpath:/application.properties] [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
+2023-03-20 13:21:18.639 [main] INFO  c.u.j.filter.DefaultLazyPropertyFilter - Property Filter custom Bean not found with name 'encryptablePropertyFilter'. Initializing Default Property Filter
+2023-03-20 13:21:18.661 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'redisConfig' of type [com.redskt.servicebase.RedisConfig$$EnhancerBySpringCGLIB$$c82b17a9] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-20 13:21:18.666 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-20 13:21:18.783 [main] INFO  c.u.j.resolver.DefaultLazyPropertyResolver - Property Resolver custom Bean not found with name 'encryptablePropertyResolver'. Initializing Default Property Resolver
+2023-03-20 13:21:18.785 [main] INFO  c.u.j.detector.DefaultLazyPropertyDetector - Property Detector custom Bean not found with name 'encryptablePropertyDetector'. Initializing Default Property Detector
+2023-03-20 13:21:19.002 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8001 (http)
+2023-03-20 13:21:19.012 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8001"]
+2023-03-20 13:21:19.013 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-03-20 13:21:19.013 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.27]
+2023-03-20 13:21:19.092 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-03-20 13:21:19.092 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 1617 ms
+2023-03-20 13:21:19.245 [main] INFO  c.u.j.encryptor.DefaultLazyEncryptor - String Encryptor custom Bean not found with name 'jasyptStringEncryptor'. Initializing Default String Encryptor
+2023-03-20 13:21:19.252 [main] INFO  c.u.j.encryptor.DefaultLazyEncryptor - Encryptor config not found for property jasypt.encryptor.algorithm, using default value: PBEWITHHMACSHA512ANDAES_256
+2023-03-20 13:21:19.253 [main] INFO  c.u.j.encryptor.DefaultLazyEncryptor - Encryptor config not found for property jasypt.encryptor.key-obtention-iterations, using default value: 1000
+2023-03-20 13:21:19.253 [main] INFO  c.u.j.encryptor.DefaultLazyEncryptor - Encryptor config not found for property jasypt.encryptor.pool-size, using default value: 1
+2023-03-20 13:21:19.254 [main] INFO  c.u.j.encryptor.DefaultLazyEncryptor - Encryptor config not found for property jasypt.encryptor.provider-name, using default value: null
+2023-03-20 13:21:19.254 [main] INFO  c.u.j.encryptor.DefaultLazyEncryptor - Encryptor config not found for property jasypt.encryptor.provider-class-name, using default value: null
+2023-03-20 13:21:19.254 [main] INFO  c.u.j.encryptor.DefaultLazyEncryptor - Encryptor config not found for property jasypt.encryptor.salt-generator-classname, using default value: org.jasypt.salt.RandomSaltGenerator
+2023-03-20 13:21:19.256 [main] INFO  c.u.j.encryptor.DefaultLazyEncryptor - Encryptor config not found for property jasypt.encryptor.iv-generator-classname, using default value: org.jasypt.iv.RandomIvGenerator
+2023-03-20 13:21:19.257 [main] INFO  c.u.j.encryptor.DefaultLazyEncryptor - Encryptor config not found for property jasypt.encryptor.string-output-type, using default value: base64
+2023-03-20 13:21:19.383 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-03-20 13:21:23.379 [main] INFO  org.apache.catalina.core.StandardService - Stopping service [Tomcat]
+2023-03-20 13:21:23.392 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2023-03-20 13:23:21.988 [main] INFO  com.redskt.classroom.RedClassApplication - Starting RedClassApplication on tanyuehongs-MacBook-Pro.local with PID 895 (/Users/zyb/Documents/redcloudcollege/service/service_redclass/target/classes started by zyb in /Users/zyb/Documents/redcloudcollege)
+2023-03-20 13:23:21.996 [main] INFO  com.redskt.classroom.RedClassApplication - The following profiles are active: dev
+2023-03-20 13:23:23.412 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2023-03-20 13:23:23.415 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data repositories in DEFAULT mode.
+2023-03-20 13:23:23.469 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 36ms. Found 0 repository interfaces.
+2023-03-20 13:23:23.825 [main] INFO  c.u.j.c.EnableEncryptablePropertiesBeanFactoryPostProcessor - Post-processing PropertySource instances
+2023-03-20 13:23:23.884 [main] INFO  c.u.j.EncryptablePropertySourceConverter - Converting PropertySource configurationProperties [org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource] to AOP Proxy
+2023-03-20 13:23:23.885 [main] INFO  c.u.j.EncryptablePropertySourceConverter - Converting PropertySource servletConfigInitParams [org.springframework.core.env.PropertySource$StubPropertySource] to EncryptablePropertySourceWrapper
+2023-03-20 13:23:23.885 [main] INFO  c.u.j.EncryptablePropertySourceConverter - Converting PropertySource servletContextInitParams [org.springframework.core.env.PropertySource$StubPropertySource] to EncryptablePropertySourceWrapper
+2023-03-20 13:23:23.886 [main] INFO  c.u.j.EncryptablePropertySourceConverter - Converting PropertySource systemProperties [org.springframework.core.env.PropertiesPropertySource] to EncryptableMapPropertySourceWrapper
+2023-03-20 13:23:23.887 [main] INFO  c.u.j.EncryptablePropertySourceConverter - Converting PropertySource systemEnvironment [org.springframework.boot.env.SystemEnvironmentPropertySourceEnvironmentPostProcessor$OriginAwareSystemEnvironmentPropertySource] to EncryptableSystemEnvironmentPropertySourceWrapper
+2023-03-20 13:23:23.887 [main] INFO  c.u.j.EncryptablePropertySourceConverter - Converting PropertySource random [org.springframework.boot.env.RandomValuePropertySource] to EncryptablePropertySourceWrapper
+2023-03-20 13:23:23.888 [main] INFO  c.u.j.EncryptablePropertySourceConverter - Converting PropertySource applicationConfig: [classpath:/application.properties] [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
+2023-03-20 13:23:23.988 [main] INFO  c.u.j.filter.DefaultLazyPropertyFilter - Property Filter custom Bean not found with name 'encryptablePropertyFilter'. Initializing Default Property Filter
+2023-03-20 13:23:24.016 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'redisConfig' of type [com.redskt.servicebase.RedisConfig$$EnhancerBySpringCGLIB$$be1de2f3] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-20 13:23:24.022 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-20 13:23:24.168 [main] INFO  c.u.j.resolver.DefaultLazyPropertyResolver - Property Resolver custom Bean not found with name 'encryptablePropertyResolver'. Initializing Default Property Resolver
+2023-03-20 13:23:24.170 [main] INFO  c.u.j.detector.DefaultLazyPropertyDetector - Property Detector custom Bean not found with name 'encryptablePropertyDetector'. Initializing Default Property Detector
+2023-03-20 13:23:24.417 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8001 (http)
+2023-03-20 13:23:24.436 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8001"]
+2023-03-20 13:23:24.437 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-03-20 13:23:24.437 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.27]
+2023-03-20 13:23:24.540 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-03-20 13:23:24.540 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 2492 ms
+2023-03-20 13:23:24.734 [main] INFO  c.u.j.encryptor.DefaultLazyEncryptor - String Encryptor custom Bean not found with name 'jasyptStringEncryptor'. Initializing Default String Encryptor
+2023-03-20 13:23:24.742 [main] INFO  c.u.j.encryptor.DefaultLazyEncryptor - Encryptor config not found for property jasypt.encryptor.algorithm, using default value: PBEWITHHMACSHA512ANDAES_256
+2023-03-20 13:23:24.742 [main] INFO  c.u.j.encryptor.DefaultLazyEncryptor - Encryptor config not found for property jasypt.encryptor.key-obtention-iterations, using default value: 1000
+2023-03-20 13:23:24.743 [main] INFO  c.u.j.encryptor.DefaultLazyEncryptor - Encryptor config not found for property jasypt.encryptor.pool-size, using default value: 1
+2023-03-20 13:23:24.743 [main] INFO  c.u.j.encryptor.DefaultLazyEncryptor - Encryptor config not found for property jasypt.encryptor.provider-name, using default value: null
+2023-03-20 13:23:24.744 [main] INFO  c.u.j.encryptor.DefaultLazyEncryptor - Encryptor config not found for property jasypt.encryptor.provider-class-name, using default value: null
+2023-03-20 13:23:24.744 [main] INFO  c.u.j.encryptor.DefaultLazyEncryptor - Encryptor config not found for property jasypt.encryptor.salt-generator-classname, using default value: org.jasypt.salt.RandomSaltGenerator
+2023-03-20 13:23:24.746 [main] INFO  c.u.j.encryptor.DefaultLazyEncryptor - Encryptor config not found for property jasypt.encryptor.iv-generator-classname, using default value: org.jasypt.iv.RandomIvGenerator
+2023-03-20 13:23:24.748 [main] INFO  c.u.j.encryptor.DefaultLazyEncryptor - Encryptor config not found for property jasypt.encryptor.string-output-type, using default value: base64
+2023-03-20 13:23:24.927 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-03-20 13:23:26.813 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-03-20 13:23:29.406 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-03-20 13:23:29.532 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2023-03-20 13:23:29.994 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/home/**'], []
+2023-03-20 13:23:29.995 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/swagger-resources/**'], []
+2023-03-20 13:23:29.995 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/webjars/**'], []
+2023-03-20 13:23:29.995 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/v2/**'], []
+2023-03-20 13:23:29.995 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/swagger-ui.html/**'], []
+2023-03-20 13:23:29.995 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/home/**'], []
+2023-03-20 13:23:29.996 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/swagger-resources/**'], []
+2023-03-20 13:23:29.996 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/webjars/**'], []
+2023-03-20 13:23:29.996 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/v2/**'], []
+2023-03-20 13:23:29.996 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/swagger-ui.html/**'], []
+2023-03-20 13:23:30.029 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/admin/**'], [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4a773f08, org.springframework.security.web.context.SecurityContextPersistenceFilter@acd115d, org.springframework.security.web.header.HeaderWriterFilter@6fdb1a59, org.springframework.security.web.authentication.logout.LogoutFilter@5730b513, com.redskt.security.filter.TokenLoginFilter@40b8158d, com.redskt.security.filter.TokenAuthenticationFilter@24e7087a, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@7ee02968, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2f2dc407, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1f8d42d1, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5bb3dee7, org.springframework.security.web.session.SessionManagementFilter@348bd063, org.springframework.security.web.access.ExceptionTranslationFilter@67ceaa9, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@467cd4b9]
+2023-03-20 13:23:30.031 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7c200e57, org.springframework.security.web.context.SecurityContextPersistenceFilter@65f470f8, org.springframework.security.web.header.HeaderWriterFilter@1adfb5b8, org.springframework.security.web.authentication.logout.LogoutFilter@3117ac8d, com.redskt.security.filter.TokenLoginFilter@1d0f7bcf, com.redskt.security.filter.TokenAuthenticationFilter@d0e4972, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@332fa1c, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@531299d3, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3487947c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1978b0d5, org.springframework.security.web.session.SessionManagementFilter@254cc548, org.springframework.security.web.access.ExceptionTranslationFilter@7f792530, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@1610c03c]
+2023-03-20 13:23:30.100 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2023-03-20 13:23:30.116 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2023-03-20 13:23:30.143 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2023-03-20 13:23:30.368 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: submitAdviseUsingPOST_1
+2023-03-20 13:23:30.378 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addGoodUsingGET_1
+2023-03-20 13:23:30.380 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: cancleGoodUsingGET_1
+2023-03-20 13:23:30.396 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: cancleGoodUsingGET_2
+2023-03-20 13:23:30.403 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: submitReplyCommentUsingPOST_1
+2023-03-20 13:23:30.410 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: submitReplyCommentUsingPOST_2
+2023-03-20 13:23:30.413 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: indexUsingGET_1
+2023-03-20 13:23:30.426 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: indexUsingGET_2
+2023-03-20 13:23:30.433 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: positionClassifyListUsingGET_1
+2023-03-20 13:23:30.449 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addGoodUsingGET_2
+2023-03-20 13:23:30.460 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: cancleGoodUsingGET_3
+2023-03-20 13:23:30.462 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: deleteQuestionUsingGET_1
+2023-03-20 13:23:30.464 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: deleteQuestionReplyUsingGET_1
+2023-03-20 13:23:30.519 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: submitQuestionUsingPOST_1
+2023-03-20 13:23:30.541 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addCommentGoodUsingGET_1
+2023-03-20 13:23:30.543 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addGoodUsingGET_3
+2023-03-20 13:23:30.545 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: cancleGoodUsingGET_4
+2023-03-20 13:23:30.549 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: cancleGoodUsingGET_5
+2023-03-20 13:23:30.553 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getCommentListUsingGET_1
+2023-03-20 13:23:30.556 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getCommentListUsingGET_2
+2023-03-20 13:23:30.562 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: indexUsingGET_3
+2023-03-20 13:23:30.566 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: submitReplyCommentUsingPOST_3
+2023-03-20 13:23:30.570 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: submitReplyCommentUsingPOST_4
+2023-03-20 13:23:30.571 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addGoodUsingGET_4
+2023-03-20 13:23:30.573 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: cancleGoodUsingGET_6
+2023-03-20 13:23:30.574 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getGoodStateUsingGET_1
+2023-03-20 13:23:30.577 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getAskTagListUsingGET_1
+2023-03-20 13:23:30.615 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: registerUserUsingPOST_1
+2023-03-20 13:23:30.636 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8001"]
+2023-03-20 13:23:30.667 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8001 (http) with context path ''
+2023-03-20 13:23:30.671 [main] INFO  com.redskt.classroom.RedClassApplication - Started RedClassApplication in 9.153 seconds (JVM running for 14.85)
+2023-03-20 13:23:40.934 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2023-03-20 13:23:40.960 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-03-20 13:23:40.972 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-03-20 13:24:59.833 [main] INFO  com.redskt.classroom.RedClassApplication - Starting RedClassApplication on tanyuehongs-MacBook-Pro.local with PID 1015 (/Users/zyb/Documents/redcloudcollege/service/service_redclass/target/classes started by zyb in /Users/zyb/Documents/redcloudcollege)
+2023-03-20 13:24:59.835 [main] INFO  com.redskt.classroom.RedClassApplication - The following profiles are active: dev
+2023-03-20 13:25:00.722 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2023-03-20 13:25:00.724 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data repositories in DEFAULT mode.
+2023-03-20 13:25:00.765 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 31ms. Found 0 repository interfaces.
+2023-03-20 13:25:01.068 [main] INFO  c.u.j.c.EnableEncryptablePropertiesBeanFactoryPostProcessor - Post-processing PropertySource instances
+2023-03-20 13:25:01.116 [main] INFO  c.u.j.EncryptablePropertySourceConverter - Converting PropertySource configurationProperties [org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource] to AOP Proxy
+2023-03-20 13:25:01.117 [main] INFO  c.u.j.EncryptablePropertySourceConverter - Converting PropertySource servletConfigInitParams [org.springframework.core.env.PropertySource$StubPropertySource] to EncryptablePropertySourceWrapper
+2023-03-20 13:25:01.117 [main] INFO  c.u.j.EncryptablePropertySourceConverter - Converting PropertySource servletContextInitParams [org.springframework.core.env.PropertySource$StubPropertySource] to EncryptablePropertySourceWrapper
+2023-03-20 13:25:01.118 [main] INFO  c.u.j.EncryptablePropertySourceConverter - Converting PropertySource systemProperties [org.springframework.core.env.PropertiesPropertySource] to EncryptableMapPropertySourceWrapper
+2023-03-20 13:25:01.118 [main] INFO  c.u.j.EncryptablePropertySourceConverter - Converting PropertySource systemEnvironment [org.springframework.boot.env.SystemEnvironmentPropertySourceEnvironmentPostProcessor$OriginAwareSystemEnvironmentPropertySource] to EncryptableSystemEnvironmentPropertySourceWrapper
+2023-03-20 13:25:01.118 [main] INFO  c.u.j.EncryptablePropertySourceConverter - Converting PropertySource random [org.springframework.boot.env.RandomValuePropertySource] to EncryptablePropertySourceWrapper
+2023-03-20 13:25:01.119 [main] INFO  c.u.j.EncryptablePropertySourceConverter - Converting PropertySource applicationConfig: [classpath:/application.properties] [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
+2023-03-20 13:25:01.196 [main] INFO  c.u.j.filter.DefaultLazyPropertyFilter - Property Filter custom Bean not found with name 'encryptablePropertyFilter'. Initializing Default Property Filter
+2023-03-20 13:25:01.217 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'redisConfig' of type [com.redskt.servicebase.RedisConfig$$EnhancerBySpringCGLIB$$473fd588] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-20 13:25:01.222 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-03-20 13:25:01.303 [main] INFO  c.u.j.resolver.DefaultLazyPropertyResolver - Property Resolver custom Bean not found with name 'encryptablePropertyResolver'. Initializing Default Property Resolver
+2023-03-20 13:25:01.305 [main] INFO  c.u.j.detector.DefaultLazyPropertyDetector - Property Detector custom Bean not found with name 'encryptablePropertyDetector'. Initializing Default Property Detector
+2023-03-20 13:25:01.502 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8001 (http)
+2023-03-20 13:25:01.509 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8001"]
+2023-03-20 13:25:01.510 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-03-20 13:25:01.510 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.27]
+2023-03-20 13:25:01.575 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-03-20 13:25:01.576 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 1707 ms
+2023-03-20 13:25:01.707 [main] INFO  c.u.j.encryptor.DefaultLazyEncryptor - String Encryptor custom Bean not found with name 'jasyptStringEncryptor'. Initializing Default String Encryptor
+2023-03-20 13:25:01.712 [main] INFO  c.u.j.encryptor.DefaultLazyEncryptor - Encryptor config not found for property jasypt.encryptor.algorithm, using default value: PBEWITHHMACSHA512ANDAES_256
+2023-03-20 13:25:01.712 [main] INFO  c.u.j.encryptor.DefaultLazyEncryptor - Encryptor config not found for property jasypt.encryptor.key-obtention-iterations, using default value: 1000
+2023-03-20 13:25:01.713 [main] INFO  c.u.j.encryptor.DefaultLazyEncryptor - Encryptor config not found for property jasypt.encryptor.pool-size, using default value: 1
+2023-03-20 13:25:01.713 [main] INFO  c.u.j.encryptor.DefaultLazyEncryptor - Encryptor config not found for property jasypt.encryptor.provider-name, using default value: null
+2023-03-20 13:25:01.713 [main] INFO  c.u.j.encryptor.DefaultLazyEncryptor - Encryptor config not found for property jasypt.encryptor.provider-class-name, using default value: null
+2023-03-20 13:25:01.714 [main] INFO  c.u.j.encryptor.DefaultLazyEncryptor - Encryptor config not found for property jasypt.encryptor.salt-generator-classname, using default value: org.jasypt.salt.RandomSaltGenerator
+2023-03-20 13:25:01.714 [main] INFO  c.u.j.encryptor.DefaultLazyEncryptor - Encryptor config not found for property jasypt.encryptor.iv-generator-classname, using default value: org.jasypt.iv.RandomIvGenerator
+2023-03-20 13:25:01.715 [main] INFO  c.u.j.encryptor.DefaultLazyEncryptor - Encryptor config not found for property jasypt.encryptor.string-output-type, using default value: base64
+2023-03-20 13:25:01.834 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-03-20 13:25:02.479 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-03-20 13:25:04.380 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-03-20 13:25:04.471 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2023-03-20 13:25:04.789 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/home/**'], []
+2023-03-20 13:25:04.790 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/swagger-resources/**'], []
+2023-03-20 13:25:04.790 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/webjars/**'], []
+2023-03-20 13:25:04.790 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/v2/**'], []
+2023-03-20 13:25:04.790 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/swagger-ui.html/**'], []
+2023-03-20 13:25:04.790 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/home/**'], []
+2023-03-20 13:25:04.790 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/swagger-resources/**'], []
+2023-03-20 13:25:04.791 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/webjars/**'], []
+2023-03-20 13:25:04.791 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/v2/**'], []
+2023-03-20 13:25:04.791 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/swagger-ui.html/**'], []
+2023-03-20 13:25:04.813 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: Ant [pattern='/admin/**'], [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3f3f554f, org.springframework.security.web.context.SecurityContextPersistenceFilter@7af56b26, org.springframework.security.web.header.HeaderWriterFilter@50930bff, org.springframework.security.web.authentication.logout.LogoutFilter@60b4c754, com.redskt.security.filter.TokenLoginFilter@3186f8f5, com.redskt.security.filter.TokenAuthenticationFilter@467cd4b9, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@66a93b25, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@67ceaa9, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@28654aff, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@69a3bf40, org.springframework.security.web.session.SessionManagementFilter@508b4f70, org.springframework.security.web.access.ExceptionTranslationFilter@3ae87e38, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@23d12a3a]
+2023-03-20 13:25:04.815 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3487947c, org.springframework.security.web.context.SecurityContextPersistenceFilter@285b491f, org.springframework.security.web.header.HeaderWriterFilter@5bb3dee7, org.springframework.security.web.authentication.logout.LogoutFilter@52325940, com.redskt.security.filter.TokenLoginFilter@77226121, com.redskt.security.filter.TokenAuthenticationFilter@3117ac8d, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@531299d3, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@346330b6, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@71e2843b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@760c777d, org.springframework.security.web.session.SessionManagementFilter@284f25e6, org.springframework.security.web.access.ExceptionTranslationFilter@24e7087a, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@65f470f8]
+2023-03-20 13:25:04.868 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2023-03-20 13:25:04.877 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2023-03-20 13:25:04.900 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2023-03-20 13:25:05.051 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: submitAdviseUsingPOST_1
+2023-03-20 13:25:05.062 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addGoodUsingGET_1
+2023-03-20 13:25:05.065 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: cancleGoodUsingGET_1
+2023-03-20 13:25:05.081 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: cancleGoodUsingGET_2
+2023-03-20 13:25:05.085 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: submitReplyCommentUsingPOST_1
+2023-03-20 13:25:05.090 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: submitReplyCommentUsingPOST_2
+2023-03-20 13:25:05.093 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: indexUsingGET_1
+2023-03-20 13:25:05.106 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: indexUsingGET_2
+2023-03-20 13:25:05.112 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: positionClassifyListUsingGET_1
+2023-03-20 13:25:05.127 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addGoodUsingGET_2
+2023-03-20 13:25:05.133 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: cancleGoodUsingGET_3
+2023-03-20 13:25:05.135 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: deleteQuestionUsingGET_1
+2023-03-20 13:25:05.137 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: deleteQuestionReplyUsingGET_1
+2023-03-20 13:25:05.171 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: submitQuestionUsingPOST_1
+2023-03-20 13:25:05.191 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addCommentGoodUsingGET_1
+2023-03-20 13:25:05.193 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addGoodUsingGET_3
+2023-03-20 13:25:05.195 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: cancleGoodUsingGET_4
+2023-03-20 13:25:05.197 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: cancleGoodUsingGET_5
+2023-03-20 13:25:05.199 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getCommentListUsingGET_1
+2023-03-20 13:25:05.200 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getCommentListUsingGET_2
+2023-03-20 13:25:05.203 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: indexUsingGET_3
+2023-03-20 13:25:05.207 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: submitReplyCommentUsingPOST_3
+2023-03-20 13:25:05.210 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: submitReplyCommentUsingPOST_4
+2023-03-20 13:25:05.212 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: addGoodUsingGET_4
+2023-03-20 13:25:05.213 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: cancleGoodUsingGET_6
+2023-03-20 13:25:05.215 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getGoodStateUsingGET_1
+2023-03-20 13:25:05.218 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: getAskTagListUsingGET_1
+2023-03-20 13:25:05.254 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: registerUserUsingPOST_1
+2023-03-20 13:25:05.270 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8001"]
+2023-03-20 13:25:05.290 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8001 (http) with context path ''
+2023-03-20 13:25:05.294 [main] INFO  com.redskt.classroom.RedClassApplication - Started RedClassApplication in 5.791 seconds (JVM running for 11.353)
+2023-03-20 13:29:06.148 [http-nio-8001-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-03-20 13:29:06.148 [http-nio-8001-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-03-20 13:29:06.159 [http-nio-8001-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 10 ms
+2023-03-20 13:29:18.886 [http-nio-8001-exec-6] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================/ucenter/getUserInfo
+2023-03-20 13:29:18.886 [http-nio-8001-exec-6] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================11
+2023-03-20 13:29:18.886 [http-nio-8001-exec-6] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================12eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSMjS0NDIysbQ0NLEwNjYwNTU3MVPSUUqtKFCyMjQztzQ1NTIwtagFAJqHEbwuAAAA.hSMAcRMfFvx_Wrm9WUhHl9-oqJpD3ruQhQt8acDWEu5G9ns8n9Ngrt32x2ec68r6ay2qKkOn0YyxuaAy1tTSaw
+2023-03-20 13:29:19.001 [http-nio-8001-exec-6] INFO  io.lettuce.core.EpollProvider - Starting without optional epoll library
+2023-03-20 13:29:19.002 [http-nio-8001-exec-6] INFO  io.lettuce.core.KqueueProvider - Starting without optional kqueue library
+2023-03-20 13:29:24.188 [http-nio-8001-exec-7] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================/ucenter/getUserInfo
+2023-03-20 13:29:24.188 [http-nio-8001-exec-7] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================11
+2023-03-20 13:29:24.189 [http-nio-8001-exec-7] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================12eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSMjS0NDIysbQ0NLEwNjYwNTU3MVPSUUqtKFCyMjQztzQ1NTIwtagFAJqHEbwuAAAA.hSMAcRMfFvx_Wrm9WUhHl9-oqJpD3ruQhQt8acDWEu5G9ns8n9Ngrt32x2ec68r6ay2qKkOn0YyxuaAy1tTSaw
+2023-03-20 13:29:24.212 [http-nio-8001-exec-6] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================3
+2023-03-20 13:29:24.213 [http-nio-8001-exec-6] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================6
+2023-03-20 13:29:24.213 [http-nio-8001-exec-6] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================8
+2023-03-20 13:29:24.242 [http-nio-8001-exec-7] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================3
+2023-03-20 13:29:24.243 [http-nio-8001-exec-7] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================6
+2023-03-20 13:29:24.244 [http-nio-8001-exec-7] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================8
+2023-03-20 13:29:27.725 [http-nio-8001-exec-8] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================/interview/admin/questionList
+2023-03-20 13:29:27.725 [http-nio-8001-exec-8] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================11
+2023-03-20 13:29:27.725 [http-nio-8001-exec-8] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================12eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSMjS0NDIysbQ0NLEwNjYwNTU3MVPSUUqtKFCyMjQztzQ1NTIwtagFAJqHEbwuAAAA.hSMAcRMfFvx_Wrm9WUhHl9-oqJpD3ruQhQt8acDWEu5G9ns8n9Ngrt32x2ec68r6ay2qKkOn0YyxuaAy1tTSaw
+2023-03-20 13:29:27.765 [http-nio-8001-exec-8] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================3
+2023-03-20 13:29:27.765 [http-nio-8001-exec-8] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================6
+2023-03-20 13:29:27.766 [http-nio-8001-exec-8] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================8
+2023-03-20 13:29:57.053 [http-nio-8001-exec-9] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================/interview/admin/questionList
+2023-03-20 13:29:57.053 [http-nio-8001-exec-9] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================11
+2023-03-20 13:29:57.053 [http-nio-8001-exec-9] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================12eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSMjS0NDIysbQ0NLEwNjYwNTU3MVPSUUqtKFCyMjQztzQ1NTIwtagFAJqHEbwuAAAA.hSMAcRMfFvx_Wrm9WUhHl9-oqJpD3ruQhQt8acDWEu5G9ns8n9Ngrt32x2ec68r6ay2qKkOn0YyxuaAy1tTSaw
+2023-03-20 13:29:57.091 [http-nio-8001-exec-9] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================3
+2023-03-20 13:29:57.092 [http-nio-8001-exec-9] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================6
+2023-03-20 13:29:57.092 [http-nio-8001-exec-9] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================8
+2023-03-20 13:58:32.512 [http-nio-8001-exec-3] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================/ucenter/getUserInfo
+2023-03-20 13:58:32.512 [http-nio-8001-exec-3] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================11
+2023-03-20 13:58:32.513 [http-nio-8001-exec-3] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================12eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSMjS0NDIysbQ0NLEwNjYwNTU3MVPSUUqtKFCyMjQztzQ1NTIwtagFAJqHEbwuAAAA.hSMAcRMfFvx_Wrm9WUhHl9-oqJpD3ruQhQt8acDWEu5G9ns8n9Ngrt32x2ec68r6ay2qKkOn0YyxuaAy1tTSaw
+2023-03-20 13:58:32.552 [http-nio-8001-exec-3] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================3
+2023-03-20 13:58:32.552 [http-nio-8001-exec-3] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================6
+2023-03-20 13:58:32.552 [http-nio-8001-exec-3] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================8
+2023-03-20 13:58:34.750 [http-nio-8001-exec-4] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================/interview/admin/questionList
+2023-03-20 13:58:34.750 [http-nio-8001-exec-4] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================11
+2023-03-20 13:58:34.751 [http-nio-8001-exec-4] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================12eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSMjS0NDIysbQ0NLEwNjYwNTU3MVPSUUqtKFCyMjQztzQ1NTIwtagFAJqHEbwuAAAA.hSMAcRMfFvx_Wrm9WUhHl9-oqJpD3ruQhQt8acDWEu5G9ns8n9Ngrt32x2ec68r6ay2qKkOn0YyxuaAy1tTSaw
+2023-03-20 13:58:34.792 [http-nio-8001-exec-4] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================3
+2023-03-20 13:58:34.792 [http-nio-8001-exec-4] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================6
+2023-03-20 13:58:34.793 [http-nio-8001-exec-4] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================8
+2023-03-20 14:03:26.124 [http-nio-8001-exec-5] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================/interview/admin/questionList
+2023-03-20 14:03:26.124 [http-nio-8001-exec-5] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================11
+2023-03-20 14:03:26.125 [http-nio-8001-exec-5] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================12eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSMjS0NDIysbQ0NLEwNjYwNTU3MVPSUUqtKFCyMjQztzQ1NTIwtagFAJqHEbwuAAAA.hSMAcRMfFvx_Wrm9WUhHl9-oqJpD3ruQhQt8acDWEu5G9ns8n9Ngrt32x2ec68r6ay2qKkOn0YyxuaAy1tTSaw
+2023-03-20 14:03:26.165 [http-nio-8001-exec-5] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================3
+2023-03-20 14:03:26.165 [http-nio-8001-exec-5] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================6
+2023-03-20 14:03:26.165 [http-nio-8001-exec-5] INFO  c.redskt.security.filter.TokenAuthenticationFilter - =================8
+2023-03-20 14:04:58.045 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2023-03-20 14:04:58.171 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-03-20 14:04:58.175 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

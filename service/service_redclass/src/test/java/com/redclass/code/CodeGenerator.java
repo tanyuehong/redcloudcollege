@@ -26,8 +26,8 @@ public class CodeGenerator {
         // 2、全局配置
         GlobalConfig gc = new GlobalConfig();
         String projectPath = System.getProperty("user.dir");
-        //gc.setOutputDir("/Users/zyb/Documents/redcloudcollege/service/service_redclass" + "/src/main/java");
-        gc.setOutputDir("C:\\Users\\tanyuehong\\Desktop\\redcloudcollege\\service\\service_redclass" + "/src/main/java");
+        gc.setOutputDir("/Users/zyb/Documents/redcloudcollege/service/service_redclass" + "/src/main/java");
+        //gc.setOutputDir("C:\\Users\\tanyuehong\\Desktop\\redcloudcollege\\service\\service_redclass" + "/src/main/java");
         gc.setAuthor("tanyuehong");
         gc.setOpen(false); //生成后是否打开资源管理器
         gc.setFileOverride(false); //重新生成时文件是否覆盖
@@ -60,7 +60,7 @@ public class CodeGenerator {
         // 5、策略配置
         StrategyConfig strategy = new StrategyConfig();
         //strategy.setInclude("red_interview_question_meet_position","red_interview_question_meet_company");
-        strategy.setInclude("red_interview_meet_position");
+        strategy.setInclude("red_interview_question_everyday");
         strategy.setNaming(NamingStrategy.underline_to_camel);//数据库表映射到实体的命名策略
         strategy.setTablePrefix(pc.getModuleName() + "_"); //生成实体时去掉表前缀
 
