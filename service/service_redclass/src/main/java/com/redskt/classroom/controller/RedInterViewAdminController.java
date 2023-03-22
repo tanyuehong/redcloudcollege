@@ -87,7 +87,7 @@ public class RedInterViewAdminController {
     @PostMapping("submitClassify")
     public R submitClassify(@RequestBody RedInterviewPositionClassify classify,HttpServletRequest request) {
         String uId = TokenManager.getMemberIdByJwtToken(request);
-        if (uId.length()>0 && this.checkIsAdmin(uId)) {
+        if (uId.length()>0 && this.userService.checkIsAdmin(uId)) {
             if(classifyService.save(classify)) {
                 return R.okSucessTips("添加成功");
             }
@@ -104,7 +104,7 @@ public class RedInterViewAdminController {
             return R.errorParam();
         }
         String uId = TokenManager.getMemberIdByJwtToken(request);
-        if (uId.length()>0 && this.checkIsAdmin(uId)) {
+        if (uId.length()>0 && this.userService.checkIsAdmin(uId)) {
             QueryWrapper<RedInterviewQuestionPosition> positionQueryWrapper = new QueryWrapper<>();
             positionQueryWrapper.eq("qid",questionPosition.getQid());
             positionQueryWrapper.eq("pid",questionPosition.getPid());
@@ -124,7 +124,7 @@ public class RedInterViewAdminController {
     @GetMapping("getEveryDayQuestionList/{date}")
     public R getEveryDayQuestionList(@PathVariable String date,HttpServletRequest request) {
         String uId = TokenManager.getMemberIdByJwtToken(request);
-        if (date.length()>0 && this.checkIsAdmin(uId)) {
+        if (date.length()>0 && this.userService.checkIsAdmin(uId)) {
             QueryWrapper<RedInterviewQuestionEveryday> everydayQueryWrapper = new QueryWrapper<>();
             everydayQueryWrapper.eq("date",date);
             List<RedInterviewQuestionEveryday> everydayList = everydayService.list(everydayQueryWrapper);
@@ -136,7 +136,7 @@ public class RedInterViewAdminController {
     @GetMapping("deleteClassify/{cid}")
     public R positionClassifyList(@PathVariable String cid,HttpServletRequest request) {
         String uId = TokenManager.getMemberIdByJwtToken(request);
-        if (cid.length()>0 && this.checkIsAdmin(uId)) {
+        if (cid.length()>0 && this.userService.checkIsAdmin(uId)) {
             if (classifyService.removeById(cid)) {
                 return R.okSucessTips("删除成功！");
             } else {
@@ -144,16 +144,5 @@ public class RedInterViewAdminController {
             }
         }
         return R.errorParam();
-    }
-
-    private boolean checkIsAdmin(String uId) {
-        QueryWrapper<RedClassUser> wrapper = new QueryWrapper<>();
-        wrapper.select("id","username","authority");
-        wrapper.eq("id",uId);
-        RedClassUser eduUser = userService.getOne(wrapper);
-        if (eduUser!=null && eduUser.getAuthority() == 100) {
-            return true;
-        }
-        return false;
     }
 }

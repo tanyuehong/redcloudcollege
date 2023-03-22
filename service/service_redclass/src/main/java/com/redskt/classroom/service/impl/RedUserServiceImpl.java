@@ -32,18 +32,30 @@ import java.util.UUID;
 public class RedUserServiceImpl extends ServiceImpl<RedUserMapper, RedClassUser> implements RedUserService {
 
     @Override
-    public List<RedClassUserVo> getFocusUserList(String uid) {
-        return baseMapper.getFocusUserList(uid);
+    public boolean checkIsAdmin(String uId) {
+        QueryWrapper<RedClassUser> wrapper = new QueryWrapper<>();
+        wrapper.select("id","username","authority");
+        wrapper.eq("id",uId);
+        RedClassUser eduUser = this.getOne(wrapper);
+        if (eduUser!=null && eduUser.getAuthority() == 100) {
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public List<RedClassUserVo> getFansUserList(String uid) {
-        return baseMapper.getFansUserList(uid);
+    public List<RedClassUserVo> getFocusUserList(String uId) {
+        return baseMapper.getFocusUserList(uId);
     }
 
     @Override
-    public RedUserAskVo getAskUserInfo(String uid) {
-        return baseMapper.getUserAskInfo(uid);
+    public List<RedClassUserVo> getFansUserList(String uId) {
+        return baseMapper.getFansUserList(uId);
+    }
+
+    @Override
+    public RedUserAskVo getAskUserInfo(String uId) {
+        return baseMapper.getUserAskInfo(uId);
     }
 
     @Override
@@ -101,12 +113,12 @@ public class RedUserServiceImpl extends ServiceImpl<RedUserMapper, RedClassUser>
     }
 
     @Override
-    public int updateUserInfo(Map<String, Object> map,String userId) {
-        return  baseMapper.updateUserInfo(map,userId);
+    public int updateUserInfo(Map<String, Object> map,String uId) {
+        return  baseMapper.updateUserInfo(map,uId);
     }
 
     @Override
-    public int changeUserPwd(Map<String, Object> map,String oldPwd,String userId) {
-        return  baseMapper.changeUserPwd(map,oldPwd,userId);
+    public int changeUserPwd(Map<String, Object> map,String oldPwd,String uId) {
+        return  baseMapper.changeUserPwd(map,oldPwd,uId);
     }
 }

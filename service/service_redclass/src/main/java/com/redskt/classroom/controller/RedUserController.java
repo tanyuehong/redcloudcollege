@@ -59,6 +59,16 @@ public class RedUserController {
         return R.ok().data("userInfo",eduUser);
     }
 
+    @PostMapping("getUserAdminState")
+    public R getUserAdminState(HttpServletRequest request) {
+        String uId = TokenManager.getMemberIdByJwtToken(request);
+        if (uId.length()>0) {
+            return R.ok().data("isAdmin",this.userService.checkIsAdmin(uId));
+        } else {
+            return R.error();
+        }
+    }
+
     @PostMapping("uploadUserImage")
     public  R uploadUerImage(@RequestParam(value = "file") MultipartFile file,HttpServletRequest request) {
         if (file.isEmpty()) {
