@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.redskt.classroom.entity.*;
+import com.redskt.classroom.entity.admin.vo.RedInterViewEveryDayQuestionVo;
 import com.redskt.classroom.entity.admin.vo.RedInterviewQuestionPositionVo;
 import com.redskt.classroom.service.*;
 import com.redskt.commonutils.R;
@@ -97,6 +98,21 @@ public class RedInterViewAdminController {
         }
     }
 
+    @PostMapping("submitEveryQuestion")
+    public R submitEveryQuestion(@RequestBody RedInterviewQuestionEveryday questionEveryday,HttpServletRequest request) {
+        String uId = TokenManager.getMemberIdByJwtToken(request);
+        if (uId.length()>0 && this.userService.checkIsAdmin(uId)) {
+            questionEveryday.setUid(uId);
+            questionEveryday.setType(1);
+            if(everydayService.save(questionEveryday)) {
+                return R.okSucessTips("添加成功");
+            }
+            return R.error("存储失败,请重试哈~");
+        } else {
+            return  R.error("没有对应的权限~");
+        }
+    }
+
     @PostMapping("submitQuestionPosition")
     public R submitQuestionPosition(@RequestBody RedInterviewQuestionPosition questionPosition,HttpServletRequest request) {
         if (questionPosition.getPid()==null ||questionPosition.getPid().length() == 0 ||
@@ -125,9 +141,7 @@ public class RedInterViewAdminController {
     public R getEveryDayQuestionList(@PathVariable String date,HttpServletRequest request) {
         String uId = TokenManager.getMemberIdByJwtToken(request);
         if (date.length()>0 && this.userService.checkIsAdmin(uId)) {
-            QueryWrapper<RedInterviewQuestionEveryday> everydayQueryWrapper = new QueryWrapper<>();
-            everydayQueryWrapper.eq("date",date);
-            List<RedInterviewQuestionEveryday> everydayList = everydayService.list(everydayQueryWrapper);
+            List<RedInterViewEveryDayQuestionVo> everydayList = everydayService.getInterViewEveryQuestionList(date);
             return R.ok().data("everydayList",everydayList);
         }
         return R.errorParam();

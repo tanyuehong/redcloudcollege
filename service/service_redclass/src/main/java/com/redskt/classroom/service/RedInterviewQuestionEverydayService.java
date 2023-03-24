@@ -2,6 +2,9 @@ package com.redskt.classroom.service;
 
 import com.redskt.classroom.entity.RedInterviewQuestionEveryday;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.redskt.classroom.entity.admin.vo.RedInterViewEveryDayQuestionVo;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface RedInterviewQuestionEverydayService extends IService<RedInterviewQuestionEveryday> {
 
+    List<RedInterViewEveryDayQuestionVo> getInterViewEveryQuestionList(String date);
 }

@@ -1,6 +1,5 @@
 package com.redskt.classroom.entity.admin.vo;
 
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 @Data

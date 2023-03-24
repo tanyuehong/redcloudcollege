@@ -2,6 +2,10 @@ package com.redskt.classroom.mapper;
 
 import com.redskt.classroom.entity.RedInterviewQuestionEveryday;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.redskt.classroom.entity.admin.vo.RedInterViewEveryDayQuestionVo;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +17,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface RedInterviewQuestionEverydayMapper extends BaseMapper<RedInterviewQuestionEveryday> {
 
+    List<RedInterViewEveryDayQuestionVo> getInterViewEveryQuestionList(@Param("date") String date);
 }
