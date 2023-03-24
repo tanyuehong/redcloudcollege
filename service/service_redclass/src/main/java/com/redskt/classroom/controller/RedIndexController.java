@@ -2,6 +2,7 @@ package com.redskt.classroom.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.redskt.classroom.entity.*;
+import com.redskt.classroom.entity.admin.vo.RedInterViewEveryDayQuestionVo;
 import com.redskt.classroom.entity.vo.OPHomeGuessLikeVo;
 import com.redskt.classroom.entity.vo.RedClassBlogDetailVo;
 import com.redskt.classroom.entity.vo.RedClassBookVo;
@@ -40,6 +41,9 @@ public class RedIndexController {
 
     @Autowired
     private RedTeacherService teacherService;
+
+    @Autowired
+    private RedInterviewQuestionEverydayService everydayService;
 
     //查询前8条热门课程，查询前4条名师
     @GetMapping("index")
@@ -118,6 +122,14 @@ public class RedIndexController {
             gussLikes.add(vo);
         }
         List<RedClassBanner> banerList = bannerService.selectAllBanner();
-        return R.ok().data("banerList",banerList).data("eduList",eduList).data("gusslikeList",gussLikes);
+
+        String date =  RedInterViewController.getFormatDateString();
+        List<RedInterViewEveryDayQuestionVo> everydayList = everydayService.getInterViewEveryQuestionList(date,null);
+
+        R r = R.ok().data("banerList",banerList).data("eduList",eduList).data("gusslikeList",gussLikes);
+        if(everydayList != null && everydayList.size()>0) {
+            r.data("everyDayQuestion",everydayList.get(0));
+        }
+        return r;
     }
 }

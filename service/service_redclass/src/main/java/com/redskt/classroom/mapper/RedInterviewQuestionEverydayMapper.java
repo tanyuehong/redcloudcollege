@@ -17,5 +17,5 @@ import java.util.List;
  */
 public interface RedInterviewQuestionEverydayMapper extends BaseMapper<RedInterviewQuestionEveryday> {
 
-    List<RedInterViewEveryDayQuestionVo> getInterViewEveryQuestionList(@Param("date") String date);
+    List<RedInterViewEveryDayQuestionVo> getInterViewEveryQuestionList(@Param("date") String date,@Param("pId") String pId);
 }

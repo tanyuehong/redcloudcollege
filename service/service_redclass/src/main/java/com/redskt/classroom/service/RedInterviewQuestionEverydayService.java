@@ -16,5 +16,5 @@ import java.util.List;
  */
 public interface RedInterviewQuestionEverydayService extends IService<RedInterviewQuestionEveryday> {
 
-    List<RedInterViewEveryDayQuestionVo> getInterViewEveryQuestionList(String date);
+    List<RedInterViewEveryDayQuestionVo> getInterViewEveryQuestionList(String date,String pId);
 }

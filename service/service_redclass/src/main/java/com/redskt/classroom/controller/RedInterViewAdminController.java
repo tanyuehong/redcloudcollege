@@ -141,7 +141,7 @@ public class RedInterViewAdminController {
     public R getEveryDayQuestionList(@PathVariable String date,HttpServletRequest request) {
         String uId = TokenManager.getMemberIdByJwtToken(request);
         if (date.length()>0 && this.userService.checkIsAdmin(uId)) {
-            List<RedInterViewEveryDayQuestionVo> everydayList = everydayService.getInterViewEveryQuestionList(date);
+            List<RedInterViewEveryDayQuestionVo> everydayList = everydayService.getInterViewEveryQuestionList(date,null);
             return R.ok().data("everydayList",everydayList);
         }
         return R.errorParam();

@@ -9,6 +9,8 @@ public class RedInterViewEveryDayQuestionVo {
 
     private String qTitle;
 
+    private String qContent;
+
     private String position;
 
     private String opName;

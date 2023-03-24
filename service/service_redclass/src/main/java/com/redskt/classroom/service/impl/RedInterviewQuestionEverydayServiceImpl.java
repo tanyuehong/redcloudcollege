@@ -21,7 +21,7 @@ import java.util.List;
 public class RedInterviewQuestionEverydayServiceImpl extends ServiceImpl<RedInterviewQuestionEverydayMapper, RedInterviewQuestionEveryday> implements RedInterviewQuestionEverydayService {
 
     @Override
-    public List<RedInterViewEveryDayQuestionVo> getInterViewEveryQuestionList(String date) {
-        return baseMapper.getInterViewEveryQuestionList(date);
+    public List<RedInterViewEveryDayQuestionVo> getInterViewEveryQuestionList(String date,String pId) {
+        return baseMapper.getInterViewEveryQuestionList(date,pId);
     }
 }

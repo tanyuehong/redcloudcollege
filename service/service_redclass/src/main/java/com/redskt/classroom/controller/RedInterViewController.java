@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.redskt.classroom.entity.*;
+import com.redskt.classroom.entity.admin.vo.RedInterViewEveryDayQuestionVo;
 import com.redskt.classroom.entity.vo.*;
 import com.redskt.classroom.service.*;
 import com.redskt.commonutils.R;
@@ -14,9 +15,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.text.DateFormat;
+import java.util.*;
 
 @RestController
 @RequestMapping("/home/interview")
@@ -48,6 +48,9 @@ public class RedInterViewController {
 
     @Autowired
     private RedInterviewPositionClassifyService classifyService;
+
+    @Autowired
+    private RedInterviewQuestionEverydayService everydayService;
 
     @PostMapping("index")
     public R getInterviewIndex(@RequestBody Map parameterMap) {
@@ -102,8 +105,22 @@ public class RedInterViewController {
         QueryWrapper<RedInterviewPositionClassify> classifyQueryWrapper = new QueryWrapper<>();
         classifyQueryWrapper.orderByAsc("sort");
         List<RedInterviewPositionClassify> classifyList = classifyService.list(classifyQueryWrapper);
+        String date =  this.getFormatDateString();
+        List<RedInterViewEveryDayQuestionVo> everydayList = everydayService.getInterViewEveryQuestionList(date,null);
+        R r = R.ok().data("list", list).data("classifyList", classifyList);
+        if( everydayList != null && everydayList.size()>0) {
+            r.data("everyDayQuestion",everydayList.get(0));
+        }
+        return r;
+    }
 
-        return R.ok().data("list", list).data("classifyList", classifyList);
+    public static String getFormatDateString() {
+        Calendar calendar = Calendar.getInstance();
+        StringBuffer sb = new StringBuffer();
+        sb.append(calendar.get(Calendar.YEAR)).append("-");
+        sb.append(calendar.get(Calendar.MONTH) + 1).append("-");
+        sb.append(calendar.get(Calendar.DAY_OF_MONTH));
+        return sb.toString();
     }
 
     @PostMapping("getQuestionDetail")
