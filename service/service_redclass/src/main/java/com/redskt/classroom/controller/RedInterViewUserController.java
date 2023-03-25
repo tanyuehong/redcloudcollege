@@ -72,17 +72,24 @@ public class RedInterViewUserController {
         String uid = (String) parameterMap.get("uid");
         String uId = TokenManager.getMemberIdByJwtToken(request);
         if (uid.length()>0 && uId.length()>0 && uid.equals(uId))  {
-            String title    = (String) parameterMap.get("title");
-            String content  = (String) parameterMap.get("content");
-            String qustype  = (String) parameterMap.get("qustype");
+            String title      = (String) parameterMap.get("title");
+            String content    = (String) parameterMap.get("content");
+            String positionId = (String) parameterMap.get("position");
+            String classifyId = (String) parameterMap.get("classify");
             List<String> tags = JSON.parseArray((String) parameterMap.get("tagList"),String.class);
 
             RedInterviewQuestion question= new RedInterviewQuestion();
             question.setUid(uid);
             question.setTitle(title);
             question.setContent(content);
-            question.setQustype(qustype);
             if (questionService.save(question)) {
+                RedInterviewQuestionPosition questionPosition = new RedInterviewQuestionPosition();
+                questionPosition.setPid(positionId);
+                questionPosition.setQid(question.getId());
+                if(classifyId!=null && classifyId.length()>0) {
+                    questionPosition.setSid(classifyId);
+                }
+                positionService.save(questionPosition);
                 List<RedInterviewTags> tagsList = new ArrayList<>();
                 for (int i=0;i<tags.size();i++) {
                     RedInterviewTags tag = new RedInterviewTags();

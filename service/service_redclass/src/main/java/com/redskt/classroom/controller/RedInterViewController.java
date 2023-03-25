@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.DateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @RestController
@@ -55,7 +57,6 @@ public class RedInterViewController {
     @PostMapping("index")
     public R getInterviewIndex(@RequestBody Map parameterMap) {
         parameterMap = RequestParmUtil.transToMAP(parameterMap);
-
         String sort = (String) parameterMap.get("sort");
         String tag  = (String) parameterMap.get("tag");
 
@@ -85,21 +86,21 @@ public class RedInterViewController {
     @PostMapping("pindex")
     public R getPositionInterviewIndex(@RequestBody Map parameterMap) {
         parameterMap = RequestParmUtil.transToMAP(parameterMap);
-        String stringSort = (String)parameterMap.get("sort");
-        String orderType  = (String)parameterMap.get("orderType");
+        String strSort    = (String)parameterMap.get("sort");   // 按什么类型排序  面试题名  回答数  出现频率？
+        String orderType  = (String)parameterMap.get("orderType");   // 降序？升序
+        String pId        = (String) parameterMap.get("pId");        // 职位id
+        String sId        = (String) parameterMap.get("pId");        // 面试题分类
         int sort = 1;
         try {
-            sort = Integer.parseInt(stringSort);
+            sort = Integer.parseInt(strSort);
         } catch (NumberFormatException e) {}
         int oType = 1;
         try {
             oType = Integer.parseInt(orderType);
         } catch (NumberFormatException e) {}
-        String pId      = (String) parameterMap.get("pId");
-        String clssify  = (String) parameterMap.get("clssify");
 
 //        PageHelper.startPage(1, 20  );
-        List<RedInterviewQuestionVo> list = questionService.getPositionQuestionList(sort,pId,clssify,oType);
+        List<RedInterviewQuestionVo> list = questionService.getPositionQuestionList(sort,pId,sId,oType);
         PageInfo page = new PageInfo(list);
 
         QueryWrapper<RedInterviewPositionClassify> classifyQueryWrapper = new QueryWrapper<>();
@@ -115,12 +116,9 @@ public class RedInterViewController {
     }
 
     public static String getFormatDateString() {
-        Calendar calendar = Calendar.getInstance();
-        StringBuffer sb = new StringBuffer();
-        sb.append(calendar.get(Calendar.YEAR)).append("-");
-        sb.append(calendar.get(Calendar.MONTH) + 1).append("-");
-        sb.append(calendar.get(Calendar.DAY_OF_MONTH));
-        return sb.toString();
+        LocalDate date = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        return  date.format(formatter);
     }
 
     @PostMapping("getQuestionDetail")
@@ -144,8 +142,8 @@ public class RedInterViewController {
             positionQueryWrapper.last("limit 4");
             List<RedInterviewPosition> positionList = positionService.list(positionQueryWrapper);
 
-            RedInterviewPosition currentPosition = positionService.getById(qDetail.getQustype());
-            List<RedInterviewQuestionVo> hotList = questionService.getHotInterviewQustionList(qDetail.getQustype(),qDetail.getQId());
+            RedInterviewPosition currentPosition = positionService.getById(qDetail.getPId());
+            List<RedInterviewQuestionVo> hotList = questionService.getHotInterviewQustionList(qDetail.getPId(),qDetail.getQId());
 
             List<RedClassReplyVo> replyList = new ArrayList<>();
             if(type == 1) {
@@ -173,12 +171,10 @@ public class RedInterViewController {
         return R.ok().data("positionList",positionList);
     }
 
-    @GetMapping("tagList/{tId}")
-    public R getTypeTagList(@PathVariable String tId) {
-        if(tId.length()>0) {
-            QueryWrapper<RedCategoryTag> typeQueryWrapper = new QueryWrapper<>();
-            typeQueryWrapper.orderByAsc("sort");
-            List<RedCategoryTag> tagList = positionService.getInterviewTypeTagList(tId);
+    @GetMapping("tagList/{pId}")
+    public R getTypeTagList(@PathVariable String pId) {
+        if(pId.length()>0) {
+            List<RedCategoryTag> tagList = positionService.getInterviewPositionTagList(pId);
             return R.ok().data("tagList",tagList);
         } else {
             return R.error("参数错误，请重新尝试");

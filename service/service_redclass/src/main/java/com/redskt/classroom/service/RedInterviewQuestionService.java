@@ -21,7 +21,7 @@ public interface RedInterviewQuestionService extends IService<RedInterviewQuesti
 
     List<RedInterviewQuestionVo> getHotInterviewQustionList(String qType,String qId);
 
-    List<RedInterviewQuestionVo> getPositionQuestionList(int sort,String pId,String classify,int orderType);
+    List<RedInterviewQuestionVo> getPositionQuestionList(int sort,String pId,String sId,int orderType);
 
     void updateQuestionReadCount(String qId,int readCount);
 

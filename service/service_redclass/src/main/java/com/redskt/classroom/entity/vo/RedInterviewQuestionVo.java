@@ -11,19 +11,19 @@ public class RedInterviewQuestionVo {
 
     private String qId;
 
-    private String uid;
+    private String pId;
+
+    private String uId;
 
     private String nickname;
 
     private String avatar;
 
-    private String snum;
+    private String sNum;
 
     private String title;
 
     private String type;
-
-    private String qustype;
 
     private String deep;
 

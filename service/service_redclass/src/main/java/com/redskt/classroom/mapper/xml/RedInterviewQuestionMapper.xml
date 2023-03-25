@@ -4,13 +4,13 @@
 
     <resultMap id="interviewQuestionMap" type="com.redskt.classroom.entity.vo.RedInterviewQuestionVo">
         <id column="qid" property="qId"/>
-        <id column="uid" property="uid"/>
+        <id column="uid" property="uId"/>
+        <id column="pId" property="pId"/>
         <id column="nickname" property="nickname"/>
         <id column="avatar" property="avatar"/>
-        <id column="snum" property="snum"/>
+        <id column="snum" property="sNum"/>
         <id column="title" property="title"/>
         <id column="type" property="type"/>
-        <id column="qustype" property="qustype"/>
         <id column="deep" property="deep"/>
         <id column="typeString" property="typeString"/>
         <id column="content" property="content"/>
@@ -42,13 +42,10 @@
         ,tag.id as ctid,tag.name as tname,tag.img as timg,tag.sort as tsort
         FROM red_interview_question qustion
         LEFT OUTER JOIN edu_user user ON qustion.uid=user.id
-        LEFT OUTER JOIN red_interview_tags tags ON tags.qid = qustion.id
+        LEFT OUTER JOIN red_interview_question_tags tags ON tags.qid = qustion.id
         LEFT OUTER JOIN red_category_tag tag ON tag.id = tags.tid
         <if test="tag != null">
             where tag.path = #{tag}
-        </if>
-        <if test="qustype != null">
-            where qustype = #{qustype}
         </if>
         <if test="qid != null">
             and  qId != #{qid}
@@ -69,23 +66,23 @@
     </select>
 
     <select id="getPositionQuestionList" resultMap="interviewQuestionMap">
-        SELECT qustion.id as qId,qustion.title,qustion.snum,qustion.type,qustion.content,qustion.deep,qustion.collect,qustion.readcount,qustion.hotnum,qustion.price,qustion.good,(tmeet+smeet+pmeet) as meet,qustion.gmt_create,user.nickname,
-        qustion.uid,(pmeet+tmeet+smeet)/ (readcount + 0.0 ) as frequency,(select count(reply.id) as replaycount from red_interview_answer reply where reply.qid=qustion.id) as reply
+        SELECT question.id as qId,question.title,question.snum,question.type,question.content,question.deep,question.collect,question.readcount,question.hotnum,question.price,question.good,(tmeet+smeet+pmeet) as meet,question.gmt_create,user.nickname,
+        question.uid,(pmeet+tmeet+smeet)/ (readcount + 0.0 ) as frequency,(select count(reply.id) as replaycount from red_interview_answer reply where reply.qid=question.id) as reply
         ,tag.id as ctid,tag.name as tname,tag.img as timg,tag.sort as tsort
-        FROM red_interview_question qustion
-        LEFT OUTER JOIN edu_user user ON qustion.uid=user.id
-        LEFT OUTER JOIN red_interview_tags tags ON tags.qid = qustion.id
+        FROM red_interview_question question
+        LEFT OUTER JOIN edu_user user ON user.id=question.uid
+        LEFT OUTER JOIN red_interview_question_tags tags ON tags.qid = question.id
         LEFT OUTER JOIN red_category_tag tag ON tag.id = tags.tid
-        LEFT OUTER JOIN red_interview_question_position tposition ON tposition.qid = qustion.id
+        LEFT OUTER JOIN red_interview_question_position tposition ON tposition.qid = question.id
         where tposition.pid = #{pid}
         <if test="sort==1">
-            ORDER BY qustion.snum
+            ORDER BY question.snum
         </if>
         <if test="sort==2">
             ORDER BY reply
         </if>
         <if test="sort==3">
-            ORDER BY qustion.hotnum
+            ORDER BY question.hotnum
         </if>
         <if test="sort==4">
             ORDER BY ddegree
@@ -109,11 +106,12 @@
     </update>
 
     <select id="getQuestionDetail" resultMap="interviewQuestionMap">
-        SELECT question.id as qId, question.uid,question.title,question.type,question.content,question.answer,question.collect,question.readcount,question.hotnum,question.price,question.deep,question.qustype,(tmeet+smeet+pmeet) as meet,question.good,question.gmt_create, user.nickname,
+        SELECT question.id as qId,qPosition.pid as pId,question.uid,question.title,question.type,question.content,question.answer,question.collect,question.readcount,question.hotnum,question.price,question.deep,(tmeet+smeet+pmeet) as meet,question.good,question.gmt_create, user.nickname,
             user.avatar,(select count(reply.id) from red_ask_reply reply where reply.qid=question.id) as reply,tag.id as ctid,tag.name as tname,tag.img as timg,tag.sort as tsort
         FROM red_interview_question question
+        LEFT OUTER JOIN red_interview_question_position qPosition ON qPosition.qid=question.id
         LEFT OUTER JOIN edu_user user ON question.uid=user.id
-        LEFT OUTER JOIN red_interview_tags tags ON tags.qid = question.id
+        LEFT OUTER JOIN red_interview_question_tags tags ON tags.qid = question.id
         LEFT OUTER JOIN red_category_tag tag ON tag.id = tags.tid
         WHERE question.id=#{tId}
     </select>

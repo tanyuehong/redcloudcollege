@@ -16,6 +16,6 @@ import java.util.List;
  */
 public interface RedInterviewPositionService extends IService<RedInterviewPosition> {
 
-    List<RedCategoryTag> getInterviewTypeTagList(String tid);
+    List<RedCategoryTag> getInterviewPositionTagList(String pId);
 
 }

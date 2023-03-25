@@ -21,8 +21,8 @@ import java.util.List;
 public class RedInterviewPositionServiceImpl extends ServiceImpl<RedInterviewPositionMapper, RedInterviewPosition> implements RedInterviewPositionService {
 
     @Override
-    public List<RedCategoryTag> getInterviewTypeTagList(String tid) {
-        return baseMapper.getInterviewTypeTagList(tid);
+    public List<RedCategoryTag> getInterviewPositionTagList(String pId) {
+        return baseMapper.getInterviewPositionTagList(pId);
     }
 
 }

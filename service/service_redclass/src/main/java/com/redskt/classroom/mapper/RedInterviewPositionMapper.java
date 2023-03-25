@@ -16,5 +16,5 @@ import java.util.List;
  * @since 2022-07-12
  */
 public interface RedInterviewPositionMapper extends BaseMapper<RedInterviewPosition> {
-    List<RedCategoryTag> getInterviewTypeTagList(@Param("tid") String tid);
+    List<RedCategoryTag> getInterviewPositionTagList(@Param("pId") String pId);
 }
