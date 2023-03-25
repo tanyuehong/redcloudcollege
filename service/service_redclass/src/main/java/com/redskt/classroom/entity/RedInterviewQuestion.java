@@ -57,8 +57,6 @@ public class RedInterviewQuestion implements Serializable {
 
     private Integer good;
 
-    private String qustype;
-
     @ApiModelProperty(value = "创建时间")
     @TableField(fill = FieldFill.INSERT)
     private Date gmtCreate;

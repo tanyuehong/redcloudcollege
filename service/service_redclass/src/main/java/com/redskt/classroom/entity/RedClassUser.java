@@ -45,6 +45,9 @@ public class RedClassUser implements Serializable {
 
     private String name;
 
+    @ApiModelProperty(value = "权限")
+    private Integer authority;
+
     @ApiModelProperty(value = "性别 1 女，2 男")
     private Integer sex;
 

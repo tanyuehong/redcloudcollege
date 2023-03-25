@@ -14,8 +14,11 @@ import com.redskt.servicebase.excepionhandler.RedCloudCollegeExceptionHandler;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * <p>
@@ -29,18 +32,30 @@ import java.util.Map;
 public class RedUserServiceImpl extends ServiceImpl<RedUserMapper, RedClassUser> implements RedUserService {
 
     @Override
-    public List<RedClassUserVo> getFocusUserList(String uid) {
-        return baseMapper.getFocusUserList(uid);
+    public boolean checkIsAdmin(String uId) {
+        QueryWrapper<RedClassUser> wrapper = new QueryWrapper<>();
+        wrapper.select("id","username","authority");
+        wrapper.eq("id",uId);
+        RedClassUser eduUser = this.getOne(wrapper);
+        if (eduUser!=null && eduUser.getAuthority() == 100) {
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public List<RedClassUserVo> getFansUserList(String uid) {
-        return baseMapper.getFansUserList(uid);
+    public List<RedClassUserVo> getFocusUserList(String uId) {
+        return baseMapper.getFocusUserList(uId);
     }
 
     @Override
-    public RedUserAskVo getAskUserInfo(String uid) {
-        return baseMapper.getUserAskInfo(uid);
+    public List<RedClassUserVo> getFansUserList(String uId) {
+        return baseMapper.getFansUserList(uId);
+    }
+
+    @Override
+    public RedUserAskVo getAskUserInfo(String uId) {
+        return baseMapper.getUserAskInfo(uId);
     }
 
     @Override
@@ -54,7 +69,7 @@ public class RedUserServiceImpl extends ServiceImpl<RedUserMapper, RedClassUser>
     }
     //注册的方法
     @Override
-    public void register(RedClassRegisterVo registerVo) {
+    public int register(RedClassRegisterVo registerVo) {
         //获取注册的数据
         String code = registerVo.getCode(); //验证码
         String username = registerVo.getMobile(); //手机号
@@ -64,7 +79,7 @@ public class RedUserServiceImpl extends ServiceImpl<RedUserMapper, RedClassUser>
         //非空判断
         if(StringUtils.isEmpty(username) || StringUtils.isEmpty(password)
                || StringUtils.isEmpty(nickname)) {
-            throw new RedCloudCollegeExceptionHandler(20001,"注册失败");
+            return 4;
         }
         //判断验证码
         //获取redis验证码
@@ -78,7 +93,7 @@ public class RedUserServiceImpl extends ServiceImpl<RedUserMapper, RedClassUser>
         wrapper.eq("username",username);
         Integer count = baseMapper.selectCount(wrapper);
         if(count > 0) {
-            throw new RedCloudCollegeExceptionHandler(20001,"注册失败");
+            return 5;
         }
 
         //数据添加数据库中
@@ -89,7 +104,7 @@ public class RedUserServiceImpl extends ServiceImpl<RedUserMapper, RedClassUser>
         member.setPassword(MD5.encrypt(password));//密码需要加密的
         member.setIsDisabled(false);//用户不禁用
         member.setAvatar("https://static.redskt.com/assets/img/yonghutouxiangnan.png");
-        baseMapper.insert(member);
+        return baseMapper.insert(member) ==1?1:6;
     }
 
     @Override
@@ -98,12 +113,12 @@ public class RedUserServiceImpl extends ServiceImpl<RedUserMapper, RedClassUser>
     }
 
     @Override
-    public int updateUserInfo(Map<String, Object> map,String userId) {
-        return  baseMapper.updateUserInfo(map,userId);
+    public int updateUserInfo(Map<String, Object> map,String uId) {
+        return  baseMapper.updateUserInfo(map,uId);
     }
 
     @Override
-    public int changeUserPwd(Map<String, Object> map,String oldPwd,String userId) {
-        return  baseMapper.changeUserPwd(map,oldPwd,userId);
+    public int changeUserPwd(Map<String, Object> map,String oldPwd,String uId) {
+        return  baseMapper.changeUserPwd(map,oldPwd,uId);
     }
 }

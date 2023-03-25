@@ -49,7 +49,7 @@ public class RedAskServiceImpl extends ServiceImpl<RedAskMapper, RedAskQuestion>
     }
 
     @Override
-    public RedClassAskQuestionVo getQustionDetail(String qId) {
+    public RedClassAskQuestionVo getQuestionDetail(String qId) {
         return baseMapper.getQustionDetail(qId);
     }
 

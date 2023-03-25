@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.redskt.classroom.mapper.RedInterviewQuestionEverydayMapper">
+
+    <resultMap id="interviewEveryQuestionMap" type="com.redskt.classroom.entity.admin.vo.RedInterViewEveryDayQuestionVo">
+        <id column="qId" property="qId"/>
+        <id column="title" property="qTitle"/>
+        <id column="pName" property="position"/>
+        <id column="name" property="opName"/>
+        <id column="content" property="qContent"/>
+        <id column="type" property="qType"/>
+    </resultMap>
+
+    <select id="getInterViewEveryQuestionList" resultMap="interviewEveryQuestionMap">
+        SELECT question.id as qId,question.title,question.type,question.content,quser.name,tposition.name as pName
+        FROM  red_interview_question_everyday everyQuestion
+        LEFT OUTER JOIN red_interview_question question on question.id = everyQuestion.qid
+        LEFT OUTER JOIN red_interview_position tposition on tposition.id = everyQuestion.pid
+        LEFT OUTER JOIN edu_user quser ON quser.id=everyQuestion.uid
+        WHERE everyQuestion.date=#{date}
+        <if test="pId != null">
+            and  everyQuestion.pid = #{pId}
+        </if>
+    </select>
+
+</mapper>

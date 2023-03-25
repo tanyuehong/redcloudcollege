@@ -18,11 +18,13 @@ import java.util.List;
  */
 public interface RedInterviewQuestionMapper extends BaseMapper<RedInterviewQuestion> {
 
-    List<RedInterviewQuestionVo> getHomeInterviewQustionList(@Param("sort") int sort, @Param("tag") String tag);
+    List<RedInterviewQuestionVo> getHomeInterviewQuestionList(@Param("sort") int sort,@Param("size") int size, @Param("tag") String tag,@Param("qustype") String qType,@Param("qid") String qId);
+
+    List<RedInterviewQuestionVo> getPositionQuestionList(@Param("sort") int sort,@Param("size") int size,@Param("pid") String pId,@Param("orderType") int orderType);
 
     int updateQuestionReadCount(@Param("id")  String qId,@Param("readCount") int readCount);
 
-    RedInterviewQuestionVo getQustionDetail(String qId);
+    RedInterviewQuestionVo getQuestionDetail(String qId);
 
     int addGoodCount(@Param("qid")  String qId);
 
@@ -40,5 +42,4 @@ public interface RedInterviewQuestionMapper extends BaseMapper<RedInterviewQuest
     int addTmeetCount(@Param("qid")  String qId);
     int addPmeetCount(@Param("qid")  String qId);
     int addUmeetCount(@Param("qid")  String qId);
-
 }

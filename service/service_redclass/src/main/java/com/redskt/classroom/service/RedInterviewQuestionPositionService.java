@@ -2,6 +2,10 @@ package com.redskt.classroom.service;
 
 import com.redskt.classroom.entity.RedInterviewQuestionPosition;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.redskt.classroom.entity.admin.vo.RedInterviewQuestionPositionVo;
+import com.redskt.classroom.entity.vo.RedInterviewQuestionVo;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +17,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface RedInterviewQuestionPositionService extends IService<RedInterviewQuestionPosition> {
 
+    List<RedInterviewQuestionPositionVo> getQuestionPositionClassifyList(String qId);
 }

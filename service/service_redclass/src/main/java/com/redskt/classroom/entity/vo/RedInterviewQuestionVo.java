@@ -11,11 +11,15 @@ public class RedInterviewQuestionVo {
 
     private String qId;
 
-    private String uid;
+    private String pId;
+
+    private String uId;
 
     private String nickname;
 
     private String avatar;
+
+    private String sNum;
 
     private String title;
 
@@ -42,6 +46,8 @@ public class RedInterviewQuestionVo {
     private Integer price;
 
     private Integer hotnum;
+
+    private float frequency;   // 面试频率
 
     private int meet;
 

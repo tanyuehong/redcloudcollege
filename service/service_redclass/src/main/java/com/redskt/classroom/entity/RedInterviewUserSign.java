@@ -15,39 +15,39 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 课程科目
+ * 
  * </p>
  *
  * @author tanyuehong
- * @since 2022-10-20
+ * @since 2023-02-22
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="RedInterviewQuestionPosition对象", description="课程科目")
-public class RedInterviewQuestionPosition implements Serializable {
+@ApiModel(value="RedInterviewUserSign对象", description="")
+public class RedInterviewUserSign implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "ID")
+    @ApiModelProperty(value = "id")
     @TableId(value = "id", type = IdType.ID_WORKER_STR)
     private String id;
 
-    @ApiModelProperty(value = "职位id")
-    private String pid;
+    @ApiModelProperty(value = "用户id")
+    private String uid;
 
-    @ApiModelProperty(value = "面试题id")
-    private String qid;
+    private Integer type;
 
-    @ApiModelProperty(value = "职业子分类id")
-    private String sid;
+    @ApiModelProperty(value = "签到日期")
+    private String date;
 
     @ApiModelProperty(value = "创建时间")
     @TableField(fill = FieldFill.INSERT)
     private Date gmtCreate;
 
-    @ApiModelProperty(value = "更新时间")
+    @ApiModelProperty(value = "修改时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date gmtModified;
+
 
 }

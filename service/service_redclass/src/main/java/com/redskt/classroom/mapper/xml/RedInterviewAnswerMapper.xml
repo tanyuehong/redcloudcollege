@@ -12,6 +12,7 @@
         <id column="bad" property="bad"/>
         <id column="state" property="state"/>
         <id column="uid" property="uid"/>
+        <id column="allcomment" property="allcomment"/>
         <id column="username" property="username"/>
         <id column="avatar" property="avatar"/>
         <id column="content" property="content"/>
@@ -49,12 +50,13 @@
         ) myc
         ORDER BY gmt_create DESC
         ) as rcomment on  rcomment.rid = answer.id
+        LEFT JOIN  ( select  count(id) as allcomment,rid from red_interview_answer_comment where uid = #{uid} group  by rid )
+        acomment on acomment.rid = answer.id
         LEFT JOIN edu_user cuser on rcomment.uid = cuser.id
         LEFT JOIN edu_user tuser on rcomment.touid = tuser.id
         <if test="uid != null">
             LEFT JOIN  ( select  id,aid from red_interview_answer_good where uid = #{uid} and is_deleted = 0)
             agood on agood.aid = answer.id
-
             LEFT JOIN  ( select  id,aid from red_interview_answer_collect where uid = #{uid} and is_deleted = 0)
             acollect on acollect.aid = answer.id
         </if>

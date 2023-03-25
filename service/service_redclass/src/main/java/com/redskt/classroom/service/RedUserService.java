@@ -19,21 +19,24 @@ import java.util.Map;
  */
 public interface RedUserService extends IService<RedClassUser> {
 
-    List<RedClassUserVo> getFocusUserList(String uid);
 
-    List<RedClassUserVo> getFansUserList(String uid);
+    boolean checkIsAdmin(String uId);
 
-    void register(RedClassRegisterVo registerVo);
+    List<RedClassUserVo> getFocusUserList(String uId);
 
-    RedClassUserVo getShowUserInfo(String uid);
+    List<RedClassUserVo> getFansUserList(String uId);
 
-    RedUserAskVo getAskUserInfo(String uid);
+    int register(RedClassRegisterVo registerVo);
+
+    RedClassUserVo getShowUserInfo(String uId);
+
+    RedUserAskVo getAskUserInfo(String uId);
 
     RedClassUserVo getUserInfoFocusCount(String uId);
     // 从数据库中取出用户信息
     RedClassUser selectByUsername(String username);
 
-    int updateUserInfo(Map<String, Object> map,String userId);
+    int updateUserInfo(Map<String, Object> map,String uId);
 
-    int changeUserPwd(Map<String, Object> map,String oldPwd,String userId);
+    int changeUserPwd(Map<String, Object> map,String oldPwd,String uId);
 }

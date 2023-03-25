@@ -12,37 +12,37 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 
+ * 课程科目
  * </p>
  *
  * @author tanyuehong
- * @since 2022-01-16
+ * @since 2023-03-15
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="RedAskQustionTag对象", description="")
-public class RedCategoryTag implements Serializable {
+@ApiModel(value="RedInterviewMeetPosition对象", description="课程科目")
+public class RedInterviewMeetPosition implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "id", type = IdType.ID_WORKER)
+    @ApiModelProperty(value = "课程类别ID")
+    @TableId(value = "id", type = IdType.ID_WORKER_STR)
     private String id;
 
-    private String name;
-
-    private String path;
-
+    @ApiModelProperty(value = "图片链接")
     private String img;
 
+    @ApiModelProperty(value = "类别名称")
+    private String title;
+
+    @ApiModelProperty(value = "排序字段")
     private Integer sort;
 
-    private String asktype;
-
-    private String describ;
-
+    @ApiModelProperty(value = "创建时间")
     private Date gmtCreate;
 
+    @ApiModelProperty(value = "更新时间")
     private Date gmtModified;
 
 

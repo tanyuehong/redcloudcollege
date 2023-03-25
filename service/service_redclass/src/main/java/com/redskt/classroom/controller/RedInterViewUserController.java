@@ -57,7 +57,10 @@ public class RedInterViewUserController {
     private RedInterviewQuestionMeetCompanyService meetCompanyService;
 
     @Autowired
-    private RedInterviewQuestionMeetPositionService meetPositionService;
+    private RedInterviewQuestionMeetPositionService questionMeetPositionService;
+
+    @Autowired
+    private RedInterviewMeetPositionService meetPositionService;
 
     @Autowired
     private RedInterviewQuestionPositionService positionService;
@@ -69,20 +72,26 @@ public class RedInterViewUserController {
         String uid = (String) parameterMap.get("uid");
         String uId = TokenManager.getMemberIdByJwtToken(request);
         if (uid.length()>0 && uId.length()>0 && uid.equals(uId))  {
-            String title    = (String) parameterMap.get("title");
-            String content  = (String) parameterMap.get("content");
-            String qustype  = (String) parameterMap.get("qustype");
+            String title      = (String) parameterMap.get("title");
+            String content    = (String) parameterMap.get("content");
+            String positionId = (String) parameterMap.get("position");
+            String classifyId = (String) parameterMap.get("classify");
             List<String> tags = JSON.parseArray((String) parameterMap.get("tagList"),String.class);
 
             RedInterviewQuestion question= new RedInterviewQuestion();
             question.setUid(uid);
             question.setTitle(title);
             question.setContent(content);
-            question.setQustype(qustype);
             question.setType("简答题");
             question.setDeep("中等");
-
             if (questionService.save(question)) {
+                RedInterviewQuestionPosition questionPosition = new RedInterviewQuestionPosition();
+                questionPosition.setPid(positionId);
+                questionPosition.setQid(question.getId());
+                if(classifyId!=null && classifyId.length()>0) {
+                    questionPosition.setSid(classifyId);
+                }
+                positionService.save(questionPosition);
                 List<RedInterviewTags> tagsList = new ArrayList<>();
                 for (int i=0;i<tags.size();i++) {
                     RedInterviewTags tag = new RedInterviewTags();
@@ -352,15 +361,15 @@ public class RedInterViewUserController {
         String title = (String) paramMap.get("title");
         String qId = (String) paramMap.get("qId");
         String uId = TokenManager.getMemberIdByJwtToken(request);
-        RedInterviewQuestionPosition position = new RedInterviewQuestionPosition();
+        RedInterviewMeetPosition position = new RedInterviewMeetPosition();
         position.setTitle(title);
         position.setSort(0);
-        if (positionService.save(position)) {
+        if (meetPositionService.save(position)) {
             RedInterviewQuestionMeetPosition meet = new RedInterviewQuestionMeetPosition();
             meet.setQid(qId);
             meet.setUid(uId);
             meet.setPid(position.getId());
-            if(meetPositionService.save(meet)) {
+            if(questionMeetPositionService.save(meet)) {
                 return R.okSucessTips("真诚感谢您的面试职位反馈～～");
             }
             return R.error("操作失败，请重新尝试");
@@ -376,7 +385,7 @@ public class RedInterViewUserController {
             meet.setQid(qId);
             meet.setUid(uId);
             meet.setPid(pId);
-            if(meetPositionService.save(meet)) {
+            if(questionMeetPositionService.save(meet)) {
                 return R.okSucessTips("真诚感谢您的面试职位反馈～～");
             } else {
                 return R.error("操作失败，请重新尝试");
