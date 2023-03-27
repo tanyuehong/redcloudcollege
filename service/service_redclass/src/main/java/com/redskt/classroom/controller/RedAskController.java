@@ -48,8 +48,6 @@ public class RedAskController {
     private RedReplyCommentGoodService replyCGoodService;
     @Autowired
     private RedAskReplyCommentService commentService;
-    @Autowired
-    private RedisTemplate redisTemplate;  //存储对象
 
 
     @GetMapping("questionTypeList")
@@ -59,13 +57,7 @@ public class RedAskController {
         List<RedAskType> typeList = askTypeService.list(askWarper);
         typeList.remove(0);
 
-        String key = RequestParmUtil.generateKeyAndIv();
-        String pagekey1 =  RequestParmUtil.getPageKey("submitQustion",key);
-        String pagekey = URLEncoder.encode(pagekey1);
-
-        this.redisTemplate.opsForValue().set(pagekey,key,30, TimeUnit.MINUTES);
-
-        return R.ok().data("typeList",typeList).data("pageKey", pagekey);
+        return R.ok().data("typeList",typeList);
     }
 
     @PostMapping("questionlist")
@@ -145,14 +137,8 @@ public class RedAskController {
         int readCount = qDetail.getReadcount() + 1;
         userAskService.updateUserAskReadCount(qDetail.getQId(), readCount);
 
-        String key = RequestParmUtil.generateKeyAndIv();
-        String pagekey1 =  RequestParmUtil.getPageKey("submitQustion",key);
-        String pagekey = URLEncoder.encode(pagekey1);
-
-        this.redisTemplate.opsForValue().set(pagekey,key,30, TimeUnit.MINUTES);
-
         List<RedClassReplyVo> replyList = replyService.getHomeAskReplyList(qDetail.getQId(),1);
-        return R.ok().data("qdetail", qDetail).data("replyList", replyList).data("pageKey",pagekey);
+        return R.ok().data("qdetail", qDetail).data("replyList", replyList);
     }
 
     @GetMapping("getQustionReplyList/{qId}/{sortType}")
