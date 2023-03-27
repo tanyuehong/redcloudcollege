@@ -121,12 +121,12 @@ public class RedIndexController {
             }
             gussLikes.add(vo);
         }
-        List<RedClassBanner> banerList = bannerService.selectAllBanner();
+        List<RedClassBanner> bannerList = bannerService.selectAllBanner();
 
         String date =  RedInterViewController.getFormatDateString();
         List<RedInterViewEveryDayQuestionVo> everydayList = everydayService.getInterViewEveryQuestionList(date,null);
 
-        R r = R.ok().data("banerList",banerList).data("eduList",eduList).data("gusslikeList",gussLikes);
+        R r = R.ok().data("banerList",bannerList).data("eduList",eduList).data("gusslikeList",gussLikes);
         if(everydayList != null && everydayList.size()>0) {
             r.data("everyDayQuestion",everydayList.get(0));
         }
