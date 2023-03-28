@@ -1,7 +1,7 @@
 package com.redskt.classroom.service;
 
-import com.redskt.classroom.entity.RedInterviewTags;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.redskt.classroom.entity.RedInterviewQuestionTags;
 
 /**
  * <p>
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author tanyuehong
  * @since 2022-07-14
  */
-public interface RedInterviewTagsService extends IService<RedInterviewTags> {
+public interface RedInterviewQuestionTagsService extends IService<RedInterviewQuestionTags> {
 
 }

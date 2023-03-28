@@ -40,7 +40,7 @@ public class RedIndexController {
     private EduBookChaptersService chaperService;
 
     @Autowired
-    private RedTeacherService teacherService;
+    private RedUserService userService;
 
     @Autowired
     private RedInterviewQuestionEverydayService everydayService;
@@ -89,12 +89,13 @@ public class RedIndexController {
                 RedClassCourse couseItem = guessvideo.get(0);
                 guessvideo.remove(0);
                 BeanUtils.copyProperties(couseItem, vo);
-                RedClassTeacher teacher = teacherService.getById(couseItem.getTeacherId());
+                RedClassUser teacher = userService.getById(couseItem.getTeacherId());
                 vo.setContentCount(couseItem.getLessonNum());
                 vo.setType(type);
+                vo.setAvatar(teacher.getAvatar());
                 vo.setAuid(couseItem.getTeacherId());
                 vo.setAuthor(teacher.getName());
-                vo.setAuthorPositon("资深工程师");
+                vo.setAuthorPositon(teacher.getCareer());
                 vo.setContent(couseItem.getCdescribe());
                 type = random.nextInt(3);
             } else if(type == 1 && blogList.size()>0) {
@@ -112,6 +113,7 @@ public class RedIndexController {
                 chperWarper.eq("book_id",book.getId());
                 List<EduBookChapters> chapters = chaperService.list(chperWarper);
                 vo.setType(type);
+                vo.setAvatar(book.getAuthorAvatar());
                 vo.setContent(book.getDescrib());
                 vo.setContentCount(chapters.size());
                 type = random.nextInt(3);
