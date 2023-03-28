@@ -30,7 +30,7 @@ public class RedCourseController<UcenterMemberService> {
 
 
     @Autowired
-    private RedTeacherService teacherService;
+    private RedUserService userService;
 
     @Autowired
     private RedCourseService courseService;
@@ -38,8 +38,8 @@ public class RedCourseController<UcenterMemberService> {
     //1 分页查询讲师的方法
     @PostMapping("teacher/getTeacherList/{page}/{limit}")
     public R getTeacherFrontList(@PathVariable long page, @PathVariable long limit) {
-        Page<RedClassTeacher> pageTeacher = new Page<>(page,limit);
-        Map<String,Object> map = teacherService.getTeacherFrontList(pageTeacher);
+        Page<RedClassUser> pageTeacher = new Page<>(page,limit);
+        Map<String,Object> map = userService.getTeacherFrontList(pageTeacher);
         //返回分页所有数据
         return R.ok().data(map);
     }
@@ -48,7 +48,7 @@ public class RedCourseController<UcenterMemberService> {
     @GetMapping("teacher/getTeacherInfo/{teacherId}")
     public R getTeacherFrontInfo(@PathVariable String teacherId) {
         //1 根据讲师id查询讲师基本信息
-        RedClassTeacher eduTeacher = teacherService.getById(teacherId);
+        RedClassUser eduTeacher = userService.getById(teacherId);
         //2 根据讲师id查询所讲课程
         QueryWrapper<RedClassCourse> wrapper = new QueryWrapper<>();
         wrapper.eq("teacher_id",teacherId);
