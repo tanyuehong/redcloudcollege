@@ -21,7 +21,6 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("edu_user")
 @ApiModel(value="Member对象", description="会员表")
 public class RedClassUser implements Serializable {
 

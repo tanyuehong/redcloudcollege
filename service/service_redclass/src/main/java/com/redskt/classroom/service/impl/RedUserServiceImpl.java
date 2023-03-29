@@ -1,6 +1,7 @@
 package com.redskt.classroom.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.redskt.classroom.entity.RedClassUser;
 import com.redskt.classroom.entity.vo.RedClassRegisterVo;
@@ -15,10 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * <p>
@@ -120,5 +118,35 @@ public class RedUserServiceImpl extends ServiceImpl<RedUserMapper, RedClassUser>
     @Override
     public int changeUserPwd(Map<String, Object> map,String oldPwd,String uId) {
         return  baseMapper.changeUserPwd(map,oldPwd,uId);
+    }
+
+    @Override
+    public Map<String, Object> getTeacherFrontList(Page<RedClassUser> pageTeacher) {
+        QueryWrapper<RedClassUser> wrapper = new QueryWrapper<>();
+        wrapper.eq("ttype",2);
+        wrapper.orderByDesc("id");
+        //把分页数据封装到pageTeacher对象
+        baseMapper.selectPage(pageTeacher,wrapper);
+
+        List<RedClassUser> records = pageTeacher.getRecords();
+        long current = pageTeacher.getCurrent();
+        long pages = pageTeacher.getPages();
+        long size = pageTeacher.getSize();
+        long total = pageTeacher.getTotal();
+        boolean hasNext = pageTeacher.hasNext();//下一页
+        boolean hasPrevious = pageTeacher.hasPrevious();//上一页
+
+        //把分页数据获取出来，放到map集合
+        Map<String, Object> map = new HashMap<>();
+        map.put("items", records);
+        map.put("current", current);
+        map.put("pages", pages);
+        map.put("size", size);
+        map.put("total", total);
+        map.put("hasNext", hasNext);
+        map.put("hasPrevious", hasPrevious);
+
+        //map返回
+        return map;
     }
 }

@@ -1,5 +1,6 @@
 package com.redskt.classroom.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.redskt.classroom.entity.RedClassUser;
 import com.redskt.classroom.entity.vo.RedClassRegisterVo;
@@ -19,8 +20,9 @@ import java.util.Map;
  */
 public interface RedUserService extends IService<RedClassUser> {
 
-
     boolean checkIsAdmin(String uId);
+
+    Map<String, Object> getTeacherFrontList(Page<RedClassUser> pageTeacher);
 
     List<RedClassUserVo> getFocusUserList(String uId);
 
