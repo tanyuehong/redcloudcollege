@@ -20,7 +20,7 @@
         SELECT eduser.id,eduser.username,eduser.nickname,eduser.sex,eduser.age,eduser.sign,eduser.avatar,eduser.position,
         eduser.perpage,eduser.company,eduser.perintroduction,eduser.gmt_create,eduser.practice,count(DISTINCT focus.id) as focus,count(DISTINCT mfocus.id) as mfocus,
         sumblog.viewsum,sumblog.bgoodsum, (count(bgood.id)+count(DISTINCT agood.id)) as ccollect
-        FROM edu_user eduser
+        FROM red_class_user eduser
         LEFT OUTER JOIN red_user_focus focus ON eduser.id=focus.fid and focus.is_deleted = 0
         LEFT OUTER JOIN red_user_focus mfocus ON eduser.id=mfocus.uid and mfocus.is_deleted = 0
         LEFT OUTER JOIN red_blog_collect bgood ON eduser.id=bgood.uid and bgood.is_deleted = 0

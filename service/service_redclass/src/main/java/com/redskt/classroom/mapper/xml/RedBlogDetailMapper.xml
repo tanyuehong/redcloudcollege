@@ -6,7 +6,7 @@
         SELECT blog.id,blog.title,blog.descrb,blog.type,blog.good,blog.faver,blog.view_count,blog.price,auser.id as aUid,auser.nickName as authorName,auser.avatar as authorAvatar,auser.id as authorUid,cCount
         FROM red_blog_good good
         LEFT OUTER JOIN op_blog_detail blog ON blog.id = good.bid
-        LEFT OUTER JOIN edu_user auser ON auser.id = blog.auid
+        LEFT OUTER JOIN red_class_user auser ON auser.id = blog.auid
         LEFT OUTER JOIN (select bid,count(id) as cCount from red_blog_comment group by bid) comment on comment.bid = blog.id
         WHERE good.uid = #{uid}
         ORDER BY blog.gmt_modified DESC
@@ -17,7 +17,7 @@
         SELECT blog.id,blog.title,blog.descrb,blog.type,blog.good,blog.faver,blog.view_count,blog.price,auser.id as aUid,auser.nickName as authorName,auser.avatar as authorAvatar,auser.id as authorUid,cCount
         FROM red_blog_collect collect
         LEFT OUTER JOIN op_blog_detail blog ON blog.id = collect.bid
-        LEFT OUTER JOIN edu_user auser ON auser.id = blog.auid
+        LEFT OUTER JOIN red_class_user auser ON auser.id = blog.auid
         LEFT OUTER JOIN (select bid,count(id) as cCount from red_blog_comment group by bid) comment on comment.bid = blog.id
         WHERE collect.uid = #{uid} and collect.is_deleted = 0
         ORDER BY blog.gmt_modified DESC
@@ -27,7 +27,7 @@
     <select id="getRedBlogDetailList" resultType="com.redskt.classroom.entity.vo.RedClassBlogDetailVo">
         SELECT blog.id,blog.title,blog.descrb,blog.type,blog.good,blog.faver,blog.view_count,blog.price,auser.id as aUid,auser.nickName as authorName,auser.avatar as authorAvatar,auser.id as authorUid,cCount
         FROM op_blog_detail blog
-        LEFT OUTER JOIN edu_user auser ON auser.id = blog.auid
+        LEFT OUTER JOIN red_class_user auser ON auser.id = blog.auid
         LEFT OUTER JOIN (select bid,count(id) as cCount from red_blog_comment group by bid) comment on comment.bid = blog.id
 
         <if test="uid != null">
@@ -48,7 +48,7 @@
     <select id="getFocusBlogList" resultType="com.redskt.classroom.entity.vo.RedClassBlogDetailVo">
         SELECT blog.id,blog.title,blog.descrb,blog.type,blog.good,blog.faver,blog.view_count,blog.price,auser.id as aUid,auser.nickName as authorName,auser.avatar as authorAvatar,auser.id as authorUid,cCount
         FROM op_blog_detail blog
-        LEFT OUTER JOIN edu_user auser ON auser.id = blog.auid
+        LEFT OUTER JOIN red_class_user auser ON auser.id = blog.auid
         LEFT OUTER JOIN (select bid,count(id) as cCount from red_blog_comment group by bid) comment on comment.bid = blog.id
         LEFT OUTER JOIN red_blog_tags tag ON tag.bid   = blog.id
         LEFT OUTER JOIN red_user_focus focus ON blog.auid = focus.fid
@@ -70,7 +70,7 @@
     <select id="getIndexBlogList" resultType="com.redskt.classroom.entity.vo.RedClassBlogDetailVo">
         SELECT blog.id,blog.title,blog.descrb,blog.type,blog.good,blog.faver,blog.view_count,blog.price,auser.id as aUid,auser.nickName as authorName,auser.avatar as authorAvatar,auser.id as authorUid,cCount
         FROM op_blog_detail blog
-        LEFT OUTER JOIN edu_user auser ON auser.id = blog.auid
+        LEFT OUTER JOIN red_class_user auser ON auser.id = blog.auid
         LEFT OUTER JOIN (select bid,count(id) as cCount from red_blog_comment group by bid) comment on comment.bid = blog.id
         LEFT OUTER JOIN red_blog_tags tag ON tag.bid   = blog.id
         LEFT OUTER JOIN op_blog_type otype ON otype.id = blog.tyid
@@ -94,7 +94,7 @@
     <select id="getRedClassBlogDetail" resultType="com.redskt.classroom.entity.vo.RedClassBlogDetailVo">
         SELECT blog.*,auser.id as aUid,auser.nickName as authorName,auser.avatar as authorAvatar,auser.id as authorUid
         FROM op_blog_detail blog
-        LEFT OUTER JOIN edu_user auser ON auser.id=blog.auid
+        LEFT OUTER JOIN red_class_user auser ON auser.id=blog.auid
         where blog.id = #{bid}
     </select>
 

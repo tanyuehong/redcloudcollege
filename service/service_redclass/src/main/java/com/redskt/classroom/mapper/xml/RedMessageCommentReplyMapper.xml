@@ -20,8 +20,8 @@
         rcomment.uid as cuid,cuser.nickname as cname,cuser.avatar as cavatar,
         rcomment.touid as touid,tuser.nickname as tname
         FROM red_message_comment_reply rcomment
-        LEFT JOIN edu_user cuser on rcomment.uid = cuser.id
-        LEFT JOIN edu_user tuser on rcomment.touid = tuser.id
+        LEFT JOIN red_class_user cuser on rcomment.uid = cuser.id
+        LEFT JOIN red_class_user tuser on rcomment.touid = tuser.id
         WHERE  rcomment.id = #{rid}
     </select>
 
