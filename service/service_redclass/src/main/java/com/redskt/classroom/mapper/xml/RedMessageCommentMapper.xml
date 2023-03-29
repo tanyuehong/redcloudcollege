@@ -40,7 +40,7 @@
         rcomment.touid as touid,tuser.nickname as tname
 
         FROM red_message_comment comment
-        LEFT JOIN edu_user ruser on comment.uid = ruser.id
+        LEFT JOIN red_class_user ruser on comment.uid = ruser.id
         LEFT JOIN (
         SELECT myc.id,myc.content,myc.good,myc.rid,myc.uid,myc.touid,myc.gmt_create,!isnull(rgood.id) as goodr
         FROM (
@@ -53,8 +53,8 @@
         ) as rcomment on  rcomment.rid =comment.id
 
         LEFT JOIN red_message_comment_good cgood on comment.uid = cgood.uid and comment.id = cgood.cid and cgood.gtype = 1 and cgood.is_deleted = 0
-        LEFT JOIN edu_user cuser on rcomment.uid = cuser.id
-        LEFT JOIN edu_user tuser on rcomment.touid = tuser.id
+        LEFT JOIN red_class_user cuser on rcomment.uid = cuser.id
+        LEFT JOIN red_class_user tuser on rcomment.touid = tuser.id
 
         WHERE comment.id in
         ( SELECT id FROM
@@ -80,7 +80,7 @@
         SELECT comment.id,comment.mid,comment.content,comment.gmt_create,
         ruser.id as uid,ruser.nickname as username,ruser.avatar
         FROM red_message_comment comment
-        LEFT JOIN edu_user ruser on comment.uid = ruser.id
+        LEFT JOIN red_class_user ruser on comment.uid = ruser.id
         WHERE  comment.id = #{mid}
     </select>
 

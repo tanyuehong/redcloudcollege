@@ -16,7 +16,7 @@
         FROM  red_interview_question_everyday everyQuestion
         LEFT OUTER JOIN red_interview_question question on question.id = everyQuestion.qid
         LEFT OUTER JOIN red_interview_position tposition on tposition.id = everyQuestion.pid
-        LEFT OUTER JOIN edu_user quser ON quser.id=everyQuestion.uid
+        LEFT OUTER JOIN red_class_user quser ON quser.id=everyQuestion.uid
         WHERE everyQuestion.date=#{date}
         <if test="pId != null">
             and  everyQuestion.pid = #{pId}

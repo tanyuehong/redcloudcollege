@@ -5,14 +5,14 @@
     <select id="getFocusUserList" resultType="com.redskt.classroom.entity.vo.RedClassUserVo">
         SELECT eduser.id,eduser.username,eduser.nickname,eduser.sign,eduser.avatar,eduser.position
         FROM red_user_focus focus
-        LEFT OUTER JOIN edu_user eduser ON eduser.id=focus.fid and focus.is_deleted = 0
+        LEFT OUTER JOIN red_class_user eduser ON eduser.id=focus.fid and focus.is_deleted = 0
         where focus.uid = #{uid} and focus.is_deleted = 0
     </select>
 
     <select id="getFansUserList" resultType="com.redskt.classroom.entity.vo.RedClassUserVo">
         SELECT eduser.id,eduser.username,eduser.nickname,eduser.sign,eduser.avatar,eduser.position
         FROM red_user_focus focus
-        LEFT OUTER JOIN edu_user eduser ON eduser.id=focus.uid and focus.is_deleted = 0
+        LEFT OUTER JOIN red_class_user eduser ON eduser.id=focus.uid and focus.is_deleted = 0
         where focus.fid = #{uid} and focus.is_deleted = 0
     </select>
 
@@ -72,19 +72,19 @@
           FROM  red_ask_reply_comment comment
           WHERE comment.touid = #{uid}
         ) as crComment
-        FROM edu_user eduser
+        FROM red_class_user eduser
         where eduser.id = #{uid}
     </select>
 
     <select id="getUserInfoFocusCount" resultType="com.redskt.classroom.entity.vo.RedClassUserVo">
         SELECT eduser.*,count(focus.id) as focus
-        FROM edu_user eduser
+        FROM red_class_user eduser
         LEFT OUTER JOIN red_user_focus focus ON eduser.id=focus.fid and focus.is_deleted = 0
         where eduser.id = #{uid}
     </select>
 
     <update id="updateUserInfo" parameterType="map">
-        update edu_user
+        update red_class_user
         set
         <foreach collection="map" item="val" index="key" separator=",">
             ${key} =  #{val}
@@ -93,7 +93,7 @@
     </update>
 
     <update id="changeUserPwd" parameterType="map">
-        update edu_user
+        update red_class_user
         set
         <foreach collection="map" item="val" index="key" separator=",">
             ${key} =  #{val}

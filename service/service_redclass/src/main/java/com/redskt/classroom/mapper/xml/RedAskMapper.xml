@@ -38,7 +38,7 @@
         ,tags.id as ctid,tags.name as tname,tags.img as timg,tags.sort as tsort,tags.asktype
         FROM edu_user_ask ask
         LEFT OUTER JOIN red_ask_type atype ON ask.qustype = atype.id
-        LEFT OUTER JOIN edu_user user ON ask.uid=user.id
+        LEFT OUTER JOIN red_class_user user ON ask.uid=user.id
         LEFT OUTER JOIN red_ask_tags tag ON tag.qid = ask.id
         LEFT OUTER JOIN red_category_tag tags ON tags.id = tag.tid
         where tags.id = #{tid}
@@ -51,7 +51,7 @@
         ,tags.id as ctid,tags.name as tname,tags.img as timg,tags.sort as tsort,tags.asktype
         FROM edu_user_ask ask
         LEFT OUTER JOIN red_qustion_good good ON ask.id = good.qid
-        LEFT OUTER JOIN edu_user user ON user.id = ask.uid
+        LEFT OUTER JOIN red_class_user user ON user.id = ask.uid
         LEFT OUTER JOIN red_ask_tags tag ON tag.qid = ask.id
         LEFT OUTER JOIN red_category_tag tags ON tags.id = tag.tid
         WHERE good.uid = #{uid}
@@ -65,7 +65,7 @@
         ,tags.id as ctid,tags.name as tname,tags.img as timg,tags.sort as tsort,tags.asktype
         FROM edu_user_ask ask
         LEFT OUTER JOIN red_qustion_collect collect ON ask.id=collect.qid
-        LEFT OUTER JOIN edu_user user ON user.id = ask.uid
+        LEFT OUTER JOIN red_class_user user ON user.id = ask.uid
         LEFT OUTER JOIN red_ask_tags tag ON tag.qid = ask.id
         LEFT OUTER JOIN red_category_tag tags ON tags.id = tag.tid
         WHERE collect.uid = #{uid}  and collect.is_deleted = 0
@@ -78,7 +78,7 @@
         ask.uid,(select count(reply.id) as replaycount from red_ask_reply reply where reply.qid=ask.id) as  reply
         FROM edu_user_ask ask
         LEFT OUTER JOIN red_ask_type atype ON ask.qustype = atype.id
-        LEFT OUTER JOIN edu_user user ON ask.uid=user.id
+        LEFT OUTER JOIN red_class_user user ON ask.uid=user.id
         <if test="qpath != null">
             where atype.type = #{qpath}
         </if>
@@ -91,7 +91,7 @@
         ,tags.id as ctid,tags.name as tname,tags.img as timg,tags.sort as tsort,tags.asktype
         FROM edu_user_ask ask
         LEFT OUTER JOIN red_ask_type atype ON ask.qustype = atype.id
-        LEFT OUTER JOIN edu_user user ON ask.uid=user.id
+        LEFT OUTER JOIN red_class_user user ON ask.uid=user.id
         LEFT OUTER JOIN red_ask_tags tag ON tag.qid = ask.id
         LEFT OUTER JOIN red_category_tag tags ON tags.id = tag.tid
         <if test="qpath != null">
@@ -107,7 +107,7 @@
         ,tags.id as ctid,tags.name as tname,tags.img as timg,tags.sort as tsort,tags.asktype
         FROM edu_user_ask ask
         LEFT OUTER JOIN red_ask_type atype ON ask.qustype = atype.id
-        LEFT OUTER JOIN edu_user user ON ask.uid=user.id
+        LEFT OUTER JOIN red_class_user user ON ask.uid=user.id
         LEFT OUTER JOIN red_ask_tags tag ON tag.qid = ask.id
         LEFT OUTER JOIN red_category_tag tags ON tags.id = tag.tid
         <if test="qpath != null">
@@ -123,7 +123,7 @@
         ,tags.id as ctid,tags.name as tname,tags.img as timg,tags.sort as tsort,tags.asktype
         FROM edu_user_ask ask
         LEFT OUTER JOIN red_ask_type atype ON ask.qustype = atype.id
-        LEFT OUTER JOIN edu_user user ON ask.uid=user.id
+        LEFT OUTER JOIN red_class_user user ON ask.uid=user.id
         LEFT OUTER JOIN red_ask_tags tag ON tag.qid = ask.id
         LEFT OUTER JOIN red_category_tag tags ON tags.id = tag.tid
         <if test="qpath != null">
@@ -138,7 +138,7 @@
         ,tags.id as ctid,tags.name as tname,tags.img as timg,tags.sort as tsort,tags.asktype
         FROM edu_user_ask ask
         LEFT OUTER JOIN red_ask_type atype ON ask.qustype = atype.id
-        LEFT OUTER JOIN edu_user user ON ask.uid=user.id
+        LEFT OUTER JOIN red_class_user user ON ask.uid=user.id
         LEFT OUTER JOIN red_ask_tags tag ON tag.qid = ask.id
         LEFT OUTER JOIN red_category_tag tags ON tags.id = tag.tid
         <if test="qpath != null">
@@ -153,7 +153,7 @@
         ,tags.id as ctid,tags.name as tname,tags.img as timg,tags.sort as tsort,tags.asktype
         FROM edu_user_ask ask
         LEFT OUTER JOIN red_ask_type atype ON ask.qustype = atype.id
-        LEFT OUTER JOIN edu_user user ON ask.uid=user.id
+        LEFT OUTER JOIN red_class_user user ON ask.uid=user.id
         LEFT OUTER JOIN red_ask_tags tag ON tag.qid = ask.id
         LEFT OUTER JOIN red_category_tag tags ON tags.id = tag.tid
         where price>0
@@ -168,7 +168,7 @@
             user.avatar,(select count(reply.id) from red_ask_reply reply where reply.qid=ask.id) as reply,qtype.name as typeString
             ,tags.id as ctid,tags.name as tname,tags.img as timg,tags.sort as tsort,tags.asktype
         FROM edu_user_ask ask
-        LEFT OUTER JOIN edu_user user ON ask.uid=user.id
+        LEFT OUTER JOIN red_class_user user ON ask.uid=user.id
         LEFT OUTER JOIN red_ask_type qtype ON ask.qustype = qtype.id
         LEFT OUTER JOIN red_ask_tags tag ON tag.qid = ask.id
         LEFT OUTER JOIN red_category_tag tags ON tags.id = tag.tid

@@ -40,7 +40,7 @@
         ruser.avatar, rcomment.id as replyId, rcomment.content as ccontent,rcomment.good as cgood,!isnull(agood.id) as isgood,!isnull(acollect.id) as iscollect,
         rcomment.rid as crid,rcomment.uid as cuid,rcomment.touid,rcomment.gmt_create as cgmt_create,cuser.nickname as cname,cuser.avatar as cavatar,tuser.nickname as tname
         FROM red_interview_answer answer
-        LEFT JOIN edu_user ruser on answer.uid = ruser.id
+        LEFT JOIN red_class_user ruser on answer.uid = ruser.id
         LEFT JOIN (
         SELECT myc.id,myc.content,myc.good,myc.rid,myc.uid,myc.touid,myc.gmt_create
         FROM (
@@ -52,8 +52,8 @@
         ) as rcomment on  rcomment.rid = answer.id
         LEFT JOIN  ( select  count(id) as allcomment,rid from red_interview_answer_comment where uid = #{uid} group  by rid )
         acomment on acomment.rid = answer.id
-        LEFT JOIN edu_user cuser on rcomment.uid = cuser.id
-        LEFT JOIN edu_user tuser on rcomment.touid = tuser.id
+        LEFT JOIN red_class_user cuser on rcomment.uid = cuser.id
+        LEFT JOIN red_class_user tuser on rcomment.touid = tuser.id
         <if test="uid != null">
             LEFT JOIN  ( select  id,aid from red_interview_answer_good where uid = #{uid} and is_deleted = 0)
             agood on agood.aid = answer.id
@@ -83,7 +83,7 @@
         SELECT  answer.id, answer.qid,answer.content,answer.good,answer.bad,answer.uid,answer.gmt_create, ruser.nickname as username,
         ruser.avatar
         FROM red_interview_answer answer
-        LEFT JOIN edu_user ruser on answer.uid = ruser.id
+        LEFT JOIN red_class_user ruser on answer.uid = ruser.id
         WHERE  answer.id = #{qid}
     </select>
 
