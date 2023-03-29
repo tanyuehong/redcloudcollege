@@ -63,7 +63,7 @@ public class RedInterViewUserController {
     private RedInterviewMeetPositionService meetPositionService;
 
     @Autowired
-    private RedInterviewQuestionPositionService positionService;
+    private RedInterviewQuestionPositionService questionPositionService;
 
 
     @PostMapping("submit")
@@ -91,7 +91,7 @@ public class RedInterViewUserController {
                 if(classifyId!=null && classifyId.length()>0) {
                     questionPosition.setSid(classifyId);
                 }
-                positionService.save(questionPosition);
+                questionPositionService.save(questionPosition);
                 List<RedInterviewQuestionTags> tagsList = new ArrayList<>();
                 for (int i=0;i<tags.size();i++) {
                     RedInterviewQuestionTags tag = new RedInterviewQuestionTags();
@@ -399,12 +399,5 @@ public class RedInterViewUserController {
         QueryWrapper<RedInterviewQuestionCompany> companyQueryWrapper = new QueryWrapper<>();
         List<RedInterviewQuestionCompany> companyList = companyService.list(companyQueryWrapper);
         return R.ok().data("companyList",companyList);
-    }
-
-    @GetMapping("positionList")
-    public R getPositionList() {
-        QueryWrapper<RedInterviewQuestionPosition> positionQueryWrapper = new QueryWrapper<>();
-        List<RedInterviewQuestionPosition> positionList = positionService.list(positionQueryWrapper);
-        return R.ok().data("positionList",positionList);
     }
 }

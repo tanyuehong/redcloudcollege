@@ -50,17 +50,6 @@ public class RedInterViewAdminController {
         return R.ok().data("questionList", questionList);
     }
 
-    @GetMapping("positionList")
-    public R getInterviewPosition() {
-        QueryWrapper<RedInterviewPosition> positionQueryWrapper = new QueryWrapper<>();
-        positionQueryWrapper.orderByAsc("gmt_create");
-
-//            PageHelper.startPage(pId, 20);
-        List<RedInterviewPosition> positionList = positionService.list(positionQueryWrapper);
-//            PageInfo page = new PageInfo(typeList);
-        return R.ok().data("positionList", positionList);
-    }
-
     @GetMapping("positionClassifyList/{pId}")
     public R positionClassifyList(@PathVariable String pId) {
         if (pId.length()>0) {
