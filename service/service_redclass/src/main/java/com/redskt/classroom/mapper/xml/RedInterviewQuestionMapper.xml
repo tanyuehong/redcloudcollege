@@ -8,7 +8,7 @@
         <id column="pId" property="pId"/>
         <id column="nickname" property="nickname"/>
         <id column="avatar" property="avatar"/>
-        <id column="snum" property="sNum"/>
+        <id column="sNum" property="sNum"/>
         <id column="title" property="title"/>
         <id column="type" property="type"/>
         <id column="deep" property="deep"/>
@@ -16,11 +16,12 @@
         <id column="content" property="content"/>
         <id column="answer" property="answer"/>
         <id column="reply" property="reply"/>
-        <id column="readcount" property="readcount"/>
+        <id column="allMeet" property="allMeet"/>
+        <id column="readCount" property="readCount"/>
         <id column="collect" property="collect"/>
         <id column="good" property="good"/>
         <id column="price" property="price"/>
-        <id column="hotnum" property="hotnum"/>
+        <id column="hotum" property="hotnum"/>
         <id column="meet" property="meet"/>
         <id column="gmt_create" property="gmtCreate"/>
 
@@ -37,8 +38,8 @@
     </resultMap>
 
     <select id="getHomeInterviewQuestionList" resultMap="interviewQuestionMap">
-        SELECT qustion.id as qId,qustion.title,qustion.snum,qustion.type,qustion.content,qustion.deep,qustion.collect,qustion.readcount,qustion.hotnum,qustion.price,qustion.good,(tmeet+smeet+pmeet) as meet,qustion.gmt_create,user.nickname,
-        qustion.uid,(pmeet+tmeet+smeet)/ (readcount + 0.0 ) as frequency,(select count(reply.id) as replaycount from red_interview_answer reply where reply.qid=qustion.id) as reply
+        SELECT qustion.id as qId,qustion.title,qustion.snum as sNum,qustion.type,qustion.content,qustion.deep,qustion.collect,qustion.readcount as readCount,qustion.hotnum,qustion.price,qustion.good,(tmeet+smeet+pmeet) as meet,qustion.gmt_create,user.nickname,
+        qustion.uid,(pmeet+tmeet+smeet) as allMeet,(select count(reply.id) as replaycount from red_interview_answer reply where reply.qid=qustion.id) as reply
         ,tag.id as ctid,tag.name as tname,tag.img as timg,tag.sort as tsort
         FROM red_interview_question qustion
         LEFT OUTER JOIN edu_user user ON qustion.uid=user.id

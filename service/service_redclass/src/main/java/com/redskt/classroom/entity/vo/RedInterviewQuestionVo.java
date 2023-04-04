@@ -37,7 +37,7 @@ public class RedInterviewQuestionVo {
 
     private Integer reply;
 
-    private Integer readcount;
+    private Integer readCount;
 
     private Integer collect;
 
@@ -47,7 +47,7 @@ public class RedInterviewQuestionVo {
 
     private Integer hotnum;
 
-    private float frequency;   // 面试频率
+    private int allMeet;   // 遇到次数
 
     private int meet;
 

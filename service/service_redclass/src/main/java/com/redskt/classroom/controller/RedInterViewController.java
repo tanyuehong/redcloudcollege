@@ -11,7 +11,6 @@ import com.redskt.commonutils.R;
 import com.redskt.commonutils.RequestParmUtil;
 import com.redskt.security.TokenManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -134,7 +133,7 @@ public class RedInterViewController {
 
         if(qId.length()>0) {
             RedInterviewQuestionVo qDetail = questionService.getQuestionDetail(qId);
-            int readCount = qDetail.getReadcount() + 1;
+            int readCount = qDetail.getReadCount() + 1;
             questionService.updateQuestionReadCount(qDetail.getQId(), readCount);
 
             QueryWrapper<RedInterviewPosition> positionQueryWrapper = new QueryWrapper<>();
