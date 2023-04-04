@@ -59,7 +59,7 @@ public class RedUserController {
         return R.ok().data("userInfo",eduUser);
     }
 
-    @PostMapping("getUserAdminState")
+    @PostMapping("commonRq/getUserAdminState")
     public R getUserAdminState(HttpServletRequest request) {
         String uId = TokenManager.getMemberIdByJwtToken(request);
         if (uId.length()>0) {

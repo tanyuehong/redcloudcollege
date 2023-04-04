@@ -49,7 +49,7 @@ public class RedInterviewQuestionVo {
 
     private int allMeet;   // 遇到次数
 
-    private int meet;
+    private float frequency;
 
     private List<RedCategoryTag> tags;
 

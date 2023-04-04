@@ -17,12 +17,12 @@
         <id column="answer" property="answer"/>
         <id column="reply" property="reply"/>
         <id column="allMeet" property="allMeet"/>
+        <id column="frequency" property="frequency"/>
         <id column="readCount" property="readCount"/>
         <id column="collect" property="collect"/>
         <id column="good" property="good"/>
         <id column="price" property="price"/>
         <id column="hotum" property="hotnum"/>
-        <id column="meet" property="meet"/>
         <id column="gmt_create" property="gmtCreate"/>
 
         <collection property="tags" resultMap="interviewTagMap">
@@ -38,7 +38,7 @@
     </resultMap>
 
     <select id="getHomeInterviewQuestionList" resultMap="interviewQuestionMap">
-        SELECT qustion.id as qId,qustion.title,qustion.snum as sNum,qustion.type,qustion.content,qustion.deep,qustion.collect,qustion.readcount as readCount,qustion.hotnum,qustion.price,qustion.good,(tmeet+smeet+pmeet) as meet,qustion.gmt_create,user.nickname,
+        SELECT qustion.id as qId,qustion.title,qustion.snum as sNum,qustion.type,qustion.content,qustion.deep,qustion.collect,qustion.readcount as readCount,qustion.hotnum,qustion.price,qustion.good,qustion.gmt_create,user.nickname,
         qustion.uid,(pmeet+tmeet+smeet) as allMeet,(select count(reply.id) as replaycount from red_interview_answer reply where reply.qid=qustion.id) as reply
         ,tag.id as ctid,tag.name as tname,tag.img as timg,tag.sort as tsort
         FROM red_interview_question qustion
@@ -67,8 +67,8 @@
     </select>
 
     <select id="getPositionQuestionList" resultMap="interviewQuestionMap">
-        SELECT question.id as qId,question.title,question.snum,question.type,question.content,question.deep,question.collect,question.readcount,question.hotnum,question.price,question.good,(tmeet+smeet+pmeet) as meet,question.gmt_create,user.nickname,
-        question.uid,(pmeet+tmeet+smeet)/ (readcount + 0.0 ) as frequency,(select count(reply.id) as replaycount from red_interview_answer reply where reply.qid=question.id) as reply
+        SELECT question.id as qId,question.title,question.snum,question.type,question.content,question.deep,question.collect,question.readcount,question.hotnum,question.price,question.good,question.gmt_create,user.nickname,
+        question.uid,(pmeet+tmeet+smeet) as allMeet, convert((pmeet+tmeet+smeet)/readcount,decimal(15,2)) as frequency,(select count(reply.id) as replaycount from red_interview_answer reply where reply.qid=question.id) as reply
         ,tag.id as ctid,tag.name as tname,tag.img as timg,tag.sort as tsort
         FROM red_interview_question question
         LEFT OUTER JOIN edu_user user ON user.id=question.uid
@@ -107,7 +107,7 @@
     </update>
 
     <select id="getQuestionDetail" resultMap="interviewQuestionMap">
-        SELECT question.id as qId,qPosition.pid as pId,question.uid,question.title,question.type,question.content,question.answer,question.collect,question.readcount,question.hotnum,question.price,question.deep,(tmeet+smeet+pmeet) as meet,question.good,question.gmt_create, user.nickname,
+        SELECT question.id as qId,qPosition.pid as pId,question.uid,question.title,question.type,question.content,question.answer,question.collect,question.readcount,question.hotnum,question.price,question.deep,(tmeet+smeet+pmeet) as allMeet,question.good,question.gmt_create, user.nickname,
             user.avatar,(select count(reply.id) from red_ask_reply reply where reply.qid=question.id) as reply,tag.id as ctid,tag.name as tname,tag.img as timg,tag.sort as tsort
         FROM red_interview_question question
         LEFT OUTER JOIN red_interview_question_position qPosition ON qPosition.qid=question.id

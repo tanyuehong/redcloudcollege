@@ -51,20 +51,30 @@ public class TokenAuthenticationFilter extends BasicAuthenticationFilter {
 
         UsernamePasswordAuthenticationToken authentication = null;
         try {
-            logger.info("=================11");
             authentication = getAuthentication(req);
         } catch (ExpiredJwtException expried) {
+            logger.info("============用户登录过期哦！");
             // 这里是token过期了 需要重新登录
-            ResponseUtil.out(res, R.LoginExpired());
+            if(req.getRequestURI().indexOf("commonRq") == -1 ) {
+                ResponseUtil.out(res, R.LoginExpired());
+            } else {
+                ResponseUtil.out(res, R.ok());
+            }
+            return ;
         } catch (Exception e) {
             logger.info("=================5"+e.getLocalizedMessage());
         }
         if (authentication != null) {
-            SecurityContextHolder.getContext().setAuthentication(authentication);
             logger.info("=================6");
+            SecurityContextHolder.getContext().setAuthentication(authentication);
         } else {
-            logger.info("=================7");
-            ResponseUtil.out(res, R.LoginNoToken());
+            logger.info("============请求没有token哦！");
+            // 这里是token过期了 需要重新登录
+            if(req.getRequestURI().indexOf("commonRq") == -1 ) {
+                ResponseUtil.out(res, R.LoginNoToken());
+            } else {
+                ResponseUtil.out(res, R.ok());
+            }
             return;
         }
         logger.info("=================8");
