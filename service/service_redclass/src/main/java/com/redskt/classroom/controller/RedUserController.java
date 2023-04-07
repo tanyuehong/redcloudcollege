@@ -111,11 +111,11 @@ public class RedUserController {
             return R.error("用户验证失败，请登录后重试");
         }
         String userPath = MD5.getMD5(userName);
-        File dest = new File("/home/redsktsource/user/"+ userPath +"/"+fileName);
+        File dest = new File("/home/redsktsource/imge/"+ userPath +"/"+fileName);
         try {
             if (!dest.exists()) dest.mkdirs(); // 要是目录不存在,创建一个
             file.transferTo(dest);
-            return R.ok().data("imageUrl","https://static.redskt.com/user/"+userPath+"/"+fileName);
+            return R.ok().data("imageUrl","https://static.redskt.com/imge/"+userPath+"/"+fileName);
         } catch (IOException e) {
             return R.error(e.getLocalizedMessage());
         }

@@ -7,6 +7,7 @@ import com.redskt.classroom.entity.*;
 import com.redskt.classroom.entity.admin.vo.RedInterViewEveryDayQuestionVo;
 import com.redskt.classroom.entity.vo.*;
 import com.redskt.classroom.service.*;
+import com.redskt.commonutils.CommonsUtils;
 import com.redskt.commonutils.R;
 import com.redskt.commonutils.RequestParmUtil;
 import com.redskt.security.TokenManager;
@@ -103,19 +104,13 @@ public class RedInterViewController {
         QueryWrapper<RedInterviewPositionClassify> classifyQueryWrapper = new QueryWrapper<>();
         classifyQueryWrapper.orderByAsc("sort");
         List<RedInterviewPositionClassify> classifyList = classifyService.list(classifyQueryWrapper);
-        String date =  this.getFormatDateString();
+        String date = CommonsUtils.getFormatDateString();
         List<RedInterViewEveryDayQuestionVo> everydayList = everydayService.getInterViewEveryQuestionList(date,null);
         R r = R.ok().data("list", list).data("classifyList", classifyList);
         if( everydayList != null && everydayList.size()>0) {
             r.data("everyDayQuestion",everydayList.get(0));
         }
         return r;
-    }
-
-    public static String getFormatDateString() {
-        LocalDate date = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        return  date.format(formatter);
     }
 
     @PostMapping("getQuestionDetail")

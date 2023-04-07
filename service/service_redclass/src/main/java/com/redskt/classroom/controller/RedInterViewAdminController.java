@@ -22,9 +22,6 @@ import java.util.Map;
 public class RedInterViewAdminController {
 
     @Autowired
-    private RedInterviewPositionService positionService;
-
-    @Autowired
     private RedInterviewQuestionService questionService;
 
     @Autowired
