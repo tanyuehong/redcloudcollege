@@ -25,7 +25,7 @@ import java.util.List;
 public class RedInterviewQuestionServiceImpl extends ServiceImpl<RedInterviewQuestionMapper, RedInterviewQuestion> implements RedInterviewQuestionService {
 
     @Override
-    public List<RedInterviewQuestionVo> getHomeInterviewQustionList(String sort, String tag) {
+    public List<RedInterviewQuestionVo> getHomeInterviewQustionList(String sort, String tId) {
         int sortInt  = 1;
         if(sort.equals("latest")) {
             sortInt = 2;
@@ -33,10 +33,10 @@ public class RedInterviewQuestionServiceImpl extends ServiceImpl<RedInterviewQue
         if(sort.equals("hot")) {
             sortInt = 3;
         }
-        if(tag.length()==0) {
-            tag = null;
+        if(tId.length()==0) {
+            tId = null;
         }
-        return baseMapper.getHomeInterviewQuestionList(sortInt,20, tag,null,null);
+        return baseMapper.getHomeInterviewQuestionList(sortInt,20, tId,null,null);
     }
 
     @Override

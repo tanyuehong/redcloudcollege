@@ -45,8 +45,8 @@
         LEFT OUTER JOIN edu_user user ON qustion.uid=user.id
         LEFT OUTER JOIN red_interview_question_tags tags ON tags.qid = qustion.id
         LEFT OUTER JOIN red_category_tag tag ON tag.id = tags.tid
-        <if test="tag != null">
-            where tag.path = #{tag}
+        <if test="tId != null">
+            where tag.id = #{tId}
         </if>
         <if test="qid != null">
             and  qId != #{qid}

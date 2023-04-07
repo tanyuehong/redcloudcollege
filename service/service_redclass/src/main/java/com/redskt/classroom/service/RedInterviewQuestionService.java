@@ -17,7 +17,7 @@ import java.util.List;
  */
 public interface RedInterviewQuestionService extends IService<RedInterviewQuestion> {
 
-    List<RedInterviewQuestionVo> getHomeInterviewQustionList(String sort, String tag);
+    List<RedInterviewQuestionVo> getHomeInterviewQustionList(String sort, String tId);
 
     List<RedInterviewQuestionVo> getHotInterviewQustionList(String qType,String qId);
 
