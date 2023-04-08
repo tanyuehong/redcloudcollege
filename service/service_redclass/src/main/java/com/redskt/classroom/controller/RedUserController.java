@@ -111,6 +111,7 @@ public class RedUserController {
         if (userName == null||userName.length()==0) {
             return R.error("用户验证失败，请登录后重试");
         }
+
         String datePath = CommonsUtils.getFormatDateString();
         File dest = new File("/home/redsktsource/imge/"+ datePath +"/"+fileName);
         try {
