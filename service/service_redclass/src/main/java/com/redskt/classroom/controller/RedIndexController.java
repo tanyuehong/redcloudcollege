@@ -8,6 +8,7 @@ import com.redskt.classroom.entity.vo.RedClassBlogDetailVo;
 import com.redskt.classroom.entity.vo.RedClassBookVo;
 import com.redskt.classroom.entity.vo.RedClassCourseWebVo;
 import com.redskt.classroom.service.*;
+import com.redskt.commonutils.CommonsUtils;
 import com.redskt.commonutils.R;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -125,7 +126,7 @@ public class RedIndexController {
         }
         List<RedClassBanner> bannerList = bannerService.selectAllBanner();
 
-        String date =  RedInterViewController.getFormatDateString();
+        String date =  CommonsUtils.getFormatDateString();
         List<RedInterViewEveryDayQuestionVo> everydayList = everydayService.getInterViewEveryQuestionList(date,null);
 
         R r = R.ok().data("banerList",bannerList).data("eduList",eduList).data("gusslikeList",gussLikes);

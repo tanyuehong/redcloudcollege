@@ -5,6 +5,7 @@ import com.redskt.classroom.entity.RedClassUser;
 import com.redskt.classroom.entity.RedUserFocus;
 import com.redskt.classroom.service.RedUserFocusService;
 import com.redskt.classroom.service.RedUserService;
+import com.redskt.commonutils.CommonsUtils;
 import com.redskt.commonutils.MD5;
 import com.redskt.commonutils.RequestParmUtil;
 import com.redskt.security.TokenManager;
@@ -110,12 +111,12 @@ public class RedUserController {
         if (userName == null||userName.length()==0) {
             return R.error("用户验证失败，请登录后重试");
         }
-        String userPath = MD5.getMD5(userName);
-        File dest = new File("/home/redsktsource/imge/"+ userPath +"/"+fileName);
+        String datePath = CommonsUtils.getFormatDateString();
+        File dest = new File("/home/redsktsource/imge/"+ datePath +"/"+fileName);
         try {
             if (!dest.exists()) dest.mkdirs(); // 要是目录不存在,创建一个
             file.transferTo(dest);
-            return R.ok().data("imageUrl","https://static.redskt.com/imge/"+userPath+"/"+fileName);
+            return R.ok().data("imageUrl","https://static.redskt.com/imge/"+datePath+"/"+fileName);
         } catch (IOException e) {
             return R.error(e.getLocalizedMessage());
         }
