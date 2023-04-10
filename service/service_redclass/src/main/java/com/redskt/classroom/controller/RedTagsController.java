@@ -3,17 +3,18 @@ package com.redskt.classroom.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.redskt.classroom.entity.RedAskQuestion;
 import com.redskt.classroom.entity.RedCategoryTag;
+import com.redskt.classroom.entity.RedInterviewComment;
 import com.redskt.classroom.entity.vo.RedCategoryTagVo;
 import com.redskt.classroom.entity.vo.RedClassAskQuestionVo;
+import com.redskt.classroom.entity.vo.RedCommentVo;
 import com.redskt.classroom.service.RedAskService;
 import com.redskt.classroom.service.RedCategoryTagService;
 import com.redskt.commonutils.R;
+import com.redskt.security.TokenManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -39,6 +40,12 @@ public class RedTagsController {
 
     @GetMapping("getAllTagList")
     public R getAskTagList() {
+        List<RedCategoryTagVo> tagList = tagService.getAllTagList();
+        return R.ok().data("tagList",tagList);
+    }
+
+    @PostMapping("searchTags")
+    public R searchTags() {
         List<RedCategoryTagVo> tagList = tagService.getAllTagList();
         return R.ok().data("tagList",tagList);
     }

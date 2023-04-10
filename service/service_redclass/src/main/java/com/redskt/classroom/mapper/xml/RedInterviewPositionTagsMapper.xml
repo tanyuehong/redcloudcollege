@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.redskt.classroom.mapper.RedInterviewPositionTagsMapper">
+
+       <select id="getInterviewPositionTagsList" resultType="com.redskt.classroom.entity.admin.vo.RedInterviewPositionTagsVo">
+        SELECT ptags.id,tag.name,tposition.name as pName
+        FROM red_interview_position_tags ptags
+        LEFT OUTER JOIN red_category_tag tag ON tag.id = ptags.tid
+        LEFT OUTER JOIN red_interview_position tposition ON tposition.id = ptags.pid
+        where ptags.tid = #{tId}
+    </select>
+
+</mapper>

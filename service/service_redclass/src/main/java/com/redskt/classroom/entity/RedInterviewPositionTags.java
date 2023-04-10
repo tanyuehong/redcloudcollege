@@ -19,35 +19,33 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author tanyuehong
- * @since 2022-01-16
+ * @since 2023-04-09
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="RedAskQustionTag对象", description="")
-public class RedCategoryTag implements Serializable {
+@ApiModel(value="RedInterviewPositionTags对象", description="")
+public class RedInterviewPositionTags implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @ApiModelProperty(value = "id")
     @TableId(value = "id", type = IdType.ID_WORKER_STR)
     private String id;
 
-    private String name;
+    @ApiModelProperty(value = "问题id")
+    private String pid;
 
-    private String img;
-
-    private Integer sort;
-
-    private String asktype;
-
-    private String describ;
+    @ApiModelProperty(value = "标签id")
+    private String tid;
 
     @ApiModelProperty(value = "创建时间")
     @TableField(fill = FieldFill.INSERT)
     private Date gmtCreate;
 
-    @ApiModelProperty(value = "更新时间")
+    @ApiModelProperty(value = "修改时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date gmtModified;
+
 
 }
