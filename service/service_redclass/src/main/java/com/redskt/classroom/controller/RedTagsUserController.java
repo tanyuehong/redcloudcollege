@@ -76,8 +76,8 @@ public class RedTagsUserController {
 
     @GetMapping("getTagPositionList/{tId}")
     public R getTagPositionList(@PathVariable String tId) {
-        List<RedInterviewPositionTagsVo> positionList = positionTagsService.getInterviewPositionTagsList(tId);
-        return R.ok().data("positionList",positionList);
+        List<RedInterviewPositionTagsVo> tagsList = positionTagsService.getInterviewPositionTagsList(tId);
+        return R.ok().data("tagPositionList",tagsList);
     }
 
 
