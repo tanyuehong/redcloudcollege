@@ -46,7 +46,7 @@ public class RedInterviewQuestionServiceImpl extends ServiceImpl<RedInterviewQue
 
     @Override
     public List<RedInterviewQuestionVo> getPositionQuestionList(int sort,String pId,String sId,int orderType) {
-        return baseMapper.getPositionQuestionList(sort,20, pId,orderType);
+        return baseMapper.getPositionQuestionList(sort,20, pId,sId,orderType);
     }
 
     @Override

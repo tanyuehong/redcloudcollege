@@ -84,10 +84,10 @@ public class RedInterViewController {
     @PostMapping("pindex")
     public R getPositionInterviewIndex(@RequestBody Map parameterMap) {
         parameterMap = RequestParmUtil.transToMAP(parameterMap);
-        String strSort    = (String)parameterMap.get("sort");   // 按什么类型排序  面试题名  回答数  出现频率？
-        String orderType  = (String)parameterMap.get("orderType");   // 降序？升序
+        String strSort    = (String) parameterMap.get("sort");   // 按什么类型排序  面试题名  回答数  出现频率？
+        String orderType  = (String) parameterMap.get("orderType");   // 降序？升序
         String pId        = (String) parameterMap.get("pId");        // 职位id
-        String sId        = (String) parameterMap.get("pId");        // 面试题分类
+        String sId        = (String) parameterMap.get("type");        // 面试题分类
         int sort = 1;
         try {
             sort = Integer.parseInt(strSort);

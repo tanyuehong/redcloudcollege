@@ -76,6 +76,9 @@
         LEFT OUTER JOIN red_category_tag tag ON tag.id = tags.tid
         LEFT OUTER JOIN red_interview_question_position tposition ON tposition.qid = question.id
         where tposition.pid = #{pid}
+        <if test="sId!=null">
+            and tposition.sid = {#sId}
+        </if>
         <if test="sort==1">
             ORDER BY question.snum
         </if>
