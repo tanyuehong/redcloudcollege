@@ -80,6 +80,4 @@ public class RedTagsUserController {
         return R.ok().data("tagPositionList",tagsList);
     }
 
-
-
 }

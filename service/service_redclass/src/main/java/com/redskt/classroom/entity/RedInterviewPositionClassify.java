@@ -36,9 +36,6 @@ public class RedInterviewPositionClassify implements Serializable {
     @ApiModelProperty(value = "职位id")
     private String pid;
 
-    @ApiModelProperty(value = "子分类类型")
-    private String sid;
-
     @ApiModelProperty(value = "类型名字")
     private String name;
 
