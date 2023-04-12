@@ -58,7 +58,7 @@ public class RedInterviewUserSignController {
         return R.errorParam();
     }
 
-    @GetMapping("getSignDateList")
+    @GetMapping("commonRq/getSignDateList")
     public R getSignDateList(HttpServletRequest request) {
         String uId = TokenManager.getMemberIdByJwtToken(request);
 
