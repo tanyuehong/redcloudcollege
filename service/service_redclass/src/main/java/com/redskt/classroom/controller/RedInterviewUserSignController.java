@@ -61,8 +61,6 @@ public class RedInterviewUserSignController {
     @GetMapping("commonRq/getSignDateList")
     public R getSignDateList(HttpServletRequest request) {
         String uId = TokenManager.getMemberIdByJwtToken(request);
-
-
         QueryWrapper<RedInterviewUserSign> signQueryWrapper = new QueryWrapper<>();
         signQueryWrapper.eq("uid",uId);
         signQueryWrapper.orderByAsc("date");
@@ -75,8 +73,5 @@ public class RedInterviewUserSignController {
         }
         return R.ok().data("dateList",dateList);
     }
-
-
-
 }
 

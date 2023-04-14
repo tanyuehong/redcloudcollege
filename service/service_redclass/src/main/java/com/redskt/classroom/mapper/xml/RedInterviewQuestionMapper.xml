@@ -42,7 +42,7 @@
         qustion.uid,(pmeet+tmeet+smeet) as allMeet,(select count(reply.id) as replaycount from red_interview_answer reply where reply.qid=qustion.id) as reply
         ,tag.id as ctid,tag.name as tname,tag.img as timg,tag.sort as tsort
         FROM red_interview_question qustion
-        LEFT OUTER JOIN edu_user user ON qustion.uid=user.id
+        LEFT OUTER JOIN red_class_user user ON qustion.uid=user.id
         LEFT OUTER JOIN red_interview_question_tags tags ON tags.qid = qustion.id
         LEFT OUTER JOIN red_category_tag tag ON tag.id = tags.tid
         <if test="tId != null">
