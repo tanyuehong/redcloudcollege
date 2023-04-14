@@ -71,7 +71,7 @@
         question.uid,(pmeet+tmeet+smeet) as allMeet, convert((pmeet+tmeet+smeet)/readcount,decimal(15,2)) as frequency,(select count(reply.id) as replaycount from red_interview_answer reply where reply.qid=question.id) as reply
         ,tag.id as ctid,tag.name as tname,tag.img as timg,tag.sort as tsort
         FROM red_interview_question question
-        LEFT OUTER JOIN edu_user user ON user.id=question.uid
+        LEFT OUTER JOIN red_class_user user ON user.id=question.uid
         LEFT OUTER JOIN red_interview_question_tags tags ON tags.qid = question.id
         LEFT OUTER JOIN red_category_tag tag ON tag.id = tags.tid
         LEFT OUTER JOIN red_interview_question_position tposition ON tposition.qid = question.id
