@@ -33,6 +33,9 @@ public class RedInterviewQuestionEveryday implements Serializable {
     @TableId(value = "id", type = IdType.ID_WORKER_STR)
     private String id;
 
+    @ApiModelProperty(value = "职位id")
+    private String pid;
+
     @ApiModelProperty(value = "用户id")
     private String uid;
 

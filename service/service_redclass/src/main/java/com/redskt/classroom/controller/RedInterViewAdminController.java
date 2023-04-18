@@ -85,6 +85,9 @@ public class RedInterViewAdminController {
     @PostMapping("submitEveryQuestion")
     public R submitEveryQuestion(@RequestBody RedInterviewQuestionEveryday questionEveryday,HttpServletRequest request) {
         String uId = TokenManager.getMemberIdByJwtToken(request);
+        if(questionEveryday.getQid()==null || questionEveryday.getPid()==null) {
+            return  R.errorParam();
+        }
         if (uId.length()>0 && this.userService.checkIsAdmin(uId)) {
             questionEveryday.setUid(uId);
             questionEveryday.setType(1);
