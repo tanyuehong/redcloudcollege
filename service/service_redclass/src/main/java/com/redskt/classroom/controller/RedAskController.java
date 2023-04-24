@@ -55,8 +55,6 @@ public class RedAskController {
         QueryWrapper<RedAskType> askWarper = new QueryWrapper<>();
         askWarper.orderByAsc("sort");
         List<RedAskType> typeList = askTypeService.list(askWarper);
-        typeList.remove(0);
-
         return R.ok().data("typeList",typeList);
     }
 
