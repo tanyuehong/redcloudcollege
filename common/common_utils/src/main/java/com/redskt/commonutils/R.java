@@ -90,6 +90,14 @@ public class R {
         return r;
     }
 
+    public static R notLoginTips(String message) {
+        R r = new R();
+        r.setSuccess(false);
+        r.setCode(ResultCode.LOGINNOTNAMLTips);
+        r.setMessage(message);
+        return r;
+    }
+
     public static R error(String message) {
         R r = new R();
         r.setSuccess(false);

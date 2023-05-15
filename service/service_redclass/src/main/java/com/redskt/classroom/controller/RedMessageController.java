@@ -96,7 +96,7 @@ public class RedMessageController {
                     return R.ok().data("good", true);
                 }
             } else {
-                return R.error("请您登录以后在点赞该文章哈！");
+                return R.notLoginTips("请您登录以后在点赞该文章哈！");
             }
         }
         return R.error("点赞失败，请稍后重试哈！");
