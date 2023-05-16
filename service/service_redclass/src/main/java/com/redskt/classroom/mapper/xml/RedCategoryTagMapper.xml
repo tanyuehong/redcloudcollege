@@ -12,7 +12,7 @@
     <select id="getBlogTypeTagList" resultType="com.redskt.classroom.entity.vo.RedCategoryTagVo">
         SELECT tag.id, tag.name,tag.bdescrib,tag.keywords
         FROM red_category_tag tag
-        LEFT OUTER JOIN op_blog_type btype  ON btype.id=tag.parenttype
+        LEFT OUTER JOIN red_blog_type btype  ON btype.id=tag.parenttype
         where  btype.type = #{bType}
         ORDER BY tag.sort DESC
     </select>
