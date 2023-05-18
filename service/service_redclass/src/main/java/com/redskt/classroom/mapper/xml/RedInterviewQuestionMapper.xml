@@ -43,7 +43,7 @@
         ,tag.id as ctid,tag.name as tname,tag.img as timg,tag.sort as tsort
         FROM red_interview_question qustion
         LEFT OUTER JOIN red_class_user user ON qustion.uid=user.id
-        LEFT OUTER JOIN red_interview_question_tags tags ON tags.qid = qustion.id
+        LEFT OUTER JOIN red_interview_question_tag tags ON tags.qid = qustion.id
         LEFT OUTER JOIN red_category_tag tag ON tag.id = tags.tid
         <if test="tId != null">
             where tag.id = #{tId}
@@ -72,7 +72,7 @@
         ,tag.id as ctid,tag.name as tname,tag.img as timg,tag.sort as tsort
         FROM red_interview_question question
         LEFT OUTER JOIN red_class_user user ON user.id=question.uid
-        LEFT OUTER JOIN red_interview_question_tags tags ON tags.qid = question.id
+        LEFT OUTER JOIN red_interview_question_tag tags ON tags.qid = question.id
         LEFT OUTER JOIN red_category_tag tag ON tag.id = tags.tid
         LEFT OUTER JOIN red_interview_question_position tposition ON tposition.qid = question.id
         where tposition.pid = #{pid}
@@ -115,7 +115,7 @@
         FROM red_interview_question question
         LEFT OUTER JOIN red_interview_question_position qPosition ON qPosition.qid=question.id
         LEFT OUTER JOIN red_class_user user ON question.uid=user.id
-        LEFT OUTER JOIN red_interview_question_tags tags ON tags.qid = question.id
+        LEFT OUTER JOIN red_interview_question_tag tags ON tags.qid = question.id
         LEFT OUTER JOIN red_category_tag tag ON tag.id = tags.tid
         WHERE question.id=#{tId}
     </select>

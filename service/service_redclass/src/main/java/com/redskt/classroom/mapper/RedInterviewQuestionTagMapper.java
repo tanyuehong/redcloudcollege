@@ -1,6 +1,6 @@
 package com.redskt.classroom.mapper;
 
-import com.redskt.classroom.entity.RedInterviewQuestionTags;
+import com.redskt.classroom.entity.RedInterviewQuestionTag;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author tanyuehong
  * @since 2022-07-14
  */
-public interface RedInterviewQuestionTagsMapper extends BaseMapper<RedInterviewQuestionTags> {
+public interface RedInterviewQuestionTagMapper extends BaseMapper<RedInterviewQuestionTag> {
 
 }

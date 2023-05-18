@@ -25,7 +25,7 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @ApiModel(value="RedInterviewTags对象", description="")
-public class RedInterviewQuestionTags implements Serializable {
+public class RedInterviewQuestionTag implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

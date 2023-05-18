@@ -27,7 +27,7 @@ public class RedInterViewUserController {
     private RedInterviewQuestionService questionService;
 
     @Autowired
-    private RedInterviewQuestionTagsService tagsService;
+    private RedInterviewQuestionTagService tagsService;
 
     @Autowired
     private RedInterviewCommentService commentService;
@@ -92,9 +92,9 @@ public class RedInterViewUserController {
                     questionPosition.setSid(classifyId);
                 }
                 questionPositionService.save(questionPosition);
-                List<RedInterviewQuestionTags> tagsList = new ArrayList<>();
+                List<RedInterviewQuestionTag> tagsList = new ArrayList<>();
                 for (int i=0;i<tags.size();i++) {
-                    RedInterviewQuestionTags tag = new RedInterviewQuestionTags();
+                    RedInterviewQuestionTag tag = new RedInterviewQuestionTag();
                     tag.setQid(question.getId());
                     tag.setTid(tags.get(i));
                     tagsList.add(tag);
