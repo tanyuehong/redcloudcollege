@@ -21,8 +21,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="OpBlogType对象", description="")
-@TableName("op_blog_type")
+@ApiModel(value="RedBlogType对象", description="")
 public class RedBlogType implements Serializable {
 
     private static final long serialVersionUID = 1L;
