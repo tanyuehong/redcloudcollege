@@ -123,6 +123,34 @@ public class RedUserController {
         }
     }
 
+    // 实践文章 图片上传接口
+    @PostMapping("uploadBlogImage")
+    public  R uploadBlogImage(@RequestParam(value = "file") MultipartFile file,HttpServletRequest request) {
+        if (file.isEmpty()) {
+            return R.error("上传失败，请选择文件");
+        }
+        String contentType = file.getContentType();
+        if (!CONTENT_TYPES.contains(contentType)){
+            // 文件类型不合法，直接返回null
+            return R.error("图片格式不正确!");
+        }
+        String fileName = file.getOriginalFilename();
+        String userName = TokenManager.getMemberIdByJwtToken(request);
+        if (userName == null||userName.length()==0) {
+            return R.error("用户验证失败，请登录后重试");
+        }
+
+        String datePath = CommonsUtils.getFormatDateString();
+        File dest = new File("/home/redsktsource/blogimge/"+ datePath +"/"+fileName);
+        try {
+            if (!dest.exists()) dest.mkdirs(); // 要是目录不存在,创建一个
+            file.transferTo(dest);
+            return R.ok().data("imageUrl","https://static.redskt.com/imge/"+datePath+"/"+fileName);
+        } catch (IOException e) {
+            return R.error(e.getLocalizedMessage());
+        }
+    }
+
     @PostMapping("updateUserInfo")
     public R updateUserInfo(@RequestBody Map parameterMap) {
         parameterMap = RequestParmUtil.transToMAP(parameterMap);
