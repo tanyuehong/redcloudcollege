@@ -6,6 +6,7 @@ import com.github.pagehelper.PageInfo;
 import com.redskt.classroom.entity.*;
 import com.redskt.classroom.entity.admin.vo.RedInterViewEveryDayQuestionVo;
 import com.redskt.classroom.entity.admin.vo.RedInterviewQuestionPositionVo;
+import com.redskt.classroom.entity.vo.RedCommentVo;
 import com.redskt.classroom.service.*;
 import com.redskt.commonutils.R;
 import com.redskt.security.TokenManager;
@@ -30,6 +31,9 @@ public class RedInterViewAdminController {
 
     @Autowired
     private RedInterviewQuestionEverydayService everydayService;
+
+    @Autowired
+    private RedInterviewPositionService positionService;
 
     @Autowired
     private RedUserService userService;
@@ -145,5 +149,26 @@ public class RedInterViewAdminController {
             }
         }
         return R.errorParam();
+    }
+
+    @PostMapping("addInterviewPostion")
+    public R addInterviewPostion(@RequestBody RedInterviewPosition position, HttpServletRequest request) {
+        if(position.getName()!=null && position.getName().length()>0 && position.getImg()!=null && position.getImg().length()>0) {
+            String uId = TokenManager.getMemberIdByJwtToken(request);
+            if (this.userService.checkIsAdmin(uId)) {
+                if(position.getId() != null && position.getId().length()>0) {
+                    if(this.positionService.updateById(position)) {
+                        return R.okSucessTips("修改职位成功～");
+                    }
+                } else {
+                    if(this.positionService.save(position)) {
+                        return R.okSucessTips("添加职位成功～");
+                    }
+                }
+            }
+            return R.error("添加职位失败，请重新尝试哈～");
+        } else {
+            return R.errorParam();
+        }
     }
 }

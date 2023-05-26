@@ -39,8 +39,6 @@ public class RedInterviewPosition implements Serializable {
     @ApiModelProperty(value = "图片")
     private String img;
 
-    private String type;
-
     @ApiModelProperty(value = "排序")
     private Integer sort;
 
