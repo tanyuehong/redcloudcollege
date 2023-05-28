@@ -4,10 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.redskt.classroom.entity.*;
 import com.redskt.classroom.entity.vo.RedCommentReplyVo;
 import com.redskt.classroom.entity.vo.RedCommentVo;
-import com.redskt.classroom.service.RedBlogCollectService;
-import com.redskt.classroom.service.RedBlogCommentGoodService;
-import com.redskt.classroom.service.RedBlogCommentReplyService;
-import com.redskt.classroom.service.RedBlogCommentService;
+import com.redskt.classroom.service.*;
 import com.redskt.commonutils.R;
 import com.redskt.security.TokenManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +27,32 @@ public class RedBlogUserController {
 
     @Autowired
     private RedBlogCollectService collectService;
+
+    @Autowired
+    private RedBlogDetailService detailService;
+
+    @PostMapping("addNewblog")
+    public R addNewblog(@RequestBody RedBlogDetail blogDetail, HttpServletRequest request) {
+        String uId = TokenManager.getMemberIdByJwtToken(request);
+        if(uId.length()>0) {
+            blogDetail.setAuid(uId);
+            if(blogDetail.getId()!=null && blogDetail.getId().length()>0) {
+                if(detailService.updateById(blogDetail)) {
+                    return R.ok().data("blog",blogDetail);
+                } else {
+                    return R.error("内容不存在哦~");
+                }
+            } else {
+                if(detailService.save(blogDetail)) {
+                    return R.ok().data("blog",blogDetail);
+                } else {
+                    return R.error("新建文章失败，请重新尝试~");
+                }
+            }
+        } else  {
+            return R.error("参数验证失败！");
+        }
+    }
 
     @PostMapping("commet/submit")
     public R submitReplyComment(@RequestBody RedBlogComment comment, HttpServletRequest request) {

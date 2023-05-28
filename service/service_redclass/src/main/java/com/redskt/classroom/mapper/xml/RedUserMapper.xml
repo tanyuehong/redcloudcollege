@@ -29,7 +29,7 @@
         (
            select  blog.auid,sum(blog.view_count) as viewsum,sum(blog.good) as bgoodsum
            from op_blog_detail blog
-           where blog.auid = #{uid}
+           where blog.auid = #{uid} and blog.state = 100
            GROUP BY blog.auid
          ) sumblog  on sumblog.auid = eduser.id
         where eduser.id = #{uid}

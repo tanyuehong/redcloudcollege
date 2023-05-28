@@ -34,6 +34,8 @@ public class RedBlogDetail implements Serializable {
 
     private String title;
 
+    private String auid;
+
     private String type;
 
     private String blogtype;

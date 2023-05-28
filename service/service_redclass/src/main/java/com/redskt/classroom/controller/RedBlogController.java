@@ -107,6 +107,19 @@ public class RedBlogController {
         return R.ok().data("typeList",typeList).data("tagList",tagList).data("blogList",blogList);
     }
 
+    @GetMapping("getBlog/{bId}")
+    public R getBlog(@PathVariable String bId) {
+        if (bId.length()>0) {
+            RedBlogDetail blogDetail = blogService.getById(bId);
+            if(blogDetail == null) {
+                return R.error("内容不存在哦~");
+            }
+            return R.ok().data("blog", blogDetail);
+        } else {
+            return R.error("参数不合法，请验证");
+        }
+    }
+
     @GetMapping("getDetail/{pId}")
     public R index(@PathVariable String pId) {
         if (pId.length()>0) {
@@ -123,6 +136,7 @@ public class RedBlogController {
             return R.error("参数不合法，请验证");
         }
     }
+
    
     @GetMapping("getCommentList/{bId}/{type}")
     public R getCommentList(@PathVariable String bId,@PathVariable int type) {

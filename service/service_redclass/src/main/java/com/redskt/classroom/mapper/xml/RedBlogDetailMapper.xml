@@ -29,9 +29,9 @@
         FROM op_blog_detail blog
         LEFT OUTER JOIN red_class_user auser ON auser.id = blog.auid
         LEFT OUTER JOIN (select bid,count(id) as cCount from red_blog_comment group by bid) comment on comment.bid = blog.id
-
+        where  blog.state = 100
         <if test="uid != null">
-        WHERE blog.auid = #{uid}
+        and blog.auid = #{uid}
         </if>
         <if test="type == 1">
             ORDER BY blog.gmt_create DESC
@@ -53,7 +53,7 @@
         LEFT OUTER JOIN red_blog_tags tag ON tag.bid   = blog.id
         LEFT OUTER JOIN red_user_focus focus ON blog.auid = focus.fid
 
-        where focus.uid = #{uid} and focus.is_deleted = 0
+        where focus.uid = #{uid} and focus.is_deleted = 0 and blog.state = 100
 
         <if test="sort == 1">
             ORDER BY blog.gmt_create DESC
@@ -74,11 +74,10 @@
         LEFT OUTER JOIN (select bid,count(id) as cCount from red_blog_comment group by bid) comment on comment.bid = blog.id
         LEFT OUTER JOIN red_blog_tags tag ON tag.bid   = blog.id
         LEFT OUTER JOIN red_blog_type otype ON otype.id = blog.tyid
+        where  blog.state = 100
+        <if test="tid != null">and tag.tid = #{tid}</if>
+        <if test="type != null">and otype.type = #{type}</if>
 
-        <where>
-            <if test="tid != null">tag.tid = #{tid}</if>
-            <if test="type != null">and otype.type = #{type}</if>
-        </where>
         <if test="sort == 1">
             ORDER BY blog.gmt_create DESC
         </if>
@@ -95,7 +94,7 @@
         SELECT blog.*,auser.id as aUid,auser.nickName as authorName,auser.avatar as authorAvatar,auser.id as authorUid
         FROM op_blog_detail blog
         LEFT OUTER JOIN red_class_user auser ON auser.id=blog.auid
-        where blog.id = #{bid}
+        where blog.id = #{bid} and blog.state = 100
     </select>
 
     <select id="getBlogUserStatus" resultType="com.redskt.classroom.entity.vo.RedUserStateVo">
@@ -104,7 +103,7 @@
         LEFT OUTER JOIN  red_blog_collect collect on collect.uid = #{uid} and collect.bid = #{bid} and collect.is_deleted = 0
         LEFT OUTER JOIN  red_user_focus focus on focus.uid = #{uid} and focus.fid = blog.auid and focus.is_deleted = 0
         LEFT OUTER JOIN  red_blog_good  good  on good.uid = #{uid} and good.bid = #{bid}
-        where blog.id = #{bid}
+        where blog.id = #{bid} and  blog.state = 100
     </select>
 
     <update id="addBlogGoodCount">
