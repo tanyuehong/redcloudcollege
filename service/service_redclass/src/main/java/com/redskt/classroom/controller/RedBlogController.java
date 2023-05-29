@@ -120,6 +120,14 @@ public class RedBlogController {
         }
     }
 
+    @GetMapping("getBlogTypeList")
+    public R getBlogTypeList() {
+        QueryWrapper<RedBlogType> wrapper = new QueryWrapper<>();
+        wrapper.orderByAsc("bsort");
+        List<RedBlogType> typeList = typeService.list(wrapper);
+        return R.ok().data("typeList",typeList);
+    }
+
     @GetMapping("getDetail/{pId}")
     public R index(@PathVariable String pId) {
         if (pId.length()>0) {
