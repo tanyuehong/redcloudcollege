@@ -38,7 +38,6 @@ public class RedInterViewAdminController {
     @Autowired
     private RedUserService userService;
 
-
     @GetMapping("questionList")
     public R getQuestionList() {
         QueryWrapper<RedInterviewQuestion> questionQueryWrapper = new QueryWrapper<>();
@@ -183,5 +182,13 @@ public class RedInterViewAdminController {
         } else {
             return R.errorParam();
         }
+    }
+
+    @GetMapping("positionClassify")
+    public R getPositionClassify() {
+        QueryWrapper<RedInterviewPositionClassify> classifyQueryWrapper = new QueryWrapper<>();
+        classifyQueryWrapper.orderByAsc("gmt_create");
+        List<RedInterviewPositionClassify> classifyList = classifyService.list(classifyQueryWrapper);
+        return R.ok().data("classifyList", classifyList);
     }
 }
