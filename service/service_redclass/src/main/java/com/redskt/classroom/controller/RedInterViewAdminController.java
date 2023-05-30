@@ -151,8 +151,21 @@ public class RedInterViewAdminController {
         return R.errorParam();
     }
 
-    @PostMapping("addInterviewPostion")
-    public R addInterviewPostion(@RequestBody RedInterviewPosition position, HttpServletRequest request) {
+    @GetMapping("deletePosition/{pid}")
+    public R deletePosition(@PathVariable String pid,HttpServletRequest request) {
+        String uId = TokenManager.getMemberIdByJwtToken(request);
+        if (pid.length()>0 && this.userService.checkIsAdmin(uId)) {
+            if (positionService.removeById(pid)) {
+                return R.okSucessTips("删除成功！");
+            } else {
+                return R.error("操作异常，请重新操作哦~");
+            }
+        }
+        return R.errorParam();
+    }
+
+    @PostMapping("addInterviewPosition")
+    public R addInterviewPosition(@RequestBody RedInterviewPosition position, HttpServletRequest request) {
         if(position.getName()!=null && position.getName().length()>0 && position.getImg()!=null && position.getImg().length()>0) {
             String uId = TokenManager.getMemberIdByJwtToken(request);
             if (this.userService.checkIsAdmin(uId)) {
