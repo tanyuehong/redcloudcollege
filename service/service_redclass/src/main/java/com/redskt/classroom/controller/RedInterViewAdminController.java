@@ -184,11 +184,4 @@ public class RedInterViewAdminController {
         }
     }
 
-    @GetMapping("positionClassify")
-    public R getPositionClassify() {
-        QueryWrapper<RedInterviewPositionClassify> classifyQueryWrapper = new QueryWrapper<>();
-        classifyQueryWrapper.orderByAsc("gmt_create");
-        List<RedInterviewPositionClassify> classifyList = classifyService.list(classifyQueryWrapper);
-        return R.ok().data("classifyList", classifyList);
-    }
 }
