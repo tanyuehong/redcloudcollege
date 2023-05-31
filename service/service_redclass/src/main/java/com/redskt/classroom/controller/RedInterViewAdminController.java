@@ -76,10 +76,16 @@ public class RedInterViewAdminController {
     public R submitClassify(@RequestBody RedInterviewPositionClassify classify,HttpServletRequest request) {
         String uId = TokenManager.getMemberIdByJwtToken(request);
         if (uId.length()>0 && this.userService.checkIsAdmin(uId)) {
-            if(classifyService.save(classify)) {
-                return R.okSucessTips("添加成功");
+            if(classify.getId() != null && classify.getId().length()>0) {
+                if(this.classifyService.updateById(classify)) {
+                    return R.okSucessTips("修改职位成功～");
+                }
+            } else {
+                if(this.classifyService.save(classify)) {
+                    return R.okSucessTips("添加职位成功～");
+                }
             }
-            return R.error("存储失败,请重试哈~");
+            return R.error("操作失败,请重试哈~");
         } else {
             return  R.error("没有对应的权限~");
         }
@@ -180,7 +186,7 @@ public class RedInterViewAdminController {
             }
             return R.error("添加职位失败，请重新尝试哈～");
         } else {
-            return R.errorParam();
+            return  R.error("没有对应的权限~");
         }
     }
 
