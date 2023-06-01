@@ -91,6 +91,19 @@ public class RedInterViewAdminController {
         }
     }
 
+    @GetMapping("deleteClassify/{cid}")
+    public R positionClassifyList(@PathVariable String cid,HttpServletRequest request) {
+        String uId = TokenManager.getMemberIdByJwtToken(request);
+        if (cid.length()>0 && this.userService.checkIsAdmin(uId)) {
+            if (classifyService.removeById(cid)) {
+                return R.okSucessTips("删除成功！");
+            } else {
+                return R.error("操作异常，请重新操作哦~");
+            }
+        }
+        return R.errorParam();
+    }
+
     @PostMapping("submitEveryQuestion")
     public R submitEveryQuestion(@RequestBody RedInterviewQuestionEveryday questionEveryday,HttpServletRequest request) {
         String uId = TokenManager.getMemberIdByJwtToken(request);
@@ -139,19 +152,6 @@ public class RedInterViewAdminController {
         if (date.length()>0 && this.userService.checkIsAdmin(uId)) {
             List<RedInterViewEveryDayQuestionVo> everydayList = everydayService.getInterViewEveryQuestionList(date,null);
             return R.ok().data("everydayList",everydayList);
-        }
-        return R.errorParam();
-    }
-
-    @GetMapping("deleteClassify/{cid}")
-    public R positionClassifyList(@PathVariable String cid,HttpServletRequest request) {
-        String uId = TokenManager.getMemberIdByJwtToken(request);
-        if (cid.length()>0 && this.userService.checkIsAdmin(uId)) {
-            if (classifyService.removeById(cid)) {
-                return R.okSucessTips("删除成功！");
-            } else {
-                return R.error("操作异常，请重新操作哦~");
-            }
         }
         return R.errorParam();
     }

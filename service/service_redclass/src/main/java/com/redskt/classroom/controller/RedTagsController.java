@@ -38,8 +38,10 @@ public class RedTagsController {
         return R.ok().data("tagList",tagList);
     }
 
+
+
     @GetMapping("getAllTagList")
-    public R getAskTagList() {
+    public R getAllTagList() {
         List<RedCategoryTagVo> tagList = tagService.getAllTagList();
         return R.ok().data("tagList",tagList);
     }
