@@ -155,11 +155,12 @@ public class RedUserController {
     }
 
     @PostMapping("uploadFuctionImage")
-    public  R uploadFuctionImage(@RequestParam(value = "file") MultipartFile file,@RequestParam(value = "fucPath") String fucPath,HttpServletRequest request) {
+    public  R uploadFuctionImage(@RequestParam(value = "file") MultipartFile file,HttpServletRequest request) {
         String uId = TokenManager.getMemberIdByJwtToken(request);
         if(!userService.checkIsAdmin(uId)) {
             return R.error("该用户权限不够哦");
         }
+        String fucPath = request.getHeader("fucPath");
         if(fucPath==null || fucPath.length() == 0) {
             return R.errorParam();
         }
@@ -172,7 +173,7 @@ public class RedUserController {
             return R.error("图片格式不正确!");
         }
         String fileName = file.getOriginalFilename();
-        String datePath = fucPath + CommonsUtils.getFormatDateString();
+        String datePath = fucPath+ "/" + CommonsUtils.getFormatDateString();
         String path =  "/home/redsktsource/"+ datePath +"/"+fileName;
         logger.info("=================2"+path);
         File dest = new File("/home/redsktsource/"+ datePath +"/"+fileName);
