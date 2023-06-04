@@ -175,7 +175,6 @@ public class RedUserController {
         String fileName = file.getOriginalFilename();
         String datePath = fucPath+ "/" + CommonsUtils.getFormatDateString();
         String path =  "/home/redsktsource/"+ datePath +"/"+fileName;
-        logger.info("=================2"+path);
         File dest = new File("/home/redsktsource/"+ datePath +"/"+fileName);
         try {
             if (!dest.exists()) dest.mkdirs(); // 要是目录不存在,创建一个

@@ -83,7 +83,7 @@ public class RedInterViewUserController {
             question.setTitle(title);
             question.setContent(content);
             question.setType("简答题");
-            question.setDeep("中等");
+            question.setDeep(50);
             if (questionService.save(question)) {
                 RedInterviewQuestionPosition questionPosition = new RedInterviewQuestionPosition();
                 questionPosition.setPid(positionId);

@@ -39,7 +39,7 @@ public class RedInterviewQuestion implements Serializable {
 
     private String type;
 
-    private String deep;
+    private Integer deep;
 
     private String content;
 
