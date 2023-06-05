@@ -13,6 +13,7 @@ public class CommonsUtils {
 
     // 获取毫秒时间戳
     public static String getTimeMMString() {
-        return  String.format("%lld",System.currentTimeMillis());
+        long timeMap = System.currentTimeMillis();
+        return Long.toString(timeMap).substring(6);
     }
 }
