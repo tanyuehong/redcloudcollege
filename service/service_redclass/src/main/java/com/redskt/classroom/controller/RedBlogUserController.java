@@ -31,6 +31,46 @@ public class RedBlogUserController {
     @Autowired
     private RedBlogDetailService detailService;
 
+    @Autowired
+    private RedBlogDetailDraftService draftService;
+
+    // 博文草稿的逻辑
+    @PostMapping("addNewBlogDraft")
+    public R addNewBlogDraft(@RequestBody RedBlogDetailDraft blogDetail, HttpServletRequest request) {
+        String uId = TokenManager.getMemberIdByJwtToken(request);
+        if(uId.length()>0) {
+            blogDetail.setAuid(uId);
+            if(blogDetail.getId()!=null && blogDetail.getId().length()>0) {
+                if(draftService.updateById(blogDetail)) {
+                    return R.ok().data("blog",blogDetail);
+                } else {
+                    return R.error("内容不存在哦~");
+                }
+            } else {
+                if(draftService.save(blogDetail)) {
+                    return R.ok().data("blog",blogDetail);
+                } else {
+                    return R.error("新建文章失败，请重新尝试~");
+                }
+            }
+        } else  {
+            return R.error("参数验证失败！");
+        }
+    }
+
+    @GetMapping("getBlogDraft/{bId}")
+    public R getBlogDraft(@PathVariable String bId) {
+        if (bId.length()>0) {
+            RedBlogDetailDraft blogDetail = draftService.getById(bId);
+            if(blogDetail == null) {
+                return R.error("内容不存在哦~");
+            }
+            return R.ok().data("blog", blogDetail);
+        } else {
+            return R.error("参数不合法，请验证");
+        }
+    }
+
     @PostMapping("addNewBlog")
     public R addNewBlog(@RequestBody RedBlogDetail blogDetail, HttpServletRequest request) {
         String uId = TokenManager.getMemberIdByJwtToken(request);

@@ -54,6 +54,10 @@ public class RedBlogDetail implements Serializable {
 
     private Integer price;
 
+    @ApiModelProperty(value = "逻辑删除 1（true）已删除， 0（false）未删除")
+    @TableLogic
+    private Boolean isDeleted;
+
     @TableField(fill = FieldFill.INSERT)
     private Date gmtCreate;
 
