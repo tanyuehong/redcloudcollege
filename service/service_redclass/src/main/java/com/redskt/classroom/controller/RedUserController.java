@@ -148,7 +148,7 @@ public class RedUserController {
         try {
             if (!dest.exists()) dest.mkdirs(); // 要是目录不存在,创建一个
             file.transferTo(dest);
-            return R.ok().data("imageUrl","https://static.redskt.com/imge/"+datePath+"/"+fileName);
+            return R.ok().data("imageUrl","https://static.redskt.com/blogimge/"+datePath+"/"+fileName);
         } catch (IOException e) {
             return R.error(e.getLocalizedMessage());
         }

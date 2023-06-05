@@ -34,6 +34,9 @@ public class RedBlogUserController {
     @Autowired
     private RedBlogDetailDraftService draftService;
 
+    @Autowired
+    private RedUserService userService;
+
     // 博文草稿的逻辑
     @PostMapping("addNewBlogDraft")
     public R addNewBlogDraft(@RequestBody RedBlogDetailDraft blogDetail, HttpServletRequest request) {
@@ -76,6 +79,11 @@ public class RedBlogUserController {
         String uId = TokenManager.getMemberIdByJwtToken(request);
         if(uId.length()>0) {
             blogDetail.setAuid(uId);
+            if(userService.checkIsAdmin(uId)) {
+                blogDetail.setState(100);
+            } else {
+                blogDetail.setState(66);
+            }
             if(blogDetail.getId()!=null && blogDetail.getId().length()>0) {
                 if(detailService.updateById(blogDetail)) {
                     return R.ok().data("blog",blogDetail);

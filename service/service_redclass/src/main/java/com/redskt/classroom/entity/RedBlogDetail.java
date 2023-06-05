@@ -38,6 +38,8 @@ public class RedBlogDetail implements Serializable {
 
     private String type;
 
+    private String tyid;
+
     private String blogtype;
 
     private String content;
@@ -53,6 +55,8 @@ public class RedBlogDetail implements Serializable {
     private Integer viewCount;
 
     private Integer price;
+
+    private Integer state;
 
     @ApiModelProperty(value = "逻辑删除 1（true）已删除， 0（false）未删除")
     @TableLogic
