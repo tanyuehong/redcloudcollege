@@ -42,8 +42,8 @@ public class CodeGenerator {
         DataSourceConfig dsc = new DataSourceConfig();
         dsc.setUrl("jdbc:mysql://121.43.146.70:3306/redcloudcollege?serverTimezone=GMT%2B8");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
-        dsc.setUsername("optanyuehong");
-        dsc.setPassword("Tan19900501#");
+        dsc.setUsername("#########");   // 配置你数据库服务器的名
+        dsc.setPassword("#########");   // 配置你数据库服务器的密码
         dsc.setDbType(DbType.MYSQL);
         mpg.setDataSource(dsc);
 
