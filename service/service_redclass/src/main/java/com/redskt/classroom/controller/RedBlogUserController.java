@@ -31,8 +31,8 @@ public class RedBlogUserController {
     @Autowired
     private RedBlogDetailService detailService;
 
-    @PostMapping("addNewblog")
-    public R addNewblog(@RequestBody RedBlogDetail blogDetail, HttpServletRequest request) {
+    @PostMapping("addNewBlog")
+    public R addNewBlog(@RequestBody RedBlogDetail blogDetail, HttpServletRequest request) {
         String uId = TokenManager.getMemberIdByJwtToken(request);
         if(uId.length()>0) {
             blogDetail.setAuid(uId);
