@@ -137,7 +137,7 @@ public class RedUserController {
             // 文件类型不合法，直接返回null
             return R.error("图片格式不正确!");
         }
-        String fileName = file.getOriginalFilename();
+        String fileName =  CommonsUtils.getTimeMMString()+ this.getFileExtension(file.getName());
         String userName = TokenManager.getMemberIdByJwtToken(request);
         if (userName == null||userName.length()==0) {
             return R.error("用户验证失败，请登录后重试");
@@ -151,6 +151,14 @@ public class RedUserController {
             return R.ok().data("imageUrl","https://static.redskt.com/blogimge/"+datePath+"/"+fileName);
         } catch (IOException e) {
             return R.error(e.getLocalizedMessage());
+        }
+    }
+
+    private static String getFileExtension(String fileName) {
+        if (fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0) {
+            return fileName.substring(fileName.lastIndexOf("."));
+        } else {
+            return "";
         }
     }
 

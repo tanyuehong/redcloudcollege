@@ -10,4 +10,9 @@ public class CommonsUtils {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return  date.format(formatter);
     }
+
+    // 获取毫秒时间戳
+    public static String getTimeMMString() {
+        return  String.format("%lld",System.currentTimeMillis());
+    }
 }
