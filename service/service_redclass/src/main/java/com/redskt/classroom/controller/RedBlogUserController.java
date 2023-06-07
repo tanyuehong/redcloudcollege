@@ -7,6 +7,7 @@ import com.redskt.classroom.entity.vo.RedCommentVo;
 import com.redskt.classroom.service.*;
 import com.redskt.commonutils.R;
 import com.redskt.security.TokenManager;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -61,6 +62,33 @@ public class RedBlogUserController {
         }
     }
 
+    @GetMapping("editBlog/{bId}")
+    public R editBlog(@PathVariable String bId,HttpServletRequest request) {
+        String uId = TokenManager.getMemberIdByJwtToken(request);
+        if(bId!=null && bId.length()>0 && uId != null && uId.length()>0) {
+            RedBlogDetailDraft blogDetail = draftService.getById(bId);
+            if (blogDetail == null) {
+                QueryWrapper<RedBlogDetail> detailQueryWrapper = new QueryWrapper<>();
+                detailQueryWrapper.eq("id", bId);
+                detailQueryWrapper.eq("auid", uId);
+                RedBlogDetail redBlogDetail = detailService.getOne(detailQueryWrapper);
+                if (redBlogDetail != null) {
+                    String eId = redBlogDetail.getId();
+                    redBlogDetail.setId(null);
+                    blogDetail = new RedBlogDetailDraft();
+                    BeanUtils.copyProperties(redBlogDetail, blogDetail);
+                    blogDetail.setEid(eId);
+                    if (draftService.save(blogDetail)) {
+                        return R.ok().data("blog", blogDetail);
+                    }
+                }
+            } else if (blogDetail.getAuid().equals(uId)) {
+                return R.ok().data("blog", blogDetail);
+            }
+        }
+        return R.errorParam();
+    }
+
     @GetMapping("getBlogDraft/{bId}")
     public R getBlogDraft(@PathVariable String bId) {
         if (bId.length()>0) {
@@ -74,10 +102,26 @@ public class RedBlogUserController {
         }
     }
 
-    @PostMapping("addNewBlog")
-    public R addNewBlog(@RequestBody RedBlogDetail blogDetail, HttpServletRequest request) {
+    @GetMapping("deleteBlog/{bId}")
+    public R deleteBlog(@PathVariable String bId, HttpServletRequest request) {
         String uId = TokenManager.getMemberIdByJwtToken(request);
-        if(uId.length()>0) {
+        if(bId!=null && bId.length()>0 && uId != null && uId.length()>0) {
+            QueryWrapper<RedBlogDetail> detailQueryWrapper = new QueryWrapper<>();
+            detailQueryWrapper.eq("id", bId);
+            detailQueryWrapper.eq("auid", uId);
+            if(detailService.remove(detailQueryWrapper)) {
+                return R.okSucessTips("删除文章成功～");
+            }
+            return R.error("操作失败，请重新尝试");
+        } else {
+            return R.errorParam();
+        }
+    }
+
+    @PostMapping("addNewBlog")
+    public R addNewBlog(@RequestBody RedBlogDetailDraft blogDetail, HttpServletRequest request) {
+        String uId = TokenManager.getMemberIdByJwtToken(request);
+        if(uId != null && uId.length()>0 && blogDetail.checkIsCanSubmit()) {
             blogDetail.setAuid(uId);
             if(userService.checkIsAdmin(uId)) {
                 blogDetail.setState(100);

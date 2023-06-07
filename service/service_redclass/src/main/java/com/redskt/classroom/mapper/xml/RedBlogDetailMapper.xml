@@ -29,7 +29,7 @@
         FROM op_blog_detail blog
         LEFT OUTER JOIN red_class_user auser ON auser.id = blog.auid
         LEFT OUTER JOIN (select bid,count(id) as cCount from red_blog_comment group by bid) comment on comment.bid = blog.id
-        where  blog.state = 100
+        where  blog.state = 100 and blog.is_deleted = 0
         <if test="uid != null">
         and blog.auid = #{uid}
         </if>

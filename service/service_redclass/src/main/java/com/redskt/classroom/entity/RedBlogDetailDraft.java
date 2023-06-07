@@ -31,9 +31,11 @@ public class RedBlogDetailDraft implements Serializable {
     @TableId(value = "id", type = IdType.ID_WORKER_STR)
     private String id;
 
-    private String title;
-
     private String auid;
+
+    private String eid;
+
+    private String title;
 
     private String descrb;
 
@@ -59,15 +61,19 @@ public class RedBlogDetailDraft implements Serializable {
 
     private String tyid;
 
-    @ApiModelProperty(value = "逻辑删除 1（true）已删除， 0（false）未删除")
-    @TableLogic
-    private Boolean isDeleted;
-
     @TableField(fill = FieldFill.INSERT)
     private Date gmtCreate;
 
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date gmtModified;
+
+    public boolean checkIsCanSubmit() {
+        if(title!=null && title.length()>0 && content!= null && content.length()>0 &&
+                descrb != null && descrb.length()>0) {
+            return true;
+        }
+        return false;
+    }
 
 
 }
