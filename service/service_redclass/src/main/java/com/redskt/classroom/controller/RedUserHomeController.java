@@ -4,6 +4,7 @@ package com.redskt.classroom.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.pig4cloud.captcha.GifCaptcha;
 import com.pig4cloud.captcha.base.Captcha;
+import com.redskt.classroom.entity.RedBlogDetailDraft;
 import com.redskt.classroom.entity.RedReplyGood;
 import com.redskt.classroom.entity.RedUserFocus;
 import com.redskt.classroom.entity.vo.RedClassAskQuestionVo;
@@ -24,6 +25,7 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -52,6 +54,9 @@ public class RedUserHomeController {
 
     @Autowired
     private RedAskService userAskService;
+
+    @Autowired
+    private RedBlogDetailDraftService draftService;
 
     @Autowired
     private RedisTemplate redisTemplate;  //存储对象
@@ -85,10 +90,16 @@ public class RedUserHomeController {
         captcha.out(httpServletResponse.getOutputStream());
     }
 
-    @GetMapping("getShowUserInfo/{uId}/{type}")
-    public R getShowUserInfo(@PathVariable String uId,@PathVariable String type) {
-        if(uId == null || uId.length() == 0 || type == null || type.length()==0 ) {
-            return R.error("请求参数异常");
+    @PostMapping("getShowUserInfo")
+    public R getShowUserInfo(@RequestBody Map parameterMap) {
+        parameterMap = RequestParmUtil.transToMAP(parameterMap);
+        String type = (String) parameterMap.get("type");
+        String uId  = (String) parameterMap.get("id");
+        String token  = (String) parameterMap.get("token");
+        String tuId = TokenManager.getUserFromToken(token);
+        if(uId.length() <19) {
+            type = uId;
+            uId = tuId;
         }
         RedClassUserVo eduUser = userService.getShowUserInfo(uId);
         if (eduUser != null && eduUser.getSign()==null) {
@@ -110,7 +121,11 @@ public class RedUserHomeController {
         } else if (type.equals("good-ask")) {
             return R.ok().data("userInfo",eduUser).data("dataList", getGoodAskList(uId));
         } else if (type.equals("draft")) {
-            return R.ok().data("userInfo",eduUser).data("dataList", getGoodAskList(uId));
+            if(uId.equals(tuId)) {
+                return R.ok().data("userInfo",eduUser).data("dataList", getDraftArticleList(uId));
+            } else {
+                return R.ok().data("userInfo",eduUser).data("dataList", new ArrayList<>());
+            }
         }
         return R.ok().data("userInfo",eduUser).data("dataList",postList);
     }
@@ -141,6 +156,12 @@ public class RedUserHomeController {
         }
         postList.addAll(blogList);
         return postList;
+    }
+
+    public List<RedBlogDetailDraft> getDraftArticleList(String uId) {
+        QueryWrapper<RedBlogDetailDraft> draftQueryWrapper = new QueryWrapper<>();
+        draftQueryWrapper.eq("auid", uId);
+        return draftService.list(draftQueryWrapper);
     }
 
     public List<RedClassBlogDetailVo> getCollectArticleList(String uId) {

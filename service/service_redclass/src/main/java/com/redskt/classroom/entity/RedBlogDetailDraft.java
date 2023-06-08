@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.*;
 import java.util.Date;
 
 import java.io.Serializable;
+import java.util.List;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -60,6 +62,9 @@ public class RedBlogDetailDraft implements Serializable {
     private Integer state;
 
     private String tyid;
+
+    @TableField(exist = false)
+    private String submitImgList[];
 
     @TableField(fill = FieldFill.INSERT)
     private Date gmtCreate;

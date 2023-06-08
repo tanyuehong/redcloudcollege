@@ -102,6 +102,19 @@ public class RedBlogUserController {
         }
     }
 
+    @GetMapping("deleteDraftBlog/{bId}")
+    public R deleteDraftBlog(@PathVariable String bId, HttpServletRequest request) {
+        String uId = TokenManager.getMemberIdByJwtToken(request);
+        if(bId!=null && bId.length()>0 && uId != null && uId.length()>0) {
+            if(draftService.removeDraft(bId,uId)) {
+                return R.okSucessTips("删除草稿成功～");
+            }
+            return R.error("操作失败，请重新尝试");
+        } else {
+            return R.errorParam();
+        }
+    }
+
     @GetMapping("deleteBlog/{bId}")
     public R deleteBlog(@PathVariable String bId, HttpServletRequest request) {
         String uId = TokenManager.getMemberIdByJwtToken(request);
