@@ -7,11 +7,20 @@ import com.redskt.classroom.entity.vo.RedCommentVo;
 import com.redskt.classroom.service.*;
 import com.redskt.commonutils.R;
 import com.redskt.security.TokenManager;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("/blog")
@@ -138,6 +147,18 @@ public class RedBlogUserController {
             } else {
                 blogDetail.setState(66);
             }
+
+            List<String> mList = extractImageUrls(blogDetail.getContent());
+
+            // 寻找在 array 中但不在 list 中的元素
+            List<String> elementsOnlyInArray = new ArrayList<>(Arrays.asList(blogDetail.getSubmitImgList()));
+            elementsOnlyInArray.removeAll(mList);
+            for (String item : elementsOnlyInArray) { // 删除上传过程中 多余的图片
+                String modifiedString = item.replace("https://static.redskt.com", "");
+                File dest = new File("/home/redsktsource"+ modifiedString);
+                dest.delete();
+            }
+
             RedBlogDetail redBlogDetail = new RedBlogDetail();
             BeanUtils.copyProperties(blogDetail,redBlogDetail);
 
@@ -162,6 +183,20 @@ public class RedBlogUserController {
         } else  {
             return R.error("参数验证失败！");
         }
+    }
+
+    public static List<String> extractImageUrls(String markdownText) {
+        List<String> imageUrls = new ArrayList<>();
+        String regex = "!\\[.*?\\]\\((.*?)\\)";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(markdownText);
+
+        while (matcher.find()) {
+            String imageUrl = matcher.group(1);
+            imageUrls.add(imageUrl);
+        }
+
+        return imageUrls;
     }
 
     @PostMapping("commet/submit")
