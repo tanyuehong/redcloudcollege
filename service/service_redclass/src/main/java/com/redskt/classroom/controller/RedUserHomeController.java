@@ -97,8 +97,11 @@ public class RedUserHomeController {
         String uId  = (String) parameterMap.get("id");
         String token  = (String) parameterMap.get("token");
         String tuId = TokenManager.getUserFromToken(token);
-        if(uId.length() <19) {
+        if(uId != null && uId.length() <19) {
             type = uId;
+            uId = tuId;
+        }
+        if(uId == null) {
             uId = tuId;
         }
         RedClassUserVo eduUser = userService.getShowUserInfo(uId);
