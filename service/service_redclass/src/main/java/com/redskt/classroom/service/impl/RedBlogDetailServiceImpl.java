@@ -1,6 +1,8 @@
 package com.redskt.classroom.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.redskt.classroom.entity.RedBlogDetail;
+import com.redskt.classroom.entity.RedBlogDetailDraft;
 import com.redskt.classroom.entity.vo.RedUserStateVo;
 import com.redskt.classroom.entity.vo.RedClassBlogDetailVo;
 import com.redskt.classroom.mapper.RedBlogDetailMapper;
@@ -64,6 +66,14 @@ public class RedBlogDetailServiceImpl extends ServiceImpl<RedBlogDetailMapper, R
         } else {
             return baseMapper.prepBlogGoodCount(bid);
         }
+    }
+
+    @Override
+    public boolean removeBlog(String bId,String uId) {
+        QueryWrapper<RedBlogDetail> detailQueryWrapper = new QueryWrapper<>();
+        detailQueryWrapper.eq("id", bId);
+        detailQueryWrapper.eq("auid", uId);
+        return remove(detailQueryWrapper);
     }
 
     @Override

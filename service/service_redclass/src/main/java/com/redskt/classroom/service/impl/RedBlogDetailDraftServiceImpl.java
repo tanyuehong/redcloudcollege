@@ -1,5 +1,7 @@
 package com.redskt.classroom.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.redskt.classroom.entity.RedBlogDetail;
 import com.redskt.classroom.entity.RedBlogDetailDraft;
 import com.redskt.classroom.mapper.RedBlogDetailDraftMapper;
 import com.redskt.classroom.service.RedBlogDetailDraftService;
@@ -17,4 +19,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class RedBlogDetailDraftServiceImpl extends ServiceImpl<RedBlogDetailDraftMapper, RedBlogDetailDraft> implements RedBlogDetailDraftService {
 
+    @Override
+    public boolean removeDraft(String bId,String uId) {
+        QueryWrapper<RedBlogDetailDraft> draftQueryWrapper = new QueryWrapper<>();
+        draftQueryWrapper.eq("id", bId);
+        draftQueryWrapper.eq("auid", uId);
+        return remove(draftQueryWrapper);
+    }
 }

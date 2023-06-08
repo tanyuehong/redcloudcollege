@@ -109,6 +109,8 @@ public class RedUserHomeController {
             postList = getGoodArticleList(uId);
         } else if (type.equals("good-ask")) {
             return R.ok().data("userInfo",eduUser).data("dataList", getGoodAskList(uId));
+        } else if (type.equals("draft")) {
+            return R.ok().data("userInfo",eduUser).data("dataList", getGoodAskList(uId));
         }
         return R.ok().data("userInfo",eduUser).data("dataList",postList);
     }

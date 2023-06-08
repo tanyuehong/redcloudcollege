@@ -106,10 +106,7 @@ public class RedBlogUserController {
     public R deleteBlog(@PathVariable String bId, HttpServletRequest request) {
         String uId = TokenManager.getMemberIdByJwtToken(request);
         if(bId!=null && bId.length()>0 && uId != null && uId.length()>0) {
-            QueryWrapper<RedBlogDetail> detailQueryWrapper = new QueryWrapper<>();
-            detailQueryWrapper.eq("id", bId);
-            detailQueryWrapper.eq("auid", uId);
-            if(detailService.remove(detailQueryWrapper)) {
+            if(detailService.removeBlog(bId,uId)) {
                 return R.okSucessTips("删除文章成功～");
             }
             return R.error("操作失败，请重新尝试");
@@ -128,15 +125,23 @@ public class RedBlogUserController {
             } else {
                 blogDetail.setState(66);
             }
-            if(blogDetail.getId()!=null && blogDetail.getId().length()>0) {
-                if(detailService.updateById(blogDetail)) {
-                    return R.ok().data("blog",blogDetail);
+            RedBlogDetail redBlogDetail = new RedBlogDetail();
+            BeanUtils.copyProperties(blogDetail,redBlogDetail);
+
+            if(blogDetail.getEid()!=null && blogDetail.getEid().length()>0) {
+                QueryWrapper<RedBlogDetail> detailQueryWrapper = new QueryWrapper<>();
+                detailQueryWrapper.eq("id", blogDetail.getEid());
+                detailQueryWrapper.eq("auid", uId);
+                if(detailService.update(redBlogDetail,detailQueryWrapper)) {
+                    draftService.removeDraft(blogDetail.getId(),uId);
+                    return R.okSucessTips("更新文章成功");
                 } else {
-                    return R.error("内容不存在哦~");
+                    return R.error("更新文章失败，请重新尝试~");
                 }
             } else {
-                if(detailService.save(blogDetail)) {
-                    return R.ok().data("blog",blogDetail);
+                if(detailService.save(redBlogDetail)) {
+                    draftService.removeDraft(blogDetail.getId(),uId);
+                    return R.okSucessTips("发布文章成功");
                 } else {
                     return R.error("新建文章失败，请重新尝试~");
                 }

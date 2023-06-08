@@ -13,4 +13,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface RedBlogDetailDraftService extends IService<RedBlogDetailDraft> {
 
+     boolean removeDraft(String bId,String uId);
+
 }

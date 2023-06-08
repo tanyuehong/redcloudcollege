@@ -34,4 +34,6 @@ public interface RedBlogDetailService extends IService<RedBlogDetail> {
     int updateBlogGoodCount(boolean isAdd,String bid);
 
     int updateReadCount(String bid);
+
+    boolean removeBlog(String bId,String uId);
 }
