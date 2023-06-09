@@ -157,6 +157,7 @@ public class RedBlogUserController {
             // 寻找在 array 中但不在 list 中的元素
             List<String> elementsOnlyInArray = new ArrayList<>(Arrays.asList(blogDetail.getSubmitImgList()));
             elementsOnlyInArray.removeAll(mList);
+            logger.info("=================删除图片逻辑");
             for (String item : elementsOnlyInArray) { // 删除上传过程中 多余的图片
                 String modifiedString = item.replace("https://static.redskt.com", "");
                 String deletePath = "/home/redsktsource"+ modifiedString;
