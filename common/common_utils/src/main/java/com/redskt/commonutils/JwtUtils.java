@@ -3,6 +3,8 @@ package com.redskt.commonutils;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.util.StringUtils;
 import io.jsonwebtoken.SignatureAlgorithm;
 
@@ -11,9 +13,13 @@ import java.util.Date;
 
 public class JwtUtils {
 
+    @Autowired
+    private static Environment env;
+
+
     //常量
     public static final long EXPIRE = 1000 * 60 * 60 * 24; //token过期时间
-    public static final String APP_SECRET = "ukc8BDbRizUDaY6pZFfWus2jZWLPHO"; //秘钥
+    public static final String APP_SECRET = env.getProperty("com.redskt.jwt.APP_SECRET");
 
     //生成token字符串的方法
     public static String getJwtToken(String id, String nickname){
