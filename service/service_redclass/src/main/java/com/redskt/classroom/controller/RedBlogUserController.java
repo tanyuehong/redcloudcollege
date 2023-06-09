@@ -8,6 +8,8 @@ import com.redskt.classroom.service.*;
 import com.redskt.commonutils.R;
 import com.redskt.security.TokenManager;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -46,6 +48,8 @@ public class RedBlogUserController {
 
     @Autowired
     private RedUserService userService;
+
+    private Logger logger = LoggerFactory.getLogger(RedUserController.class);
 
     // 博文草稿的逻辑
     @PostMapping("addNewBlogDraft")
@@ -153,10 +157,14 @@ public class RedBlogUserController {
             // 寻找在 array 中但不在 list 中的元素
             List<String> elementsOnlyInArray = new ArrayList<>(Arrays.asList(blogDetail.getSubmitImgList()));
             elementsOnlyInArray.removeAll(mList);
+            logger.info("=================删除图片逻辑");
             for (String item : elementsOnlyInArray) { // 删除上传过程中 多余的图片
                 String modifiedString = item.replace("https://static.redskt.com", "");
-                File dest = new File("/home/redsktsource"+ modifiedString);
+                String deletePath = "/home/redsktsource"+ modifiedString;
+                File dest = new File(deletePath);
                 dest.delete();
+
+                logger.info("================="+deletePath);
             }
 
             RedBlogDetail redBlogDetail = new RedBlogDetail();
