@@ -18,7 +18,7 @@ public class JwtUtils {
 
 
     //常量
-    public static final long EXPIRE = 1000 * 60 * 60 * 24; //token过期时间
+    public static final long EXPIRE = 30 * 60 * 60 * 24; //token过期时间
     public static final String APP_SECRET = env.getProperty("com.redskt.jwt.APP_SECRET");
 
     //生成token字符串的方法
